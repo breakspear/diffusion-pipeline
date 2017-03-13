@@ -2,28 +2,25 @@
 #file: fibertrackandcntmecon
 #usage: fibertrackandcntmecon ismultishell numfibers  cntmeprefix
 
-ismultishell=$1
-numfibers=$2
-CNTMEPREFIX=$3
+subj=$1
+WORKDIR=$2
+numfibers=$3
+CNTMEPREFIX=$4
+
+rundir=$(pwd)
+baserundir=$(basename $rundir)
+
+if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+cd $WORKDIR/Diff/$subj/preproc
+fi
 
 
 #Multi-tissue spherical deconvolution
-
-
-if [ $ismultishell==1 ]
-then
-
-dwi2response msmt_5tt biascorr.mif r5TT.nii wm.txt gm.txt csf.txt -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus -force
-
-dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus
-
-else
 
 dwi2response dhollander biascorr.mif wm.txt gm.txt csf.txt -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus -force
 
 dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus
 
-fi
 
 
 mrconvert wm.mif wmstr.mif -stride +1,2,3,4 -nthreads $ncpus -force
@@ -35,7 +32,7 @@ fod2dec wm.mif  foddec.mif -mask biasmeanb0bet_mask.nii.gz -force -nthreads $ncp
 
 #Fiber tracking
 
-tckgen wm.mif $(numfibers).tck -act r5TT.nii -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number $numfibers -mask wmseg025.nii -output_seeds succeeds.txt -force -nthreads $ncpus
+tckgen wm.mif $(numfibers).tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number $numfibers -mask wmseg025.nii -output_seeds succeeds.txt -force -nthreads $ncpus
 
 tckmap $(numfibers).tck $(numfibers).mif -vox 0.5 -force -nthreads $ncpus
 

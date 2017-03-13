@@ -44,7 +44,7 @@ mrconvert APb0s.mif AP7b0s.mif -coord 3 0,2,4,6,8,10,11 -force -nthreads $ncpus
 
 #dwiextract rawdataPAdn.mif rawdatPAdnrem.mif -bzero -force -nthreads $ncpus 
 #mv rawdataPAdnrem.mif rawdataPAdn.mif
-mrconvert rawadataPAdn.mif rawdataPAdnrem.mif -coord 3 0,1,2,3,4,5,6 -force -nthreads $ncpus
+mrconvert rawdataPAdn.mif rawdataPAdnrem.mif -coord 3 0,1,2,3,4,5,6 -force -nthreads $ncpus
 mv rawdataPAdnrem.mif rawdataPAdn.mif
 
 #dwipreproc_cust -rpe_pair AP7b0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force
