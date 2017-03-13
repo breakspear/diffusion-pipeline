@@ -1,0 +1,139 @@
+#!/bin/bash
+#file : segparcandcoregT1
+#usage: segparcandcoregT1 <subj> <WORKDIR> parctype
+
+#FSparctype options = "DES" (desikan, 68 rois) or DST (destrieux; 148)
+
+subj=$1
+WORKDIR=$2
+parctype=$3
+
+rundir=$(pwd)
+baserundir=$(basename $rundir)
+
+if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+cd $WORKDIR/Diff/$subj/preproc
+fi
+
+SUBJECTS_DIR=${WORKDIR}/FS
+
+#prepare anatomical volume for segmentation, parcellation correction, and then co-registration to diffusion space
+
+mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -stride +1,2,3 -nthreads $ncpus -force
+
+mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -stride +1,2,3 -nthreads $ncpus -force
+
+#flirt -in $FSLDIR/data/standard/MNI152_T1_1mm_brain.nii.gz -ref brainFS.nii -omat mni2FS.mat -dof 12
+
+#convert_xfm -omat FS2mni.mat -inverse mni2FS.mat
+
+#flirt -in $FSLDIR/data/standard/MNI152_T1_1mm_brain.nii.gz -ref brainFS.nii -omat FS2mni.mat -dof 12 -applyxfm -init FS2mni.mat
+
+#5ttgen_alt brainFS.nii FS2mni.mat 5TTFSmasked.nii
+
+bet2 T1.nii T1bet -f 0.15
+
+mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -force
+
+flirt -ref T1bet.nii.gz -in brainFSsp.nii -dof 6 -out FS2FSL -omat FS2FSL.mat
+
+bet2 FS2FSL.nii.gz FS2FSLbet -f 0.15 -m
+
+fslmaths T1bet.nii.gz -mas FS2FSLbet_mask.nii.gz T1betFSmasked.nii.gz
+
+fast -B --nopve T1betFSmasked.nii.gz
+
+5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTFSmasked.nii -nthreads $ncpus -force
+
+5tt2gmwmi 5TTFSmasked.nii 5TTgmwmi.nii -nthreads $ncpus -force
+
+if [ $parctype=="DES" ]
+then
+	labelconvert $SUBJECTS_DIR/$subj/mri/aparc+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRtrix/src/connectome/tables/fs_default.txt parc.nii -nthreads $ncpus -force
+elif
+then
+	labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRtrix/src/connectome/tables/fs_a2009s.txt parc.nii -nthreads $ncpus -force
+fi
+
+flirt -ref T1bet.nii.gz -in parc.nii -applyxfm -init FS2FSL.mat -interp nearestneighbour -out parcFSL.nii.gz
+
+rm parc_fixsubcort.nii
+
+mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -stride -1,2,3 -force -nthreads $ncpus
+
+labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRtrix/src/connectome/tables/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus
+
+if [ $parctype=="desikan" ]
+then
+       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRtrix/src/connectome/tables/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus
+elif [ $parctype=="destrieux" ]
+then
+       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRtrix/src/connectome/tables/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus
+fi
+
+
+mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -stride +1,2,3 -force -nthreads $ncpus
+
+mv parc_fixsubcortstr.nii parc_fixsubcort.nii
+
+rm parcFSLtempstr.nii.gz
+
+
+#Coregistrations setup
+
+
+#FSL co-registration of T1 to diffusion image (& subsequent 5TT file)
+
+#flirt -ref eddyb0.nii -in T1.nii -omat T1FSLtoDiff.mat -dof 6
+
+#transformconvert T1FSLtoDiff.mat T1.nii eddyb0.nii flirt_import T1FSLtoDiffMR.mat -force
+
+#mrtransform 5TTFSL.nii -linear T1FSLtoDiffMR.mat r5TTFSL.nii -force
+
+bbregister --s $subj --mov biasmeanb0bet.nii.gz --init-fsl --reg register.dat --dti --fslmat diff2FS.mat
+
+transformconvert diff2FS.mat biasmeanb0bet.nii.gz $SUBJECTS_DIR/$subj/mri/brain.mgz flirt_import diff2FSMR.mat -force
+
+mrtransform FS.nii rFS.nii -linear diff2FSMR.mat -inverse -force
+
+mrtransform FS.nii rFSrg.nii -linear diff2FSMR.mat -inverse -template fa.nii -force
+
+
+#Move other files from T1 space
+
+transformconvert FS2FSL.mat brainFSsp.nii T1bet.nii.gz flirt_import FS2FSLMR.mat -force
+
+mrtransform 5TTFSmasked.nii 5TTFSspmasked.nii -linear FS2FSLMR.mat -inverse -force
+
+mrtransform 5TTgmwmi.nii 5TTFSspgmwmi.nii -linear FS2FSLMR.mat -inverse -force
+
+mrtransform 5TTFSspgmwmi.nii r5TTgmwmi.nii -linear diff2FSMR.mat -inverse -force
+
+mrtransform 5TTFSspmasked.nii r5TT.nii -linear diff2FSMR.mat -inverse -force
+
+convert_xfm -omat FSL2FS.mat -inverse FS2FSL.mat
+
+flirt -ref brainFSsp.nii -in parc_fixsubcort.nii -applyxfm -init FSL2FS.mat -interp nearestneighbour -out parc_fixsubcortFS.nii.gz
+
+convert_xfm -omat FS2diff.mat  -inverse diff2FS.mat
+
+flirt -ref fa.nii -in parc_fixsubcortFS.nii.gz -applyxfm -init FS2diff.mat -out rparc_fixsubcort.nii.gz  -interp nearestneighbour
+
+#mrtransform parc_fixsubcort.nii rparc_fixsubcort.nii -linear diff2FSMR.mat -inverse -interp nearest -template biasmeanb0bet.nii.gz -force
+
+
+#FS co-registration of T1 to diffusion image (& subsequent 5TT file)
+
+
+#mrconvert 5TTFSmasked.nii wmseg.nii -coord 3 2
+
+#flirt -ref brain.nii -in fa.nii -out DiffinFS -omat DiffinFS.mat -dof 6 -cost bbr  -wmseg wmseg.nii
+
+#transformconvert DiffinFS.mat b0bet.nii.gz brain.nii flirt_import DiffinFSMR.mat -force
+
+#mrtransform T1FS.nii -linear DiffinFSMR.mat rT1FSbbr.nii -force -inverse
+
+#mrtransform 5TTFSmasked.nii -linear FSinDiffMR.mat r5TTFSmasked.nii -force 
+
+
+gunzip rparc_fixsubcort.nii.gz

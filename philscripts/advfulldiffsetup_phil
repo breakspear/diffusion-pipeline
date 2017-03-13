@@ -1,0 +1,23 @@
+#!/bin/bash 
+#file: advfulldiffsteps
+
+subj=$1
+WORKDIR=$2
+#FS_DIR=$3
+
+#Full diffusion pipeline, from pre-processing to connectome construction - using the advanced version
+
+#Advanced preprocessing
+#Parameters: mosaic fullrevsequence multiband (1 if yes)
+
+advpreproc_phil $subj $WORKDIR
+ 
+#Segmentation, parcellation and co-registration of T1 images
+
+segparcandcoregT1_phil $subj $WORKDIR
+
+#Fiber construction and connectome construction
+
+advfibertrackandcntmecon_phil $subj $WORKDIR 50M DST
+
+
