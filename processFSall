@@ -1,0 +1,10 @@
+#!/bin/bash
+# file: processFSall
+
+subj=$1
+WORKDIR=$2
+
+SUBJECTS_DIR=${WORKDIR}/FS
+mkdir -p ${SUBJECTS_DIR}
+
+recon-all -all -i T1.nii -subjid $subj -sd $SUBJECTS_DIR -no-isrunning -mprage
