@@ -1,0 +1,37 @@
+#!/bin/bash
+
+subj=$1
+WORKDIR=$2
+numfibers=$3
+
+rundir=$(pwd)
+baserundir=$(basename $rundir)
+
+if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+cd $WORKDIR/Diff/$subj/preproc
+fi
+
+#Generate response function by spherical deconvolution
+
+dwi2response dhollander -mask biasb0brain_mask.nii.gz biascorr.mif wm.txt gm.txt csf.txt -force -nthreads $ncpus
+
+#Fiber orientation estimates
+
+dwi2fod msmt_csd biascorr.mif wm.txt wm.mif csf.txt csf.mif -force -mask biasb0brain_mask.nii.gz -nthreads $ncpus
+fod2dec wm.mif foddec.mif -force -nthreads $ncpus
+
+#Extract filtered mask for improving tracking
+
+#Co-register low-resolution FA into high-resolution template
+
+#flirt -ref fa.nii -in $FSLDIR/data/standard/FMRIB58_FA_1mm.nii.gz -out MNItofa -omat MNItofa.mat
+
+#fslmaths fa.nii -mas MNItofa.nii.gz fa_extracted.nii.gz
+#fslmaths fa_extracted -bin fa_binary.nii.gz
+
+#Fiber tracking
+
+tckgen -algorithm iFOD2 wm.mif ${numfibers}.tck -seed_image biasb0brain_mask.nii.gz -minlength 10 -maxlength 250 -number $numfibers -nthreads $ncpus -mask biasb0brain_mask.nii.gz -output_seeds sucesstrackseeds.txt
+
+#Track density image for vis purposes
+tckmap ${numfibers}.tck ${numfibers}_tdi.nii -vox 0.5
