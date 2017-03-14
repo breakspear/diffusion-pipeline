@@ -114,7 +114,7 @@ gunzip rparc_fixsubcort.nii.gz
 
 #setup 5TT file for modified fiber tracking - unique to phil
 
-mrconvert r5TT.niii r5TT.mif -nthreads $ncpus -force
+mrconvert r5TT.nii r5TT.mif -nthreads $ncpus -force
 
 mrconvert r5TT.mif wmseg.nii -coord 3 2 -nthreads $ncpus -force
 

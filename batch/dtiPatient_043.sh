@@ -21,8 +21,8 @@
 # *m* situations under which to email a) aborted b) begin e) end
 # *M* email address to send emails to
 
-pipedir=&&&&
-PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
+pipelinedir=/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline
+PATH=$PATH$( find $pipelinedir/ -type d -printf ":%p" )
 #export PATH=$(pwd)/custscripts:$PATH
 export ncpus=8
 
@@ -34,10 +34,10 @@ module load freesurfer/5.3.0
 module load ANTs/20160509
 module load fsl/5.0.9_eddy
 
-subj=####
-subjDIRECTORY=????
+subj=Patient_043
+subjDIRECTORY=/working/lab_michaebr/alistaiP/diffusion-testing/PARK/Raw/Patient_043
 
 cd $subjDIRECTORY
 
-%%%% #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
+advfulldiffsetup_phil Patient_043 /working/lab_michaebr/alistaiP/diffusion-testing/PARK  #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
  
