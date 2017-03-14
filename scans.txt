@@ -1,1 +1,3 @@
-/working/lab_michaebr/alistaiP/diffusion-testing/PARK/Raw/Patient_043
+/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Raw/LucaFull
+/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Raw/LucaFull2
+/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Raw/LucaFullMP

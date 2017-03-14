@@ -75,12 +75,10 @@ mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads $ncpus
 dwiextract rawdataAPdn.mif APb0s.mif -bzero -force
 
 if [ $ismultiband==1 ] && [ $fullrevsequence==0 ];
-then
+then	
+	${MRTRIX}/scripts/dwipreproc_mb -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . #assuming multiband factor of 2
 
-	#assuming multiband factor of 2
-	${MRTRIX}/scripts/dwipreproc_mb -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir .
-
-elif [ $ismultiband==1 ] && [ $fullrevsequence==1 ],
+elif [ $ismultiband==1 ] && [ $fullrevsequence==1 ];
 then
 	${MRTRIX}/scripts/dwipreproc_mb -rpe_all rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir .
 

@@ -1,0 +1,185 @@
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+dwidenoise: [ERROR] not enough parameters to option "-nthreads"
+dwidenoise: [ERROR] not enough parameters to option "-nthreads"
+mrconvert: [ERROR] not enough parameters to option "-nthreads"
+mrconvert: [ERROR] not enough parameters to option "-nthreads"
+mrconvert: [ERROR] not enough parameters to option "-nthreads"
+mrconvert: [ERROR] not enough parameters to option "-nthreads"
+rm: cannot remove ‘rawdataAPdnstr.mif’: No such file or directory
+rm: cannot remove ‘rawdataPAdnstr.mif’: No such file or directory
+mrconvert: [ERROR] not enough parameters to option "-nthreads"
+mrconvert: [ERROR] not enough parameters to option "-nthreads"
+dwiextract: [WARNING] existing output files will be overwritten
+dwiextract: [ERROR] failed to open key/value file "rawdataAPdn.mif": No such file or directory
+dwiextract: [ERROR] error opening image "rawdataAPdn.mif"
+mrconvert: [ERROR] not enough parameters to option "-nthreads"
+mrconvert: [ERROR] not enough parameters to option "-nthreads"
+mv: cannot stat ‘rawdataPAdnrem.mif’: No such file or directory
+
+Error: argument -nthreads: expected one argument
+Usage: dwipreproc_cust [ options ] pe_dir input output
+Usage: (Run dwipreproc_cust -help for more information)
+
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: [ERROR] failed to open key/value file "eddycorr.mif": No such file or directory
+dwiextract: [ERROR] error opening image "eddycorr.mif"
+mrmath: [ERROR] no filename supplied to standard input (broken pipe?)
+mrmath: [ERROR] error opening image "-"
+Image Exception : #22 :: ERROR: Could not open image eddymeanb0
+terminate called after throwing an instance of 'RBD_COMMON::BaseException'
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advpreproc_phil: line 55: 67338 Aborted                 (core dumped) bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
+
+Error: argument -nthreads: expected one argument
+Usage: dwibiascorrect [ options ] input output
+Usage: (Run dwibiascorrect -help for more information)
+
+mrinfo: [ERROR] failed to open key/value file "biascorr.mif": No such file or directory
+mrinfo: [ERROR] error opening image "biascorr.mif"
+mrcat: [ERROR] Expected at least 3 arguments (1 supplied)
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: [ERROR] failed to open key/value file "biascorr.mif": No such file or directory
+dwiextract: [ERROR] error opening image "biascorr.mif"
+mrmath: [ERROR] no filename supplied to standard input (broken pipe?)
+mrmath: [ERROR] error opening image "-"
+Image Exception : #22 :: ERROR: Could not open image biasmeanb0
+terminate called after throwing an instance of 'RBD_COMMON::BaseException'
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advpreproc_phil: line 64: 67427 Aborted                 (core dumped) bet2 biasmeanb0.nii biasmeanb0bet -f 0.15 -m
+dwi2tensor: [ERROR] failed to open key/value file "biascorr.mif": No such file or directory
+dwi2tensor: [ERROR] error opening image "biascorr.mif"
+tensor2metric: [ERROR] cannot stat file "dt.nii": No such file or directory
+tensor2metric: [ERROR] error opening image "dt.nii"
+mrinfo: [ERROR] failed to open key/value file "biascorr.mif": No such file or directory
+mrinfo: [ERROR] error opening image "biascorr.mif"
+mrcat: [ERROR] Expected at least 3 arguments (1 supplied)
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/brain.mgz"...  [===============]
+mrconvert: [ERROR] output file "brainFS.nii" already exists (use -force option to force overwrite)
+mrconvert: [ERROR] error creating image "brainFS.nii"
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/T1.mgz"...  [===============]
+mrconvert: [ERROR] output file "FS.nii" already exists (use -force option to force overwrite)
+mrconvert: [ERROR] error creating image "FS.nii"
+WARNING::in calculating COG, total = 0.0
+mrconvert: copying from "brainFS.nii" to "T1.nii"...  [==================================================]
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image
+ERROR:: Empty mask image

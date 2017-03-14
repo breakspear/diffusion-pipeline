@@ -5,10 +5,11 @@
 # These will be interpreted by the job submission system (PBS pro)
 
 #PBS -l ncpus=8,mem=2G
-#
 # *select* is the number of parallel processes
 # *ncpus* is the number of cores required by each process
 # *mem* is the amount of memory required by each process
+
+#PBS -v MRTRIX=/software/mrtrix3/mrtrix3-AP,ncpus=8
 
 #PBS -l walltime=47:00:00
 # *walltime* is the total time required in hours:minutes:seconds
@@ -24,10 +25,6 @@
 pipedir=&&&&
 PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
 #export PATH=$(pwd)/custscripts:$PATH
-export ncpus=8
-
-MRTRIX=/software/mrtrix3/mrtrix3-AP
-export PATH=${MRTRIX}/release/bin:${MRTRIX}/scripts:$PATH
 
 module load mrtrix3/AP
 module load freesurfer/5.3.0
