@@ -37,7 +37,7 @@ mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -forc
 
 5tt2gmwmi 5TTFSmasked.nii 5TTgmwmi.nii -nthreads $ncpus -force
 
-labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRtrix/src/connectome/tables/fs_a2009s.txt parc.nii -nthreads $ncpus -force
+labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/src/connectome/tables/fs_a2009s.txt parc.nii -nthreads $ncpus -force
 
 #flirt -ref T1bet.nii.gz -in parc.nii -applyxfm -init FS2FSL.mat -interp nearestneighbour -out parcFSL.nii.gz
 
@@ -45,7 +45,7 @@ rm parc_fixsubcort.nii
 
 mrconvert parc.nii parctempstr.nii -stride -1,2,3 -force -nthreads $ncpus
 
-labelsgmfix parctempstr.nii brainFS.nii $MRtrix/src/connectome/tables/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus
+labelsgmfix parctempstr.nii brainFS.nii $MRTRIX/src/connectome/tables/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus
 
 mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -stride +1,2,3
 

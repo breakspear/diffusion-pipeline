@@ -1,0 +1,252 @@
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+dwidenoise: [WARNING] existing output files will be overwritten
+dwidenoise: preloading data for "rawdataAP.mif"...  [==================================================]
+dwidenoise: running MP-PCA denoising...  [==================================================]
+dwidenoise: [WARNING] existing output files will be overwritten
+dwidenoise: preloading data for "rawdataPA.mif"...  [==================================================]
+dwidenoise: running MP-PCA denoising...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdn.mif" to "rawdataAPdnstr.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdnstr.mif" to "rawdataAPdn.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "rawdataPAdnstr.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdnstr.mif" to "rawdataPAdn.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdn.mif" to "b0AP.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "b0PA.mif"...  [==================================================]
+dwiextract: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "APb0s.mif" to "AP7b0s.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "rawdataPAdnrem.mif"...  [==================================================]
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: preloading data for "/tmp/mrtrix-tmp-Ey97JY.mif"...  [==================================================]
+mrmath: computing mean along axis 3......  [==================================================]
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: preloading data for "/tmp/mrtrix-tmp-Cv0Nt7.mif"...  [==================================================]
+mrmath: computing mean along axis 3......  [==================================================]
+dwi2tensor: [WARNING] existing output files will be overwritten
+dwi2tensor: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=====]
+dwi2tensor: computing tensors...  [==================================================]
+tensor2metric: [WARNING] existing output files will be overwritten
+tensor2metric: computing metrics...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/brain.mgz"...  [===============]
+mrconvert: copying from "/working/l...S/Patient_043/mri/brain.mgz" to "brainFS.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/T1.mgz"...  [===============]
+mrconvert: copying from "/working/l...K/FS/Patient_043/mri/T1.mgz" to "FS.nii"...  [==================================================]
+mrconvert: copying from "brainFS.nii" to "T1.nii"...  [==================================================]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+mrmath: computing sum across 14 images...  [======]
+mrcalc: computing: min (/tmp/mrtrix-tmp-h2VlB6.mif, 1)...  [==================================================]
+mrthreshold: uncompressing image "T1_pve_2.nii.gz"...  [===================================]
+mrthreshold: thresholding "T1_pve_2.nii.gz" at intensity 0.001...  [==================================================]
+maskfilter: applying connected-component filter to image -...  . done
+mrconvert: uncompressing image "T1_pve_0.nii.gz"...  [===================================]
+mrconvert: copying from "T1_pve_0.nii.gz" to "csf.mif"...  [==================================================]
+mrcalc: computing: min ((1 - csf.mif), all_sgms.mif)...  [==================================================]
+mrcalc: uncompressing image "T1_pve_1.nii.gz"...  [===================================]
+mrcalc: uncompressing image "T1_pve_2.nii.gz"...  [===================================]
+mrcalc: computing: ((1 - (csf.mif + sgm.mif)) / (T1_pve_1.nii.gz + T1_pve_2.nii.gz))...  [==================================================]
+mrcalc: computing: (finite (multiplier.mif) ? multiplier.mif : 0)...  [==================================================]
+mrcalc: uncompressing image "T1_pve_1.nii.gz"...  [===================================]
+mrcalc: computing: (T1_pve_1.nii.gz * multiplier_noNAN.mif)...  [==================================================]
+mrcalc: uncompressing image "T1_pve_2.nii.gz"...  [===================================]
+mrcalc: computing: ((T1_pve_2.nii.gz * multiplier_noNAN.mif) * wm_mask.mif)...  [==================================================]
+mrcalc: computing: min (0, wm.mif)...  [==================================================]
+mrcat: concatenating "cgm.mif"...  [==================================================]
+mrcat: concatenating "sgm.mif"...  [==================================================]
+mrcat: concatenating "wm.mif"...  [==================================================]
+mrcat: concatenating "csf.mif"...  [==================================================]
+mrcat: concatenating "path.mif"...  [==================================================]
+mrconvert: copying from "/tmp/mrtrix-tmp-R97fcL.mif" to "combined_precrop.mif"...  [==================================================]
+mrconvert: copying from "combined_precrop.mif" to "result.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "result.mif" to "5TTFSmasked.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/brain.mgz"...  [===============]
+mrconvert: copying from "/working/l...S/Patient_043/mri/brain.mgz" to "brainFSsp.nii"...  [==================================================]
+5tt2gmwmi: [WARNING] existing output files will be overwritten
+5tt2gmwmi: Generating GMWMI seed mask...  [==================================================]
+labelconvert: [WARNING] existing output files will be overwritten
+labelconvert: [ERROR] required input file "/src/connectome/tables/fs_a2009s.txt" not found
+rm: cannot remove ‘parc_fixsubcort.nii’: No such file or directory
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [ERROR] cannot stat file "parc.nii": No such file or directory
+mrconvert: [ERROR] error opening image "parc.nii"
+labelsgmfix: [01;31m[ERROR] Command failed: mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/PARK/Diff/Patient_043/preproc/parctempstr.nii /tmp/labelsgmfix-tmp-PRS7O1/parc.mif[0m
+labelsgmfix: [03;32mOutput of failed command:[0m
+mrconvert: [01;31m[ERROR] cannot stat file "/mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/PARK/Diff/Patient_043/preproc/parctempstr.nii": No such file or directory[0m
+mrconvert: [01;31m[ERROR] error opening image "/mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/PARK/Diff/Patient_043/preproc/parctempstr.nii"[0m
+mrconvert: [ERROR] cannot stat file "parc_fixsubcort.nii": No such file or directory
+mrconvert: [ERROR] error opening image "parc_fixsubcort.nii"
+mv: cannot stat ‘parc_fixsubcortstr.nii’: No such file or directory
+rm: cannot remove ‘parctempstr.nii’: No such file or directory
+transformconvert: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/brain.mgz"...  [===============]
+mrtransform: preloading data for "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/brain.mgz"...  [==================================================]
+mrtransform: copying from "/working/l...S/Patient_043/mri/brain.mgz" to "rFS.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/brain.mgz"...  [===============]
+mrtransform: preloading data for "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/brain.mgz"...  [==================================================]
+mrtransform: reslicing "/working/lab_michaebr/alistaiP/diffusion-testing/PARK/FS/Patient_043/mri/brain.mgz"...  [====================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "5TTgmwmi.nii" to "5TTFSspgmwmi.nii"...  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSspgmwmi.nii" to "r5TTgmwmi.nii"......  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "5TTFSmasked.nii" to "5TTFSspmasked.nii"...  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSspmasked.nii" to "r5TT.nii"......  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [ERROR] cannot stat file "parc_fixsubcort.nii": No such file or directory
+mrconvert: [ERROR] error opening image "parc_fixsubcort.nii"
+Image Exception : #22 :: ERROR: Could not open image parc_FSspfixsubcort
+terminate called after throwing an instance of 'RBD_COMMON::BaseException'
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/segparcandcoregT1_phil: line 94: 19329 Aborted                 (core dumped) flirt -ref fa.nii -in parc_FSspfixsubcort.nii -applyxfm -init FS2diff.mat -out rparc_fixsubcort.nii.gz -interp nearestneighbour
+gzip: rparc_fixsubcort.nii.gz: No such file or directory
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "r5TT.nii" to "r5TT.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "r5TT.mif" to "wmseg.nii"...  [==================================================]
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: thresholding "wmseg.nii" at intensity 0.5...  [==================================================]
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: thresholding "wmseg.nii" at intensity 0.25...  [==================================================]
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: thresholding "wmseg.nii" at intensity 0.75...  [==================================================]
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=====]
+dwi2fod: preloading data for "biascorr.mif"...  [==================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "wm.mif" to "wmstr.mif"...  [==================================================]
+fod2dec: [WARNING] existing output files will be overwritten
+fod2dec: preloading data for "wm.mif"...  [==================================================]
+fod2dec: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=====]
+fod2dec: computing colours...  [==================================================]
+fod2dec: (re)weighting...  [==================================================]
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: Creating homogeneous processing mask...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        1 selected
+tckgen: [  0%]      221 generated,      110 selected
+tckgen: [  0%]      481 generated,      254 selected
+tckgen: [  0%]      981 generated,      509 selected
+tckgen: [  0%]     2001 generated,     1006 selected
+tckgen: [  0%]     3881 generated,     2059 selected
+tckgen: [  0%]     7621 generated,     4354 selected
+tckgen: [  0%]    18011 generated,    10731 selected
+tckgen: [  0%]    45341 generated,    24322 selected
+tckgen: [  0%]   117241 generated,    50429 selected
+tckgen: [  0%]   296081 generated,    98763 selected
+tckgen: [  0%]   732521 generated,   193908 selected
+tckgen: [  0%]  1750571 generated,   385563 selected
+tckgen: [  1%]  3900371 generated,   764749 selected
+tckgen: [  3%]  8218891 generated,  1515318 selected
+tckgen: [  6%] 16817251 generated,  3013943 selected
+tckgen: [ 12%] 34198871 generated,  6067202 selected
+tckgen: [ 24%] 68766711 generated, 12176730 selected
+tckgen: [ 49%] 138406421 generated, 24544109 selected
+tckgen: [ 96%] 263757901 generated, 48009123 selected
+tckgen: [100%] 271483443 generated, 50000000 selected
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: Creating homogeneous processing mask...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        1 selected
+tckgen: [  0%]      151 generated,       70 selected
+tckgen: [  0%]      281 generated,      149 selected
+tckgen: [  0%]      601 generated,      304 selected
+tckgen: [  0%]     1331 generated,      681 selected
+tckgen: [  0%]     3321 generated,     1716 selected
+tckgen: [  0%]     7841 generated,     4410 selected
+tckgen: [  1%]    18511 generated,    10859 selected
+tckgen: [  2%]    47291 generated,    25023 selected
+tckgen: [  5%]   123401 generated,    52351 selected
+tckgen: [ 10%]   317081 generated,   104374 selected
+tckgen: [ 20%]   782761 generated,   203336 selected
+tckgen: [ 39%]  1801511 generated,   393409 selected
+tckgen: [ 77%]  3884121 generated,   771156 selected
+tckgen: [100%]  4913541 generated,  1000000 selected
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
+tcksift2: [ERROR] unknown option "-mask"
+tcksift2: [ERROR] unknown option "-mask"
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 54: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 54: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file ".tck" not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 56: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 56: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file ".tck" not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 58: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 58: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file ".tck" not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 60: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 60: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file ".tck" not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 64: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 64: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file ".tck" not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 66: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 66: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file ".tck" not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 68: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 68: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file ".tck" not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 70: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/philscripts/advfibertrackandcntmecon_phil: line 70: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file ".tck" not found
+tckedit: [WARNING] existing output files will be overwritten
+tckedit: [ERROR] input file "1Msift_weightfactor.txt" not found (required for option "-tck_weights_in")
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: [ERROR] required input file "1Msift.tck" not found

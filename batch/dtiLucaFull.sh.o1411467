@@ -1,0 +1,114 @@
+dwipreproc_mb: [03;32m[0m
+dwipreproc_mb: [03;32mNote that this script makes use of commands / algorithms that have relevant articles for citation; INCLUDING FROM EXTERNAL SOFTWARE PACKAGES. Please consult the help page (-help option) for more information.[0m
+dwipreproc_mb: [03;32m[0m
+dwipreproc_mb: [03;32mGenerated temporary directory: /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Diff/LucaFull/preproc/dwipreproc_mb-tmp-LIN7F0/[0m
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Diff/LucaFull/preproc/rawdataAPdn.mif /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Diff/LucaFull/preproc/dwipreproc_mb-tmp-LIN7F0/series.mif
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Diff/LucaFull/preproc/APb0s.mif /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Diff/LucaFull/preproc/dwipreproc_mb-tmp-LIN7F0/pair1.mif
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Diff/LucaFull/preproc/rawdataPAdn.mif /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Diff/LucaFull/preproc/dwipreproc_mb-tmp-LIN7F0/pair2.mif
+dwipreproc_mb: [03;32mChanging to temporary directory (/mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Diff/LucaFull/preproc/dwipreproc_mb-tmp-LIN7F0/)[0m
+dwipreproc_mb: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo series.mif -size' (piping data to local storage)[0m
+dwipreproc_mb: [03;32mResult: 122 122 70 88[0m
+dwipreproc_mb: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo series.mif -dwgrad' (piping data to local storage)[0m
+dwipreproc_mb: [03;32mResult:          0          0          0          0
+ -0.984796  -0.160271  0.0670155       3000
+  0.977891  -0.190975 -0.0851956       1000
+  0.200813  -0.969687   0.139215       3000
+ 0.0337549   0.272728   0.961499       2950
+  0.185346   0.566469   -0.80297       3000
+ 0.0800478  -0.042082   0.995902       1000
+  0.461653   0.837329   0.292843       3000
+  0.648197  -0.504239  -0.570599       3000
+ -0.682129   0.190388  -0.706012       3000
+ -0.284035  -0.958161  -0.035376       1000
+  0.897217  -0.435311  0.0741957       3000
+  0.692093   0.662851  -0.285719       3000
+         0          0          0          0
+ 0.0383922  -0.757118   -0.65215       3000
+ -0.745627   0.528836   -0.40543       1000
+  -0.50886 -0.0395874   0.859939       2950
+  -0.77295  -0.350093  -0.529134       3000
+  0.433728  -0.716126   0.546848       3000
+ 0.0969454  -0.529832  -0.842544       1000
+ -0.394512   0.911514   0.116202       3000
+ 0.0968077  -0.388339   0.916417       2950
+         0          0          0          0
+  0.917417  0.0254111  -0.397114       3000
+   0.72854   0.620418  -0.290364       1000
+  0.487508   0.439255    0.75458       3000
+  0.422662   0.860677  -0.283889       3000
+ -0.808589   0.542853   0.226924       3000
+  -0.66778   0.483659   0.565813       1000
+  0.765468   0.596155   0.242195       3000
+ -0.466033   0.346139   0.814249       2950
+  0.868797  -0.302365   0.392132       3000
+ -0.227106   0.608371  -0.760465       1000
+  0.146688   0.821401  -0.551165       3000
+  0.406101  -0.143473   0.902495       2950
+         0          0          0          0
+  0.135395   0.915657    0.37847       3000
+  -0.51006   -0.36929  -0.776829       1000
+  0.676148   0.479595  -0.559296       3000
+ -0.726089   0.621624  -0.293902       3000
+-0.0827396  0.0570713  -0.994936       3000
+  0.287761  -0.929663   0.230042       1000
+  0.222403   -0.88927   -0.39967       3000
+ -0.929558  -0.280705  -0.239014       3000
+         0          0          0          0
+ -0.744889   -0.17273   0.644441       2950
+  -0.38452  -0.447776   0.807243       1000
+ -0.114658  -0.965378   0.234305       3000
+  0.178368  -0.500957  -0.846893       3000
+ -0.399613   0.460549  -0.792593       3000
+  0.770469   0.596355   0.225254       1000
+ -0.299993  -0.737125  -0.605516       3000
+  0.973117  -0.193744  -0.124523       3000
+ -0.616577  -0.787198 -0.0123528       3000
+ -0.237544   0.900929   0.363179       1000
+ -0.211233  -0.232545    0.94937       2950
+  0.674054   -0.73834 -0.0224711       3000
+         0          0          0          0
+  0.868411   0.031213   0.494861       2950
+ -0.926772  -0.102657  -0.361324       1000
+ -0.163431    0.87625  -0.453295       3000
+ -0.344881  -0.183828   -0.92047       3000
+  0.711519  -0.164826  -0.683061       3000
+ -0.861378  -0.143248   0.487349       1000
+ -0.372293   0.677803    0.63402       3000
+ -0.436212  -0.689054   0.578726       3000
+         0          0          0          0
+ -0.875814  -0.352309   0.329892       3000
+  0.603577  -0.160256   0.781033       1000
+  0.029578  -0.991246  -0.128669       3000
+ -0.980629   0.064023  -0.185116       3000
+  0.173234   0.534467   0.827245       3000
+   0.46556 -0.0920835  -0.880213       1000
+   0.12839  -0.675208   0.726368       2950
+ -0.481642    0.84214   -0.24253       3000
+  0.247779   -0.12377  -0.960878       3000
+  0.217696    0.84424  -0.489762       1000
+   0.86656   0.497754 -0.0362509       3000
+  0.640063   0.133496   0.756636       2950
+         0          0          0          0
+  0.556423  -0.751165  -0.355169       3000
+  0.697312  -0.709443  -0.102215       1000
+  0.300075   0.953079  0.0399415       3000
+  0.468153   0.382558  -0.796544       3000
+ -0.859394   0.294051     0.4183       3000
+  0.301222   0.797068     0.5234       1000
+ -0.591152  -0.623832  -0.511246       3000
+ -0.656249   0.481916  -0.580598       3000[0m
+dwipreproc_mb: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo series.mif -stride' (piping data to local storage)[0m
+dwipreproc_mb: [03;32mResult: 1 2 3 4[0m
+dwipreproc_mb: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo pair1.mif -size' (piping data to local storage)[0m
+dwipreproc_mb: [03;32mResult: 122 122 70 8[0m
+dwipreproc_mb: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo pair2.mif -size' (piping data to local storage)[0m
+dwipreproc_mb: [03;32mResult: 122 122 70 88[0m
+dwipreproc_mb: [00;31m[WARNING] Inequal number of b=0 volumes in pair; registration may be biased[0m
+[03;34mCommand:[0m mrconvert series.mif dwi_pre_topup.nii -stride -1,+2,+3,+4
+[03;34mCommand:[0m mrcat pair1.mif pair2.mif - -axis 3 | mrconvert - topup_in.nii -stride -1,+2,+3,+4
+dwipreproc_mb: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo pair1.mif -size' (piping data to local storage)[0m
+dwipreproc_mb: [03;32mResult: 122 122 70 8[0m
+dwipreproc_mb: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo pair2.mif -size' (piping data to local storage)[0m
+dwipreproc_mb: [03;32mResult: 122 122 70 88[0m
+dwipreproc_mb: [03;32mCreating phase-encoding configuration file[0m
+[03;34mCommand:[0m topup --imain=topup_in.nii --datain=config.txt --out=field --fout=field_map.nii.gz --config=/software/fsl/fsl-5.0.9_eddy/fsl/etc/flirtsch/b02b0.cnf
