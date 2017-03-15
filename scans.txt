@@ -1,3 +1,2 @@
-/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Raw/LucaFull
-/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Raw/LucaFull2
-/working/lab_michaebr/alistaiP/diffusion-testing/testPBS/Raw/LucaFullMP
+/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Raw/Long
+/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Raw/Short

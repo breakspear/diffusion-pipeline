@@ -23,7 +23,7 @@ cd $WORKDIR/Diff/$subj/preproc
 mrinfo rawdataAP.mif -export_grad_mrtrix rawencoding.b
 mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b
 
-if [ $ismosaic=="1" ];
+if [ $ismosiac = 1 ];
 then
 
 	mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads $ncpus
@@ -39,7 +39,7 @@ then
 	mv rawdataAPrem.mif rawdataAP.mif
 fi
 
-if [ $fullreverseseq=="1" ];
+if [ $fullreverseseq = 1 ];
 then
 	mrconvert rawdataPA.mif rawdataPA.nii -force -nthreads $ncpus
 	fslroi rawdataPA.nii rawdataPArem 1 $adjvols
@@ -74,10 +74,10 @@ mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads $ncpus
 
 dwiextract rawdataAPdn.mif APb0s.mif -bzero -force
 
-if ([ $ismultiband=="1" ] && [ $fullrevsequence=="0" ]); then
+if ([ $ismultiband = 1 ] && [ $fullreverseseq = 0 ]); then
 	${MRTRIX}/scripts/dwipreproc_mb -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . #assuming multiband factor of 2
 
-elif ([ $ismultiband=="1" ] && [ $fullrevsequence=="1" ]); then
+elif ([ $ismultiband = 1 ] && [ $fullreverseseq = 1 ]); then
 	${MRTRIX}/scripts/dwipreproc_mb -rpe_all rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir .
 
 else
