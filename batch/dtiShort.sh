@@ -36,5 +36,5 @@ subjDIRECTORY=/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Raw/Sh
 
 cd $subjDIRECTORY
 
-processFSall Short /working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS  #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
+advfulldiffsetup Short /working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS  #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
  

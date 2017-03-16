@@ -1,0 +1,221 @@
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAP.mif" to "rawdataAP.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "rawdataAPrem.nii.gz"...  [==================================================]
+mrconvert: copying from "rawdataAPrem.nii.gz" to "rawdataAPrem.mif"...  [==================================================]
+dwiextract: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+dwidenoise: [WARNING] existing output files will be overwritten
+dwidenoise: preloading data for "rawdataAP.mif"...  [==================================================]
+dwidenoise: running MP-PCA denoising...  [==================================================]
+dwidenoise: [WARNING] existing output files will be overwritten
+dwidenoise: preloading data for "rawdataPA.mif"...  [==================================================]
+dwidenoise: running MP-PCA denoising...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdn.mif" to "rawdataAPdnstr.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdnstr.mif" to "rawdataAPdn.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "rawdataPAdnstr.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdnstr.mif" to "rawdataPAdn.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdn.mif" to "b0AP.mif"...  [==============================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "b0PA.mif"...  [==============================]
+dwiextract: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: preloading data for "/tmp/mrtrix-tmp-PZs7n7.mif"...  [==================================================]
+mrmath: computing mean along axis 3......  [==================================================]
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: preloading data for "/tmp/mrtrix-tmp-hNlfSG.mif"...  [==================================================]
+mrmath: computing mean along axis 3......  [==================================================]
+dwi2tensor: [WARNING] existing output files will be overwritten
+dwi2tensor: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+dwi2tensor: computing tensors...  [==================================================]
+tensor2metric: [WARNING] existing output files will be overwritten
+tensor2metric: computing metrics...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/FS/Short/mri/brain.mgz"...  [===============]
+mrconvert: copying from "/working/l.../PBS/FS/Short/mri/brain.mgz" to "brainFS.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/FS/Short/mri/T1.mgz"...  [===============]
+mrconvert: copying from "/working/l...ran/PBS/FS/Short/mri/T1.mgz" to "FS.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/FS/Short/mri/brain.mgz"...  [===============]
+mrconvert: copying from "/working/l.../PBS/FS/Short/mri/brain.mgz" to "brainFSsp.nii"...  [==================================================]
+5tt2gmwmi: [WARNING] existing output files will be overwritten
+5tt2gmwmi: Generating GMWMI seed mask...  [=================================================]
+labelconvert: [WARNING] existing output files will be overwritten
+labelconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/FS/Short/mri/aparc+aseg.mgz"...  [===================================]
+rm: cannot remove ‘parc_fixsubcort.nii’: No such file or directory
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "parcFSL.nii.gz"...  [==================================]
+mrconvert: copying from "parcFSL.nii.gz" to "parcFSLtempstr.nii.gz"...  [==================================================]
+mrconvert: compressing image "parcFSLtempstr.nii.gz"...  [==================================]
+labelsgmfix: [01;31m[ERROR] Command failed: mrconvert result.mif /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Diff/Short/preproc/parc_fixsubcort.nii[0m
+labelsgmfix: [03;32mOutput of failed command:[0m
+mrconvert: [01;31m[ERROR] output file "/mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Diff/Short/preproc/parc_fixsubcort.nii" already exists (use -force option to force overwrite)[0m
+mrconvert: [01;31m[ERROR] error creating image "/mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Diff/Short/preproc/parc_fixsubcort.nii"[0m
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "parc_fixsubcort.nii" to "parc_fixsubcortstr.nii"...  [==================================================]
+transformconvert: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: preloading data for "FS.nii"...  [==================================================]
+mrtransform: copying from "FS.nii" to "rFS.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: preloading data for "FS.nii"...  [==================================================]
+mrtransform: reslicing "FS.nii"...  [==============================]
+transformconvert: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSmasked.nii" to "5TTFSspmasked.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTgmwmi.nii" to "5TTFSspgmwmi.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSspgmwmi.nii" to "r5TTgmwmi.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSspmasked.nii" to "r5TT.nii"......  [==================================================]
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+dwi2fod: preloading data for "biascorr.mif"...  [==================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "wm.mif" to "wmstr.mif"...  [==================================================]
+fod2dec: [WARNING] existing output files will be overwritten
+fod2dec: preloading data for "wm.mif"...  [==================================================]
+fod2dec: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+fod2dec: computing colours...  [==================================================]
+fod2dec: (re)weighting...  [==============================]
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 46: numfibers: command not found
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+tckgen: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+tckgen: resampling ACT 5TT image to fixel image space...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        0 selected
+tckgen: [  0%]      151 generated,       78 selected
+tckgen: [  0%]      371 generated,      194 selected
+tckgen: [  0%]      821 generated,      445 selected
+tckgen: [  0%]     1541 generated,      849 selected
+tckgen: [  0%]     3021 generated,     1809 selected
+tckgen: [  0%]     6121 generated,     3960 selected
+tckgen: [  0%]    14271 generated,     9290 selected
+tckgen: [  0%]    34721 generated,    20425 selected
+tckgen: [  0%]    81681 generated,    39507 selected
+tckgen: [  0%]   187051 generated,    72209 selected
+tckgen: [  0%]   415151 generated,   128779 selected
+tckgen: [  0%]   892641 generated,   233489 selected
+tckgen: [  0%]  1875271 generated,   438010 selected
+tckgen: [  1%]  3885321 generated,   850488 selected
+tckgen: [  3%]  7871561 generated,  1675567 selected
+tckgen: [  6%] 15685511 generated,  3330550 selected
+tckgen: [ 13%] 31251551 generated,  6717491 selected
+tckgen: [ 27%] 62093721 generated, 13637333 selected
+tckgen: [ 55%] 123404731 generated, 27874645 selected
+tckgen: [100%] 203721337 generated, 50000000 selected
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 48: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 48: numfibers: command not found
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+tckgen: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+tckgen: resampling ACT 5TT image to fixel image space...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        0 selected
+tckgen: [  0%]       71 generated,       39 selected
+tckgen: [  0%]      211 generated,      104 selected
+tckgen: [  0%]      461 generated,      215 selected
+tckgen: [  0%]      961 generated,      492 selected
+tckgen: [  0%]     2461 generated,     1417 selected
+tckgen: [  0%]     6021 generated,     3834 selected
+tckgen: [  0%]    14571 generated,     9448 selected
+tckgen: [  2%]    34261 generated,    20000 selected
+tckgen: [  3%]    80341 generated,    38910 selected
+tckgen: [  7%]   183371 generated,    70598 selected
+tckgen: [ 12%]   410621 generated,   127174 selected
+tckgen: [ 23%]   889921 generated,   233260 selected
+tckgen: [ 43%]  1872191 generated,   438065 selected
+tckgen: [ 85%]  3824061 generated,   858096 selected
+tckgen: [100%]  4284177 generated,  1000000 selected
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  .... done
+tckmap: mapping tracks to image...  [==================================================]
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 57: numfibers: command not found
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: resampling ACT 5TT image to fixel image space...  [==================================================]
+tcksift2: segmenting FODs...  [==================================================]
+tcksift2: mapping tracks to image...  [==================================================]
+tcksift2:   Iteration     CF (data)      CF (reg)     Streamlines
+....tcksift2: [ .  ]         2        38.508%         0.767%        50000000
+..tcksift2: [  . ]         3        35.981%         1.231%        50000000
+..tcksift2: [.   ]         4        34.516%         1.614%        50000000
+....tcksift2: [ .  ]         6        32.846%         2.170%        50000000
+........tcksift2: [  . ]        10        31.302%         2.816%        50000000
+................tcksift2: [   .]        18        30.142%         3.407%        50000000
+................................tcksift2: [ .  ]        34        29.426%         3.836%        50000000
+........................................tcksift2: [done]        54        29.143%         4.027%        50000000
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: resampling ACT 5TT image to fixel image space...  [==================================================]
+tcksift2: segmenting FODs...  [==================================================]
+tcksift2: mapping tracks to image...  [==================================================]
+tcksift2:   Iteration     CF (data)      CF (reg)     Streamlines
+....tcksift2: [ .  ]         2        38.035%         0.788%        1000000
+..tcksift2: [   .]         3        35.456%         1.262%        1000000
+..tcksift2: [ .  ]         4        33.974%         1.650%        1000000
+....tcksift2: [ .  ]         6        32.297%         2.209%        1000000
+........tcksift2: [ .  ]        10        30.760%         2.853%        1000000
+................tcksift2: [   .]        18        29.616%         3.437%        1000000
+................................tcksift2: [ .  ]        34        28.916%         3.858%        1000000
+......................................tcksift2: [done]        53        28.652%         4.039%        1000000
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 65: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 65: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 67: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 67: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 69: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 69: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 71: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 71: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 75: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 75: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 77: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 77: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 79: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 79: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 81: numfibers: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/advscripts/advfibertrackandcntmecon: line 81: CNTMEPREFIX: command not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tckedit: [WARNING] existing output files will be overwritten
+tckedit: [ .  ]    39169 read,    39169 written
+tckedit: [  . ]    89473 read,    89473 written
+tckedit: [   .]   139048 read,   139048 written
+tckedit: [ .  ]   187561 read,   187561 written
+tckedit: [  . ]   333251 read,   333251 written
+tckedit: [  . ]   612353 read,   612353 written
+tckedit: [done]  1000000 read,  1000000 written
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
