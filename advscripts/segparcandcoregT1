@@ -21,7 +21,7 @@ SUBJECTS_DIR=${WORKDIR}/FS
 
 mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -stride +1,2,3 -nthreads $ncpus -force
 
-mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -stride +1,2,3 -nthreads $ncpus -force
+mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -nthreads $ncpus -force
 
 #flirt -in $FSLDIR/data/standard/MNI152_T1_1mm_brain.nii.gz -ref brainFS.nii -omat mni2FS.mat -dof 12
 
