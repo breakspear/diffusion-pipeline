@@ -34,11 +34,11 @@ fod2dec wm.mif  foddec.mif -mask biasmeanb0bet_mask.nii.gz -force -nthreads $ncp
 
 tckgen wm.mif ${numfibers}.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number ${numfibers} -mask wmseg025.nii -output_seeds succeeds.txt -force -nthreads $ncpus
 
-tckmap ${numfibers}.tck ${numfibers}.mif -vox 0.5 -force -nthreads $ncpus
+tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
 
 tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number 1M -mask wmseg025.nii  -output_seeds succeeds1M.txt -force -nthreads $ncpus
 
-tckmap 1M.tck 1M.mif -vox 0.5 -force -nthreads $ncpus
+tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads $ncpus
 
 
 #regrid segmentation to diffusion space for sift purposes
@@ -79,4 +79,4 @@ tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlen
 
 tckedit 1M.tck -tck_weights_in 1Msift_weightfactor.txt  1Msift.tck -force -nthreads $ncpus
 
-tckmap 1Msift.tck 1Msift.mif -vox 0.5 -force -nthreads $ncpus
+tckmap 1Msift.tck 1Msift.nii -vox 0.5 -force -nthreads $ncpus
