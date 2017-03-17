@@ -1,2 +1,1 @@
-/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Raw/Long
-/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Raw/Short
+/working/lab_michaebr/alistaiP/diffusion-testing/PARK/Raw/Patient_043

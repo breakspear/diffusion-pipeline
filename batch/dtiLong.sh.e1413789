@@ -1,0 +1,198 @@
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+mrinfo: [ERROR] output file "rawencoding.b" already exists (use -force option to force overwrite)
+mrinfo: [ERROR] output file "rawrevencoding.b" already exists (use -force option to force overwrite)
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAP.mif" to "rawdataAP.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "rawdataAPrem.nii.gz"...  [==================================================]
+mrconvert: copying from "rawdataAPrem.nii.gz" to "rawdataAPrem.mif"...  [==================================================]
+dwiextract: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+dwidenoise: [WARNING] existing output files will be overwritten
+dwidenoise: preloading data for "rawdataAP.mif"...  [==================================================]
+dwidenoise: running MP-PCA denoising...  [==================================================]
+dwidenoise: [WARNING] existing output files will be overwritten
+dwidenoise: preloading data for "rawdataPA.mif"...  [==================================================]
+dwidenoise: running MP-PCA denoising...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdn.mif" to "rawdataAPdnstr.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdnstr.mif" to "rawdataAPdn.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "rawdataPAdnstr.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdnstr.mif" to "rawdataPAdn.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdn.mif" to "b0AP.mif"...  [==============================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "b0PA.mif"...  [==============================]
+dwiextract: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: preloading data for "/tmp/mrtrix-tmp-E51bl7.mif"...  [==================================================]
+mrmath: computing mean along axis 3......  [==================================================]
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: preloading data for "/tmp/mrtrix-tmp-5HxVJ9.mif"...  [==================================================]
+mrmath: computing mean along axis 3......  [==================================================]
+dwi2tensor: [WARNING] existing output files will be overwritten
+dwi2tensor: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+dwi2tensor: computing tensors...  [==================================================]
+tensor2metric: [WARNING] existing output files will be overwritten
+tensor2metric: computing metrics...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/FS/Long/mri/brain.mgz"...  [===============]
+mrconvert: copying from "/working/l...n/PBS/FS/Long/mri/brain.mgz" to "brainFS.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/FS/Long/mri/T1.mgz"...  [===============]
+mrconvert: copying from "/working/l...iran/PBS/FS/Long/mri/T1.mgz" to "FS.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/FS/Long/mri/brain.mgz"...  [===============]
+mrconvert: copying from "/working/l...n/PBS/FS/Long/mri/brain.mgz" to "brainFSsp.nii"...  [==================================================]
+5tt2gmwmi: [WARNING] existing output files will be overwritten
+5tt2gmwmi: Generating GMWMI seed mask...  [=================================================]
+labelconvert: [WARNING] existing output files will be overwritten
+labelconvert: uncompressing image "/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/FS/Long/mri/aparc+aseg.mgz"...  [===================================]
+rm: cannot remove ‘parc_fixsubcort.nii’: No such file or directory
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "parcFSL.nii.gz"...  [=================================================]
+mrconvert: copying from "parcFSL.nii.gz" to "parcFSLtempstr.nii.gz"...  [==================================================]
+mrconvert: compressing image "parcFSLtempstr.nii.gz"...  [=================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "parc_fixsubcort.nii" to "parc_fixsubcortstr.nii"...  [==================================================]
+transformconvert: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: preloading data for "FS.nii"...  [==================================================]
+mrtransform: copying from "FS.nii" to "rFS.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: preloading data for "FS.nii"...  [==================================================]
+mrtransform: reslicing "FS.nii"...  [========================================]
+transformconvert: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSmasked.nii" to "5TTFSspmasked.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTgmwmi.nii" to "5TTFSspgmwmi.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSspgmwmi.nii" to "r5TTgmwmi.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSspmasked.nii" to "r5TT.nii"......  [==================================================]
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+dwi2fod: preloading data for "biascorr.mif"...  [==================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "wm.mif" to "wmstr.mif"...  [==================================================]
+fod2dec: [WARNING] existing output files will be overwritten
+fod2dec: preloading data for "wm.mif"...  [==================================================]
+fod2dec: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+fod2dec: computing colours...  [==================================================]
+fod2dec: (re)weighting...  [==============================]
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+tckgen: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+tckgen: resampling ACT 5TT image to fixel image space...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        0 selected
+tckgen: [  0%]       21 generated,       12 selected
+tckgen: [  0%]       71 generated,       38 selected
+tckgen: [  0%]      151 generated,       87 selected
+tckgen: [  0%]      331 generated,      174 selected
+tckgen: [  0%]      731 generated,      416 selected
+tckgen: [  0%]     1731 generated,     1057 selected
+tckgen: [  0%]     3361 generated,     2241 selected
+tckgen: [  0%]     6731 generated,     4775 selected
+tckgen: [  0%]    15691 generated,    11063 selected
+tckgen: [  0%]    36561 generated,    23715 selected
+tckgen: [  0%]    98311 generated,    53264 selected
+tckgen: [  0%]   277841 generated,   123423 selected
+tckgen: [  0%]   887621 generated,   340173 selected
+tckgen: [  1%]  2545561 generated,   934880 selected
+tckgen: [  2%]  3954711 generated,  1455173 selected
+tckgen: [  5%]  7427661 generated,  2771233 selected
+tckgen: [ 10%] 14049941 generated,  5362255 selected
+tckgen: [ 23%] 30082421 generated, 11883382 selected
+tckgen: [ 58%] 71396751 generated, 29464357 selected
+tckgen: [100%] 113663861 generated, 50000000 selected
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  .... done
+tckmap: mapping tracks to image...  [==================================================]
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+tckgen: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=]
+tckgen: resampling ACT 5TT image to fixel image space...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        1 selected
+tckgen: [  0%]      101 generated,       52 selected
+tckgen: [  0%]      211 generated,      109 selected
+tckgen: [  0%]      471 generated,      258 selected
+tckgen: [  0%]      971 generated,      544 selected
+tckgen: [  0%]     2291 generated,     1394 selected
+tckgen: [  0%]     5261 generated,     3589 selected
+tckgen: [  0%]    13171 generated,     9296 selected
+tckgen: [  2%]    31541 generated,    20713 selected
+tckgen: [  4%]    73431 generated,    41917 selected
+tckgen: [  8%]   166811 generated,    80706 selected
+tckgen: [ 15%]   360481 generated,   151548 selected
+tckgen: [ 29%]   760291 generated,   291948 selected
+tckgen: [ 53%]  1449421 generated,   533123 selected
+tckgen: [100%]  2601013 generated,  1000000 selected
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: resampling ACT 5TT image to fixel image space...  [==================================================]
+tcksift2: segmenting FODs...  [==================================================]
+tcksift2: mapping tracks to image...  [==================================================]
+tcksift2:   Iteration     CF (data)      CF (reg)     Streamlines
+....tcksift2: [.   ]         2        36.340%         0.908%        50000000
+..tcksift2: [ .  ]         3        33.586%         1.430%        50000000
+..tcksift2: [ .  ]         4        32.021%         1.855%        50000000
+....tcksift2: [  . ]         6        30.266%         2.464%        50000000
+........tcksift2: [ .  ]        10        28.676%         3.160%        50000000
+................tcksift2: [   .]        18        27.509%         3.783%        50000000
+................................tcksift2: [ .  ]        34        26.804%         4.228%        50000000
+................................tcksift2: [done]        50        26.568%         4.396%        50000000
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: resampling ACT 5TT image to fixel image space...  [==================================================]
+tcksift2: segmenting FODs...  [==================================================]
+tcksift2: mapping tracks to image...  [==================================================]
+tcksift2:   Iteration     CF (data)      CF (reg)     Streamlines
+....tcksift2: [  . ]         2        36.079%         0.912%        1000000
+..tcksift2: [ .  ]         3        33.290%         1.438%        1000000
+..tcksift2: [.   ]         4        31.704%         1.866%        1000000
+....tcksift2: [  . ]         6        29.926%         2.481%        1000000
+........tcksift2: [ .  ]        10        28.318%         3.183%        1000000
+................tcksift2: [  . ]        18        27.142%         3.810%        1000000
+................................tcksift2: [ .  ]        34        26.439%         4.254%        1000000
+................................tcksift2: [done]        50        26.206%         4.421%        1000000
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tckedit: [WARNING] existing output files will be overwritten
+tckedit: [ .  ]    20865 read,    20865 written
+tckedit: [.   ]    39365 read,    39365 written
+tckedit: [  . ]    84402 read,    84402 written
+tckedit: [.   ]   129410 read,   129410 written
+tckedit: [ .  ]   264431 read,   264431 written
+tckedit: [ .  ]   488932 read,   488932 written
+tckedit: [done]  1000000 read,  1000000 written
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  .... done
+tckmap: mapping tracks to image...  [==================================================]

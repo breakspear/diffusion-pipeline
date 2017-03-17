@@ -10,7 +10,7 @@ WORKDIR=$2
 #Advanced preprocessing
 #Parameters: mosaic fullrevsequence multiband (1 if yes)
 
-advpreproc $subj $WORKDIR 1 0 1
+advpreproc $subj $WORKDIR 1 1 1
  
 #Segmentation, parcellation and co-registration of T1 images
 

@@ -41,33 +41,38 @@ tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number 1
 tckmap 1M.tck 1M.mif -vox 0.5 -force -nthreads $ncpus
 
 
+#regrid segmentation to diffusion space for sift purposes
+
+mrtransform 5TTFSspmasked.nii r5TTrg.mif -linear diff2FSMR.mat -template fa.nii -inverse -force -nthreads $ncpus
+mrconvert r5TTrg.mif wmsegrg.nii -coord 3 2 -force -nthreads $ncpus
+
 #tcksift2
 
-tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -mask wmseg025.nii -force -nthreads $ncpus
+tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -proc_mask wmseg025.nii -force -nthreads $ncpus
 
-tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -mask wmseg025.nii -force -nthreads $ncpus
+tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -proc_mask wmseg025.nii -force -nthreads $ncpus
 
 
 #Connectome construction
 #sifted
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads $ncpus
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreds $ncpus
 
 
 #non-sifted
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -scale_invlength -force
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads $ncpus
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
 
 
 #Alter sift tracks for visualisation purposes
