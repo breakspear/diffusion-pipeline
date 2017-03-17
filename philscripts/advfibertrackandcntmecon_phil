@@ -41,6 +41,13 @@ tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number 1
 tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads $ncpus
 
 
+#visualise streamline ends for quality checking purposes
+
+tckmap ${numfibers}.tck ${numfibers}ends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
+
+tckmap 1M.tck 1Mends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
+
+
 #regrid segmentation to diffusion space for sift purposes
 
 mrtransform 5TTFSspmasked.nii r5TTrg.mif -linear diff2FSMR.mat -template fa.nii -inverse -force -nthreads $ncpus
