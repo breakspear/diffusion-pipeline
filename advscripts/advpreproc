@@ -20,8 +20,8 @@ cd $WORKDIR/Diff/$subj/preproc
 
 #Extract encoding
 
-mrinfo rawdataAP.mif -export_grad_mrtrix rawencoding.b
-mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b
+mrinfo rawdataAP.mif -export_grad_mrtrix rawencoding.b -force
+mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 
 if [ $ismosiac = 1 ];
 then

@@ -36,5 +36,5 @@ subjDIRECTORY=/working/lab_michaebr/alistaiP/diffusion-testing/PARK/Raw/Patient_
 
 cd $subjDIRECTORY
 
-advfulldiffsetup_phil Patient_043 /working/lab_michaebr/alistaiP/diffusion-testing/PARK  #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
+advfibertrackandcntmecon_phil Patient_043 /working/lab_michaebr/alistaiP/diffusion-testing/PARK 50M DST #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
  
