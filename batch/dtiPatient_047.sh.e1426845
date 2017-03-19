@@ -1,0 +1,59 @@
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+dwi2response: [01;31m[ERROR] Command failed: mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_047/preproc/biascorr.mif /tmp/dwi2response-tmp-3TDN7J/dwi.mif -stride 0,0,0,1[0m
+dwi2response: [03;32mOutput of failed command:[0m
+mrconvert: [01;31m[ERROR] failed to open key/value file "/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_047/preproc/biascorr.mif": No such file or directory[0m
+mrconvert: [01;31m[ERROR] error opening image "/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_047/preproc/biascorr.mif"[0m
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [ERROR] failed to open key/value file "biascorr.mif": No such file or directory
+dwi2fod: [ERROR] error opening image "biascorr.mif"
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [ERROR] failed to open key/value file "wm.mif": No such file or directory
+mrconvert: [ERROR] error opening image "wm.mif"
+mv: cannot stat ‘wmstr.mif’: No such file or directory
+fod2dec: [WARNING] existing output files will be overwritten
+fod2dec: [ERROR] failed to open key/value file "wm.mif": No such file or directory
+fod2dec: [ERROR] error opening image "wm.mif"
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: [ERROR] cannot stat file "wmseg025.nii": No such file or directory
+tckgen: [ERROR] error opening image "wmseg025.nii"
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: [ERROR] required input file "25M.tck" not found
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: [ERROR] cannot stat file "wmseg025.nii": No such file or directory
+tckgen: [ERROR] error opening image "wmseg025.nii"
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: [ERROR] required input file "1M.tck" not found
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: [ERROR] required input file "25M.tck" not found
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: [ERROR] required input file "1M.tck" not found
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] input file "diff2FSMR.mat" not found (required for option "-linear")
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [ERROR] failed to open key/value file "r5TTrg.mif": No such file or directory
+mrconvert: [ERROR] error opening image "r5TTrg.mif"
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: [ERROR] required input file "25M.tck" not found
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: [ERROR] required input file "1M.tck" not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file "25M.tck" not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file "25M.tck" not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file "25M.tck" not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file "25M.tck" not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file "25M.tck" not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file "25M.tck" not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file "25M.tck" not found
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] required input file "25M.tck" not found
+tckedit: [WARNING] existing output files will be overwritten
+tckedit: [ERROR] required input file "1M.tck" not found
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: [ERROR] required input file "1Msift.tck" not found

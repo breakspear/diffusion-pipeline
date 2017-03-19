@@ -1,0 +1,9 @@
+dwi2response: [03;32m[0m
+dwi2response: [03;32mNote that this script makes use of commands / algorithms that have relevant articles for citation. Please consult the help page (-help option) for more information.[0m
+dwi2response: [03;32m[0m
+dwi2response: [03;32mGenerated temporary directory: /tmp/dwi2response-tmp-3TDN7J/[0m
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_047/preproc/biascorr.mif /tmp/dwi2response-tmp-3TDN7J/dwi.mif -stride 0,0,0,1
+dwi2response: [03;32m[0m
+dwi2response: [03;32mChanging back to original directory (/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_047/preproc)[0m
+dwi2response: [00;31mScript failed while executing the command: mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_047/preproc/biascorr.mif /tmp/dwi2response-tmp-3TDN7J/dwi.mif -stride 0,0,0,1[0m
+dwi2response: [00;31mFor debugging, inspect contents of temporary directory: /tmp/dwi2response-tmp-3TDN7J/[0m

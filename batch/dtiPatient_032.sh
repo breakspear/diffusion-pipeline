@@ -22,19 +22,34 @@
 # *m* situations under which to email a) aborted b) begin e) end
 # *M* email address to send emails to
 
-pipedir=/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline
+
+####
+#Find all scripting files
+pipedir=$(pwd)
 PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
 #export PATH=$(pwd)/custscripts:$PATH
 
+
+####
+#Load all required software
 module load mrtrix3/AP
 module load freesurfer/6.0.0
 module load ANTs/20160509
 module load fsl/5.0.9_eddy
 
+
+####
+#Setup dir for temp MRtrix files to be written - otherwise they get sent to nodes tmp dir
+
+WORKDIR=/mnt/lustre/working/lab_michaebr/alistaiP/Park
+echo "TempDir: ${WORKDIR}/tmp" > /mnt/lustre/$USER/.mrtrix.conf
+
+#Extract ID of subject and their corresponding folder holding raw image files
+
 subj=Patient_032
-subjDIRECTORY=/working/lab_michaebr/alistaiP/Park/Raw/Patient_032
+subjDIRECTORY=/mnt/lustre/working/lab_michaebr/alistaiP/Park/Raw/Patient_032
 
 cd $subjDIRECTORY
 
-advfulldiffsetup_phil Patient_032 /working/lab_michaebr/alistaiP/Park  #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
+advfibertrackandcntmecon_phil Patient_032 /mnt/lustre/working/lab_michaebr/alistaiP/Park 25M DST #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
  
