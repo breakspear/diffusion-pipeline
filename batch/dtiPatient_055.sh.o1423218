@@ -1,0 +1,1004 @@
+dwipreproc_cust: [03;32m[0m
+dwipreproc_cust: [03;32mNote that this script makes use of commands / algorithms that have relevant articles for citation; INCLUDING FROM EXTERNAL SOFTWARE PACKAGES. Please consult the help page (-help option) for more information.[0m
+dwipreproc_cust: [03;32m[0m
+dwipreproc_cust: [03;32mGenerated temporary directory: /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/dwipreproc_cust-tmp-4JCWUT/[0m
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/rawdataAPdn.mif /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/dwipreproc_cust-tmp-4JCWUT/series.mif
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/AP7b0s.mif /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/dwipreproc_cust-tmp-4JCWUT/pair1.mif
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/rawdataPAdn.mif /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/dwipreproc_cust-tmp-4JCWUT/pair2.mif
+dwipreproc_cust: [03;32mChanging to temporary directory (/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/dwipreproc_cust-tmp-4JCWUT/)[0m
+dwipreproc_cust: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo series.mif -size' (piping data to local storage)[0m
+dwipreproc_cust: [03;32mResult: 128 128 90 102[0m
+dwipreproc_cust: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo series.mif -dwgrad' (piping data to local storage)[0m
+dwipreproc_cust: [03;32mResult:          0          0          0          0
+         0          0          0          0
+  0.999984   1.91e-06 0.00569487       3000
+-0.0262949  -0.746797   0.664533       3000
+0.00420063   0.520608  -0.853786       3000
+  -0.27178   0.829958    0.48714       3000
+  0.651393   0.408145   0.639613       3000
+ -0.508051    0.26413  -0.819829       3000
+ -0.958789   0.282825 -0.0271071       3000
+ -0.534575   0.383667   0.753014       3000
+   0.31724   0.136531   0.938466       3000
+         0          0          0          0
+ -0.504978  -0.593286   0.626904       3000
+ -0.601084  0.0985275   0.793089       3000
+  0.954286  -0.157908    0.25378       3000
+  0.526655  -0.744954  -0.409484       3000
+ -0.193529  -0.926211  -0.323541       3000
+  0.364028   0.926477  0.0955172       3000
+ -0.258739    0.93171  -0.254891       3000
+-0.0224164   0.513432   0.857837       3000
+  0.612683   0.789307  0.0401726       3000
+         0          0          0          0
+ -0.873727  0.0398534  -0.484781       3000
+  0.744221  -0.233501   -0.62579       3000
+ -0.487512   0.678945  -0.548968       3000
+   0.45055  -0.891546  0.0463753       3000
+  0.662682  -0.433782    0.61048       3000
+  0.853804   0.240043   0.461951       3000
+  0.439229  -0.508666   0.740498       3000
+ -0.958015     -0.142   0.249086       3000
+  0.703156  -0.596693    0.38669       3000
+         0          0          0          0
+  0.387471  -0.183515  -0.903432       3000
+ -0.143027    -0.6839  -0.715419       3000
+  0.801291  -0.597898 -0.0212247       3000
+  0.288697  -0.139247    0.94724       3000
+  -0.96331  -0.131364  -0.234047       3000
+   0.15057  -0.698954  -0.699137       3000
+ 0.0165467  -0.983603   0.179585       3000
+  0.375712  -0.898603  -0.226612       3000
+ -0.667338   0.730166  -0.146685       3000
+         0          0          0          0
+  0.290487  -0.468803  -0.834171       3000
+  0.722927   -0.16552   0.670805       3000
+ -0.715916  -0.660661   -0.22581       3000
+  -0.42821  -0.583907  -0.689702       3000
+ -0.958266   -0.28539  0.0167229       3000
+ -0.493722  -0.299563  -0.816395       3000
+  0.893712   0.400997   0.201197       3000
+ -0.202641   0.978625  0.0350726       3000
+  0.230096     0.9669  -0.110271       3000
+         0          0          0          0
+ -0.738488   0.602503   0.302697       3000
+ -0.843743   0.339275    0.41592       3000
+ -0.105244  -0.287579  -0.951957       3000
+   -0.2397   0.401954  -0.883729       3000
+ -0.612049   0.779931   0.130781       3000
+  0.266666   0.460255   0.846791       3000
+  0.658047  -0.516167  -0.548221       3000
+ -0.256451  -0.896726   0.360716       3000
+  0.249348  -0.822276   0.511554       3000
+         0          0          0          0
+  0.572284    0.66134   0.484892       3000
+ 0.0211974  -0.250723   0.967827       3000
+   0.22463   0.323332  -0.919237       3000
+ -0.837561   0.325198  -0.439019       3000
+  -0.86044   0.467257   -0.20326       3000
+  0.487394  -0.811404   0.322601       3000
+ -0.106064   0.948348   0.298976       3000
+  0.543109  0.0130482   0.839561       3000
+ -0.250313  -0.578919   0.776013       3000
+         0          0          0          0
+ -0.229032 -0.0418211    0.97252       2950
+ -0.215557   0.655398   -0.72387       3000
+  0.961644  -0.148399  -0.230691       3000
+  0.311237    0.79074   0.527126       3000
+ -0.870407  -0.431511   0.237046       3000
+  0.845684   0.266708  -0.462262       3000
+  0.893687  -0.414424  -0.171975       3000
+ -0.702778   -0.68002   0.208989       3000
+ -0.667132  -0.353312   0.655824       3000
+         0          0          0          0
+  0.516803    0.75136  -0.410333       3000
+ -0.720544  -0.137201    -0.6797       3000
+-0.0401039 -0.0236021  -0.998917       2950
+  0.825973   0.563702 0.00287149       3000
+   0.45328   0.388345  -0.802325       3000
+ -0.880285   0.038316   0.472895       3000
+ -0.148153   0.249602   0.956948       3000
+ -0.767573  -0.486491  -0.417322       3000
+  -0.47952  -0.136279   0.866884       3000
+         0          0          0          0
+  0.717641   0.535093  -0.445721       3000
+ -0.481465  -0.823814  -0.299202       3000
+  0.281746   0.764122   -0.58029       3000
+ 0.0172368   0.848951    0.52819       3000
+-0.0653097  -0.993481 -0.0934378       3000
+ -0.420954   0.636353   0.646415       3000
+  0.734303   0.100467  -0.671346       3000
+0.00014687   0.898161  -0.439667       3000
+ -0.475303  -0.863085   0.170794       3000
+         0          0          0          0[0m
+dwipreproc_cust: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo series.mif -stride' (piping data to local storage)[0m
+dwipreproc_cust: [03;32mResult: 1 2 3 4[0m
+dwipreproc_cust: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo pair1.mif -size' (piping data to local storage)[0m
+dwipreproc_cust: [03;32mResult: 128 128 90 7[0m
+dwipreproc_cust: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo pair2.mif -size' (piping data to local storage)[0m
+dwipreproc_cust: [03;32mResult: 128 128 90 7[0m
+[03;34mCommand:[0m mrconvert series.mif dwi_pre_topup.nii -stride -1,+2,+3,+4
+[03;34mCommand:[0m mrcat pair1.mif pair2.mif - -axis 3 | mrconvert - topup_in.nii -stride -1,+2,+3,+4
+dwipreproc_cust: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo pair1.mif -size' (piping data to local storage)[0m
+dwipreproc_cust: [03;32mResult: 128 128 90 7[0m
+dwipreproc_cust: [03;32mCommand: '/software/mrtrix3/mrtrix3-AP/release/bin/mrinfo pair2.mif -size' (piping data to local storage)[0m
+dwipreproc_cust: [03;32mResult: 128 128 90 7[0m
+dwipreproc_cust: [03;32mCreating phase-encoding configuration file[0m
+[03;34mCommand:[0m topup --imain=topup_in.nii --datain=config.txt --out=field --fout=field_map.nii.gz --config=/software/fsl/fsl-5.0.9_eddy/fsl/etc/flirtsch/b02b0.cnf
+[03;34mCommand:[0m applytopup --imain=dwi_pre_topup.nii --datain=config.txt --inindex=1 --topup=field --out=dwi_post_topup.nii.gz --method=jac
+[03;34mCommand:[0m mrconvert series.mif - -stride -1,+2,+3,+4 | mrinfo - -export_grad_fsl bvecs bvals
+[03;34mCommand:[0m mrconvert dwi_post_topup.nii.gz -fslgrad bvecs bvals - | dwi2mask - - | maskfilter - dilate - | mrconvert - mask.nii -datatype float32 -stride -1,+2,+3
+[03;34mCommand:[0m eddy_openmp --imain=dwi_pre_topup.nii --mask=mask.nii --index=indices.txt --acqp=config.txt --bvecs=bvecs --bvals=bvals --repol --topup=field --out=dwi_post_eddy
+[03;34mCommand:[0m mrconvert dwi_post_eddy.nii.gz result.mif -stride 1,2,3,4 -fslgrad dwi_post_eddy.eddy_rotated_bvecs bvals
+[03;34mCommand:[0m mrconvert result.mif /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/eddycorr.mif -export_grad_mrtrix /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/adjencoding.b
+dwipreproc_cust: [03;32mChanging back to original directory (/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc)[0m
+dwipreproc_cust: [03;32mDeleting temporary directory /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/dwipreproc_cust-tmp-4JCWUT/[0m
+dwibiascorrect: [03;32m[0m
+dwibiascorrect: [03;32mNote that this script makes use of commands / algorithms that have relevant articles for citation; INCLUDING FROM EXTERNAL SOFTWARE PACKAGES. Please consult the help page (-help option) for more information.[0m
+dwibiascorrect: [03;32m[0m
+dwibiascorrect: [03;32mGenerated temporary directory: /tmp/dwibiascorrect-tmp-NJX21O/[0m
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/eddycorr.mif /tmp/dwibiascorrect-tmp-NJX21O/in.mif
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/eddymeanb0bet_mask.nii.gz /tmp/dwibiascorrect-tmp-NJX21O/mask.mif
+dwibiascorrect: [03;32mChanging to temporary directory (/tmp/dwibiascorrect-tmp-NJX21O/)[0m
+[03;34mCommand:[0m dwiextract in.mif - -bzero | mrmath - mean mean_bzero.mif -axis 3
+[03;34mCommand:[0m mrcalc mean_bzero.mif mask.mif -mult - | mrconvert - mean_bzero_masked.nii -stride -1,+2,+3
+[03;34mCommand:[0m fast -t 2 -o fast -n 3 -b mean_bzero_masked.nii
+[03;34mCommand:[0m mrcalc in.mif fast_bias.nii.gz -div result.mif
+[03;34mCommand:[0m mrconvert result.mif /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/biascorr.mif
+dwibiascorrect: [03;32mChanging back to original directory (/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc)[0m
+dwibiascorrect: [03;32mDeleting temporary directory /tmp/dwibiascorrect-tmp-NJX21O/[0m
+Extracting mean of the b=0 shell.
+Extracting mean of the b=2998.89 shell.
+Extracting mean of the b=0 shell.
+Extracting mean of the b=2998.89 shell.
+27667
+labelsgmfix: [03;32m[0m
+labelsgmfix: [03;32mNote that this script makes use of commands / algorithms that have relevant articles for citation; INCLUDING FROM EXTERNAL SOFTWARE PACKAGES. Please consult the help page (-help option) for more information.[0m
+labelsgmfix: [03;32m[0m
+labelsgmfix: [03;32mGenerated temporary directory: /tmp/labelsgmfix-tmp-0I8E70/[0m
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/parctempstr.nii /tmp/labelsgmfix-tmp-0I8E70/parc.mif
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/brainFS.nii /tmp/labelsgmfix-tmp-0I8E70/T1.nii -stride -1,+2,+3
+labelsgmfix: [03;32mChanging to temporary directory (/tmp/labelsgmfix-tmp-0I8E70/)[0m
+[03;34mCommand:[0m run_first_all -s R_Thal,L_Puta,R_Caud,R_Hipp,L_Amyg,R_Pall,R_Amyg,L_Caud,L_Pall,L_Thal,L_Hipp,R_Accu,L_Accu,R_Puta -i T1.nii -b -o first
+[03;34mCommand:[0m mrcalc parc.mif 0 -min sgm.mif
+[03;34mCommand:[0m meshconvert first-R_Thal_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - R_Thal_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc R_Thal_mask.mif 6 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-L_Puta_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - L_Puta_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc L_Puta_mask.mif 3 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-R_Caud_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - R_Caud_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc R_Caud_mask.mif 7 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-R_Hipp_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - R_Hipp_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc R_Hipp_mask.mif 13 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-L_Amyg_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - L_Amyg_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc L_Amyg_mask.mif 12 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-R_Pall_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - R_Pall_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc R_Pall_mask.mif 9 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-R_Amyg_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - R_Amyg_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc R_Amyg_mask.mif 14 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-L_Caud_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - L_Caud_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc L_Caud_mask.mif 2 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-L_Pall_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - L_Pall_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc L_Pall_mask.mif 4 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-L_Thal_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - L_Thal_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc L_Thal_mask.mif 1 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-L_Hipp_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - L_Hipp_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc L_Hipp_mask.mif 11 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-R_Accu_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - R_Accu_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc R_Accu_mask.mif 10 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-L_Accu_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - L_Accu_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc L_Accu_mask.mif 5 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m meshconvert first-R_Puta_first.vtk transformed.vtk -transform_first2real T1.nii
+[03;34mCommand:[0m mesh2pve transformed.vtk parc.mif - | mrthreshold - R_Puta_mask.mif -abs 0.5
+[03;34mCommand:[0m mrcalc R_Puta_mask.mif 8 sgm.mif -if sgm_new.mif
+[03;34mCommand:[0m mrmath R_Thal_mask.mif L_Puta_mask.mif R_Caud_mask.mif R_Hipp_mask.mif L_Amyg_mask.mif R_Pall_mask.mif R_Amyg_mask.mif L_Caud_mask.mif L_Pall_mask.mif L_Thal_mask.mif L_Hipp_mask.mif R_Accu_mask.mif L_Accu_mask.mif R_Puta_mask.mif sum - | mrcalc - 1 -gt sgm_overlap_mask.mif
+[03;34mCommand:[0m mrcalc sgm_overlap_mask.mif 0 sgm.mif -if sgm_masked.mif
+[03;34mCommand:[0m labelconvert sgm_masked.mif /software/mrtrix3/mrtrix3-AP/scripts/data/FreeSurferSGM.txt /software/mrtrix3/mrtrix3-AP/src/connectome/tables/fs_a2009s.txt sgm_new_labels.mif
+[03;34mCommand:[0m mrcalc parc.mif 83 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 78 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 84 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 87 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 81 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 86 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 88 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 77 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 79 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 76 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 80 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 89 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 82 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc parc.mif 85 -eq 0 parc.mif -if parc_removed.mif
+[03;34mCommand:[0m mrcalc sgm_new_labels.mif 0.5 -gt sgm_new_labels.mif parc.mif -if result.mif -datatype uint32
+[03;34mCommand:[0m mrconvert result.mif /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/parc_fixsubcort.nii
+labelsgmfix: [03;32mChanging back to original directory (/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc)[0m
+labelsgmfix: [03;32mDeleting temporary directory /tmp/labelsgmfix-tmp-0I8E70/[0m
+tmp ./tmp.bbregister.13005
+Log file is register.dat.log
+Sat Mar 18 07:00:28 AEST 2017
+
+setenv SUBJECTS_DIR /working/lab_michaebr/alistaiP/Park/FS
+cd /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc
+/software/freesurfer/freesurfer-6.0.0/bin/bbregister --s Patient_055 --mov biasmeanb0bet.nii.gz --init-fsl --reg register.dat --dti --fslmat diff2FS.mat
+
+$Id: bbregister,v 1.75 2016/05/10 20:02:28 greve Exp $
+Linux hpcnode038.adqimr.ad.lan 3.10.0-327.3.1.el7.x86_64 #1 SMP Wed Dec 9 14:09:15 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+FREESURFER_HOME /software/freesurfer/freesurfer-6.0.0
+mri_convert biasmeanb0bet.nii.gz ./tmp.bbregister.13005/template.nii
+mri_convert.bin biasmeanb0bet.nii.gz ./tmp.bbregister.13005/template.nii 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from biasmeanb0bet.nii.gz...
+TR=1000.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (0.999439, -0.0115886, 0.0314228)
+j_ras = (0.00976871, 0.9983, 0.0574647)
+k_ras = (-0.0320353, -0.0571255, 0.997853)
+writing to ./tmp.bbregister.13005/template.nii...
+fslregister --s Patient_055 --mov ./tmp.bbregister.13005/template.nii --reg ./tmp.bbregister.13005/reg.init.dat --niters 1 --maxangle 90 --tmp ./tmp.bbregister.13005/fslregister --dof 6 --fsvol brainmask.mgz --nobetmov
+
+Log file is ./tmp.bbregister.13005/reg.init.dat.fslregister.log
+
+Sat Mar 18 07:00:28 AEST 2017
+--s Patient_055 --mov ./tmp.bbregister.13005/template.nii --reg ./tmp.bbregister.13005/reg.init.dat --niters 1 --maxangle 90 --tmp ./tmp.bbregister.13005/fslregister --dof 6 --fsvol brainmask.mgz --nobetmov
+$Id: fslregister,v 1.40 2016/02/12 21:43:15 zkaufman Exp $
+hpcnode038.adqimr.ad.lan
+Linux hpcnode038.adqimr.ad.lan 3.10.0-327.3.1.el7.x86_64 #1 SMP Wed Dec 9 14:09:15 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+nIters 1
+--------------------------------------
+/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc
+mri_convert /working/lab_michaebr/alistaiP/Park/FS/Patient_055/mri/brainmask.mgz ./tmp.bbregister.13005/fslregister/refvol.fslregister.nii
+mri_convert.bin /working/lab_michaebr/alistaiP/Park/FS/Patient_055/mri/brainmask.mgz ./tmp.bbregister.13005/fslregister/refvol.fslregister.nii 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from /working/lab_michaebr/alistaiP/Park/FS/Patient_055/mri/brainmask.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, -1.04774e-09, 3.72529e-09)
+j_ras = (0, 3.72529e-09, -1)
+k_ras = (5.82077e-10, 1, 0)
+writing to ./tmp.bbregister.13005/fslregister/refvol.fslregister.nii...
+--------------------------------------
+/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc
+mri_convert ./tmp.bbregister.13005/template.nii ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii --frame 0
+mri_convert.bin ./tmp.bbregister.13005/template.nii ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii --frame 0 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from ./tmp.bbregister.13005/template.nii...
+TR=1000.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (0.999439, -0.0115886, 0.0314228)
+j_ras = (0.00976871, 0.9983, 0.0574647)
+k_ras = (-0.0320353, -0.0571255, 0.997853)
+keeping frame 0
+writing to ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii...
+Mov determinant is 5.02197
+Swapping dims for pos det
+WARNING:: Flipping Left/Right orientation (as det < 0)
+tkregister_tcl /software/freesurfer/freesurfer-6.0.0/tktools/tkregister2.tcl
+target  volume ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii
+movable volume ./tmp.bbregister.13005/template.nii
+reg file       ./tmp.bbregister.13005/fslregister/swapreg.dat
+LoadVol        0
+ZeroCRAS       0
+$Id: tkregister2.c,v 1.132.2.1 2016/08/02 21:17:29 greve Exp $
+Diagnostic Level -1
+INFO: loading target ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii
+INFO: target does not conform to COR format, so I'm going to
+reslice to COR. This will not affect the final registration.
+Ttarg: --------------------
+-1.00000   0.00000   0.00000   128.00000;
+ 0.00000   0.00000   1.00000  -128.00000;
+ 0.00000  -1.00000   0.00000   128.00000;
+ 0.00000   0.00000   0.00000   1.00000;
+INFO: loading movable ./tmp.bbregister.13005/template.nii
+Tmov: --------------------
+-1.71875   0.00000   0.00000   110.00000;
+ 0.00000   0.00000   1.70000  -76.50000;
+ 0.00000  -1.71875   0.00000   110.00000;
+ 0.00000   0.00000   0.00000   1.00000;
+mkheaderreg = 1, float2int = 0
+Computing reg from header (and possibly input matrix)
+---- Input registration matrix (computed) --------
+-0.99944   0.01159  -0.03142   1.71875;
+-0.03204  -0.05713   0.99785   0.00003;
+-0.00977  -0.99830  -0.05746  -0.00001;
+ 0.00000   0.00000   0.00000   1.00000;
+---------------------------------------
+---- Input registration matrix --------
+-0.99944   0.01159  -0.03142   1.71875;
+-0.03204  -0.05713   0.99785   0.00003;
+-0.00977  -0.99830  -0.05746  -0.00001;
+ 0.00000   0.00000   0.00000   1.00000;
+Determinant -1
+subject = subject-unknown
+RegMat ---------------------------
+-1.00000  -0.00000   0.00000   1.71875;
+ 0.00000   1.00000  -0.00000   0.00005;
+-0.00000  -0.00000   1.00000  -0.00001;
+ 0.00000   0.00000   0.00000   1.00000;
+/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc
+tkregister2_cmdl --mov ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii --reg ./tmp.bbregister.13005/fslregister/reg0.13052.dat --regheader --fslregout ./tmp.bbregister.13005/reg.init.dat.fsl.mat0 --s Patient_055 --noedit
+tkregister_tcl /software/freesurfer/freesurfer-6.0.0/tktools/tkregister2.tcl
+INFO: no target volume specified, assuming FreeSurfer orig volume.
+target  volume orig
+movable volume ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii
+reg file       ./tmp.bbregister.13005/fslregister/reg0.13052.dat
+LoadVol        0
+ZeroCRAS       0
+$Id: tkregister2.c,v 1.132.2.1 2016/08/02 21:17:29 greve Exp $
+Diagnostic Level -1
+INFO: loading target /working/lab_michaebr/alistaiP/Park/FS/Patient_055/mri/orig.mgz
+Ttarg: --------------------
+-1.00000   0.00000   0.00000   128.00000;
+ 0.00000   0.00000   1.00000  -128.00000;
+ 0.00000  -1.00000   0.00000   128.00000;
+ 0.00000   0.00000   0.00000   1.00000;
+INFO: loading movable ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii
+Tmov: --------------------
+-1.71875   0.00000   0.00000   110.00000;
+ 0.00000   0.00000   1.70000  -76.50000;
+ 0.00000  -1.71875   0.00000   110.00000;
+ 0.00000   0.00000   0.00000   1.00000;
+mkheaderreg = 1, float2int = 0
+Computing reg from header (and possibly input matrix)
+---- Input registration matrix (computed) --------
+ 0.99944  -0.01159   0.03142   1.00000;
+-0.03204  -0.05713   0.99785  -0.34998;
+-0.00977  -0.99830  -0.05746  -11.67836;
+ 0.00000   0.00000   0.00000   1.00000;
+---------------------------------------
+---- Input registration matrix --------
+ 0.99944  -0.01159   0.03142   1.00000;
+-0.03204  -0.05713   0.99785  -0.34998;
+-0.00977  -0.99830  -0.05746  -11.67836;
+ 0.00000   0.00000   0.00000   1.00000;
+Determinant 1
+subject = Patient_055
+RegMat ---------------------------
+ 0.99944  -0.01159   0.03142   1.00000;
+-0.03204  -0.05713   0.99785  -0.34998;
+-0.00977  -0.99830  -0.05746  -11.67836;
+ 0.00000   0.00000   0.00000   1.00000;
+FSLOUTPUTTYPE NIFTI 
+tkreg2FSL: mov det = -5.02197, ref det = -1
+Sat Mar 18 07:00:30 AEST 2017
+/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc
+flirt.fsl -ref ./tmp.bbregister.13005/fslregister/refvol.fslregister.nii -in ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii -bins 256 -cost corratio -dof 6 -searchrx -90 90 -searchry -90 90 -searchrz -90 90 -verbose 0 -omat ./tmp.bbregister.13005/fslregister/fslmat0.trans.mat -schedule /software/freesurfer/freesurfer-6.0.0/bin/fsl.5.0.2.xyztrans.sch -init ./tmp.bbregister.13005/reg.init.dat.fsl.mat0
+Sat Mar 18 07:01:01 AEST 2017
+/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc
+flirt.fsl -ref ./tmp.bbregister.13005/fslregister/refvol.fslregister.nii -in ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii -bins 256 -cost corratio -dof 6 -searchrx -90 90 -searchry -90 90 -searchrz -90 90 -verbose 0 -omat ./tmp.bbregister.13005/reg.init.dat.fsl.mat -init ./tmp.bbregister.13005/fslregister/fslmat0.trans.mat -schedule /software/freesurfer/freesurfer-6.0.0/bin/flirt.newdefault.20080811.sch
+tkregister2_cmdl --s Patient_055 --mov ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii --reg ./tmp.bbregister.13005/reg.init.dat --fslreg ./tmp.bbregister.13005/reg.init.dat.fsl.mat --noedit
+tkregister_tcl /software/freesurfer/freesurfer-6.0.0/tktools/tkregister2.tcl
+---- FSL registration matrix --------
+ 0.99954  -0.01915   0.02332   19.14470;
+ 0.02237  -0.04845  -0.99857   208.52901;
+ 0.02025   0.99864  -0.04800   8.31130;
+ 0.00000   0.00000   0.00000   1.00000;
+---------------------------------------
+INFO: no target volume specified, assuming FreeSurfer orig volume.
+target  volume orig
+movable volume ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii
+reg file       ./tmp.bbregister.13005/reg.init.dat
+LoadVol        0
+ZeroCRAS       0
+$Id: tkregister2.c,v 1.132.2.1 2016/08/02 21:17:29 greve Exp $
+Diagnostic Level -1
+INFO: loading target /working/lab_michaebr/alistaiP/Park/FS/Patient_055/mri/orig.mgz
+Ttarg: --------------------
+-1.00000   0.00000   0.00000   128.00000;
+ 0.00000   0.00000   1.00000  -128.00000;
+ 0.00000  -1.00000   0.00000   128.00000;
+ 0.00000   0.00000   0.00000   1.00000;
+INFO: loading movable ./tmp.bbregister.13005/fslregister/movvol.fslregister.nii
+Tmov: --------------------
+-1.71875   0.00000   0.00000   110.00000;
+ 0.00000   0.00000   1.70000  -76.50000;
+ 0.00000  -1.71875   0.00000   110.00000;
+ 0.00000   0.00000   0.00000   1.00000;
+mkheaderreg = 0, float2int = 0
+FSLOUTPUTTYPE NIFTI 
+fsl2TkReg: mov det = -5.02197, ref det = -1
+---- Input registration matrix (computed) --------
+ 0.99954  -0.02025   0.02237   0.57190;
+-0.02332  -0.04800   0.99858   0.70740;
+-0.01915  -0.99864  -0.04845  -11.34367;
+ 0.00000   0.00000   0.00000   1.00000;
+---------------------------------------
+---- Input registration matrix --------
+ 0.99954  -0.02025   0.02237   0.57190;
+-0.02332  -0.04800   0.99858   0.70740;
+-0.01915  -0.99864  -0.04845  -11.34367;
+ 0.00000   0.00000   0.00000   1.00000;
+Determinant 1
+subject = Patient_055
+RegMat ---------------------------
+ 0.99954  -0.02025   0.02237   0.57190;
+-0.02332  -0.04800   0.99858   0.70740;
+-0.01915  -0.99864  -0.04845  -11.34367;
+ 0.00000   0.00000   0.00000   1.00000;
+mri_matrix_multiply -im ./tmp.bbregister.13005/fslregister/swapreg.dat -im ./tmp.bbregister.13005/reg.init.dat -om ./tmp.bbregister.13005/reg.init.dat
+(standard_in) 1: illegal character: P
+ 
+Started at Sat Mar 18 07:00:28 AEST 2017 
+Ended   at Sat Mar 18 07:02:05 AEST 2017
+ 
+fslregister Done
+ 
+To check results, run:
+tkregister2 --mov ./tmp.bbregister.13005/template.nii --reg ./tmp.bbregister.13005/reg.init.dat --surf orig
+ 
+mri_segreg --mov ./tmp.bbregister.13005/template.nii --init-reg ./tmp.bbregister.13005/reg.init.dat --out-reg ./tmp.bbregister.13005/bbr.pass1.dat --subsamp-brute 100 --subsamp 100 --tol 1e-4 --tol1d 1e-3 --brute -4 4 4 --surf white --gm-proj-frac 0.5 --gm-gt-wm 0.5
+$Id: mri_segreg.c,v 1.113 2016/05/10 03:23:20 greve Exp $
+setenv SUBJECTS_DIR /working/lab_michaebr/alistaiP/Park/FS
+cd /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc
+mri_segreg --mov ./tmp.bbregister.13005/template.nii --init-reg ./tmp.bbregister.13005/reg.init.dat --out-reg ./tmp.bbregister.13005/bbr.pass1.dat --subsamp-brute 100 --subsamp 100 --tol 1e-4 --tol1d 1e-3 --brute -4 4 4 --surf white --gm-proj-frac 0.5 --gm-gt-wm 0.5 
+sysname  Linux
+hostname hpcnode038.adqimr.ad.lan
+machine  x86_64
+user     alistaiP
+movvol ./tmp.bbregister.13005/template.nii
+regfile ./tmp.bbregister.13005/reg.init.dat
+subject Patient_055
+dof 6
+outregfile ./tmp.bbregister.13005/bbr.pass1.dat
+UseMask 0
+UseLH 1
+UseRH 1
+nsubsamp 100
+PenaltySign  -1
+PenaltySlope 0.500000
+PenaltyCenter 0.000000
+surfname white
+GMProjFrac 0.500000
+WMProjAbs 2.000000
+lhcostfile (null)
+rhcostfile (null)
+interp  trilinear (1)
+frame  0
+TolPowell 0.000100
+nMaxItersPowell 36
+n1dmin  3
+Profile   0
+Gdiag_no  -1
+AddNoise  0 (0)
+SynthSeed 1489845351
+TransRandMax 0.000000
+RotRandMax 0.000000
+Translations 0.000000 0.000000 0.000000
+Rotations   0.000000 0.000000 0.000000
+Input reg
+-0.99954   0.02025  -0.02237   1.14685;
+-0.02332  -0.04800   0.99857   0.70744;
+-0.01915  -0.99864  -0.04845  -11.34368;
+ 0.00000   0.00000   0.00000   1.00000;
+
+Loading mov
+Projecting LH Surfs
+Loading lh.white surf
+Loading lh.thickness for GM
+GM Proj: 1 0.500000 2.000000
+WM Proj: 0 0.500000 2.000000
+Projecting RH Surfs
+Loading rh.white surf
+Loading rh.thickness for GM
+Projecting RH Surfs
+Using lh.cortex.label
+Using rh.cortex.label
+Computing relative cost
+ 0  -25.0 -25.0 -25.0   0.994222
+ 1  -25.0 -25.0  25.0   0.982507
+ 2  -25.0  25.0 -25.0   0.989424
+ 3  -25.0  25.0  25.0   0.997681
+ 4   25.0 -25.0 -25.0   1.018658
+ 5   25.0 -25.0  25.0   1.030990
+ 6   25.0  25.0 -25.0   1.013009
+ 7   25.0  25.0  25.0   0.945056
+REL:  8  0.117320    7.971548  0.996444 rel = 0.117738 
+Initial costs ----------------
+Number of surface hits 2742
+WM  Intensity   375.1153 +/-  68.2475
+Ctx Intensity   537.9298 +/- 114.7261
+Pct Contrast     34.4614 +/-  22.7718
+Cost   0.1173
+RelCost   0.1177
+
+------------------------------------
+Brute force preopt -4 4 4, n = 729
+     0  -4.0000  -4.0000  -4.0000  -4.0000  -4.0000  -4.0000      0.9985   0.9985  0.0
+     2  -4.0000  -4.0000  -4.0000  -4.0000  -4.0000   4.0000      0.9808   0.9808  0.0
+     3  -4.0000  -4.0000  -4.0000  -4.0000   0.0000  -4.0000      0.9753   0.9753  0.0
+     6  -4.0000  -4.0000  -4.0000  -4.0000   4.0000  -4.0000      0.9197   0.9197  0.0
+    11  -4.0000  -4.0000  -4.0000   0.0000  -4.0000   4.0000      0.9104   0.9104  0.0
+    15  -4.0000  -4.0000  -4.0000   0.0000   4.0000  -4.0000      0.8404   0.8404  0.0
+    33  -4.0000  -4.0000   0.0000  -4.0000   4.0000  -4.0000      0.8221   0.8221  0.0
+    45  -4.0000  -4.0000   0.0000   4.0000  -4.0000  -4.0000      0.8078   0.8078  0.0
+   118  -4.0000   0.0000   0.0000   0.0000  -4.0000   0.0000      0.7535   0.7535  0.0
+   120  -4.0000   0.0000   0.0000   0.0000   0.0000  -4.0000      0.7489   0.7489  0.0
+   274   0.0000  -4.0000   0.0000  -4.0000   0.0000   0.0000      0.6628   0.6628  0.0
+   363   0.0000   0.0000   0.0000   0.0000   0.0000  -4.0000      0.6117   0.6117  0.0
+   364   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000      0.1173   0.1173  0.0
+Brute Force --------------------------
+Min cost was 0.117320
+Number of iterations   729
+Search time 3.547000 sec
+Parameters at best (transmm, rotdeg)
+  0.000   0.000   0.000  0.000  0.000  0.000 
+--------------------------------------------
+
+Starting Powell Minimization
+Init Powel Params dof = 6
+0 0
+1 0
+2 0
+3 0
+4 0
+5 0
+fs_powell::minimize
+  nparams 6
+  maxfev 36
+  ftol   0.000100
+  linmin_xtol_   0.001000
+  powell nthiter 0: fret = 0.117320
+   7 -0.099  0.000  0.000  0.000  0.000  0.000   0.1172884023
+   8 -0.050  0.000  0.000  0.000  0.000  0.000   0.1161564751
+   9 -0.049  0.000  0.000  0.000  0.000  0.000   0.1161447312
+  11 -0.044  0.000  0.000  0.000  0.000  0.000   0.1161286696
+  12 -0.045  0.000  0.000  0.000  0.000  0.000   0.1161263040
+  18 -0.045 -0.618  0.000  0.000  0.000  0.000   0.0812631988
+  20 -0.045 -0.644  0.000  0.000  0.000  0.000   0.0812001619
+  21 -0.045 -0.645  0.000  0.000  0.000  0.000   0.0811913547
+  23 -0.045 -0.697  0.000  0.000  0.000  0.000   0.0807349168
+  26 -0.045 -0.696  0.000  0.000  0.000  0.000   0.0807282639
+  27 -0.045 -0.690  0.000  0.000  0.000  0.000   0.0807134506
+  29 -0.045 -0.691  0.000  0.000  0.000  0.000   0.0807132304
+  37 -0.045 -0.691  0.158  0.000  0.000  0.000   0.0794678154
+  39 -0.045 -0.691  0.191  0.000  0.000  0.000   0.0794628511
+  41 -0.045 -0.691  0.176  0.000  0.000  0.000   0.0794495261
+  43 -0.045 -0.691  0.177  0.000  0.000  0.000   0.0794495175
+  54 -0.045 -0.691  0.177 -0.010  0.000  0.000   0.0794040062
+  56 -0.045 -0.691  0.177 -0.012  0.000  0.000   0.0794031203
+  64 -0.045 -0.691  0.177 -0.012  0.001  0.000   0.0793653409
+  65 -0.045 -0.691  0.177 -0.012  0.095  0.000   0.0773012115
+  68 -0.045 -0.691  0.177 -0.012  0.065  0.000   0.0771421795
+  70 -0.045 -0.691  0.177 -0.012  0.075  0.000   0.0770226319
+  71 -0.045 -0.691  0.177 -0.012  0.077  0.000   0.0770197279
+  72 -0.045 -0.691  0.177 -0.012  0.078  0.000   0.0770177756
+  81 -0.045 -0.691  0.177 -0.012  0.078  0.152   0.0748191504
+  84 -0.045 -0.691  0.177 -0.012  0.078  0.188   0.0743958806
+  86 -0.045 -0.691  0.177 -0.012  0.078  0.187   0.0743958105
+  powell nthiter 1: fret = 0.074396
+  95 -0.050 -0.691  0.177 -0.012  0.078  0.187   0.0742974515
+  98 -0.070 -0.691  0.177 -0.012  0.078  0.187   0.0741728869
+  99 -0.069 -0.691  0.177 -0.012  0.078  0.187   0.0741704870
+ 100 -0.067 -0.691  0.177 -0.012  0.078  0.187   0.0741682782
+ 115 -0.067 -0.692  0.177 -0.012  0.078  0.187   0.0741669565
+ 116 -0.067 -0.693  0.177 -0.012  0.078  0.187   0.0741663430
+ 127 -0.067 -0.693  0.179 -0.012  0.078  0.187   0.0741656953
+ 138 -0.067 -0.693  0.179 -0.004  0.078  0.187   0.0741421972
+ 139 -0.067 -0.693  0.179 -0.003  0.078  0.187   0.0741407682
+ 140 -0.067 -0.693  0.179 -0.002  0.078  0.187   0.0741405515
+ 150 -0.067 -0.693  0.179 -0.002  0.072  0.187   0.0741276200
+ 162 -0.067 -0.693  0.179 -0.002  0.072  0.176   0.0739698342
+ 163 -0.067 -0.693  0.179 -0.002  0.072  0.168   0.0739227169
+ 165 -0.067 -0.693  0.179 -0.002  0.072  0.166   0.0739202950
+  powell nthiter 2: fret = 0.073920
+ 174 -0.068 -0.693  0.179 -0.002  0.072  0.166   0.0739162598
+ 177 -0.070 -0.693  0.179 -0.002  0.072  0.166   0.0739135728
+ 190 -0.070 -0.689  0.179 -0.002  0.072  0.166   0.0739053818
+ 199 -0.070 -0.689  0.196 -0.002  0.072  0.166   0.0738175613
+ 201 -0.070 -0.689  0.202 -0.002  0.072  0.166   0.0738102146
+ 213 -0.070 -0.689  0.202  0.001  0.072  0.166   0.0738086349
+ 224 -0.070 -0.689  0.202  0.001  0.065  0.166   0.0737915258
+ 225 -0.070 -0.689  0.202  0.001  0.067  0.166   0.0737909512
+ 237 -0.070 -0.689  0.202  0.001  0.067  0.159   0.0737515309
+ 239 -0.070 -0.689  0.202  0.001  0.067  0.156   0.0737511239
+ 241 -0.070 -0.689  0.202  0.001  0.067  0.157   0.0737499114
+ 248 -0.071 -0.687  0.211  0.002  0.064  0.154   0.0737288701
+ 249 -0.071 -0.687  0.212  0.002  0.064  0.153   0.0737280764
+ 250 -0.071 -0.687  0.213  0.002  0.064  0.153   0.0737280023
+ 252 -0.071 -0.686  0.214  0.002  0.064  0.153   0.0737276192
+ 259 -0.071 -0.686  0.214  0.002  0.064  0.153   0.0737275033
+  powell nthiter 3: fret = 0.073728
+ 266 -0.072 -0.686  0.214  0.002  0.064  0.153   0.0737177375
+ 269 -0.077 -0.686  0.214  0.002  0.064  0.153   0.0737059874
+ 270 -0.076 -0.686  0.214  0.002  0.064  0.153   0.0737056132
+ 281 -0.076 -0.672  0.214  0.002  0.064  0.153   0.0736917652
+ 282 -0.076 -0.678  0.214  0.002  0.064  0.153   0.0736739936
+ 296 -0.076 -0.678  0.214  0.002  0.064  0.152   0.0736735751
+ 308 -0.076 -0.678  0.214 -0.003  0.064  0.152   0.0736687665
+ 319 -0.076 -0.678  0.214 -0.003  0.065  0.152   0.0736683935
+ 326 -0.077 -0.676  0.222 -0.002  0.063  0.148   0.0736652941
+ 327 -0.077 -0.677  0.219 -0.003  0.063  0.150   0.0736622532
+ 331 -0.077 -0.677  0.219 -0.003  0.063  0.150   0.0736622202
+  powell nthiter 4: fret = 0.073662
+ 345 -0.079 -0.677  0.219 -0.003  0.063  0.150   0.0736596168
+ 358 -0.079 -0.678  0.219 -0.003  0.063  0.150   0.0736594226
+ 371 -0.079 -0.678  0.219 -0.003  0.063  0.148   0.0736586866
+ 385 -0.079 -0.678  0.219 -0.004  0.063  0.148   0.0736577665
+ 386 -0.079 -0.678  0.219 -0.005  0.063  0.148   0.0736574355
+ 403 -0.079 -0.678  0.220 -0.004  0.063  0.148   0.0736563530
+ 404 -0.079 -0.678  0.221 -0.004  0.063  0.147   0.0736557652
+ 410 -0.079 -0.678  0.221 -0.004  0.063  0.147   0.0736557409
+Powell done niters = 4
+Computing relative cost
+ 0  -25.0 -25.0 -25.0   0.988956
+ 1  -25.0 -25.0  25.0   0.996944
+ 2  -25.0  25.0 -25.0   0.968356
+ 3  -25.0  25.0  25.0   0.996090
+ 4   25.0 -25.0 -25.0   1.014723
+ 5   25.0 -25.0  25.0   1.016878
+ 6   25.0  25.0 -25.0   1.004998
+ 7   25.0  25.0  25.0   0.944248
+REL:  8  0.073656    7.931193  0.991399 rel = 0.0742947 
+Number of iterations     4
+Min cost was 0.073656
+Number of FunctionCalls   411
+TolPowell 0.000100
+nMaxItersPowell 36
+OptimizationTime 1.983000 sec
+Parameters at optimum (transmm) -0.07936 -0.67754  0.22121
+Parameters at optimum (rotdeg) -0.00437  0.06280  0.14738 
+Final costs ----------------
+Number of surface hits 2742
+WM  Intensity   369.2217 +/-  65.2189
+Ctx Intensity   529.5918 +/-  92.8362
+Pct Contrast     35.1307 +/-  20.4922
+Cost   0.0737
+RelCost   0.1177
+Reg at min cost was 
+-0.99950   0.01928  -0.02499   1.05324;
+-0.02589  -0.04803   0.99851   0.03196;
+-0.01805  -0.99866  -0.04850  -11.12377;
+ 0.00000   0.00000   0.00000   1.00000;
+
+Writing optimal reg to ./tmp.bbregister.13005/bbr.pass1.dat, type = 14 
+Original Reg 
+-0.99954   0.02025  -0.02237   1.14685;
+-0.02332  -0.04800   0.99857   0.70744;
+-0.01915  -0.99864  -0.04845  -11.34368;
+ 0.00000   0.00000   0.00000   1.00000;
+
+Original Reg - Optimal Reg
+-0.00004   0.00097   0.00262   0.09361;
+ 0.00257   0.00003   0.00006   0.67548;
+-0.00110   0.00002   0.00005  -0.21991;
+ 0.00000   0.00000   0.00000   0.00000;
+
+Computing change in lh position
+LH rmsDiffMean 0.638582
+Computing change in rh position
+Surface-RMS-Diff-mm 0.715738 0.091410 0.893908
+mri_segreg done
+mri_segreg --mov ./tmp.bbregister.13005/template.nii --init-reg ./tmp.bbregister.13005/bbr.pass1.dat --out-reg register.dat --interp trilinear --wm-proj-abs 2 --tol 1e-8 --tol1d 1e-3 --c0 0 --mincost register.dat.mincost --dof 6 --nmax 36 --param register.dat.param --surf white --brute -0.1 0.1 0.1 --cur-reg ./tmp.bbregister.13005/reg.curopt.dat --gm-proj-frac 0.5 --nsub 1 --gm-gt-wm 0.5
+$Id: mri_segreg.c,v 1.113 2016/05/10 03:23:20 greve Exp $
+setenv SUBJECTS_DIR /working/lab_michaebr/alistaiP/Park/FS
+cd /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc
+mri_segreg --mov ./tmp.bbregister.13005/template.nii --init-reg ./tmp.bbregister.13005/bbr.pass1.dat --out-reg register.dat --interp trilinear --wm-proj-abs 2 --tol 1e-8 --tol1d 1e-3 --c0 0 --mincost register.dat.mincost --dof 6 --nmax 36 --param register.dat.param --surf white --brute -0.1 0.1 0.1 --cur-reg ./tmp.bbregister.13005/reg.curopt.dat --gm-proj-frac 0.5 --nsub 1 --gm-gt-wm 0.5 
+sysname  Linux
+hostname hpcnode038.adqimr.ad.lan
+machine  x86_64
+user     alistaiP
+movvol ./tmp.bbregister.13005/template.nii
+regfile ./tmp.bbregister.13005/bbr.pass1.dat
+subject Patient_055
+dof 6
+outregfile register.dat
+UseMask 0
+UseLH 1
+UseRH 1
+nsubsamp 1
+PenaltySign  -1
+PenaltySlope 0.500000
+PenaltyCenter 0.000000
+surfname white
+GMProjFrac 0.500000
+WMProjAbs 2.000000
+lhcostfile (null)
+rhcostfile (null)
+interp  trilinear (1)
+frame  0
+TolPowell 0.000000
+nMaxItersPowell 36
+n1dmin  3
+Profile   0
+Gdiag_no  -1
+AddNoise  0 (0)
+SynthSeed 1490071405
+TransRandMax 0.000000
+RotRandMax 0.000000
+Translations 0.000000 0.000000 0.000000
+Rotations   0.000000 0.000000 0.000000
+Input reg
+-0.99950   0.01928  -0.02499   1.05324;
+-0.02589  -0.04803   0.99851   0.03196;
+-0.01805  -0.99866  -0.04850  -11.12377;
+ 0.00000   0.00000   0.00000   1.00000;
+
+Loading mov
+Projecting LH Surfs
+Loading lh.white surf
+Loading lh.thickness for GM
+GM Proj: 1 0.500000 2.000000
+WM Proj: 0 0.500000 2.000000
+Projecting RH Surfs
+Loading rh.white surf
+Loading rh.thickness for GM
+Projecting RH Surfs
+Using lh.cortex.label
+Using rh.cortex.label
+Computing relative cost
+ 0  -25.0 -25.0 -25.0   1.011665
+ 1  -25.0 -25.0  25.0   1.005701
+ 2  -25.0  25.0 -25.0   1.016630
+ 3  -25.0  25.0  25.0   0.986790
+ 4   25.0 -25.0 -25.0   0.995690
+ 5   25.0 -25.0  25.0   1.007551
+ 6   25.0  25.0 -25.0   1.013434
+ 7   25.0  25.0  25.0   0.981019
+REL:  8  0.074546    8.018479  1.002310 rel = 0.0743739 
+Initial costs ----------------
+Number of surface hits 274675
+WM  Intensity   369.0098 +/-  64.4117
+Ctx Intensity   530.7850 +/-  94.2285
+Pct Contrast     35.3426 +/-  19.5217
+Cost   0.0745
+RelCost   0.0744
+
+------------------------------------
+Brute force preopt -0.1 0.1 0.1, n = 729
+     0  -0.1000  -0.1000  -0.1000  -0.1000  -0.1000  -0.1000      0.0817   0.0817  0.0
+     3  -0.1000  -0.1000  -0.1000  -0.1000   0.0000  -0.1000      0.0788   0.0788  0.0
+    12  -0.1000  -0.1000  -0.1000   0.0000   0.0000  -0.1000      0.0787   0.0787  0.0
+    22  -0.1000  -0.1000  -0.1000   0.1000   0.0000   0.0000      0.0780   0.0780  0.0
+    84  -0.1000   0.0000  -0.1000  -0.1000   0.0000  -0.1000      0.0771   0.0771  0.0
+    93  -0.1000   0.0000  -0.1000   0.0000   0.0000  -0.1000      0.0768   0.0768  0.0
+    94  -0.1000   0.0000  -0.1000   0.0000   0.0000   0.0000      0.0765   0.0765  0.0
+   102  -0.1000   0.0000  -0.1000   0.1000   0.0000  -0.1000      0.0764   0.0764  0.0
+   112  -0.1000   0.0000   0.0000  -0.1000   0.0000   0.0000      0.0761   0.0761  0.0
+   183  -0.1000   0.1000  -0.1000   0.1000   0.0000  -0.1000      0.0756   0.0756  0.0
+   201  -0.1000   0.1000   0.0000   0.0000   0.0000  -0.1000      0.0751   0.0751  0.0
+   337   0.0000   0.0000  -0.1000   0.0000   0.0000   0.0000      0.0748   0.0748  0.0
+   364   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000      0.0737   0.0737  0.0
+Brute Force --------------------------
+Min cost was 0.073656
+Number of iterations   729
+Search time 3.182000 sec
+Parameters at best (transmm, rotdeg)
+  0.000   0.000   0.000  0.000  0.000  0.000 
+--------------------------------------------
+
+Starting Powell Minimization
+Init Powel Params dof = 6
+0 0
+1 0
+2 0
+3 0
+4 0
+5 0
+fs_powell::minimize
+  nparams 6
+  maxfev 36
+  ftol   0.000000
+  linmin_xtol_   0.001000
+  powell nthiter 0: fret = 0.074546
+   7  0.010  0.000  0.000  0.000  0.000  0.000   0.0745382668
+   8  0.009  0.000  0.000  0.000  0.000  0.000   0.0745376813
+   9  0.008  0.000  0.000  0.000  0.000  0.000   0.0745376407
+  17  0.008  0.086  0.000  0.000  0.000  0.000   0.0741513848
+  18  0.008  0.071  0.000  0.000  0.000  0.000   0.0741335325
+  19  0.008  0.072  0.000  0.000  0.000  0.000   0.0741331962
+  20  0.008  0.073  0.000  0.000  0.000  0.000   0.0741330666
+  29  0.008  0.073 -0.005  0.000  0.000  0.000   0.0741233605
+  30  0.008  0.073 -0.018  0.000  0.000  0.000   0.0741111531
+  31  0.008  0.073 -0.020  0.000  0.000  0.000   0.0741109732
+  39  0.008  0.073 -0.020 -0.058  0.000  0.000   0.0736703419
+  40  0.008  0.073 -0.020 -0.075  0.000  0.000   0.0736365655
+  41  0.008  0.073 -0.020 -0.080  0.000  0.000   0.0736358639
+  42  0.008  0.073 -0.020 -0.079  0.000  0.000   0.0736357853
+  50  0.008  0.073 -0.020 -0.079 -0.089  0.000   0.0728236864
+  52  0.008  0.073 -0.020 -0.079 -0.082  0.000   0.0728226693
+  53  0.008  0.073 -0.020 -0.079 -0.085  0.000   0.0728212191
+  62  0.008  0.073 -0.020 -0.079 -0.085  0.156   0.0716134428
+  64  0.008  0.073 -0.020 -0.079 -0.085  0.155   0.0716133333
+  65  0.008  0.073 -0.020 -0.079 -0.085  0.154   0.0716132541
+  powell nthiter 1: fret = 0.071613
+  74  0.067  0.073 -0.020 -0.079 -0.085  0.154   0.0714221690
+  75  0.055  0.073 -0.020 -0.079 -0.085  0.154   0.0714148534
+  76  0.057  0.073 -0.020 -0.079 -0.085  0.154   0.0714137155
+  77  0.059  0.073 -0.020 -0.079 -0.085  0.154   0.0714135572
+  86  0.059  0.071 -0.020 -0.079 -0.085  0.154   0.0714132076
+  94  0.059  0.071  0.031 -0.079 -0.085  0.154   0.0713893408
+  95  0.059  0.071  0.010 -0.079 -0.085  0.154   0.0713648669
+  97  0.059  0.071  0.009 -0.079 -0.085  0.154   0.0713648383
+ 106  0.059  0.071  0.009 -0.059 -0.085  0.154   0.0713456884
+ 108  0.059  0.071  0.009 -0.058 -0.085  0.154   0.0713456737
+ 116  0.059  0.071  0.009 -0.058 -0.094  0.154   0.0713396825
+ 117  0.059  0.071  0.009 -0.058 -0.093  0.154   0.0713393710
+ 118  0.059  0.071  0.009 -0.058 -0.092  0.154   0.0713393614
+ 126  0.059  0.071  0.009 -0.058 -0.092  0.179   0.0713158739
+ 127  0.059  0.071  0.009 -0.058 -0.092  0.175   0.0713147482
+  powell nthiter 2: fret = 0.071315
+ 138  0.064  0.071  0.009 -0.058 -0.092  0.175   0.0713112181
+ 139  0.065  0.071  0.009 -0.058 -0.092  0.175   0.0713110215
+ 147  0.065  0.072  0.009 -0.058 -0.092  0.175   0.0713097646
+ 148  0.065  0.079  0.009 -0.058 -0.092  0.175   0.0713076001
+ 150  0.065  0.077  0.009 -0.058 -0.092  0.175   0.0713069982
+ 159  0.065  0.077  0.007 -0.058 -0.092  0.175   0.0713068816
+ 167  0.065  0.077  0.007 -0.057 -0.092  0.175   0.0713066978
+ 168  0.065  0.077  0.007 -0.056 -0.092  0.175   0.0713066964
+ 178  0.065  0.077  0.007 -0.056 -0.094  0.175   0.0713066355
+ 179  0.065  0.077  0.007 -0.056 -0.095  0.175   0.0713066343
+ 190  0.065  0.077  0.007 -0.056 -0.095  0.173   0.0713065095
+  powell nthiter 3: fret = 0.071307
+ 210  0.065  0.076  0.007 -0.056 -0.095  0.173   0.0713064419
+ 219  0.065  0.076  0.006 -0.056 -0.095  0.173   0.0713063784
+  powell nthiter 4: fret = 0.071306
+Powell done niters = 4
+Computing relative cost
+ 0  -25.0 -25.0 -25.0   1.012461
+ 1  -25.0 -25.0  25.0   1.005568
+ 2  -25.0  25.0 -25.0   1.016253
+ 3  -25.0  25.0  25.0   0.987342
+ 4   25.0 -25.0 -25.0   0.996526
+ 5   25.0 -25.0  25.0   1.007524
+ 6   25.0  25.0 -25.0   1.013442
+ 7   25.0  25.0  25.0   0.980513
+REL:  8  0.071306    8.019629  1.002454 rel = 0.0711318 
+Number of iterations     4
+Min cost was 0.071306
+Number of FunctionCalls   299
+TolPowell 0.000000
+nMaxItersPowell 36
+OptimizationTime 54.828000 sec
+Parameters at optimum (transmm)  0.06540  0.07567  0.00620
+Parameters at optimum (rotdeg) -0.05574 -0.09459  0.17328 
+Final costs ----------------
+Number of surface hits 274675
+WM  Intensity   369.0292 +/-  64.4889
+Ctx Intensity   531.4439 +/-  93.2891
+Pct Contrast     35.4990 +/-  19.2866
+Cost   0.0713
+RelCost   0.0744
+Reg at min cost was 
+-0.99939   0.02107  -0.02793   1.13693;
+-0.02893  -0.04894   0.99838   0.10004;
+-0.01967  -0.99858  -0.04952  -11.11584;
+ 0.00000   0.00000   0.00000   1.00000;
+
+Writing optimal reg to register.dat, type = 14 
+Original Reg 
+-0.99950   0.01928  -0.02499   1.05324;
+-0.02589  -0.04803   0.99851   0.03196;
+-0.01805  -0.99866  -0.04850  -11.12377;
+ 0.00000   0.00000   0.00000   1.00000;
+
+Original Reg - Optimal Reg
+-0.00011  -0.00180   0.00294  -0.08370;
+ 0.00304   0.00091   0.00013  -0.06808;
+ 0.00162  -0.00008   0.00101  -0.00793;
+ 0.00000   0.00000   0.00000   0.00000;
+
+Computing change in lh position
+LH rmsDiffMean 0.214715
+Computing change in rh position
+Surface-RMS-Diff-mm 0.169649 0.068249 0.344274
+mri_segreg done
+MinCost: 0.071306 369.029166 531.443906 35.499006 
+tkregister2_cmdl --mov biasmeanb0bet.nii.gz --reg register.dat --noedit --fslregout diff2FS.mat
+tkregister_tcl /software/freesurfer/freesurfer-6.0.0/tktools/tkregister2.tcl
+INFO: no target volume specified, assuming FreeSurfer orig volume.
+target  volume orig
+movable volume biasmeanb0bet.nii.gz
+reg file       register.dat
+LoadVol        0
+ZeroCRAS       0
+$Id: tkregister2.c,v 1.132.2.1 2016/08/02 21:17:29 greve Exp $
+Diagnostic Level -1
+---- Input registration matrix --------
+-0.99939   0.02107  -0.02793   1.13693;
+-0.02893  -0.04894   0.99838   0.10004;
+-0.01967  -0.99858  -0.04952  -11.11584;
+ 0.00000   0.00000   0.00000   1.00000;
+float2int = 0
+---------------------------------------
+INFO: loading target /working/lab_michaebr/alistaiP/Park/FS/Patient_055/mri/orig.mgz
+Ttarg: --------------------
+-1.00000   0.00000   0.00000   128.00000;
+ 0.00000   0.00000   1.00000  -128.00000;
+ 0.00000  -1.00000   0.00000   128.00000;
+ 0.00000   0.00000   0.00000   1.00000;
+INFO: loading movable biasmeanb0bet.nii.gz
+Tmov: --------------------
+-1.71875   0.00000   0.00000   110.00000;
+ 0.00000   0.00000   1.70000  -76.50000;
+ 0.00000  -1.71875   0.00000   110.00000;
+ 0.00000   0.00000   0.00000   1.00000;
+mkheaderreg = 0, float2int = 0
+---- Input registration matrix --------
+-0.99939   0.02107  -0.02793   1.13693;
+-0.02893  -0.04894   0.99838   0.10004;
+-0.01967  -0.99858  -0.04952  -11.11584;
+ 0.00000   0.00000   0.00000   1.00000;
+Determinant -0.999999
+subject = Patient_055
+RegMat ---------------------------
+-0.99939   0.02107  -0.02793   1.13693;
+-0.02893  -0.04894   0.99838   0.10004;
+-0.01967  -0.99858  -0.04952  -11.11584;
+ 0.00000   0.00000   0.00000   1.00000;
+FSLOUTPUTTYPE NIFTI_GZ 
+tkreg2FSL: mov det = 5.02197, ref det = -1
+INFO: FSL2FreeSurfer: Mov volume is NIFTI with positive det,
+      applying LR flip to registration matrix.
+Cleaning up
+ 
+Started at Sat Mar 18 07:00:28 AEST 2017 
+Ended   at Sat Mar 18 07:03:40 AEST 2017
+BBR-Run-Time-Sec 192
+ 
+bbregister Done
+To check results, run:
+tkregisterfv --mov biasmeanb0bet.nii.gz --reg register.dat --surfs 
+ 
+dwi2response: [03;32m[0m
+dwi2response: [03;32mNote that this script makes use of commands / algorithms that have relevant articles for citation. Please consult the help page (-help option) for more information.[0m
+dwi2response: [03;32m[0m
+dwi2response: [03;32mGenerated temporary directory: /tmp/dwi2response-tmp-25BXWV/[0m
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/biascorr.mif /tmp/dwi2response-tmp-25BXWV/dwi.mif -stride 0,0,0,1
+[03;34mCommand:[0m mrconvert /mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc/biasmeanb0bet_mask.nii.gz /tmp/dwi2response-tmp-25BXWV/mask.mif -datatype bit
+dwi2response: [03;32mChanging to temporary directory (/tmp/dwi2response-tmp-25BXWV/)[0m
+dwi2response: [03;32m2 unique b-value(s) detected: 0,2999 with 12,90 volumes.[0m
+[03;34mCommand:[0m maskfilter mask.mif erode eroded_mask.mif -npass 3
+[03;34mCommand:[0m dwiextract dwi.mif -shell 0 dwi_b0.mif
+[03;34mCommand:[0m mrmath dwi_b0.mif mean mean_b0.mif -axis 3
+[03;34mCommand:[0m mrcalc mean_b0.mif -finite mean_b0.mif 0 -if 0 -le err_b0.mif -datatype bit
+[03;34mCommand:[0m dwiextract dwi.mif -shell 2999 dwi_b2999.mif
+[03;34mCommand:[0m mrmath dwi_b2999.mif mean mean_b2999.mif -axis 3
+[03;34mCommand:[0m mrcalc mean_b2999.mif -finite mean_b2999.mif 0 -if 0 -le err_b2999.mif -datatype bit
+[03;34mCommand:[0m mrcalc mean_b0.mif mean_b2999.mif -divide -log sdm_b2999.mif
+[03;34mCommand:[0m mrcalc sdm_b2999.mif 90 -mult 90 -divide full_sdm.mif
+[03;34mCommand:[0m mrcalc full_sdm.mif -finite full_sdm.mif 0 -if 0 -le err_sdm.mif -datatype bit
+[03;34mCommand:[0m mrcalc err_b0.mif err_b2999.mif -add err_sdm.mif -add 0 eroded_mask.mif -if safe_mask.mif -datatype bit
+[03;34mCommand:[0m mrcalc safe_mask.mif full_sdm.mif 0 -if 10 -min safe_sdm.mif
+[03;34mCommand:[0m dwi2tensor dwi.mif - -mask safe_mask.mif | tensor2metric - -fa safe_fa.mif -vector safe_vecs.mif -modulate none -mask safe_mask.mif
+[03;34mCommand:[0m mrcalc safe_mask.mif safe_fa.mif 0 -if 0.2 -gt crude_wm.mif -datatype bit
+[03;34mCommand:[0m mrcalc crude_wm.mif 0 safe_mask.mif -if _crudenonwm.mif -datatype bit
+[03;34mCommand:[0m mrcalc _crudenonwm.mif safe_sdm.mif 2.11352 -subtract 0 -if - | mrthreshold - - -mask _crudenonwm.mif | mrcalc _crudenonwm.mif - 0 -if crude_csf.mif -datatype bit
+[03;34mCommand:[0m mrcalc crude_csf.mif 0 _crudenonwm.mif -if crude_gm.mif -datatype bit
+[03;34mCommand:[0m mrcalc crude_wm.mif safe_sdm.mif 0 -if 1.52699 -gt _crudewmhigh.mif -datatype bit
+[03;34mCommand:[0m mrcalc _crudewmhigh.mif 0 crude_wm.mif -if _crudewmlow.mif -datatype bit
+[03;34mCommand:[0m mrcalc crude_wm.mif safe_sdm.mif 0 -if 1.95747 -gt _crudewmoutliers.mif -datatype bit
+[03;34mCommand:[0m mrcalc _crudewmoutliers.mif 0 crude_wm.mif -if refined_wm.mif -datatype bit
+[03;34mCommand:[0m mrcalc crude_gm.mif safe_sdm.mif 0 -if 1.93439 -gt _crudegmhigh.mif -datatype bit
+[03;34mCommand:[0m mrcalc _crudegmhigh.mif 0 crude_gm.mif -if _crudegmlow.mif -datatype bit
+[03;34mCommand:[0m mrcalc _crudegmhigh.mif safe_sdm.mif 1.93439 -subtract 0 -if - | mrthreshold - - -mask _crudegmhigh.mif -invert | mrcalc _crudegmhigh.mif - 0 -if _crudegmhighselect.mif -datatype bit
+[03;34mCommand:[0m mrcalc _crudegmlow.mif safe_sdm.mif 1.93439 -subtract -neg 0 -if - | mrthreshold - - -mask _crudegmlow.mif -invert | mrcalc _crudegmlow.mif - 0 -if _crudegmlowselect.mif -datatype bit
+[03;34mCommand:[0m mrcalc _crudegmhighselect.mif 1 _crudegmlowselect.mif -if refined_gm.mif -datatype bit
+[03;34mCommand:[0m mrcalc _crudewmoutliers.mif safe_sdm.mif 0 -if 2.71241 -gt 1 crude_csf.mif -if _crudecsfextra.mif -datatype bit
+[03;34mCommand:[0m mrcalc _crudecsfextra.mif safe_sdm.mif 2.71241 -subtract 0 -if - | mrthreshold - - -mask _crudecsfextra.mif | mrcalc _crudecsfextra.mif - 0 -if refined_csf.mif -datatype bit
+dwi2response: [03;32mRunning 'tournier' algorithm to select 609 single-fibre WM voxels.[0m
+[03;34mCommand:[0m dwi2response tournier dwi.mif _respsfwmss.txt -sf_voxels 609 -iter_voxels 6090 -mask refined_wm.mif -voxels voxels_sfwm.mif -quiet -tempdir /tmp/dwi2response-tmp-25BXWV/
+[03;34mCommand:[0m mrcalc refined_gm.mif safe_sdm.mif 0 -if 1.92137 -gt _refinedgmhigh.mif -datatype bit
+[03;34mCommand:[0m mrcalc _refinedgmhigh.mif 0 refined_gm.mif -if _refinedgmlow.mif -datatype bit
+[03;34mCommand:[0m mrcalc _refinedgmhigh.mif safe_sdm.mif 0 -if - | mrthreshold - - -bottom 752 -ignorezero | mrcalc _refinedgmhigh.mif - 0 -if _refinedgmhighselect.mif -datatype bit
+[03;34mCommand:[0m mrcalc _refinedgmlow.mif safe_sdm.mif 0 -if - | mrthreshold - - -top 752 -ignorezero | mrcalc _refinedgmlow.mif - 0 -if _refinedgmlowselect.mif -datatype bit
+[03;34mCommand:[0m mrcalc _refinedgmhighselect.mif 1 _refinedgmlowselect.mif -if voxels_gm.mif -datatype bit
+[03;34mCommand:[0m mrcalc refined_csf.mif safe_sdm.mif 0 -if - | mrthreshold - - -top 1581 -ignorezero | mrcalc refined_csf.mif - 0 -if voxels_csf.mif -datatype bit
+dwi2response: [03;32mSummary of voxel counts:[0m
+dwi2response: [03;32mMask: 355305 --> 290353 --> 290329[0m
+dwi2response: [03;32mWM: 128818 --> 121860 --> 609 (SF)[0m
+dwi2response: [03;32mGM: 119147 --> 75240 --> 1504[0m
+dwi2response: [03;32mCSF: 42364 --> 15805 --> 1581[0m
+[03;34mCommand:[0m amp2sh dwi_b0.mif - | sh2response - voxels_sfwm.mif safe_vecs.mif _respsfwmb0.txt
+[03;34mCommand:[0m amp2sh dwi_b2999.mif - | sh2response - voxels_sfwm.mif safe_vecs.mif _respsfwmb2999.txt
+[03;34mCommand:[0m mrcat crude_csf.mif crude_gm.mif crude_wm.mif crude.mif -axis 3
+[03;34mCommand:[0m mrcat refined_csf.mif refined_gm.mif refined_wm.mif refined.mif -axis 3
+[03;34mCommand:[0m mrcat voxels_csf.mif voxels_gm.mif voxels_sfwm.mif voxels.mif -axis 3
+dwi2response: [03;32mChanging back to original directory (/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff/Patient_055/preproc)[0m
+dwi2response: [03;32mDeleting temporary directory /tmp/dwi2response-tmp-25BXWV/[0m

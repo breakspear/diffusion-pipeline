@@ -1,0 +1,235 @@
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+dwidenoise: [WARNING] existing output files will be overwritten
+dwidenoise: preloading data for "rawdataAP.mif"...  [==================================================]
+dwidenoise: running MP-PCA denoising...  [==================================================]
+dwidenoise: [WARNING] existing output files will be overwritten
+dwidenoise: preloading data for "rawdataPA.mif"...  [==================================================]
+dwidenoise: running MP-PCA denoising...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdn.mif" to "rawdataAPdnstr.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdnstr.mif" to "rawdataAPdn.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "rawdataPAdnstr.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdnstr.mif" to "rawdataPAdn.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataAPdn.mif" to "b0AP.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "b0PA.mif"...  [==================================================]
+dwiextract: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "APb0s.mif" to "AP7b0s.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "rawdataPAdn.mif" to "rawdataPAdnrem.mif"...  [==================================================]
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: preloading data for "/tmp/mrtrix-tmp-3JYVCY.mif"...  [==================================================]
+mrmath: computing mean along axis 3......  [==================================================]
+mrmath: [WARNING] existing output files will be overwritten
+dwiextract: extracting volumes...  [==================================================]
+mrmath: preloading data for "/tmp/mrtrix-tmp-vjrlGv.mif"...  [==================================================]
+mrmath: computing mean along axis 3......  [==================================================]
+dwi2tensor: [WARNING] existing output files will be overwritten
+dwi2tensor: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=====]
+dwi2tensor: computing tensors...  [==================================================]
+tensor2metric: [WARNING] existing output files will be overwritten
+tensor2metric: computing metrics...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/Park/FS/Patient_050/mri/brain.mgz"...  [===============]
+mrconvert: copying from "/working/l...S/Patient_050/mri/brain.mgz" to "brainFS.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/Park/FS/Patient_050/mri/T1.mgz"...  [===============]
+mrconvert: copying from "/working/l...k/FS/Patient_050/mri/T1.mgz" to "FS.nii"...  [==================================================]
+mrconvert: copying from "brainFS.nii" to "T1.nii"...  [==================================================]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+meshconvert: writing mesh to file...  [==================================================]
+mesh2pve: converting mesh to PVE image...  [==]
+mrmath: computing sum across 14 images...  [======]
+mrcalc: computing: min (/tmp/mrtrix-tmp-ixO0my.mif, 1)...  [==================================================]
+mrthreshold: uncompressing image "T1_pve_2.nii.gz"...  [===================================]
+mrthreshold: thresholding "T1_pve_2.nii.gz" at intensity 0.001...  [==================================================]
+maskfilter: applying connected-component filter to image -...   done
+mrconvert: uncompressing image "T1_pve_0.nii.gz"...  [===================================]
+mrconvert: copying from "T1_pve_0.nii.gz" to "csf.mif"...  [==================================================]
+mrcalc: computing: min ((1 - csf.mif), all_sgms.mif)...  [==================================================]
+mrcalc: uncompressing image "T1_pve_1.nii.gz"...  [===================================]
+mrcalc: uncompressing image "T1_pve_2.nii.gz"...  [===================================]
+mrcalc: computing: ((1 - (csf.mif + sgm.mif)) / (T1_pve_1.nii.gz + T1_pve_2.nii.gz))...  [==================================================]
+mrcalc: computing: (finite (multiplier.mif) ? multiplier.mif : 0)...  [==================================================]
+mrcalc: uncompressing image "T1_pve_1.nii.gz"...  [===================================]
+mrcalc: computing: (T1_pve_1.nii.gz * multiplier_noNAN.mif)...  [==================================================]
+mrcalc: uncompressing image "T1_pve_2.nii.gz"...  [===================================]
+mrcalc: computing: ((T1_pve_2.nii.gz * multiplier_noNAN.mif) * wm_mask.mif)...  [==================================================]
+mrcalc: computing: min (0, wm.mif)...  [==================================================]
+mrcat: concatenating "cgm.mif"...  [==================================================]
+mrcat: concatenating "sgm.mif"...  [==================================================]
+mrcat: concatenating "wm.mif"...  [==================================================]
+mrcat: concatenating "csf.mif"...  [==================================================]
+mrcat: concatenating "path.mif"...  [==================================================]
+mrconvert: copying from "/tmp/mrtrix-tmp-z5CjZj.mif" to "combined_precrop.mif"...  [==================================================]
+mrconvert: copying from "combined_precrop.mif" to "result.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "result.mif" to "5TTFSmasked.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: uncompressing image "/working/lab_michaebr/alistaiP/Park/FS/Patient_050/mri/brain.mgz"...  [===============]
+mrconvert: copying from "/working/l...S/Patient_050/mri/brain.mgz" to "brainFSsp.nii"...  [==================================================]
+5tt2gmwmi: [WARNING] existing output files will be overwritten
+5tt2gmwmi: Generating GMWMI seed mask...  [==================================================]
+labelconvert: [WARNING] existing output files will be overwritten
+labelconvert: uncompressing image "/working/lab_michaebr/alistaiP/Park/FS/Patient_050/mri/aparc.a2009s+aseg.mgz"...  [===================================]
+rm: cannot remove ‘parc_fixsubcort.nii’: No such file or directory
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "parc.nii" to "parctempstr.nii"...  [==================================================]
+mrconvert: copying from "parc_fixsubcort.nii" to "parc_fixsubcortstr.nii"...  [==================================================]
+transformconvert: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: uncompressing image "/working/lab_michaebr/alistaiP/Park/FS/Patient_050/mri/brain.mgz"...  [===============]
+mrtransform: preloading data for "/working/lab_michaebr/alistaiP/Park/FS/Patient_050/mri/brain.mgz"...  [==================================================]
+mrtransform: copying from "/working/l...S/Patient_050/mri/brain.mgz" to "rFS.nii"......  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: uncompressing image "/working/lab_michaebr/alistaiP/Park/FS/Patient_050/mri/brain.mgz"...  [===============]
+mrtransform: preloading data for "/working/lab_michaebr/alistaiP/Park/FS/Patient_050/mri/brain.mgz"...  [==================================================]
+mrtransform: reslicing "/working/lab_michaebr/alistaiP/Park/FS/Patient_050/mri/brain.mgz"...  [====================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "5TTgmwmi.nii" to "5TTFSspgmwmi.nii"...  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSspgmwmi.nii" to "r5TTgmwmi.nii"......  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "5TTFSmasked.nii" to "5TTFSspmasked.nii"...  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: copying from "5TTFSspmasked.nii" to "r5TT.nii"......  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "parc_fixsubcort.nii" to "parc_FSspfixsubcort.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "r5TT.nii" to "r5TT.mif"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "r5TT.mif" to "wmseg.nii"...  [==================================================]
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: thresholding "wmseg.nii" at intensity 0.5...  [==================================================]
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: thresholding "wmseg.nii" at intensity 0.25...  [==================================================]
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: thresholding "wmseg.nii" at intensity 0.75...  [==================================================]
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=====]
+dwi2fod: preloading data for "biascorr.mif"...  [==================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "wm.mif" to "wmstr.mif"...  [==================================================]
+fod2dec: [WARNING] existing output files will be overwritten
+fod2dec: preloading data for "wm.mif"...  [==================================================]
+fod2dec: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=====]
+fod2dec: computing colours...  [==================================================]
+fod2dec: (re)weighting...  [==================================================]
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: Creating homogeneous processing mask...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        1 selected
+tckgen: [  0%]      131 generated,       68 selected
+tckgen: [  0%]      291 generated,      142 selected
+tckgen: [  0%]      551 generated,      276 selected
+tckgen: [  0%]     1071 generated,      540 selected
+tckgen: [  0%]     1981 generated,     1030 selected
+tckgen: [  0%]     3651 generated,     1970 selected
+tckgen: [  0%]     6991 generated,     3982 selected
+tckgen: [  0%]    14111 generated,     8361 selected
+tckgen: [  0%]    31581 generated,    17706 selected
+tckgen: [  0%]    76591 generated,    36144 selected
+tckgen: [  0%]   190371 generated,    70960 selected
+tckgen: [  0%]   462931 generated,   136459 selected
+tckgen: [  1%]  1077671 generated,   261023 selected
+tckgen: [  2%]  2370561 generated,   502377 selected
+tckgen: [  3%]  5014251 generated,   983977 selected
+tckgen: [  7%] 10308191 generated,  1949809 selected
+tckgen: [ 15%] 20856231 generated,  3899015 selected
+tckgen: [ 31%] 41769881 generated,  7824593 selected
+tckgen: [ 62%] 83198311 generated, 15737008 selected
+tckgen: [100%] 126208601 generated, 25000000 selected
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ...... done
+tckmap: mapping tracks to image...  [==================================================]
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: Creating homogeneous processing mask...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        1 selected
+tckgen: [  0%]      131 generated,       70 selected
+tckgen: [  0%]      251 generated,      129 selected
+tckgen: [  0%]      541 generated,      256 selected
+tckgen: [  0%]     1031 generated,      495 selected
+tckgen: [  0%]     2031 generated,      985 selected
+tckgen: [  0%]     3861 generated,     1998 selected
+tckgen: [  0%]     7251 generated,     4026 selected
+tckgen: [  0%]    14551 generated,     8471 selected
+tckgen: [  1%]    31941 generated,    17715 selected
+tckgen: [  3%]    77301 generated,    36174 selected
+tckgen: [  7%]   192581 generated,    70994 selected
+tckgen: [ 13%]   469351 generated,   136448 selected
+tckgen: [ 26%]  1086971 generated,   260302 selected
+tckgen: [ 50%]  2397671 generated,   504039 selected
+tckgen: [100%]  4786434 generated,  1000000 selected
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ...... done
+tckmap: mapping tracks to image...  [==================================================]
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ...... done
+tckmap: mapping tracks to image...  [==================================================]
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ...... done
+tckmap: mapping tracks to image...  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: reslicing "5TTFSspmasked.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "r5TTrg.mif" to "wmsegrg.nii"...  [====================================]
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: [ERROR] Dimensions of processing mask image provided using -proc_mask option must match relevant fixel image
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: [ERROR] Dimensions of processing mask image provided using -proc_mask option must match relevant fixel image
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] input file "sift_weightfactor.txt" not found (required for option "-tck_weights_in")
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] input file "sift_weightfactor.txt" not found (required for option "-tck_weights_in")
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: [ERROR] input file "sift_weightfactor.txt" not found (required for option "-tck_weights_in")
+tck2connectome: [ERROR] unknown option "-nthreds"
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tckedit: [WARNING] existing output files will be overwritten
+tckedit: [ERROR] input file "1Msift_weightfactor.txt" not found (required for option "-tck_weights_in")
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: [ERROR] required input file "1Msift.tck" not found

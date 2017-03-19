@@ -31,10 +31,10 @@ module load freesurfer/6.0.0
 module load ANTs/20160509
 module load fsl/5.0.9_eddy
 
-subj=Patient_043
-subjDIRECTORY=/working/lab_michaebr/alistaiP/Park/Raw/Patient_043
+subj=Patient_029
+subjDIRECTORY=/working/lab_michaebr/alistaiP/Park/Raw/Patient_029
 
 cd $subjDIRECTORY
 
-advfulldiffsetup_phil Patient_043 /working/lab_michaebr/alistaiP/Park  #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
+advfulldiffsetup_phil Patient_029 /working/lab_michaebr/alistaiP/Park  #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
  
