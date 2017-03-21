@@ -69,6 +69,12 @@
 ### 2. Perform the preprocessing, and fiber construction methods
   
    * To perform all the diffusion steps (i.e. from preprocessing to connectome construction), the individual scripts above are actualy embedded within a setup script `advfulldiffsetup`.
+   * Again, to perform the pipeline for all subjects:
+     ```
+     sh dticon /working/lab_michaebr/alistaiP/Park advfulldiffsetup
+     cd batch
+     find . -name "-sh" -exec qsub {} \;
+     ```
    * You will need to edit it's user-specific options before calling the `dticon` script
    * Required inputs are: 
     + ismosaic - is data acquired with moasic DICOM extraction (1 if yes)
