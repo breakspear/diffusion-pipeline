@@ -36,27 +36,26 @@
    * rsync the Raw folder into the desired project directory 
      + `rsync -vaz Raw /working/lab_michaebr/alistaiP/Park`
 
-# The functionality of the pipeline
+## The functionality of the pipeline
 
-## Calling the scripts
+### 1. Calling the scripts
    * The scripts function in that everything is run by a master `dticon` command - located within the package folder.
-  
-   * This command is required to be called with compulsory arguments including the location of the project directory (i.e `/working/lab_michaebr/alistaiP/Park`), and the desired script of diffusion preprocesing options. 
-   
-   * There are also extra arguments depending on the preprocessing option of choice. The individual preprocessing scripts include:
+   * This command is required to be called with: 
+     +  The location of the project directory (i.e `/working/lab_michaebr/alistaiP/Park`)
+     *  And the desired script of diffusion preprocesing options. 
+   * There are also extra arguments depending on the preprocessing option of choice 
+   * The individual preprocessing scripts include:
      + processFSall (using Freesurfer, cortical reconstruction of T1 images)
      + advpreproc (full diffusion preprocessing)
      + segparcandcoregT1 (FSL segmentation, parcellation, and co-registration of the T1 image)
      + advfibertrackandcntmecon (fiber tracking and connectome construction)
      + advcntmecononly (to be added)
-
    * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details.
+   * Each subject-specific script will be then placed within the folder `batch`, where users can submit their jobs to the avalon PBS nodes. 
   
-   * Each subject-specific script will be then placed within the folder `batch`, where users can submit the compute jobs to the avalon PBS nodes. 
-  
-# Running the whole diffusion pipeline
+## Running the whole diffusion pipeline
 
-## Freesurfer construction of T1 images
+### 1. Freesurfer construction of T1 images
 
    * For the diffusion  pipeline to be run, first the subjects must be processed using freesurfer's recon-all (https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all)
 
@@ -68,7 +67,7 @@
   
    * The Freesurfer output will be placed within a parent directory called `FS` (located within the project directory) - for which the subsequent pipeline steps will look for.
   
- # Perform the preprocessing, and fiber construction methods
+### 2. Perform the preprocessing, and fiber construction methods
   
   To perform all the diffusion steps (i.e. from preprocessing to connectome construction), the individual scripts above are actualy embedded within a setup script `advfulldiffsetup`.
   
