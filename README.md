@@ -46,7 +46,7 @@
   * There are also extra arguments depending on the preprocessing option of choice 
   
   * These individual preprocessing scripts include:
-     +  processFSall (using Freesurfer, cortical reconstruction of T1 images)
+     +  processFSall
      +  advpreproc (full diffusion preprocessing)
      +  segparcandcoregT1 (FSL segmentation, parcellation, and co-registration of the T1 image)
      +  advfibertrackandcntmecon (fiber tracking and connectome construction)
