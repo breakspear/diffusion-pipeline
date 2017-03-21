@@ -40,9 +40,9 @@
 
 ## Calling the scripts
  
-  * The scripts function in that everything is run by a master `dticon` command - located within the package folder.
+   * The scripts function in that everything is run by a master `dticon` command - located within the package folder.
   
-  * This command is required to be called with compulsory arguments including the location of the project directory (i.e `/working/lab_michaebr/alistaiP/Park`), and the desired script of diffusion preprocesing options. There are also extra arguments depending on the preprocessing option of choice. The individual preprocessing scripts include:
+   * This command is required to be called with compulsory arguments including the location of the project directory (i.e `/working/lab_michaebr/alistaiP/Park`), and the desired script of diffusion preprocesing options. There are also extra arguments depending on the preprocessing option of choice. The individual preprocessing scripts include:
 
      + processFSall (using Freesurfer, cortical reconstruction of T1 images)
      + advpreproc (full diffusion preprocessing)
