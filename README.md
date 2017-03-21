@@ -69,6 +69,14 @@
 ### 2. Perform the preprocessing, and fiber construction methods
   
    * To perform all the diffusion steps (i.e. from preprocessing to connectome construction), the individual scripts above are actualy embedded within a setup script `advfulldiffsetup`.
+   * You will need to edit it's user-specific options before calling the `dticon` script
+   * Required inputs are: 
+    + ismosaic - is data acquired with moasic DICOM extraction (1 if yes)
+    + isfullrevsequence - is a full sequence acquired in the opposite phase encoding direction (i.e. P A) (1 if yes)
+    + ismultiband - is data acquired with multiple slice acquisition (1 if yes)
+    + parc - FS parcellation to choose (options are DESIKAN "DES" or DESTRIEUX "DST")
+    + ismultishell - is data acquired with multiple b-value weightings (1 if yes)
+    + numfibers - number of whole brain fibers for whole brian tractography
   
   
   
