@@ -44,9 +44,8 @@
      +  The location of the project directory (i.e `/working/lab_michaebr/alistaiP/Park`)
      +  And the desired script of diffusion preprocesing options. 
   * There are also extra arguments depending on the preprocessing option of choice 
-  
-  * These individual preprocessing scripts include:
-  ```
+  * These individual preprocessing scripts include:
+     ```
      processFSall (using Freesurfer, cortical reconstruction of T1 images)
      advpreproc (full diffusion preprocessing)
      segparcandcoregT1 (FSL segmentation, parcellation, and co-registration of the T1 image)
