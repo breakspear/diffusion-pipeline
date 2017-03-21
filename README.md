@@ -39,20 +39,19 @@
 # The functionality of the pipeline
 
 ## Calling the scripts
- 
    * The scripts function in that everything is run by a master `dticon` command - located within the package folder.
   
    * This command is required to be called with compulsory arguments including the location of the project directory (i.e `/working/lab_michaebr/alistaiP/Park`), and the desired script of diffusion preprocesing options. There are also extra arguments depending on the preprocessing option of choice. The individual preprocessing scripts include:
 
-     + processFSall (using Freesurfer, cortical reconstruction of T1 images)
+     + processFSall (using Freesurfer, cortical reconstruction of T1 images)
      + advpreproc (full diffusion preprocessing)
      + segparcandcoregT1 (FSL segmentation, parcellation, and co-registration of the T1 image)
      + advfibertrackandcntmecon (fiber tracking and connectome construction)
      + advcntmecononly (to be added)
 
-  * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details.
+   * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details.
   
-  * Each subject-specific script will be then placed within the folder `batch`, where users can submit the compute jobs to the avalon PBS nodes. 
+   * Each subject-specific script will be then placed within the folder `batch`, where users can submit the compute jobs to the avalon PBS nodes. 
   
 # Running the whole diffusion pipeline
 
