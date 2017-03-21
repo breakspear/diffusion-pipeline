@@ -59,10 +59,11 @@
 
    * All that needs to be done, is call the `dticon` script - along with the project directory (make sure the last backspace is removed) and the script name as the arguments. For example,
      
-     sh dticon /working/lab_michaebr/alistaiP/Park processFSall  
+     ```
+     sh dticon /working/lab_michaebr/alistaiP/Park advfulldiffsetup
      cd batch
-     find . -name "-sh" -exec qsub {} \; # (send all the jobs to the batch scheduler)
-     ```
+     find . -name "-sh" -exec qsub {} \;
+     ```
   
    * The Freesurfer output will be placed within a parent directory called `FS` (located within the project directory) - for which the subsequent pipeline steps will look for.
   
@@ -82,17 +83,4 @@
     + ismultiband - is data acquired with multiple slice acquisition (1 if yes)
     + parc - FS parcellation to choose (options are DESIKAN "DES" or DESTRIEUX "DST")
     + ismultishell - is data acquired with multiple b-value weightings (1 if yes)
-    + numfibers - number of whole brain fibers for whole brian tractography
-  
-  
-  
-  
-  
-There are 4 scripts to be called 
-
-1. `sh workingdirectory processFSall`
-2. (perform all diffusion steps)
-   ```
-   edit include 
-   sh workingdirectory dtiadvfullsetup
-   ```
+    + numfibers - number of whole brain fibers for whole brain tractography
