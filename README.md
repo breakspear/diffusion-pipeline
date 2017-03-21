@@ -2,7 +2,6 @@
 
 ## Setup information
 
-
 ### 1. Install the github package
    * Ensure your current working directory is your home directory on avalon. E.g. `cd  ~` or `cd /mnt/lustre/home/$USER`
    * `git clone https://github.com/breakspear/diffusion-pipeline.git`
@@ -39,6 +38,17 @@
 
 ## Processing the data
  
+  The scripts function in that everything is run by a master `dticon` command.
+  
+  The command is required to be called first with the location of the project directory, the desired scripts of diffusion preprocesing options, and extra arguments (if needed). These include, for example:
+
+       + advpreproc (full diffusion preprocessing)
+       + segparcandcoregT1 (segmentation, parcellation, and co-registration of T1 image)
+       + advfibertrackandcntmecon (fiber tracking and connectome construction)
+       + advcntmecononly (to be added)
+       
+  
+  
 There are 4 scripts to be called 
 
 1. `sh workingdirectory processFSall`
