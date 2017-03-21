@@ -1,0 +1,125 @@
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+This version of mrtrix3 is maintained by Alistair Perry in the Breakepear Lab
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=====]
+dwi2fod: preloading data for "biascorr.mif"...  [==================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "wm.mif" to "wmstr.mif"...  [==================================================]
+fod2dec: [WARNING] existing output files will be overwritten
+fod2dec: preloading data for "wm.mif"...  [==================================================]
+fod2dec: uncompressing image "biasmeanb0bet_mask.nii.gz"...  [=====]
+fod2dec: computing colours...  [==================================================]
+fod2dec: (re)weighting...  [==================================================]
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: Creating homogeneous processing mask...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        0 selected
+tckgen: [  0%]      251 generated,      112 selected
+tckgen: [  0%]      501 generated,      247 selected
+tckgen: [  0%]     1001 generated,      478 selected
+tckgen: [  0%]     1951 generated,      952 selected
+tckgen: [  0%]     3831 generated,     1987 selected
+tckgen: [  0%]     8121 generated,     4543 selected
+tckgen: [  0%]    16551 generated,     9604 selected
+tckgen: [  0%]    36141 generated,    19503 selected
+tckgen: [  0%]    86821 generated,    39278 selected
+tckgen: [  0%]   203021 generated,    73781 selected
+tckgen: [  0%]   473061 generated,   137819 selected
+tckgen: [  1%]  1088341 generated,   260620 selected
+tckgen: [  2%]  2425661 generated,   507078 selected
+tckgen: [  3%]  5082931 generated,   990404 selected
+tckgen: [  7%] 10386431 generated,  1960500 selected
+tckgen: [ 15%] 20663251 generated,  3862219 selected
+tckgen: [ 30%] 40470281 generated,  7577282 selected
+tckgen: [ 60%] 80478871 generated, 15200139 selected
+tckgen: [100%] 126297398 generated, 25000000 selected
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: Creating homogeneous processing mask...  [==================================================]
+tckgen: segmenting FODs...  [==================================================]
+tckgen: preloading data for "wm.mif"...  [==================================================]
+tckgen: [  0%]        1 generated,        1 selected
+tckgen: [  0%]      191 generated,      102 selected
+tckgen: [  0%]      411 generated,      237 selected
+tckgen: [  0%]      871 generated,      444 selected
+tckgen: [  0%]     1821 generated,      903 selected
+tckgen: [  0%]     3441 generated,     1810 selected
+tckgen: [  0%]     6531 generated,     3670 selected
+tckgen: [  0%]    13271 generated,     7844 selected
+tckgen: [  1%]    28711 generated,    16158 selected
+tckgen: [  3%]    68751 generated,    33164 selected
+tckgen: [  6%]   177481 generated,    66925 selected
+tckgen: [ 13%]   442841 generated,   130514 selected
+tckgen: [ 25%]  1064391 generated,   255465 selected
+tckgen: [ 50%]  2388491 generated,   500922 selected
+tckgen: [100%]  4800792 generated,  1000000 selected
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: reslicing "5TTFSspmasked.nii"...  [==================================================]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "r5TTrg.mif" to "wmsegrg.nii"...  [====================================]
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: Copying processing mask to memory...  [==================================================]
+tcksift2: segmenting FODs...  [==================================================]
+tcksift2: mapping tracks to image...  [==================================================]
+tcksift2:   Iteration     CF (data)      CF (reg)     Streamlines
+....tcksift2: [  . ]         2        21.701%         0.602%        25000000
+..tcksift2: [  . ]         3        20.192%         0.906%        25000000
+..tcksift2: [  . ]         4        19.462%         1.127%        25000000
+....tcksift2: [  . ]         6        18.716%         1.413%        25000000
+........tcksift2: [  . ]        10        18.107%         1.695%        25000000
+................tcksift2: [.   ]        18        17.702%         1.908%        25000000
+................................tcksift2: [ .  ]        34        17.471%         2.043%        25000000
+....tcksift2: [done]        36        17.457%         2.052%        25000000
+tcksift2: [WARNING] existing output files will be overwritten
+tcksift2: Copying processing mask to memory...  [==================================================]
+tcksift2: segmenting FODs...  [==================================================]
+tcksift2: mapping tracks to image...  [==================================================]
+tcksift2:   Iteration     CF (data)      CF (reg)     Streamlines
+....tcksift2: [ .  ]         2        21.648%         0.589%        1000000
+..tcksift2: [.   ]         3        20.163%         0.887%        1000000
+..tcksift2: [ .  ]         4        19.445%         1.105%        1000000
+....tcksift2: [  . ]         6        18.710%         1.386%        1000000
+........tcksift2: [  . ]        10        18.107%         1.664%        1000000
+................tcksift2: [   .]        18        17.704%         1.877%        1000000
+................................tcksift2: [ .  ]        34        17.477%         2.011%        1000000
+....tcksift2: [done]        36        17.464%         2.020%        1000000
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tck2connectome: [WARNING] existing output files will be overwritten
+tck2connectome: Constructing connectome...  [==================================================]
+tckedit: [WARNING] existing output files will be overwritten
+tckedit: [ .  ]    30919 read,    30919 written
+tckedit: [  . ]    73857 read,    73857 written
+tckedit: [   .]   112874 read,   112874 written
+tckedit: [ .  ]   186348 read,   186348 written
+tckedit: [   .]   346113 read,   346113 written
+tckedit: [ .  ]   641081 read,   641081 written
+tckedit: [done]  1000000 read,  1000000 written
+tckmap: [WARNING] existing output files will be overwritten
+tckmap: creating new template image...  ..... done
+tckmap: mapping tracks to image...  [==================================================]
