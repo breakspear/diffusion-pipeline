@@ -33,7 +33,7 @@
      + The storage capacity of each home directory (10GB, which is backed up nightly) is too small for diffusion purposes
    * The location of your working scratch space will depend on your group leader
      + For myelf, it is `/working/lab_michaebr/alistaiP`
-   * rsync the Raw folder into the desired project directory:
+   * rsync the Raw folder into the desired project directory:
      + `rsync -vaz Raw /working/lab_michaebr/alistaiP/Park` 
 
 ## The functionality of the pipeline
