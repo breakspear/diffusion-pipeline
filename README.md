@@ -50,7 +50,7 @@
      segparcandcoregT1 (FSL segmentation, parcellation, and co-registration of the T1 image)
      advfibertrackandcntmecon (fiber tracking and connectome construction)
      ```
-   * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details
+   * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details
    * Each subject-script will be then placed within the folder `batch`, where users can submit their jobs to the avalon PBS nodes:
   
 ## Running the whole diffusion pipeline
@@ -75,7 +75,7 @@
      cd batch
      find . -name "-sh" -exec qsub {} \;
      ```
-   * You will need to edit it's user-specific options before calling the `dticon` script
+   * You will need to edit it's user-specific options before calling the `dticon` script
    * Required inputs are: 
       + ismosaic - is data acquired with moasic DICOM extraction (1 if yes)
       + isfullrevsequence - is a full sequence acquired in the opposite phase encoding direction (i.e. P A) (1 if yes)
