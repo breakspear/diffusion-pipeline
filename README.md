@@ -40,15 +40,15 @@
 
 ## Calling the scripts
  
-  * The scripts function in that everything is run by a master `dticon` command - located within the package folder.
+  * The scripts function in that everything is run by a master `dticon` command - located within the package folder.
   
-  * This command is required to be called with compulsory arguments including the location of the project directory (i.e `/working/lab_michaebr/alistaiP/Park`), and the desired script of diffusion preprocesing options. There are also extra arguments depending on the preprocessing option of choice. The individual preprocessing scripts include:
+  * This command is required to be called with compulsory arguments including the location of the project directory (i.e `/working/lab_michaebr/alistaiP/Park`), and the desired script of diffusion preprocesing options. There are also extra arguments depending on the preprocessing option of choice. The individual preprocessing scripts include:
 
-     + processFSall (using Freesurfer, cortical reconstruction of T1 images)
-     + advpreproc (full diffusion preprocessing)
-     + segparcandcoregT1 (FSL segmentation, parcellation, and co-registration of the T1 image)
-     + advfibertrackandcntmecon (fiber tracking and connectome construction)
-     + advcntmecononly (to be added)
+     + processFSall (using Freesurfer, cortical reconstruction of T1 images)
+     + advpreproc (full diffusion preprocessing)
+     + segparcandcoregT1 (FSL segmentation, parcellation, and co-registration of the T1 image)
+     + advfibertrackandcntmecon (fiber tracking and connectome construction)
+     + advcntmecononly (to be added)
 
   * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details.
   
@@ -62,9 +62,9 @@
 
    * All that needs to be done, is call the `dticon` script - along with the project directory (make sure the last backspace is removed) and the script name as the arguments. For example,
   
-        + sh dticon /working/lab_michaebr/alistaiP/Park processFSall  
-        + cd batch
-        + find . -name "-sh" -exec qsub {} \; # (send all the jobs to the batch scheduler)
+       + sh dticon /working/lab_michaebr/alistaiP/Park processFSall  
+       + cd batch
+       + find . -name "-sh" -exec qsub {} \; # (send all the jobs to the batch scheduler)
   
    * The Freesurfer output will be placed within a parent directory called `FS` (located within the project directory) - for which the subsequent pipeline steps will look for.
   
