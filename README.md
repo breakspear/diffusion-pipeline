@@ -70,7 +70,7 @@
   
 ### 2. Perform the preprocessing, and fiber construction methods
   
-   * To perform all the diffusion steps (i.e. from preprocessing to connectome construction), the individual scripts above are actualy embedded within a setup script `advfulldiffsetup`:
+   * To perform all the diffusion steps sequentially (i.e. from preprocessing to connectome construction), these individual scripts above are embedded within the setup script `advfulldiffsetup`:
    ![advfulldiffsetup](https://cloud.githubusercontent.com/assets/23748735/24157899/02bedbe8-0e5b-11e7-978e-0bd6d8d727eb.png)
    * Again, to perform the pipeline for all subjects:
      ```
