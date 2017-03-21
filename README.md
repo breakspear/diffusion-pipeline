@@ -46,11 +46,11 @@
   * There are also extra arguments depending on the preprocessing option of choice 
   
   * These individual preprocessing scripts include:
-     + processFSall (using Freesurfer, cortical reconstruction of T1 images)
-     + advpreproc (full diffusion preprocessing)
-     + segparcandcoregT1 (FSL segmentation, parcellation, and co-registration of the T1 image)
-     + advfibertrackandcntmecon (fiber tracking and connectome construction)
-     + advcntmecononly (to be added)
+     +  processFSall (using Freesurfer, cortical reconstruction of T1 images)
+     +  advpreproc (full diffusion preprocessing)
+     +  segparcandcoregT1 (FSL segmentation, parcellation, and co-registration of the T1 image)
+     +  advfibertrackandcntmecon (fiber tracking and connectome construction)
+     +  advcntmecononly (to be added)
   * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details.
   * Each subject-specific script will be then placed within the folder `batch`, where users can submit their jobs to the avalon PBS nodes. 
   
