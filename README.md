@@ -58,16 +58,14 @@
 ### 1. Freesurfer construction of T1 images
 
    * For the diffusion  pipeline to be run, first the subjects must be processed using freesurfer's recon-all (https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all)
-
-   * All that needs to be done, is call the `dticon` script - along with the project directory (make sure the last backspace is removed) and the script name as the arguments. For example,
+   * All that needs to be done, is call the `dticon` script - along with the project directory (make sure the last backspace is removed) and the script name as the arguments. For example,
      
      ```
      sh dticon /working/lab_michaebr/alistaiP/Park advfulldiffsetup
      cd batch
      find . -name "-sh" -exec qsub {} \;
      ```
-  
-   * The Freesurfer output will be placed within a parent directory called `FS` (located within the project directory) - for which the subsequent pipeline steps will look for.
+    * The Freesurfer output will be placed within a parent directory called `FS` (located within the project directory) - for which the subsequent pipeline steps will look for.
   
 ### 2. Perform the preprocessing, and fiber construction methods
   
