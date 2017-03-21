@@ -32,8 +32,8 @@
    * Working directory is the scratch space
      + The storage capacity of each home directory (10GB, which is backed up nightly) is too small for diffusion purposes
    * The location of your working scratch space will depend on your group leader
-     + For myself, it is /working/lab_michaebr/alistaiP
-   * rsync the Raw folder into the desired project directory 
+     + For myself, it is `/working/lab_michaebr/alistaiP`
+   * rsync the Raw folder into the desired project directory 
      + `rsync -vaz Raw /working/lab_michaebr/alistaiP/Park`
 
 ## The functionality of the pipeline
@@ -43,7 +43,6 @@
   * This `dticon` command is required to be called with the compulsory arguments: 
      +  The location of the project directory (i.e `/working/lab_michaebr/alistaiP/Park`)
      +  And the desired script of diffusion preprocesing options. 
-  * There are also extra arguments depending on the preprocessing option of choice 
   * These individual preprocessing scripts include,
      ```
      processFSall (using Freesurfer, cortical reconstruction of T1 images)
