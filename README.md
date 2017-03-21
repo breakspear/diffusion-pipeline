@@ -52,6 +52,7 @@
      ```
    * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details
    * Each subject-script will be then placed within the folder `batch`, where users can submit their jobs to the avalon PBS nodes:
+   
    ![Batch directory](https://cloud.githubusercontent.com/assets/23748735/24157898/02a68f52-0e5b-11e7-9eef-1666c1fe1858.png)
   
 ## Running the whole diffusion pipeline
