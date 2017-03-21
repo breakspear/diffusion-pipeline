@@ -52,6 +52,7 @@
      ```
    * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details
    * Each subject-script will be then placed within the folder `batch`, where users can submit their jobs to the avalon PBS nodes:
+   ![Batch directory](https://cloud.githubusercontent.com/assets/23748735/24157898/02a68f52-0e5b-11e7-9eef-1666c1fe1858.png)
   
 ## Running the whole diffusion pipeline
 
@@ -68,7 +69,8 @@
   
 ### 2. Perform the preprocessing, and fiber construction methods
   
-   * To perform all the diffusion steps (i.e. from preprocessing to connectome construction), the individual scripts above are actualy embedded within a setup script `advfulldiffsetup`.
+   * To perform all the diffusion steps (i.e. from preprocessing to connectome construction), the individual scripts above are actualy embedded within a setup script `advfulldiffsetup`:
+   ![advfulldiffsetup](https://cloud.githubusercontent.com/assets/23748735/24157899/02bedbe8-0e5b-11e7-978e-0bd6d8d727eb.png)
    * Again, to perform the pipeline for all subjects:
      ```
      sh dticon /working/lab_michaebr/alistaiP/Park advfulldiffsetup
