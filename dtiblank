@@ -41,8 +41,8 @@ module load fsl/5.0.9_eddy
 ####
 #Setup dir for temp MRtrix files to be written - otherwise they get sent to nodes tmp dir
 
-WORKDIR=&&&&
-echo "TempDir: ${WORKDIR}/tmp" > /mnt/lustre/$USER/.mrtrix.conf
+#WORKDIR=&&&&
+#echo "TempDir: ${WORKDIR}/tmp" > /mnt/lustre/$USER/.mrtrix.conf
 
 #Extract ID of subject and their corresponding folder holding raw image files
 

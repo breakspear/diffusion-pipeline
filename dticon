@@ -33,7 +33,7 @@ do
 	subjDIRECTORY=$line
 	cp dtiblank batch/dti$subj.sh
 	#sed -i "s;&&&&;$pipedir;" batch/dti$subj.sh -not needed
-        sed -i "s;&&&&;${WORKDIR};" batch/dti$subj.sh
+        #sed -i "s;&&&&;${WORKDIR};" batch/dti$subj.sh
 	sed -i "s/@@@@/$subj/" batch/dti$subj.sh
 	sed -i "s!????!$subjDIRECTORY!" batch/dti$subj.sh
 	sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" batch/dti$subj.sh
