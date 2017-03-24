@@ -17,11 +17,27 @@ fi
 
 SUBJECTS_DIR=${WORKDIR}/FS
 
-#prepare anatomical volume for segmentation, parcellation correction, and then co-registration to diffusion space
+#prepare anatomical volumes for segmentation, parcellation correction, and then co-registration to diffusion space
 
 mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -stride +1,2,3 -nthreads $ncpus -force
 
 mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -stride +1,2,3 -nthreads $ncpus -force
+
+mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -force
+
+#add steps to go from T1 native to FS space (redundant here, but applicable to Phil's STN approaches)
+
+bet2 T1.nii T1bet -f 0.15
+
+mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -force
+
+flirt -ref T1bet.nii.gz -in brainFSsp.nii -dof 6 -out FS2FSL -omat FS2FSL.mat
+
+convert_xfm -omat FSL2FS.mat -inverse FS2FSL.mat
+
+
+
+#5TT setup and cust 5TTgen script (unique to Phil)
 
 flirt -in $FSLDIR/data/standard/MNI152_T1_1mm_brain.nii.gz -ref brainFS.nii -omat mni2FS.mat -dof 12
 
@@ -33,9 +49,10 @@ convert_xfm -omat FS2mni.mat -inverse mni2FS.mat
 
 #bet2 T1.nii T1bet -f 0.15
 
-mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -force
-
 5tt2gmwmi 5TTFSmasked.nii 5TTgmwmi.nii -nthreads $ncpus -force
+
+
+#parcellation setup
 
 labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/src/connectome/tables/fs_a2009s.txt parc.nii -nthreads $ncpus -force
 
