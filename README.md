@@ -5,10 +5,12 @@
 ### 1. Install the github package
    * Ensure your current working directory is your home directory on avalon. E.g. `cd  ~` or `cd /mnt/lustre/home/$USER`
    * `git clone https://github.com/breakspear/diffusion-pipeline.git`
+   
 ### 2. Setup required software for the pipeline
    * Copy and paste the lines from the .bashrc file (located in the /data folder) into your user .bashrc file located in the home directory 
    * Or, copy the file directly into your home directory
    * You may need to restart your session browser for the software to be sourced correctly
+   
 ### 3. Locate image files from the scanner DICOM folders
    * This DICOM data should be stored on the L-Drive or R-Drive (where users only have read access)
    * The scanner will presumably give you image data in a set of DICOM folders
@@ -18,6 +20,7 @@
      + A P diffusion sequence (AP_OCD_MB_BLOCK1_DIFF_88DIR_0011)
      + P A diffusion sequence (PA_OCD.. etc)
      + And, the structural T1-image (either MPRAGE or MP2RAGE)
+     
 ### 4. Extract all the images with MRtrix
    * There should be a parent directory called Raw, with the subfolders corresponding to each subject:
      ![subfolders](https://cloud.githubusercontent.com/assets/23441440/24085971/f05c659c-0d51-11e7-9938-a7c83b3ed7b4.png)
@@ -28,6 +31,7 @@
      mrconvert /path/to/PA_DICOM rawdataAP.mif -stride +1,2,3,4
      mrconvert /path/to/T1_DICOM T1.nii -stride +1,2,3
      ```
+     
 ### 5. Copy the Raw folder directory to the avalon /working space
    * Working directory is the scratch space
      + The storage capacity of each home directory (10GB, which is backed up nightly) is too small for diffusion purposes
@@ -64,7 +68,7 @@
      ```
      sh dticon /working/lab_michaebr/alistaiP/Park advfulldiffsetup
      cd batch
-     find . -name "-sh" -exec qsub {} \;
+     find . -name "*.sh" -exec qsub {} \;
      ```
     * The Freesurfer output will be placed within a parent directory called `FS` (located within the project directory) - for which the subsequent pipeline steps will look for.
   
