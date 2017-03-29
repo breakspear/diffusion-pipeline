@@ -36,7 +36,7 @@
    * Working directory is the scratch space
      + The storage capacity of each home directory (10GB, which is backed up nightly) is too small for diffusion purposes
    * The location of your working scratch space will depend on your group leader
-     + For myelf, it is `/working/lab_michaebr/alistaiP`
+     + For myself, it is `/working/lab_michaebr/alistaiP`
    * rsync the Raw folder into the desired project directory:
      + `rsync -vaz Raw /working/lab_michaebr/alistaiP/Park` 
 
@@ -62,7 +62,6 @@
 ## Running the whole diffusion pipeline
 
 ### 1. Freesurfer construction of T1 images
-
    * For the diffusion  pipeline to be run, first the subjects must be processed using freesurfer's recon-all (https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all)
    * All that needs to be done, is call the `dticon` script - along with the project directory (make sure the last backspace is removed) and the script name as the arguments. For example,
      ```
@@ -80,7 +79,7 @@
      ```
      sh dticon /working/lab_michaebr/alistaiP/Park advfulldiffsetup
      cd batch
-     find . -name "-sh" -exec qsub {} \;
+     find . -name "*.sh" -exec qsub {} \;
      ```
    * You will need to edit it's user-specific options before calling the `dticon` script
    * Required inputs are: 
