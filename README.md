@@ -15,7 +15,9 @@
    * This DICOM data should be stored on the L-Drive or R-Drive (where users only have read access)
    * The scanner will presumably give you image data in a set of DICOM folders
    * Each folder should correspond to separate scanning sequences:
+   
      ![folders](https://cloud.githubusercontent.com/assets/23441440/24085970/ec2e0d5e-0d51-11e7-905b-1a5991050e2a.png)
+     
    * The image folders of interest here are the diffusion sequences for: 
      + A P diffusion sequence (AP_OCD_MB_BLOCK1_DIFF_88DIR_0011)
      + P A diffusion sequence (PA_OCD.. etc)
@@ -23,7 +25,9 @@
      
 ### 4. Extract all the images with MRtrix
    * There should be a parent directory called Raw, with the subfolders corresponding to each subject:
+     
      ![subfolders](https://cloud.githubusercontent.com/assets/23441440/24085971/f05c659c-0d51-11e7-9938-a7c83b3ed7b4.png)
+     
    * Within each subject folder, unpack the DICOM’s into corresponding image files (note the strides are important!).
    * For example, 
      ```
@@ -57,7 +61,7 @@
    * It picks up the basic template of the scripts from `dtiblank`, and inserts the subject-specific and script-specific details
    * Each subject-script will be then placed within the folder `batch`, where users can submit their jobs to the avalon PBS nodes:
    
-   ![Batch directory](https://cloud.githubusercontent.com/assets/23748735/24157898/02a68f52-0e5b-11e7-9eef-1666c1fe1858.png)
+     ![Batch directory](https://cloud.githubusercontent.com/assets/23748735/24157898/02a68f52-0e5b-11e7-9eef-1666c1fe1858.png)
   
 ## Running the whole diffusion pipeline
 
@@ -74,7 +78,9 @@
 ### 2. Perform the preprocessing, and fiber construction methods
   
    * To perform all the diffusion steps sequentially (i.e. from preprocessing to connectome construction), these individual scripts above are embedded within the setup script `advfulldiffsetup`:
-   ![advfulldiffsetup](https://cloud.githubusercontent.com/assets/23748735/24157899/02bedbe8-0e5b-11e7-978e-0bd6d8d727eb.png)
+   
+     ![advfulldiffsetup](https://cloud.githubusercontent.com/assets/23748735/24157899/02bedbe8-0e5b-11e7-978e-0bd6d8d727eb.png)
+     
    * Again, to perform the pipeline for all subjects:
      ```
      sh dticon /working/lab_michaebr/alistaiP/Park advfulldiffsetup
