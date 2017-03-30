@@ -104,3 +104,7 @@
     ````
   * After a job has finished (either terminated or sucessfully), log files will appear in the `batch` directory:
   
+    ![logfiles](https://cloud.githubusercontent.com/assets/23748735/24496298/26042098-1538-11e7-9e69-4b09885530d2.png)
+    
+  * Note, I will try and add running time log files so users can view the ongoing status.
+  
