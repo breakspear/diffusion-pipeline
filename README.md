@@ -95,3 +95,12 @@
       + parc - FS parcellation to choose (options are DESIKAN "DES" or DESTRIEUX "DST")
       + ismultishell - is data acquired with multiple b-value weightings (1 if yes)
       + numfibers - number of whole brain fibers for whole brain tractography
+      
+#### 3. Checking the status of your jobs
+
+  * To check the status of your called jobs, invoke the command:
+    ````
+    qstat -n -u $USER
+    ````
+  * After a job has finished (either terminated or sucessfully), log files will appear in the `batch` directory:
+  
