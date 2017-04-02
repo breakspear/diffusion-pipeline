@@ -8,8 +8,6 @@ subj=$1
 WORKDIR=$2
 parctype=$3
 
-echo "${parctype}"
-
 rundir=$(pwd)
 baserundir=$(basename $rundir)
 
@@ -47,7 +45,7 @@ fast -B --nopve T1betFSmasked.nii.gz
 
 5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTFSmasked.nii -nthreads $ncpus -force
 
-5t2gmwmi 5TTFSmasked.nii 5TTgmwmi.nii -nthreads $ncpus -force
+5tt2gmwmi 5TTFSmasked.nii 5TTgmwmi.nii -nthreads $ncpus -force
 
 if [ $parctype=="DES" ]; then
 	echo "${parctype} parcellation being constructed"
