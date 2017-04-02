@@ -25,9 +25,10 @@
 
 ####
 #Find all scripting files
-pipedir=$(pwd)
-PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
-export PATH:$PATH
+#currdir=$(pwd)
+pipedir=&&&&
+PATH=$PATH$( find $pipedir/ -not -path '*/\.*'  -type d -printf ":%p" )
+#export PATH:$PATH
 
 
 ####

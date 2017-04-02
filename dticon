@@ -21,7 +21,7 @@ extargs=${@:3}
 find $1/Raw/* -maxdepth 0 -type d > scans.txt #Creates list of folders containing the subject data to be analysed
 
 pipedir=$(pwd)
-PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
+#PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
 
 #Convert base script into subject specific batch jobs
 
@@ -32,7 +32,7 @@ do
 	subj=$(basename $line)
 	subjDIRECTORY=$line
 	cp dtiblank batch/dti$subj.sh
-	#sed -i "s;&&&&;$pipedir;" batch/dti$subj.sh -not needed
+	sed -i "s;&&&&;$pipedir;" batch/dti$subj.sh
         #sed -i "s;&&&&;${WORKDIR};" batch/dti$subj.sh
 	sed -i "s/@@@@/$subj/" batch/dti$subj.sh
 	sed -i "s!????!$subjDIRECTORY!" batch/dti$subj.sh
