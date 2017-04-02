@@ -131,4 +131,4 @@ flirt -ref fa.nii -in parc_fixsubcortFS.nii.gz -applyxfm -init FS2diff.mat -out 
 #mrtransform 5TTFSmasked.nii -linear FSinDiffMR.mat r5TTFSmasked.nii -force 
 
 
-gunzip rparc_fixsubcort.nii.gz
+gunzip -f rparc_fixsubcort.nii.gz
