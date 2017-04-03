@@ -32,7 +32,7 @@
    * For example, 
      ```
      mrconvert /path/to/AP_OCD_MB_BLOCK_1_DIFF_88DIR_0012/ rawdataAP.mif -stride +1,2,3,4
-     mrconvert /path/to/PA_DICOM rawdataAP.mif -stride +1,2,3,4
+     mrconvert /path/to/PA_DICOM rawdataPA.mif -stride +1,2,3,4
      mrconvert /path/to/T1_DICOM T1.nii -stride +1,2,3
      ```
      
