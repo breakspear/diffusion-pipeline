@@ -75,20 +75,23 @@ mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads $ncpus
 dwiextract rawdataAPdn.mif APb0s.mif -bzero -force
 
 if ([ $ismultiband = 1 ] && [ $fullreverseseq = 0 ]); then
-	${MRTRIX}/scripts/dwipreproc_mb -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . #assuming multiband factor of 2
+	echo "Preprocessing command...: ${MRTRIX}/scripts/dwipreproc_mb -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup"
+	${MRTRIX}/scripts/dwipreproc_mb -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup
 
 elif ([ $ismultiband = 1 ] && [ $fullreverseseq = 1 ]); then
-	${MRTRIX}/scripts/dwipreproc_mb -rpe_all rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir .
+	echo "Preprocessing command...: ${MRTRIX}/scripts/dwipreproc_mb -rpe_all rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup"
+	${MRTRIX}/scripts/dwipreproc_mb -rpe_all rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup
 
 else
-	${MRTRIX}/scripts/dwipreproc_cust -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir .
+	echo "Preprocessing command...: ${MRTRIX}/scripts/dwipreproc_cust -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup"
+	${MRTRIX}/scripts/dwipreproc_cust -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup
 fi
 
 dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force
 bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
 
 dwibiascorrect -mask eddymeanb0bet_mask.nii.gz -fsl eddycorr.mif biascorr.mif -nthreads $ncpus -force
-dwishellmath biascorr.mif mean meanshell.mif
+dwishellmath biascorr.mif mean meanshell.mif -force
 
 #Create tensor and FA images
 
