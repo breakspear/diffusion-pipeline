@@ -32,7 +32,7 @@
    * For example, 
      ```
      mrconvert /path/to/AP_OCD_MB_BLOCK_1_DIFF_88DIR_0012/ rawdataAP.mif -stride +1,2,3,4
-     mrconvert /path/to/PA_DICOM rawdataAP.mif -stride +1,2,3,4
+     mrconvert /path/to/PA_DICOM rawdataPA.mif -stride +1,2,3,4
      mrconvert /path/to/T1_DICOM T1.nii -stride +1,2,3
      ```
      
@@ -69,7 +69,7 @@
    * For the diffusion  pipeline to be run, first the subjects must be processed using freesurfer's recon-all (https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all)
    * All that needs to be done, is call the `dticon` script - along with the project directory (make sure the last backspace is removed) and the script name as the arguments. For example,
      ```
-     sh dticon /working/lab_michaebr/alistaiP/Park advfulldiffsetup
+     sh dticon /working/lab_michaebr/alistaiP/Park processFSall
      cd batch
      find . -name "*.sh" -exec qsub {} \;
      ```
@@ -87,8 +87,8 @@
      cd batch
      find . -name "*.sh" -exec qsub {} \;
      ```
-   * You will need to edit it's user-specific options before calling the `dticon` script
-   * Required inputs are: 
+   * NOTE: You will need to edit `advfulldiffsetup's` user-specific options before calling the `dticon` script
+   * Required inputs in`advfulldiffsetup` are: 
       + ismosaic - is data acquired with moasic DICOM extraction (1 if yes)
       + isfullrevsequence - is a full sequence acquired in the opposite phase encoding direction (i.e. P A) (1 if yes)
       + ismultiband - is data acquired with multiple slice acquisition (1 if yes)
