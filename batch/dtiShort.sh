@@ -26,7 +26,7 @@
 ####
 #Find all scripting files
 #currdir=$(pwd)
-pipedir=&&&&
+pipedir=/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline
 PATH=$PATH$( find $pipedir/ -not -path '*/\.*'  -type d -printf ":%p" )
 #export PATH:$PATH
 
@@ -42,15 +42,15 @@ module load fsl/5.0.9_eddy
 ####
 #Setup dir for temp MRtrix files to be written - otherwise they get sent to nodes tmp dir
 
-#WORKDIR=&&&&
+#WORKDIR=/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline
 #echo "TempDir: ${WORKDIR}/tmp" > /mnt/lustre/$USER/.mrtrix.conf
 
 #Extract ID of subject and their corresponding folder holding raw image files
 
-subj=@@@@
-subjDIRECTORY=????
+subj=Short
+subjDIRECTORY=/mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Raw/Short
 
 cd $subjDIRECTORY
 
-%%%% #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
+segparcandcoregT1 Short /mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS DST #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
  
