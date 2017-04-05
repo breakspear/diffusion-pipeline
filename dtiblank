@@ -34,7 +34,7 @@ PATH=$PATH$( find $pipedir/ -not -path '*/\.*'  -type d -printf ":%p" )
 ####
 #Load all required software
 module load mrtrix3/AP
-module load freesurfer/5.3.0
+module load freesurfer/5.3.0 #change from 6 for now
 module load ANTs/20160509
 module load fsl/5.0.9_eddy
 
