@@ -89,9 +89,9 @@ bbregister --s $subj --mov biasmeanb0bet.nii.gz --init-fsl --reg register.dat --
 
 transformconvert diff2FS.mat biasmeanb0bet.nii.gz $SUBJECTS_DIR/$subj/mri/brain.mgz flirt_import diff2FSMR.mat -force
 
-mrtransform FS.nii rFS.nii -linear diff2FSMR.mat -inverse -force
+mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFS.nii -linear diff2FSMR.mat -inverse -force
 
-mrtransform FS.nii rFSrg.nii -linear diff2FSMR.mat -inverse -template fa.nii -force
+mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFSrg.nii -linear diff2FSMR.mat -inverse -template fa.nii -force
 
 
 #Move other files from T1 space
