@@ -6,7 +6,7 @@ WORKDIR=$2
 #FS_DIR=$3
 
 #arguments to be set
-ismosaic=1
+ismosaic=0
 isfullrevsequence=0
 ismultiband=1
 parc=DST
