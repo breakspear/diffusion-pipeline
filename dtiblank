@@ -22,7 +22,7 @@
 # *m* situations under which to email a) aborted b) begin e) end
 # *M* email address to send emails to
 
-export OMP_NUM_THREADS=5
+export OMP_NUM_THREADS=8
 
 ####
 #Find all scripting files
