@@ -1,2 +1,1 @@
-/mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Raw/Long
-/mnt/lustre/working/lab_michaebr/alistaiP/diffusion-testing/Keiran/PBS/Raw/Short
+/working/lab_michaebr/alistaiP/diffusion-testing/0604/Raw/dum
