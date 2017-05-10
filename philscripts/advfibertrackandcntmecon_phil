@@ -17,9 +17,8 @@ if [ "$nargs" == 4]; then
 	cd $WORKDIR/Diff/$subj/preproc
 	fi
 else
-cd ${WORKDIR}/$5/${subj}/preproc
+	cd ${WORKDIR}/${5}/${subj}/preproc
 fi
-
 
 #Multi-tissue spherical deconvolution
 
@@ -38,11 +37,11 @@ fod2dec wm.mif  foddec.mif -mask biasmeanb0bet_mask.nii.gz -force -nthreads $ncp
 
 #Fiber tracking
 
-tckgen wm.mif ${numfibers}.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number ${numfibers} -mask wmseg025.nii -output_seeds succeeds.txt -force -nthreads $ncpus
+tckgen wm.mif ${numfibers}.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number ${numfibers} -act r5TT.nii -output_seeds succeeds.txt -force -nthreads $ncpus
 
 tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
 
-tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number 1M -mask wmseg025.nii  -output_seeds succeeds1M.txt -force -nthreads $ncpus
+tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number 1M -mask r5TT.nii  -output_seeds succeeds1M.txt -force -nthreads $ncpus
 
 tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads $ncpus
 
@@ -56,14 +55,14 @@ tckmap 1M.tck 1Mends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
 
 #regrid segmentation to diffusion space for sift purposes
 
-mrtransform 5TTFSspmasked.nii r5TTrg.mif -linear diff2FSMR.mat -template fa.nii -inverse -force -nthreads $ncpus
-mrconvert r5TTrg.mif wmsegrg.nii -coord 3 2 -force -nthreads $ncpus
+#mrtransform 5TTFSspmasked.nii r5TTrg.mif -linear diff2FSMR.mat -template fa.nii -inverse -force -nthreads $ncpus
+#mrconvert r5TTrg.mif wmsegrg.nii -coord 3 2 -force -nthreads $ncpus
 
 #tcksift2
 
-tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -proc_mask wmsegrg.nii -force -nthreads $ncpus
+tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -act r5TT.nii -force -nthreads $ncpus
 
-tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -proc_mask wmsegrg.nii -force -nthreads $ncpus
+tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -act r5TT.nii -force -nthreads $ncpus
 
 
 #Connectome construction
@@ -71,7 +70,7 @@ tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -proc_mask wmsegrg.nii -force -nt
 
 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
+#tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
 
 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodeweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
 
@@ -85,7 +84,7 @@ tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthwei
 
 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads $ncpus
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
+#tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
 
 
 #Alter sift tracks for visualisation purposes
