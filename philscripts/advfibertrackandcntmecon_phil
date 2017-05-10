@@ -10,8 +10,14 @@ CNTMEPREFIX=$4
 rundir=$(pwd)
 baserundir=$(basename $rundir)
 
-if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
-cd $WORKDIR/Diff/$subj/preproc
+nargs=$#
+
+if [ "$nargs" == 4]; then
+	if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+	cd $WORKDIR/Diff/$subj/preproc
+	fi
+else
+cd ${WORKDIR}/$5/${subj}/preproc
 fi
 
 

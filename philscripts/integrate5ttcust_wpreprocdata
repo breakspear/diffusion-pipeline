@@ -25,7 +25,7 @@ convert_xfm -omat FSL2FS.mat -inverse FS2FSL.mat
 
 transformconvert FS2FSL.mat brainFSsp.nii T1bet.nii.gz flirt_import FS2FSLMR.mat -force
 
-rsync biascorr.mif brainFS.nii rFS.nii rFSrg.nii T1.nii biasmeanb0bet_mask.nii.gz rparc_fixsubcort.nii fa.nii FS2FSLMR.mat diff2FSMR.mat ${OUTDIR}
+rsync biascorr.mif brainFS.nii brainFSsp.nii rFS.nii rFSrg.nii T1.nii biasmeanb0bet_mask.nii.gz rparc_fixsubcort.nii fa.nii FS2FSLMR.mat FS2FSL.mat diff2FSMR.mat diff2FS.mat ${OUTDIR}
 
 cd ${OUTDIR}
 
