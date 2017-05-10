@@ -1,0 +1,145 @@
+#!/bin/bash
+#file: integrate5ttcust_wpreprocdata
+
+subj=$1
+WORKDIR=$2
+CATDIR=$3
+
+GMin=${CATDIR}/${subj}/GMin.nii
+WMin=${CATDIR}/${subj}/WMin.nii
+CSFin=${CATDIR}/${subj}/CSFin.nii
+
+OUTDIR=${WORKDIR}/Diff-wcust5tt/${subj}/preproc
+
+mkdir -p ${OUTDIR}
+
+cd ${WORKDIR}/Diff/${subj}/preproc
+
+#temp co-reg of FS T1 to native T1 - will remove soon
+
+bet2 T1.nii T1bet -f 0.15
+
+flirt -ref T1bet.nii.gz -in brainFSsp.nii -dof 6 -out FS2FSL -omat FS2FSL.mat
+
+convert_xfm -omat FSL2FS.mat -inverse FS2FSL.mat
+
+transformconvert FS2FSL.mat brainFSsp.nii T1bet.nii.gz flirt_import FS2FSLMR.mat -force
+
+rsync biascorr.mif brainFS.nii rFS.nii rFSrg.nii T1.nii biasmeanb0bet_mask.nii.gz rparc_fixsubcort.nii fa.nii FS2FSLMR.mat diff2FSMR.mat ${OUTDIR}
+
+cd ${OUTDIR}
+
+mrtransform brainFS.nii brainFSinT1.nii -linear FS2FSLMR.mat -template T1.nii 
+
+mkdir 5ttcust
+
+rsync brainFSinT1.nii 5ttcust
+
+rsync $GMin $WMin $CSFin .
+
+cd 5ttcust
+
+run_first_all -s L_Accu,R_Accu,L_Caud,R_Caud,L_Pall,R_Pall,L_Puta,R_Puta,L_Thal,R_Thal,L_Amyg,R_Amyg,L_Hipp,R_Hipp -i brainFSinT1.nii -o first -b
+
+meshconvert first-L_Accu_first.vtk L_Accu.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve L_Accu.vtk brainFSinT1.nii mesh2pve_L_Accu.mif -force
+
+meshconvert first-R_Accu_first.vtk R_Accu.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve R_Accu.vtk brainFSinT1.nii mesh2pve_R_Accu.mif -force
+
+meshconvert first-L_Caud_first.vtk L_Caud.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve L_Caud.vtk brainFSinT1.nii mesh2pve_L_Caud.mif -force
+
+meshconvert first-R_Caud_first.vtk R_Caud.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve R_Caud.vtk brainFSinT1.nii mesh2pve_R_Caud.mif -force
+
+meshconvert first-L_Pall_first.vtk L_Pall.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve L_Pall.vtk brainFSinT1.nii mesh2pve_L_Pall.mif -force
+
+meshconvert first-R_Pall_first.vtk R_Pall.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve R_Pall.vtk brainFSinT1.nii mesh2pve_R_Pall.mif -force
+
+meshconvert first-L_Puta_first.vtk L_Puta.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve L_Puta.vtk brainFSinT1.nii mesh2pve_L_Puta.mif -force
+
+meshconvert first-R_Puta_first.vtk R_Puta.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve R_Puta.vtk brainFSinT1.nii mesh2pve_R_Puta.mif -force
+
+meshconvert first-L_Thal_first.vtk L_Thal.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve L_Thal.vtk brainFSinT1.nii mesh2pve_L_Thal.mif -force
+
+meshconvert first-R_Thal_first.vtk R_Thal.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve R_Thal.vtk brainFSinT1.nii mesh2pve_R_Thal.mif -force
+
+meshconvert first-L_Amyg_first.vtk L_Amyg.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve L_Amyg.vtk brainFSinT1.nii mesh2pve_L_Amyg.mif -force
+
+meshconvert first-R_Amyg_first.vtk R_Amyg.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve R_Amyg.vtk brainFSinT1.nii mesh2pve_R_Amyg.mif -force
+
+meshconvert first-L_Hipp_first.vtk L_Hipp.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve L_Hipp.vtk brainFSinT1.nii mesh2pve_L_Hipp.mif -force
+
+meshconvert first-R_Hipp_first.vtk R_Hipp.vtk -transform_first2real brainFSinT1.nii -force
+
+mesh2pve R_Hipp.vtk brainFSinT1.nii mesh2pve_R_Hipp.mif -force
+
+mrmath mesh2pve_L_Accu.mif mesh2pve_R_Accu.mif mesh2pve_L_Caud.mif mesh2pve_R_Caud.mif mesh2pve_L_Pall.mif mesh2pve_R_Pall.mif mesh2pve_L_Puta.mif mesh2pve_R_Puta.mif mesh2pve_L_Thal.mif mesh2pve_R_Thal.mif mesh2pve_L_Amyg.mif mesh2pve_R_Amyg.mif mesh2pve_L_Hipp.mif mesh2pve_R_Hipp.mif sum - | mrcalc - 1.0 -min all_sgms.mif -force
+
+mrthreshold $WMin - -abs 0.001 | maskfilter - connect wm_mask.mif -largest -force
+
+mrconvert $CSFin csf.mif -force
+
+mrcalc 1.0 csf.mif -sub all_sgms.mif -min sgm.mif -force
+
+mrcalc 1.0 csf.mif sgm.mif -add -sub $GMin $WMin -add -div multiplier.mif -force
+
+mrcalc multiplier.mif -finite multiplier.mif 0.0 -if multiplier_noNAN.mif -force
+
+mrcalc $GMin multiplier_noNAN.mif -mult cgm.mif -force
+
+mrcalc $WMin multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif -force
+
+mrcalc 0 wm.mif -min path.mif -force
+
+mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4 -force
+
+mrconvert combined_precrop.mif 5TT.mif -stride +1,2,3,4 -force
+
+mv all_sgms.mif 5TT.mif ${OUTDIR}
+
+#cd ${OUTDIR}/${subj}
+
+cd ${OUTDIR}
+
+rm -rf 5ttcust
+
+echo "Custom 5TT construction complete"
+
+
+echo "Assuming 5TT file was created within T1 space.."
+
+
+5tt2gmwmi 5TT.mif 5TTgmwmi.nii -force
+
+mrtransform 5TT.mif 5TTFSspmasked.nii -linear FS2FSLMR.mat -inverse -force
+
+mrtransform 5TTFSspmasked.nii r5TT.nii -linear diff2FSMR.mat -inverse -force
+
+mrtransform 5TTgmwmi.nii 5TTFSspgmwmi.nii -linear FS2FSLMR.mat -inverse -force
+
+mrtransform 5TTFSspgmwmi.nii r5TTgmwmi.nii -linear diff2FSMR.mat -inverse -force
+
