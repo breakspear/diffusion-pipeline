@@ -7,7 +7,7 @@ WORKDIR=$2
 
 #arguments to be set
 ismosaic=1
-isfullrevsequence=1
+isfullrevsequence=0
 ismultiband=1
 parc=DST
 ismultishell=1
