@@ -71,7 +71,7 @@ flirt -in HCP_ROFC_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_ROFC_diff.nii.g
 
 gunzip HCP_ROFC_diff.nii.gz
  
-tckgen ${currrundir}/wm.mif RSTNtoHCPROFC.tck -seed_image RSTN_diff.nii -include HCP_ROFC_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
+#tckgen ${currrundir}/wm.mif RSTNtoHCPROFC.tck -seed_image RSTN_diff.nii -include HCP_ROFC_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
 
 flirt -in ~/base/HCP_RSMA.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RSMA_FS.nii.gz
 
@@ -98,7 +98,7 @@ flirt -in HCP_LOFC_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_LOFC_diff.nii.g
 
 gunzip HCP_LOFC_diff.nii.gz
  
-tckgen ${currrundir}/wm.mif LSTNtoHCPLOFC.tck -seed_image LSTN_diff.nii -include HCP_LOFC_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
+#tckgen ${currrundir}/wm.mif LSTNtoHCPLOFC.tck -seed_image LSTN_diff.nii -include HCP_LOFC_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
 
 flirt -in ~/base/HCP_LSMA.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LSMA_FS.nii.gz
 
