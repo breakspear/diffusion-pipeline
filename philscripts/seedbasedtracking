@@ -45,8 +45,6 @@ gunzip RSTN_diff.nii.gz
 
 #now left-hem
  
-tckgen wm.mif RSTNtoHCPLSMA.tck -seed_image RSTN_Mask_Diff_Flirt.nii -include HCP_LSMA_diff.nii -act r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
-
 flirt -in /mnt/lustre/home/$USER/base/rLSTN_MNI.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out LSTN_FS.nii.gz
 
 gunzip LSTN_FS.nii.gz
