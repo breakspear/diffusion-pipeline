@@ -23,7 +23,7 @@ cd seedtracking
 
 #Setup transforms between FS, MNI, and Diff space
 
-flirt -ref ~/base/mni_hires_t1_brain.nii -in ${currrundir}/brainFS.nii -omat FS2MNIhires.mat -out FS2MNIhiris -dof 12
+flirt -ref /mnt/lustre/home/$USER/base/mni_hires_t1_brain.nii -in ${currrundir}/brainFS.nii -omat FS2MNIhires.mat -out FS2MNIhiris -dof 12
 
 convert_xfm -omat MNIhires2FS.mat -inverse FS2MNIhires.mat
 
@@ -32,7 +32,7 @@ convert_xfm -omat FS2diff.mat -inverse ${currrundir}/diff2FS.mat
 
 #Setup STN seeds in diffusion space
 
-flirt -in ~/base/rRSTN_MNI.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out RSTN_FS.nii.gz
+flirt -in /mnt/lustre/home/$USER/base/rRSTN_MNI.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out RSTN_FS.nii.gz
 
 gunzip RSTN_FS.nii.gz
 
@@ -47,7 +47,7 @@ gunzip RSTN_diff.nii.gz
  
 tckgen wm.mif RSTNtoHCPLSMA.tck -seed_image RSTN_Mask_Diff_Flirt.nii -include HCP_LSMA_diff.nii -act r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
 
-flirt -in ~/base/rLSTN_MNI.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out LSTN_FS.nii.gz
+flirt -in /mnt/lustre/home/$USER/base/rLSTN_MNI.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out LSTN_FS.nii.gz
 
 gunzip LSTN_FS.nii.gz
 
@@ -61,19 +61,19 @@ gunzip LSTN_diff.nii.gz
 
 #Setup include masks in diffusion space, plus tracking 
 
-flirt -in ~/base/HCP_ROFC.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_ROFC_FS.nii.gz
+#flirt -in /mnt/lustre/home/$USER/base/HCP_ROFC.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_ROFC_FS.nii.gz
 
-gunzip HCP_ROFC_FS.nii.gz
+#gunzip HCP_ROFC_FS.nii.gz
  
-mrconvert HCP_ROFC_FS.nii HCP_ROFC_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+#mrconvert HCP_ROFC_FS.nii HCP_ROFC_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
  
-flirt -in HCP_ROFC_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_ROFC_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+#flirt -in HCP_ROFC_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_ROFC_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
-gunzip HCP_ROFC_diff.nii.gz
+#gunzip HCP_ROFC_diff.nii.gz
  
 #tckgen ${currrundir}/wm.mif RSTNtoHCPROFC.tck -seed_image RSTN_diff.nii -include HCP_ROFC_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
 
-flirt -in ~/base/HCP_RSMA.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RSMA_FS.nii.gz
+flirt -in /mnt/lustre/home/$USER/base/HCP_RSMA.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RSMA_FS.nii.gz
 
 gunzip HCP_RSMA_FS.nii.gz
  
@@ -88,19 +88,19 @@ tckgen ${currrundir}/wm.mif RSTNtoHCPRSMA.tck -seed_image RSTN_diff.nii -include
 
 #repeat for left-hemisphere
 
-flirt -in ~/base/HCP_LOFC.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LOFC_FS.nii.gz
+#flirt -in /mnt/lustre/home/$USER/base/HCP_LOFC.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LOFC_FS.nii.gz
 
-gunzip HCP_LOFC_FS.nii.gz
+#gunzip HCP_LOFC_FS.nii.gz
  
-mrconvert HCP_LOFC_FS.nii HCP_LOFC_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+#mrconvert HCP_LOFC_FS.nii HCP_LOFC_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
  
-flirt -in HCP_LOFC_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_LOFC_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+#flirt -in HCP_LOFC_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_LOFC_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
-gunzip HCP_LOFC_diff.nii.gz
+#gunzip HCP_LOFC_diff.nii.gz
  
 #tckgen ${currrundir}/wm.mif LSTNtoHCPLOFC.tck -seed_image LSTN_diff.nii -include HCP_LOFC_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
 
-flirt -in ~/base/HCP_LSMA.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LSMA_FS.nii.gz
+flirt -in /mnt/lustre/home/$USER/base/HCP_LSMA.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LSMA_FS.nii.gz
 
 gunzip HCP_LSMA_FS.nii.gz
  
