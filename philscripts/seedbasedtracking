@@ -64,17 +64,6 @@ gunzip LSTN_diff.nii.gz
 
 #Setup include masks in diffusion space, plus tracking 
 
-#flirt -in /mnt/lustre/home/$USER/base/HCP_ROFC.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_ROFC_FS.nii.gz
-
-#gunzip HCP_ROFC_FS.nii.gz
- 
-#mrconvert HCP_ROFC_FS.nii HCP_ROFC_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
- 
-#flirt -in HCP_ROFC_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_ROFC_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
-
-#gunzip HCP_ROFC_diff.nii.gz
- 
-#tckgen ${currrundir}/wm.mif RSTNtoHCPROFC.tck -seed_image RSTN_diff.nii -include HCP_ROFC_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
 
 flirt -in /mnt/lustre/home/$USER/base/HCP_RSMA.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RSMA_FS.nii.gz
 
@@ -91,17 +80,6 @@ tckgen ${currrundir}/wm.mif RSTNtoHCPRSMA.tck -seed_image RSTN_diff.nii -include
 
 #repeat for left-hemisphere
 
-#flirt -in /mnt/lustre/home/$USER/base/HCP_LOFC.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LOFC_FS.nii.gz
-
-#gunzip HCP_LOFC_FS.nii.gz
- 
-#mrconvert HCP_LOFC_FS.nii HCP_LOFC_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
- 
-#flirt -in HCP_LOFC_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_LOFC_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
-
-#gunzip HCP_LOFC_diff.nii.gz
- 
-#tckgen ${currrundir}/wm.mif LSTNtoHCPLOFC.tck -seed_image LSTN_diff.nii -include HCP_LOFC_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
 
 flirt -in /mnt/lustre/home/$USER/base/HCP_LSMA.nii -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LSMA_FS.nii.gz
 
@@ -115,3 +93,18 @@ gunzip HCP_LSMA_diff.nii.gz
  
 tckgen ${currrundir}/wm.mif LSTNtoHCPLSMA.tck -seed_image LSTN_diff.nii -include HCP_LSMA_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
 
+
+#calculate metrics
+
+tckmap RSTNtoHCPRSMA.tck RSTNtoHCPRSMA_tdi.nii -template ${currrundir}/fa.nii #this is actually useful in looking at the track density
+
+mrthreshold RSTNtoHCPRSMA_tdi.nii RSTNtoHCPRSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
+
+mrstats ${currrundir}/fa.nii -mask RSTNtoHCPRSMA_tdi_thr.nii -output mean > RSTNtoHCPRSMA_meanFA.txt
+
+
+tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ${currrundir}/fa.nii #this is actually useful in looking at the track density
+
+mrthreshold LSTNtoHCPLSMA_tdi.nii LSTNtoHCPLSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
+
+mrstats ${currrundir}/fa.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -output mean > LSTNtoHCPLSMA_meanFA.txt
