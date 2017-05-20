@@ -1,12 +1,17 @@
 #!/bin/bash
+#usage: seedbasedtracking $subj $WORKDIR
 
+#compulsory arguments that are called automatically:
 subj=$1
 WORKDIR=$2
 
-rundir=$(pwd)
-#baserundir=$(basename $rundir)
+#option to include extra command argument ($3), if diffusion data directory has changed
+#e.g: if files are now located in "Diff-wcust5tt"
+#usage: seedbasedtracking $subj $WORKDIR Diff-wcust5tt
 
 nargs=$#
+
+rundir=$(pwd)
 
 if [ "$nargs" == 2]; then
 	if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
