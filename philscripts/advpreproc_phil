@@ -49,7 +49,7 @@ mv rawdataPAdnrem.mif rawdataPAdn.mif
 
 #dwipreproc_cust -rpe_pair AP7b0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force
 
-${MRTRIX}/scripts/dwipreproc_cust -rpe_pair AP7b0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir .
+${MRTRIX}/scripts/dwipreproc_cust -rpe_pair AP7b0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -nocleanup -tempdir .
 
 dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force
 bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
