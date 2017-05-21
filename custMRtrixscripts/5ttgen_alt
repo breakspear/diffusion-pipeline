@@ -10,7 +10,7 @@ cp $2 5TTgen_tmp
 
 cd 5TTgen_tmp
 
-mrconvert $1 T1.nii -stride +1,+2,+3 -nthreads 10 -force
+mrconvert $1 T1.nii -stride +1,+2,+3 -nthreads 8 -force
 
 fast -N -o T1 -a $2 -g T1.nii
 
@@ -76,7 +76,7 @@ mrmath mesh2pve_L_Accu.mif mesh2pve_R_Accu.mif mesh2pve_L_Caud.mif mesh2pve_R_Ca
 
 mrthreshold T1_pve_2.nii.gz - -abs 0.001 | maskfilter - connect wm_mask.mif -largest
 
-mrconvert T1_pve_0.nii.gz csf.mif -nthreads 10 -force
+mrconvert T1_pve_0.nii.gz csf.mif -nthreads 8 -force
 
 mrcalc 1.0 csf.mif -sub all_sgms.mif -min sgm.mif
 
@@ -90,11 +90,11 @@ mrcalc T1_pve_2.nii.gz multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif
 
 mrcalc 0 wm.mif -min path.mif
 
-mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads 10 | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4 -nthreads 10 -force
+mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads 8 | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4 -nthreads 8 -force
 
-mrconvert combined_precrop.mif result.mif -nthreads 10 -force
+mrconvert combined_precrop.mif result.mif -nthreads 8 -force
 
-mrconvert result.mif $3 -force -nthreads 10
+mrconvert result.mif $3 -force -nthreads 8
 
 mv *_pve_* *_seg_* $3 $workingdir
 
