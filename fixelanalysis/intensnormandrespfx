@@ -1,0 +1,39 @@
+#!/bin/bash
+#file: intensitynormandrespfx
+#usage: intensitynormandrespfx $WORKDIR $OUTDIR
+
+WORKDIR=$1
+OUTDIR=$2
+
+mkdir -p ${WORKDIR}/${OUTDIR}
+mkdir -p ${WORKDIR}/${OUTDIR}/DWI
+mkdir -p ${WORKDIR}/${OUTDIR}/Masks
+mkidr -p ${WORKDIR}/${OUTDIR}/DWInorm
+
+nargs=$#
+
+if [ "$nargs" == 3]; then
+	DATADIR=${WORKDIR}/Diff
+else
+	DATADIR=${WORKDIR}/Diff
+fi
+
+cd ${OUTDIR}
+
+find ${DATADIR}/* -maxdepth 0 -type d | awk -F "/" '{print $NF}' > scans.txt
+
+for subj in `cat scans.txt`; do
+rsync ${DATADIR}/${subj}/preproc/biascorr.mif DWI/${subj}_DWI.mif
+rsync ${DATADIR}/${subj}/preproc/biasmeanb0bet_mask.nii.gz Masks/${subj}_Mask.nii.gz
+done
+
+dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/${OUTDIR}/DWInorm ${WORKDIR}/${OUTDIR}/fa_template.mif ${WORKDIR}/${OUTDIR}/fa_template_wm_mask.mif -tempdir . -nocleanup -force -nthreads $ncpus
+
+foreach * : dwi2response tournier IN/dwi_denoised_preproc_bias_norm.mif IN/response.txt
+average_response */response.txt ${WORKDIR}/${OUTDIR}/group_average_response.txt
+
+mkdir -p ${WORKDIR}/${OUTDIR}/FODS
+
+foreach * : dwi2fod msmt_csd biascorr.mif wm.txt wm.mif csf.txt csf.mif -force -mask biasmeanb0bet_mask.nii.gz 
+
+
