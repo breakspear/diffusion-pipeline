@@ -5,9 +5,9 @@ subj=$1
 WORKDIR=$2
 CATDIR=$3
 
-GMin=${WORKDIR}/{CATDIR}/${subj}/GMin.nii
-WMin=${WORKDIR}/{CATDIR}/${subj}/WMin.nii
-CSFin=${WORKDIR}/{CATDIR}/${subj}/CSFin.nii
+GMin=${WORKDIR}/${CATDIR}/${subj}/GMin.nii
+WMin=${WORKDIR}/${CATDIR}/${subj}/WMin.nii
+CSFin=${WORKDIR}/${CATDIR}/${subj}/CSFin.nii
 
 OUTDIR=${WORKDIR}/Diff-wcust5tt/${subj}/preproc
 
