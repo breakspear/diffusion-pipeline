@@ -3,7 +3,7 @@
 #usage: intensitynormandrespfx $WORKDIR $subjs $OUTDIR
 
 WORKDIR=$1
-subjs=$2
+subjs="$2"
 OUTDIR=$3
 
 mkdir -p ${WORKDIR}/${OUTDIR}
@@ -30,11 +30,14 @@ done
 
 dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/${OUTDIR}/DWInorm ${WORKDIR}/${OUTDIR}/fa_template.mif ${WORKDIR}/${OUTDIR}/fa_template_wm_mask.mif -tempdir . -nocleanup -force -nthreads $ncpus
 
-foreach * : dwi2response tournier IN/dwi_denoised_preproc_bias_norm.mif IN/response.txt
-average_response */response.txt ${WORKDIR}/${OUTDIR}/group_average_response.txt
-
 mkdir -p ${WORKDIR}/${OUTDIR}/FODS
 
-foreach * : dwi2fod msmt_csd biascorr.mif wm.txt wm.mif csf.txt csf.mif -force -mask biasmeanb0bet_mask.nii.gz 
+foreach -N 10 DWInorm/*.mif : dwi2response dhollander IN ${WORKDIR}/${OUTDIR}/FODS/UNIwm.txt ${WORKDIR}/${OUTDIR}/FODS/UNIgm.txt ${WORKDIR}/${OUTDIR}/FODS/UNIcsf.txt -mask ${WORKDIR}/${OUTDIR}/UNI_Mask.nii.gz -nthreads 0 -force
+
+average_response */wm.txt ${WORKDIR}/${OUTDIR}/group_average_response.txt
+
+average_response */csf.txt ${WORKDIR}/${OUTDIR}/group_average_response.txt
+
+foreach -N 10 * : dwi2fod msmt_csd biascorr.mif wm.txt wm.mif csf.txt csf.mif -force -mask biasmeanb0bet_mask.nii.gz 
 
 
