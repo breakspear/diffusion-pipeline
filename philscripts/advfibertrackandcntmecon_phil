@@ -24,7 +24,7 @@ fi
 
 dwi2response dhollander biascorr.mif wm.txt gm.txt csf.txt -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus -force
 
-dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus
+dwi2fod msmt_csd biascorr.mif wm.txt wm.mif csf.txt csf.mif -force -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus
 
 
 
