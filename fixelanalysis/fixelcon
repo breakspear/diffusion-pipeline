@@ -20,7 +20,7 @@ pipedir=$(pwd)
 
 #Convert base script into subject specific batch jobs
 
-mkdir batch
+mkdir fixelbatch
 
 cp fixelblank fixelbatch/fixel_${2}.sh
 sed -i "s;&&&&;$pipedir;" fixelbatch/fixel_${2}.sh
