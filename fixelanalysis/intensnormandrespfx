@@ -32,12 +32,10 @@ dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/
 
 mkdir -p ${WORKDIR}/${OUTDIR}/FODS
 
-foreach -N 10 DWInorm/*.mif : dwi2response dhollander IN ${WORKDIR}/${OUTDIR}/FODS/UNIwm.txt ${WORKDIR}/${OUTDIR}/FODS/UNIgm.txt ${WORKDIR}/${OUTDIR}/FODS/UNIcsf.txt -mask ${WORKDIR}/${OUTDIR}/UNI_Mask.nii.gz -nthreads 0 -force
+foreach -10 DWInorm/*.mif : dwi2response dhollander IN FODS/UNI_wm.txt FODS/UNI_gm.txt FODS/UNI_csf.txt -mask Masks/UNI_Mask.nii.gz -nthreads 0 -force 
 
-average_response */wm.txt ${WORKDIR}/${OUTDIR}/group_average_response.txt
+average_response FODS/*wm.txt FODS/avg_wm_resp.txt
 
-average_response */csf.txt ${WORKDIR}/${OUTDIR}/group_average_response.txt
+average_response FODS/*csf.txt FODS/avg_csf_resp.txt
 
-foreach -N 10 * : dwi2fod msmt_csd biascorr.mif wm.txt wm.mif csf.txt csf.mif -force -mask biasmeanb0bet_mask.nii.gz 
-
-
+foreach -10 DWInorm/*.mif : dwi2fod msmt_csd FODS/avg_wm_resp.txt FODS/UNI_wm.mif FODS/avg_csf_resp.txt FODS/UNI_csf.mif -nthreads 0 -force -mask Masks/UNI_Mask.nii.gz
