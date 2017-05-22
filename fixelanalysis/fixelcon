@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#ARGUMENTS 
+
+#Standard arguments:
+
+WORKDIR=$1 #DIR containing all data directories (make sure to remove the ending backspace)
+SCRIPT=$2 #Script to be called
+
+#Options:
+
+#Extra Arguments - script specific options
+nargs=$#
+extargs=${@:3}
+
+find $1/Diff/* -maxdepth 0 -type d > scans.txt #Creates list of folders containing the subject data to be analysed
+
+pipedir=$(pwd)
+#PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
+
+#Convert base script into subject specific batch jobs
+
+mkdir batch
+
+cp fixelblank fixelbatch/fixel_${2}.sh
+sed -i "s;&&&&;$pipedir;" fixelbatch/fixel_${2}.sh
+sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" fixelbatch/fixel_${2}.sh
+
+#cd batch #Directory containing batch jobs to be called
+#call jobs
