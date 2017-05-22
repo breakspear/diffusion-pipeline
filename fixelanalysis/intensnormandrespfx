@@ -1,9 +1,10 @@
 #!/bin/bash
 #file: intensitynormandrespfx
-#usage: intensitynormandrespfx $WORKDIR $OUTDIR
+#usage: intensitynormandrespfx $WORKDIR $subjs $OUTDIR
 
 WORKDIR=$1
-OUTDIR=$2
+subjs=$2
+OUTDIR=$3
 
 mkdir -p ${WORKDIR}/${OUTDIR}
 mkdir -p ${WORKDIR}/${OUTDIR}/DWI
@@ -15,14 +16,14 @@ nargs=$#
 if [ "$nargs" == 3]; then
 	DATADIR=${WORKDIR}/Diff
 else
-	DATADIR=${WORKDIR}/Diff
+	DATADIR=${WORKDIR}/$4
 fi
 
 cd ${OUTDIR}
 
-find ${DATADIR}/* -maxdepth 0 -type d | awk -F "/" '{print $NF}' > scans.txt
+#find ${DATADIR}/* -maxdepth 0 -type d | awk -F "/" '{print $NF}' > scans.txt
 
-for subj in `cat scans.txt`; do
+for subj in `cat ${subjs}`; do
 rsync ${DATADIR}/${subj}/preproc/biascorr.mif DWI/${subj}_DWI.mif
 rsync ${DATADIR}/${subj}/preproc/biasmeanb0bet_mask.nii.gz Masks/${subj}_Mask.nii.gz
 done
