@@ -27,6 +27,8 @@ rsync ${DATADIR}/${subj}/preproc/biascorr.mif ./DWI/${subj}_DWI.mif
 rsync ${DATADIR}/${subj}/preproc/biasmeanb0bet_mask.nii.gz ./Masks/${subj}_Mask.nii.gz
 done
 
+echo "echo NumberOfThreads: 10" > /mnt/lustre/$USER/.mrtrix.conf
+
 dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/${OUTDIR}/DWInorm ${WORKDIR}/${OUTDIR}/fa_template.mif ${WORKDIR}/${OUTDIR}/fa_template_wm_mask.mif -tempdir . -nocleanup -force -nthreads $ncpus
 
 mkdir -p ${WORKDIR}/${OUTDIR}/FODS
