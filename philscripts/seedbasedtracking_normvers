@@ -97,6 +97,7 @@ tensor2metric ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -fa ${WORKDIR}/${NORM
 tensor2metric ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -adc ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
 
 
+
 #calculate metrics
 
 #FA
@@ -131,6 +132,32 @@ mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask LSTNtoHCPLSMA_tdi_thr
 
 
 #AFD
-afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRSMA.tck -all_fixels -afd_map RSTNtoHCPRSMA_AFD.nii > RSTNtoHCPRSMA_AFD.txt
+afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRSMA.tck -all_fixels -force -afd_map RSTNtoHCPRSMA_AFD.nii > RSTNtoHCPRSMA_AFD.txt
 
-afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -all_fixels -afd_map LSTNtoHCPLSMA_AFD.nii > LSTNtoHCPLSMA_AFD.txt
+afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -all_fixels -force -afd_map LSTNtoHCPLSMA_AFD.nii > LSTNtoHCPLSMA_AFD.txt
+
+
+#Extract successful seeds as images
+cut -d ',' -f 3-5 LSTNseeds.txt > LSTNcolseeds.txt
+
+cut -d ',' -f 3-5 RSTNseeds.txt > RSTNcolseeds.txt
+
+sed -1d LSTNcolseeds.txt > LSTNcolseedsnohead.txt
+
+mv LSTNcolseedsnohead.txt LSTNseeds.txt
+
+sed -1d RSTNcolseeds.txt > RSTNcolseedsnohead.txt
+
+mv RSTNcolseedsnohead.txt RSTNseeds.txt
+
+rm RSTNcolseeds.txt
+
+rm LSTNcolseeds.txt
+
+tckconvert RSTNseeds.txt RSTNseeds.tck -nthreads 0 -force
+
+tckmap RSTNseeds.tck RSTNseeds.nii -upsample 1 -force -nthreads 0
+
+tckconvert LSTNseeds.txt LSTNseeds.tck -nthreads 0 -force
+
+tckmap LSTNseeds.tck LSTNseeds.nii -upsample 1 -force -nthreads 0
