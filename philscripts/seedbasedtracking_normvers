@@ -104,16 +104,16 @@ tensor2metric ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -adc ${WORKDIR}/${NOR
 
 tckmap RSTNtoHCPRSMA.tck RSTNtoHCPRSMA_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -force #this is actually useful in looking at the track density
 
-mrthreshold RSTNtoHCPRSMA_tdi.nii RSTNtoHCPRSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
+mrthreshold RSTNtoHCPRSMA_tdi.nii RSTNtoHCPRSMA_tdi_thr.nii -force -abs 1 #parameter can be changed to exclude noisey fibers
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask RSTNtoHCPRSMA_tdi_thr.nii -output mean > RSTNtoHCPRSMA_meanFA.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask RSTNtoHCPRSMA_tdi_thr.nii -force -output mean > RSTNtoHCPRSMA_meanFA.txt
 
 
 tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -force #this is actually useful in looking at the track density
 
-mrthreshold LSTNtoHCPLSMA_tdi.nii LSTNtoHCPLSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
+mrthreshold LSTNtoHCPLSMA_tdi.nii LSTNtoHCPLSMA_tdi_thr.nii -force -abs 1 #parameter can be changed to exclude noisey fibers
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -output mean > LSTNtoHCPLSMA_meanFA.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -force -output mean > LSTNtoHCPLSMA_meanFA.txt
 
 
 #MD
@@ -121,14 +121,14 @@ mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask LSTNtoHCPLSMA_tdi_thr
 
 #mrthreshold RSTNtoHCPRSMA_tdi.nii RSTNtoHCPRSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask RSTNtoHCPRSMA_tdi_thr.nii -output mean > RSTNtoHCPRSMA_meanMD.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask RSTNtoHCPRSMA_tdi_thr.nii -force -output mean > RSTNtoHCPRSMA_meanMD.txt
 
 
 #tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii  #this is actually useful in looking at the track density
 
 #mrthreshold LSTNtoHCPLSMA_tdi.nii LSTNtoHCPLSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -output mean > LSTNtoHCPLSMA_meanMD.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -force -output mean > LSTNtoHCPLSMA_meanMD.txt
 
 
 #AFD
