@@ -156,8 +156,8 @@ rm LSTNcolseeds.txt
 
 tckconvert RSTNseeds.txt RSTNseeds.tck -nthreads 0 -force
 
-tckmap RSTNseeds.tck RSTNseeds.nii -upsample 1 -force -nthreads 0
+tckmap RSTNseeds.tck RSTNseeds.nii -upsample 1 -force -nthreads 0 -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii
 
 tckconvert LSTNseeds.txt LSTNseeds.tck -nthreads 0 -force
 
-tckmap LSTNseeds.tck LSTNseeds.nii -upsample 1 -force -nthreads 0
+tckmap LSTNseeds.tck LSTNseeds.nii -upsample 1 -force -nthreads 0 -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii
