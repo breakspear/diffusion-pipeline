@@ -88,21 +88,42 @@ gunzip HCP_LSMA_diff.nii.gz
 tckgen ./FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -seed_image LSTN_diff.nii -include HCP_LSMA_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
 
 
+#calculate normalized tensor images - note will turn off once data has been constructed again (from intensitynormalization)
 
+dwi2tensor ./DWInorm/${subj}_DWI.mif ./DWInorm/${subj}_dt.mif -mask ./Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
 
+tensor2metric ./DWInorm/${subj}_dt.mif -fa ./DWInorm/${subj}_fa.nii -mask ./Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
+
+tensor2metric ./DWInorm/${subj}_dt.mif -adc ./DWInorm/${subj}_md.nii -mask ./Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
 
 
 #calculate metrics
 
-tckmap RSTNtoHCPRSMA.tck RSTNtoHCPRSMA_tdi.nii -template ${currrundir}/fa.nii #this is actually useful in looking at the track density
+#FA
+
+tckmap RSTNtoHCPRSMA.tck RSTNtoHCPRSMA_tdi.nii -template ./DWInorm/${subj}_fa.nii #this is actually useful in looking at the track density
 
 mrthreshold RSTNtoHCPRSMA_tdi.nii RSTNtoHCPRSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
 
-mrstats ${currrundir}/fa.nii -mask RSTNtoHCPRSMA_tdi_thr.nii -output mean > RSTNtoHCPRSMA_meanFA.txt
+mrstats ./DWInorm/${subj}_fa.nii -mask RSTNtoHCPRSMA_tdi_thr.nii -output mean > RSTNtoHCPRSMA_meanFA.txt
 
 
-tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ${currrundir}/fa.nii #this is actually useful in looking at the track density
+tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ./DWInorm/${subj}_fa.nii #this is actually useful in looking at the track density
 
 mrthreshold LSTNtoHCPLSMA_tdi.nii LSTNtoHCPLSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
 
-mrstats ${currrundir}/fa.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -output mean > LSTNtoHCPLSMA_meanFA.txt
+mrstats ./DWInorm/${subj}_fa.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -output mean > LSTNtoHCPLSMA_meanFA.txt
+
+#MD
+tckmap RSTNtoHCPRSMA.tck RSTNtoHCPRSMA_tdi.nii -template ./DWInorm/${subj}_fa.nii #this is actually useful in looking at the track density
+
+mrthreshold RSTNtoHCPRSMA_tdi.nii RSTNtoHCPRSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
+
+mrstats ./DWInorm/${subj}_fa.nii -mask RSTNtoHCPRSMA_tdi_thr.nii -output mean > RSTNtoHCPRSMA_meanFA.txt
+
+
+tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ./DWInorm/${subj}_fa.nii #this is actually useful in looking at the track density
+
+mrthreshold LSTNtoHCPLSMA_tdi.nii LSTNtoHCPLSMA_tdi_thr.nii -abs 1 #parameter can be changed to exclude noisey fibers
+
+mrstats ./DWInorm/${subj}_fa.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -output mean > LSTNtoHCPLSMA_meanFA.txt
