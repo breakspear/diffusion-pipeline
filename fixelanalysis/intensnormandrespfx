@@ -33,12 +33,19 @@ dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/
 
 rm /mnt/lustre/home/$USER/.mrtrix.conf
 
+foreach -10 DWInorm/*DWI.mif : dwi2tensor IN ./DWInorm/UNI_dt.mif -mask ./Masks/UNI_Mask.nii.gz -nthreads 0 -force
+
+foreach -10 DWInorm/*dt.mif : tensor2metric IN -fa ./DWInorm/UNI_fa.nii -mask ./Masks/UNI_Mask.nii.gz -nthreads 0 -force
+
+foreach -10 DWInorm/*dt.mif : tensor2metric IN -adc ./DWInorm/UNI_md.nii -mask ./Masks/UNI_Mask.nii.gz -nthreads 0 -force
+
+
 mkdir -p ${WORKDIR}/${OUTDIR}/FODS
 
-foreach -10 DWInorm/*.mif : dwi2response dhollander IN ./FODS/UNI_wm.txt ./FODS/UNI_gm.txt ./FODS/UNI_csf.txt -mask ./Masks/UNI_Mask.nii.gz -nthreads 0 -force 
+foreach -10 DWInorm/DWI*.mif : dwi2response dhollander IN ./FODS/UNI_wm.txt ./FODS/UNI_gm.txt ./FODS/UNI_csf.txt -mask ./Masks/UNI_Mask.nii.gz -nthreads 0 -force 
 
 average_response ./FODS/*wm.txt ./FODS/avg_wm_resp.txt
 
 average_response ./FODS/*csf.txt ./FODS/avg_csf_resp.txt
 
-foreach -10 DWInorm/*.mif : dwi2fod msmt_csd IN ./FODS/avg_wm_resp.txt ./FODS/UNI_wm.mif ./FODS/avg_csf_resp.txt ./FODS/UNI_csf.mif -nthreads 0 -force -mask ./Masks/UNI_Mask.nii.gz
+foreach -10 DWInorm/DWI*.mif : dwi2fod msmt_csd IN ./FODS/avg_wm_resp.txt ./FODS/UNI_wm.mif ./FODS/avg_csf_resp.txt ./FODS/UNI_csf.mif -nthreads 0 -force -mask ./Masks/UNI_Mask.nii.gz
