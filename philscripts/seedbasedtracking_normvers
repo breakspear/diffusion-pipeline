@@ -70,7 +70,7 @@ flirt -in HCP_RSMA_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_RS
 
 gunzip HCP_RSMA_diff.nii.gz
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRSMA.tck -seed_image RSTN_diff.nii -include HCP_RSMA_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRSMA.tck -seed_image RSTN_diff.nii -include HCP_RSMA_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds RSTNseeds.txt
 
 
 #repeat for left-hemisphere
@@ -85,7 +85,7 @@ flirt -in HCP_LSMA_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_LS
 
 gunzip HCP_LSMA_diff.nii.gz
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -seed_image LSTN_diff.nii -include HCP_LSMA_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -seed_image LSTN_diff.nii -include HCP_LSMA_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds LSTNseeds.txt
 
 
 #calculate normalized tensor images - note will turn off once data has been constructed again (from intensitynormalization)
