@@ -1,44 +1,47 @@
 #!/usr/bin/env Rscript
 
-args <- commandArgs(TRUE)
+args = commandArgs(TRUE)
 
-ph=read.table("/mnt/lustre/working/lab_michaebr/alistair/Park/Analysis/",header=T,stringsAsFactors=T,sep=",",colClasses="character")
+ph=read.table("/working/lab_michaebr/alistaiP/Park/analysis/Baseline_Data_Subjects_29-64_fixid.dat",header=T,stringsAsFactors=T,sep="\t",colClasses="character")
 
+#DATADIR=as.character("/working/lab_michaebr/alistaiP/Park/AFD/seedtracking")
 DATADIR=as.character(args[1])
 OUTDIR=as.character(args[2])
 
 PatientIDs<-list.dirs(path = DATADIR, full.names = FALSE, recursive = FALSE)
 PatientIDs<-t(PatientIDs)
+PatientIDs<-as.character(PatientIDs)
+
+IDs_nopre<-gsub("^.*?_","",PatientIDs)
 
 convars=cbind("meanFA","meanMD","AFD")
-egsubject<-PatientIDs[1,]
+egsubject<-PatientIDs[1]
 
 convarstrings = NULL
 for(i in 1:length(convars))
 {
-  varmatch<-list.files(path = paste(DATADIR,egsubject,sep="/"), pattern=convars[i])
+  varmatch<-list.files(path = paste(DATADIR,egsubject,sep="/"), pattern=paste(convars[i],".txt",sep=""))
   convarstrings=c(convarstrings,varmatch)
 }
 
-convarstringsnoext<-basename(convarstrings)
-varnames<-convarstringsnoext
+varnames<-gsub(pattern = "\\.txt$", "", convarstrings)
 
 xall=NULL
 
 for(i in 1:length(PatientIDs))
 {
 
-PatDir<-paste(DATADIR,PatientIDs[,i],sep="/")
+PatDir<-paste(DATADIR,PatientIDs[i],sep="/")
   
 xx=NULL
 for(j in 1:length(convarstrings))
 {
-confile=paste(PatDir, convarstrings, sep="/")
-condata=read.table(confile,header=FALSE)
+confile=paste(PatDir, convarstrings[j], sep="/")
+condata=scan(confile)
 xx=c(xx,condata)
 }
 
-out=c(PatientIDs[i],xx)
+out=c(IDs_nopre[i],xx)
 xall=rbind(xall,out)
 
 }
