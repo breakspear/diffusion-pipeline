@@ -1,38 +1,35 @@
 #!/usr/bin/env Rscript
 
-#library(epicalc)
-#invnorm=function(x){x=qnorm(rank(x)/(length(x)+1));return(x)}
-
-fname.in="noSIFT_connectomedata_CATseg_n59_invlength.dat"
-Baseoutput="Summary_noSIFT_DEGSTR_catseg_invlength"
+fname.in="/working/lab_michaebr/alistaiP/Park/analysis/Patients_trackconnectivity.dat"
+Baseoutput="CONvars"
 dat=read.table(fname.in,header=T,stringsAsFactors=F,sep="\t")
 
-varsSTR=paste("STR",seq(1,164),sep="")
-varsDEG=paste("DEG",seq(1,164),sep="")
-varsBETC=paste("BETC",seq(1,164),sep="")
-varsEFF=paste("NodalEff",seq(1,164),sep="")
+indvars=cbind("Age","Sex","Clinical_Subtype","Tremor.Akinesia_Subtype","Hoehn_._Yahr_Stage","Years_Since_Diagnosis","Side_of_Onset","Pre_LEDD","Pre_BIS_Total","Pre_EQ_Total","Pre_ICD_Total","Pre_QUIP.Total","Pre_CarerBIS_Total","Pre_CarerEQ_Total","LN_HaylingCatAErrors","LN_HaylingCatBErrors","LN_HaylingABErrorScore","LN_ELF_RuleViolations","LN_DelayDiscount_K")
+tracksint=cbind("RSTNtoHCPRSMA","LSTNtoHCPLSMA")
 
-#varsRAWSTR=paste("RAWSTR",se`q(1,434),sep="")
-#varsRAWDEG=paste("RAWDEG",seq(1,434),sep="")
-#varsRAWMAD=paste("RAWMAD",seq(1,434),sep="")
+DVs=NULL
+for(i in 1:length(tracksint))
+{
+DVmatch<-grep(tracksint[i], names(Patients_trackconnectivity), value=TRUE)
+DVs=c(DVs,DVmatch)
+}
 
-cvars=cbind("geschlecht","disease_duration","age_onset","side_of_onset","updrs_iii_on_gesamt","updrs_off_iii_gesamt","medication_response","disprogress","rs1800497")
-allvars=c(cvars,"numfibers","avgCCOEFF","MAD","CPL","EFF",varsSTR,varsDEG,varsBETC,varsEFF)
+allvars=c(indvars,DVs)
 ph=subset(dat,select=allvars)
 
 mreg=0
 
 if(mreg==0) {
-mprms=cvars
+mprms=indvars
 } else
 {
-for(i in seq(1,length(cvars)))
+for(i in seq(1,length(indvars)))
 {
 if(i==1) {
-mprms=cvars[,i]
+mprms=indvars[,i]
 } else 
 {
-mprms=cbind(paste(mprms,cvars[,i],sep="+"))
+mprms=cbind(paste(mprms,indvars[,i],sep="+"))
 }
 }
 }
@@ -44,70 +41,16 @@ regmodel=paste('y~',mprms[,j],sep="")
 
 outall=NULL
 
-id=which(allvars==paste("numfibers"))
-y=ph[,id]
-out=summary(lm(regmodel,data=ph))
-res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
-outall=rbind(outall,res)
-
-id=which(allvars==paste("avgCCOEFF"))
-y=ph[,id]
-out=summary(lm(regmodel,data=ph))
-res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
-outall=rbind(outall,res)
-
-id=which(allvars==paste("MAD"))
-y=ph[,id]
-out=summary(lm(regmodel,data=ph))
-res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
-outall=rbind(outall,res)
-
-id=which(allvars==paste("CPL"))
-y=ph[,id]
-out=summary(lm(regmodel,data=ph))
-res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
-outall=rbind(outall,res)
-
-id=which(allvars==paste("EFF"))
-y=ph[,id]
-out=summary(lm(regmodel,data=ph))
-res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
-outall=rbind(outall,res)
-
-for(i in seq(1,164))
+for(i in seq(1,length(cvars)))
 {
-id=which(allvars==paste("STR",i,sep=""))
+for(j in seq(1,length(DVs)))
+{
+id=which(allvars==DVs[j]))
 y=ph[,id]
 out=summary(lm(regmodel,data=ph))
 res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
 outall=rbind(outall,res)
 }
-
-for(i in seq(1,164))
-{
-id=which(allvars==paste("DEG",i,sep=""))
-y=ph[,id]
-out=summary(lm(regmodel,data=ph))
-res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
-outall=rbind(outall,res)
-}
-
-for(i in seq(1,164))
-{
-id=which(allvars==paste("BETC",i,sep=""))
-y=ph[,id]
-out=summary(lm(regmodel,data=ph))
-res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
-outall=rbind(outall,res)
-}
-
-for(i in seq(1,164))
-{
-id=which(allvars==paste("NodalEff",i,sep=""))
-y=ph[,id]
-out=summary(lm(regmodel,data=ph))
-res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
-outall=rbind(outall,res)
 }
 
 regvars=c("Inter",attr(out$terms,"term.labels"))
