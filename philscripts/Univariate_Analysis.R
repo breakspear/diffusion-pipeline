@@ -59,5 +59,6 @@ regvars=c("Inter",attr(out$terms,"term.labels"))
 outall=data.frame(outall,stringsAsFactors=F)
 names(outall)=c("Var","Mean","SD",paste("beta",regvars,sep="."),paste("SE",regvars,sep="."),paste("Pvals",regvars,sep="."))
 
-write.table(outall,file=paste(OUTDIR,Baseoutput,"_",mprms[,j],".csv",sep=""),row.names=F,col.names=T,sep=",",quote=F)
+OUTBASE=paste(OUTDIR,Baseoutput,sep="/")
+write.table(outall,file=paste(OUTBASE,"_",mprms[,j],".csv",sep=""),row.names=F,col.names=T,sep=",",quote=F)
 }
