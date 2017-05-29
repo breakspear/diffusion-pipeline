@@ -11,7 +11,7 @@ tracksint=cbind("RSTNtoHCPRSMA","LSTNtoHCPLSMA")
 DVs=NULL
 for(i in 1:length(tracksint))
 {
-DVmatch<-grep(tracksint[i], names(Patients_trackconnectivity), value=TRUE)
+DVmatch<-grep(tracksint[i], names(dat), value=TRUE)
 DVs=c(DVs,DVmatch)
 }
 
