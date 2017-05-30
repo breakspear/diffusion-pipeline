@@ -51,6 +51,11 @@ mv rawdataPAdnrem.mif rawdataPAdn.mif
 
 ${MRTRIX}/scripts/dwipreproc_cust -rpe_pair AP7b0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -nocleanup -tempdir .
 
+#extract motion parameters
+preprocdir=$(find * -maxdepth 0 -name "*dwipreproc*" -type d)
+awk -F " " '{print $2}' ${preprocdir}/dwi_post_eddy.eddy_movement_rms > FD.txt
+awk '{ total += $1 } END { print total/NR }' FD.txt > meanFD.txt
+
 dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force
 bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
 
