@@ -18,6 +18,30 @@ rsync T1.nii $WORKDIR/Diff/$subj/preproc
 
 cd $WORKDIR/Diff/$subj/preproc
 
+#check for extra b0 volume
+
+mrinfo rawdataAP.mif -dwgrad > rawencoding.b
+
+nvols=$(wc -l rawencoding.b | awk -F " " '{print $1}')
+
+if [ $nvols == "103" ]; then
+
+	mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads $ncpus
+
+	adjvols=$(expr $nvols - 1)
+
+	fslroi rawdataAP.nii rawdataAPrem 1 $adjvols
+
+	sed '1d' rawencoding.b > rawencodingrem.b
+
+	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4
+
+	mv rawdataAPrem.mif rawdataAP.mif
+
+	mv rawencodingrem.b rawencoding.b
+
+fi
+
 #Denoise
 
 dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads $ncpus
@@ -59,7 +83,7 @@ awk '{ total += $1 } END { print total/NR }' FD.txt > meanFD.txt
 dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force
 bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
 
-dwibiascorrect -mask eddymeanb0bet_mask.nii.gz -fsl eddycorr.mif biascorr.mif -nthreads $ncpus -force
+dwibiascorrect -mask eddymeanb0bet_mask.nii.gz -ants eddycorr.mif biascorr.mif -nthreads $ncpus -force
 dwishellmath biascorr.mif mean meanshell.mif
 
 #Create tensor and FA images
