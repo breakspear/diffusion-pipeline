@@ -5,7 +5,7 @@ Baseoutput="CONvars"
 OUTDIR="/working/lab_michaebr/alistaiP/Park/analysis"
 dat=read.table(fname.in,header=T,stringsAsFactors=F,sep="\t")
 
-indvars=cbind("Age","Sex","Clinical_Subtype","Tremor.Akinesia_Subtype","Hoehn_._Yahr_Stage","Years_Since_Diagnosis","Side_of_Onset","Pre_LEDD","Pre_BIS_Total","Pre_EQ_Total","Pre_ICD_Total","Pre_QUIP.Total","Pre_CarerBIS_Total","Pre_CarerEQ_Total","LN_HaylingCatAErrors","LN_HaylingCatBErrors","LN_HaylingABErrorScore","LN_ELF_RuleViolations","LN_DelayDiscount_K")
+indvars=cbind("Age","Sex","Clinical_Subtype","Tremor.Akinesia_Subtype","Hoehn_._Yahr_Stage","Years_Since_Diagnosis","Side_of_Onset","Pre_LEDD","Pre_BIS_Total","Pre_EQ_Total","Pre_ICD.Total","Pre_QUIP.Total","Pre_CarerBIS_Total","Pre_CarerEQ_Total","LN_HaylingCatAErrors","LN_HaylingCatBErrors","LN_HaylingABErrorScore","LN_ELF_RuleViolations","LN_DelayDiscount_K")
 tracksint=cbind("RSTNtoHCPRSMA","LSTNtoHCPLSMA")
 
 DVs=NULL
@@ -42,17 +42,15 @@ regmodel=paste('y~',mprms[,j],sep="")
 
 outall=NULL
 
-for(i in seq(1,length(cvars)))
+for(i in seq(1,length(DVs)))
 {
-for(j in seq(1,length(DVs)))
-{
-id=which(allvars==DVs[j]))
+id=which(allvars==DVs[i])
 y=ph[,id]
 out=summary(lm(regmodel,data=ph))
 res=c(allvars[id],mean(y),sd(y),out$coefficients[,1],out$coefficients[,2],out$coefficients[,4])
 outall=rbind(outall,res)
 }
-}
+
 
 regvars=c("Inter",attr(out$terms,"term.labels"))
 

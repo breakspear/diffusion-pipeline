@@ -3,10 +3,15 @@
 args <- commandArgs(TRUE)
 
 #ph<-{} 
-ph=read.table("/working/lab_michaebr/alistaiP/Park/analysis/Patients_trackconnectivity.dat",header=T,stringsAsFactors=T,sep="\t",colClasses="character")
+datatablefile="/working/lab_michaebr/alistaiP/Park/analysis/Patients_trackconnectivity.dat"
+ph=read.table(datatablefile,header=T,stringsAsFactors=T,sep="\t",colClasses="character")
 
+#DATADIR="/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff"
 DATADIR=as.character(args[1])
+#OUTDIR="/working/lab_michaebr/alistaiP/Park/analysis"
 OUTDIR=as.character(args[2])
+
+nvols<-102
 
 PatientIDs<-list.dirs(path = DATADIR, full.names = FALSE, recursive = FALSE)
 PatientIDs<-t(PatientIDs)
@@ -29,10 +34,14 @@ for(i in 1:length(PatientIDs))
   } else {
     eddyfoldmatch<-list.files(path = PatDATDir, pattern="preproc", include.dirs = TRUE)
     
-    FDfile=paste(PatDATDir, eddyfoldmatch, dwi_post_eddy.eddy_movement_rms, sep="/")
+    FDfile=paste(PatDATDir, eddyfoldmatch, "dwi_post_eddy.eddy_movement_rms", sep="/")
     FD=read.table(FDfile,header=FALSE)
     
     FDvals<-FD$V2
+    if (length(FDvals)!=nvols){
+	FDvals[nvols]<-mean(FDvals)
+	}
+
     meanFDval<-mean(FDvals)
     
   }
@@ -49,13 +58,14 @@ meanFDall=data.frame(meanFDall,stringsAsFactors=F)
 names(meanFDall)=c("ID","meanFD")
 
 FDall=data.frame(FDall,stringsAsFactors=F)
-names(FDall)=c("ID",seq(1,length(FDvals)))
+names(FDall)=c("ID",seq(1,length(nvols)))
 
 #check if motion parameters are to be integrated into existing data table
 
-if(length(ph~=0)) {
+if(length(ph!=0)) {
 tmp=merge(ph,meanFDall,by.x="ID",by.y="ID",sort=F)
-datatablebase<-gsub("^.*?_","",datatablefile)
+datatablebase<-basename(datatablefile)
+datatablebase<-gsub(pattern = "\\.dat$","", datatablebase)
 meanFDfname.out=paste(OUTDIR,paste(datatablebase,"_wFD.dat",sep=""),sep="/")
 } else {
   tmp<-meanFDall
