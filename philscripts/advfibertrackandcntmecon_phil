@@ -41,7 +41,7 @@ tckgen wm.mif ${numfibers}.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250
 
 tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
 
-tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number 1M -mask r5TT.nii  -output_seeds succeeds1M.txt -force -nthreads $ncpus
+tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -number 1M -act r5TT.nii  -output_seeds succeeds1M.txt -force -nthreads $ncpus
 
 tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads $ncpus
 
@@ -62,7 +62,7 @@ tckmap 1M.tck 1Mends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
 
 tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -act r5TT.nii -force -nthreads $ncpus
 
-tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -act r5TT.nii -force -nthreads $ncpus
+#tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -act r5TT.nii -force -nthreads $ncpus
 
 
 #Connectome construction
@@ -89,6 +89,6 @@ tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengt
 
 #Alter sift tracks for visualisation purposes
 
-tckedit 1M.tck -tck_weights_in 1Msift_weightfactor.txt  1Msift.tck -force -nthreads $ncpus
+#tckedit 1M.tck -tck_weights_in 1Msift_weightfactor.txt  1Msift.tck -force -nthreads $ncpus
 
-tckmap 1Msift.tck 1Msift.nii -vox 0.5 -force -nthreads $ncpus
+#tckmap 1Msift.tck 1Msift.nii -vox 0.5 -force -nthreads $ncpus
