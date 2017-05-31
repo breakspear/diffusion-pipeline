@@ -20,6 +20,6 @@ segparcandcoregT1_phil $subj $WORKDIR
 
 #Fiber construction and connectome construction
 
-#advfibertrackandcntmecon_phil $subj $WORKDIR $numfibers $parc
+advfibertrackandcntmecon_phil $subj $WORKDIR $numfibers $parc
 
 

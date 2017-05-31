@@ -12,8 +12,8 @@ baserundir=$(basename $rundir)
 
 nargs=$#
 
-if [ "$nargs" == 4]; then
-	if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+if [ $nargs == "4" ]; then
+	if [ "$rundir" != "${WORKDIR}/Diff/${subj}/preproc" ]; then
 	cd $WORKDIR/Diff/$subj/preproc
 	fi
 else

@@ -27,10 +27,10 @@ for(i in 1:length(PatientIDs))
  
   if (file.exists(paste(PatDATDir,"FD.txt",sep="/"))) {
       meanFDfile=paste(PatDATDir, "meanFD.txt", sep="/")
-      meanFDval=read.table(meanFDfile,header=FALSE)
+      meanFDval=scan(meanFDfile)
 
       FDfile=paste(PatDATDir, "FD.txt", sep="/")
-      FDvals=read.table(FDfile,header=FALSE)
+      FDvals=scan(FDfile)
       if (length(FDvals)<nvols){
         FDvals[nvols]<-mean(FDvals)
         }
@@ -68,7 +68,7 @@ meanFDall=data.frame(meanFDall,stringsAsFactors=F)
 names(meanFDall)=c("ID","meanFD")
 
 FDall=data.frame(FDall,stringsAsFactors=F)
-names(FDall)=c("ID",seq(1,length(nvols)))
+names(FDall)=c("ID",paste("VOL",seq(1,nvols),sep=""))
 
 #check if motion parameters are to be integrated into existing data table
 
