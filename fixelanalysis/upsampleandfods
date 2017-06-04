@@ -1,0 +1,22 @@
+#!/bin/bash
+#usage: upsampleandfods subj WORKDIR NORMDIR VOXSIZE OUTDIR
+
+#compulsory arguments that are called automatically:
+subj=$1
+WORKDIR=$2
+NORMDIR=$3
+VOXSIZE=$4
+OUTDIR=$5
+
+cd ${WORKDIR}/${NORMDIR}
+
+mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}
+mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI
+mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks
+mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS
+
+mrresize ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_DWI.mif -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/${subj}_DWI.mif -nthreads 1 -force 
+
+mrresize ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_Mask.nii.gz -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/${subj}_Mask.mif -nthreads 1 -force 
+
+dwi2fod msmt_csd ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/${subj}_DWI.mif ${WORKDIR}/${NORMDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_wm.mif ${WORKDIR}/${NORMDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/${subj}_Mask.mif
