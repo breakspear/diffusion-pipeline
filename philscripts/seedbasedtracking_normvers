@@ -99,7 +99,7 @@ flirt -in HCP_RIFG_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_RI
 
 gunzip HCP_RIFG_diff.nii.gz -f
  
-#tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG.tck -seed_image RSTN_diff.nii -include HCP_RIFG_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds RSTNseedstoIFG.txt
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG.tck -seed_image RSTN_diff.nii -include HCP_RIFG_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds RSTNseedstoIFG.txt
 
 
 #calculate normalized tensor images - note will turn off once data has been constructed again (from intensitynormalization)

@@ -4,9 +4,10 @@ args = commandArgs(TRUE)
 
 ph=read.table("/working/lab_michaebr/alistaiP/Park/analysis/Baseline_Data_Subjects_29-64_fixid.dat",header=T,stringsAsFactors=T,sep="\t",colClasses="character")
 
-#DATADIR=as.character("/working/lab_michaebr/alistaiP/Park/AFD/seedtracking")
-DATADIR=as.character(args[1])
-OUTDIR=as.character(args[2])
+DATADIR=as.character("/working/lab_michaebr/alistaiP/Park/AFD/seedtracking")
+#DATADIR=as.character(args[1])
+OUTDIR=as.character("/working/lab_michaebr/alistaiP/Park/AFD/analysis-new")
+#OUTDIR=as.character(args[2])
 
 PatientIDs<-list.dirs(path = DATADIR, full.names = FALSE, recursive = FALSE)
 PatientIDs<-t(PatientIDs)
