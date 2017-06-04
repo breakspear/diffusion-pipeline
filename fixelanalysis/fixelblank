@@ -1,8 +1,15 @@
 #!/bin/bash
-#Template file which sets up PBS requirements for all jobs
 
-# All required resource statements start with "#PBS -l"
-# These will be interpreted by the job submission system (PBS pro)
+#SBATCH -n 1 # 1 per CPU
+#SBATCH -c 5 # number of cpus per task
+#SBATCH --nice=5
+#SBATCH -p blade-a
+
+source /daten/bin/setup_fsl-5.0.9-cscor.sh
+source /beegfs/v1/bin2/setup_freesurfer_530.sh
+
+MRTRIX=/beegfs/scratch/tnc_scratch/aperry/MRtrix/02032017
+export PATH=${MRTRIX}/release/bin:${MRTRIX}/scripts:$PATH
 
 export OMP_NUM_THREADS=8
 
@@ -12,12 +19,5 @@ export OMP_NUM_THREADS=8
 pipedir=&&&&
 PATH=$PATH$( find $pipedir/ -not -path '*/\.*'  -type d -printf ":%p" )
 #export PATH:$PATH
-
-####
-#Load all required software
-module load mrtrix3/AP
-module load freesurfer/6.0.0
-module load ANTs/20160509
-module load fsl/5.0.9_eddy
 
 %%%% #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
