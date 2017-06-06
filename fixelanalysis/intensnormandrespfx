@@ -16,6 +16,7 @@ if [ "$nargs" == 2 ]; then
 	DATADIR=${WORKDIR}/Diff
 else
 	DATADIR=${WORKDIR}/$3
+	echo "Subjects data are contained in ${DATADIR}"
 fi
 
 cd ${WORKDIR}/${OUTDIR}
@@ -34,16 +35,16 @@ dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/
 
 rm /home/$USER/.mrtrix.conf
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2tensor IN ${WORKDIR}/${OUTDIR}/DWInorm/UNI_dt.mif -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 10 -force
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2tensor IN ${WORKDIR}/${OUTDIR}/DWInorm/UNIP_dt.mif -mask ${WORKDIR}/${OUTDIR}/Masks/UNIP_Mask.nii.gz -nthreads 10 -force
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -fa ${WORKDIR}/${OUTDIR}/DWInorm/UNI_fa.nii -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 10 -force
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -fa ${WORKDIR}/${OUTDIR}/DWInorm/UNIP_fa.nii -mask ${WORKDIR}/${OUTDIR}/Masks/UNIP_Mask.nii.gz -nthreads 10 -force
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -adc ${WORKDIR}/${OUTDIR}/DWInorm/UNI_md.nii -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 10 -force
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -adc ${WORKDIR}/${OUTDIR}/DWInorm/UNIP_md.nii -mask ${WORKDIR}/${OUTDIR}/Masks/UNIP_Mask.nii.gz -nthreads 10 -force
 
 
 mkdir -p ${WORKDIR}/${OUTDIR}/FODS
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2response dhollander IN ${WORKDIR}/${OUTDIR}/FODS/UNI_wm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_gm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_csf.txt -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 10 -force 
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2response dhollander IN ${WORKDIR}/${OUTDIR}/FODS/UNIP_wm.txt ${WORKDIR}/${OUTDIR}/FODS/UNIP_gm.txt ${WORKDIR}/${OUTDIR}/FODS/UNIP_csf.txt -mask ${WORKDIR}/${OUTDIR}/Masks/UNIP_Mask.nii.gz -nthreads 10 -force 
 
 rm ${WORKDIR}/${OUTDIR}/FODS/avg_wm_resp.txt
 
@@ -53,4 +54,4 @@ average_response ${WORKDIR}/${OUTDIR}/FODS/*wm.txt ${WORKDIR}/${OUTDIR}/FODS/avg
 
 average_response ${WORKDIR}/${OUTDIR}/FODS/*csf.txt ${WORKDIR}/${OUTDIR}/FODS/avg_csf_resp.txt
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${OUTDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_wm.mif ${WORKDIR}/${OUTDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${OUTDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNIP_wm.mif ${WORKDIR}/${OUTDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNIP_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${OUTDIR}/Masks/UNIP_Mask.nii.gz
