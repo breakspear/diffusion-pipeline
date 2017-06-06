@@ -104,11 +104,11 @@ tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG.tck -seed_image R
 
 #calculate normalized tensor images - note will turn off once data has been constructed again (from intensitynormalization)
 
-dwi2tensor ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_DWI.mif ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
+#dwi2tensor ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_DWI.mif ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
 
-tensor2metric ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -fa ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
+#tensor2metric ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -fa ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
 
-tensor2metric ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -adc ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
+#tensor2metric ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -adc ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
 
 
 
