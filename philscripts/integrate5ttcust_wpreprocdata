@@ -39,6 +39,9 @@ rsync $GMin $WMin $CSFin .
 
 cd 5ttcust
 
+#remove sending the job to more slurms
+export FSLSUB_IGNORE_SLURM=1
+
 run_first_all -s L_Accu,R_Accu,L_Caud,R_Caud,L_Pall,R_Pall,L_Puta,R_Puta,L_Thal,R_Thal,L_Amyg,R_Amyg,L_Hipp,R_Hipp -i brainFSinT1.nii -o first -b
 
 meshconvert first-L_Accu_first.vtk L_Accu.vtk -transform_first2real brainFSinT1.nii -force
