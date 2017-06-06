@@ -2,11 +2,11 @@
 #usage: upsampleandfods subj WORKDIR NORMDIR VOXSIZE OUTDIR
 
 #compulsory arguments that are called automatically:
-subj=$1
-WORKDIR=$2
-NORMDIR=$3
-VOXSIZE=$4
-OUTDIR=$5
+#subj=$1
+WORKDIR=$1
+NORMDIR=$2
+VOXSIZE=$3
+OUTDIR=$4
 
 cd ${WORKDIR}/${NORMDIR}
 
