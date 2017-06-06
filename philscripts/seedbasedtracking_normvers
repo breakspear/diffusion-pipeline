@@ -18,88 +18,100 @@ else
 	DATADIR=${WORKDIR}/$4
 fi
 
+#setup directory trees
+
 cd ${WORKDIR}/${NORMDIR}
 
 mkdir -p ${WORKDIR}/${NORMDIR}/seedtracking/${subj}
+
+#rsync files that are needed - can remove later
+
+cd ${WORKDIR}/Diff/${subj}
+
+rsync brainFS.nii FS2diff.mat ${DATADIR}/${subj}
+
+# cd to working directory
+
 cd ${WORKDIR}/${NORMDIR}/seedtracking/${subj}
+
 
 #Setup transforms between FS, MNI, and Diff space
 
-flirt -ref /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/mni_hires_t1_brain.nii -in ${DATADIR}/${subj}/preproc/brainFS.nii -omat FS2MNIhires.mat -out FS2MNIhiris -dof 12
+flirt -ref /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/mni_hires_t1_brain.nii -in ${DATADIR}/${subj}/brainFS.nii -omat FS2MNIhires.mat -out FS2MNIhiris -dof 12
 
 convert_xfm -omat MNIhires2FS.mat -inverse FS2MNIhires.mat
 
-convert_xfm -omat FS2diff.mat -inverse ${DATADIR}/${subj}/preproc/diff2FS.mat
+convert_xfm -omat FS2diff.mat -inverse ${DATADIR}/${subj}/diff2FS.mat
 
 
 #Setup STN seeds in diffusion space
 
-flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/rRSTN_MNI.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out RSTN_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/rRSTN_MNI.nii -ref ${DATADIR}/${subj}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out RSTN_FS.nii.gz
 
 gunzip RSTN_FS.nii.gz -f
 
 mrconvert RSTN_FS.nii RSTN_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
 
-flirt -in RSTN_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out RSTN_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+flirt -in RSTN_FS_str.nii -ref ${DATADIR}/${subj}/fa.nii -out RSTN_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
 gunzip RSTN_diff.nii.gz -f
 
 
 #now left-hem
  
-flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/rLSTN_MNI.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out LSTN_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/rLSTN_MNI.nii -ref ${DATADIR}/${subj}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out LSTN_FS.nii.gz
 
 gunzip LSTN_FS.nii.gz -f
 
 mrconvert LSTN_FS.nii LSTN_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
 
-flirt -in LSTN_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out LSTN_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+flirt -in LSTN_FS_str.nii -ref ${DATADIR}/${subj}/fa.nii -out LSTN_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
 gunzip LSTN_diff.nii.gz -f
 
 
 #Setup include masks in diffusion space, plus tracking 
 
-flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/HCP_RSMA.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RSMA_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/HCP_RSMA.nii -ref ${DATADIR}/${subj}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RSMA_FS.nii.gz
 
 gunzip HCP_RSMA_FS.nii.gz -f
  
 mrconvert HCP_RSMA_FS.nii HCP_RSMA_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
  
-flirt -in HCP_RSMA_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_RSMA_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+flirt -in HCP_RSMA_FS_str.nii -ref ${DATADIR}/${subj}/fa.nii -out HCP_RSMA_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
 gunzip HCP_RSMA_diff.nii.gz -f
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRSMA.tck -seed_image RSTN_diff.nii -include HCP_RSMA_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds RSTNseeds.txt
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRSMA.tck -seed_image RSTN_diff.nii -include HCP_RSMA_diff.nii -act ${DATADIR}/${subj}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads 10 -output_seeds RSTNseeds.txt
 
 
 #repeat for left-hemisphere
 
-flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/HCP_LSMA.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LSMA_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/HCP_LSMA.nii -ref ${DATADIR}/${subj}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LSMA_FS.nii.gz
 
 gunzip HCP_LSMA_FS.nii.gz
  
-mrconvert HCP_LSMA_FS.nii HCP_LSMA_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+mrconvert HCP_LSMA_FS.nii HCP_LSMA_FS_str.nii -stride -1,3,-2 -force -nthreads 10
  
-flirt -in HCP_LSMA_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_LSMA_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+flirt -in HCP_LSMA_FS_str.nii -ref ${DATADIR}/${subj}/fa.nii -out HCP_LSMA_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
 gunzip HCP_LSMA_diff.nii.gz
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -seed_image LSTN_diff.nii -include HCP_LSMA_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds LSTNseeds.txt
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -seed_image LSTN_diff.nii -include HCP_LSMA_diff.nii -act ${DATADIR}/${subj}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads 10 -output_seeds LSTNseeds.txt
 
 
 #NOWIFG
-flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/HCP_RIFG.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RIFG_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/HCP_RIFG.nii -ref ${DATADIR}/${subj}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RIFG_FS.nii.gz
 
 gunzip HCP_RIFG_FS.nii.gz -f
  
 mrconvert HCP_RIFG_FS.nii HCP_RIFG_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
  
-flirt -in HCP_RIFG_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_RIFG_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+flirt -in HCP_RIFG_FS_str.nii -ref ${DATADIR}/${subj}/fa.nii -out HCP_RIFG_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
 gunzip HCP_RIFG_diff.nii.gz -f
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG.tck -seed_image RSTN_diff.nii -include HCP_RIFG_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds RSTNseedstoIFG.txt
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG.tck -seed_image RSTN_diff.nii -include HCP_RIFG_diff.nii -act ${DATADIR}/${subj}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds RSTNseedstoIFG.txt
 
 
 #calculate normalized tensor images - note will turn off once data has been constructed again (from intensitynormalization)
@@ -115,12 +127,12 @@ tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG.tck -seed_image R
 #calculate metrics
 #TDI
 
-tckmap RSTNtoHCPRSMA.tck RSTNtoHCPRSMA_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+tckmap RSTNtoHCPRSMA.tck RSTNtoHCPRSMA_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads 10 -force #this is actually useful in looking at the track density
 
 mrthreshold RSTNtoHCPRSMA_tdi.nii RSTNtoHCPRSMA_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
 
 
-tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads 10 -force #this is actually useful in looking at the track density
 
 mrthreshold LSTNtoHCPLSMA_tdi.nii LSTNtoHCPLSMA_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
 
