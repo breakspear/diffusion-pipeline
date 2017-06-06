@@ -25,7 +25,7 @@ cd ${WORKDIR}/${NORMDIR}/seedtracking/${subj}
 
 #Setup transforms between FS, MNI, and Diff space
 
-flirt -ref /mnt/lustre/home/$USER/base/mni_hires_t1_brain.nii -in ${DATADIR}/${subj}/preproc/brainFS.nii -omat FS2MNIhires.mat -out FS2MNIhiris -dof 12
+flirt -ref /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/mni_hires_t1_brain.nii -in ${DATADIR}/${subj}/preproc/brainFS.nii -omat FS2MNIhires.mat -out FS2MNIhiris -dof 12
 
 convert_xfm -omat MNIhires2FS.mat -inverse FS2MNIhires.mat
 
@@ -34,7 +34,7 @@ convert_xfm -omat FS2diff.mat -inverse ${DATADIR}/${subj}/preproc/diff2FS.mat
 
 #Setup STN seeds in diffusion space
 
-flirt -in /mnt/lustre/home/$USER/base/rRSTN_MNI.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out RSTN_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/rRSTN_MNI.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out RSTN_FS.nii.gz
 
 gunzip RSTN_FS.nii.gz -f
 
@@ -47,7 +47,7 @@ gunzip RSTN_diff.nii.gz -f
 
 #now left-hem
  
-flirt -in /mnt/lustre/home/$USER/base/rLSTN_MNI.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out LSTN_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/rLSTN_MNI.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out LSTN_FS.nii.gz
 
 gunzip LSTN_FS.nii.gz -f
 
@@ -60,7 +60,7 @@ gunzip LSTN_diff.nii.gz -f
 
 #Setup include masks in diffusion space, plus tracking 
 
-flirt -in /mnt/lustre/home/$USER/base/HCP_RSMA.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RSMA_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/HCP_RSMA.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RSMA_FS.nii.gz
 
 gunzip HCP_RSMA_FS.nii.gz -f
  
@@ -75,7 +75,7 @@ tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRSMA.tck -seed_image R
 
 #repeat for left-hemisphere
 
-flirt -in /mnt/lustre/home/$USER/base/HCP_LSMA.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LSMA_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/HCP_LSMA.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LSMA_FS.nii.gz
 
 gunzip HCP_LSMA_FS.nii.gz
  
@@ -89,7 +89,7 @@ tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -seed_image L
 
 
 #NOWIFG
-flirt -in /mnt/lustre/home/$USER/base/HCP_RIFG.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RIFG_FS.nii.gz
+flirt -in /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/parcs/HCP_RIFG.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RIFG_FS.nii.gz
 
 gunzip HCP_RIFG_FS.nii.gz -f
  
