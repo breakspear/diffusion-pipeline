@@ -15,8 +15,12 @@ mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI
 mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks
 mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS
 
-foreach -10 ${WORKDIR}/${NORMDIR}/DWInorm/*DWI.mif : mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/UNIP_DWI.mif -nthreads 1 -force 
+foreach -20 ${WORKDIR}/${NORMDIR}/DWInorm/*DWI.mif : mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/UNI_DWI.mif -nthreads 1 -force 
 
-foreach -10 ${WORKDIR}/${NORMDIR}/DWInorm/*.nii.gz : mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNIP_Mask.mif -interp nearest -nthreads 1 -force 
+foreach -20 ${WORKDIR}/${NORMDIR}/DWInorm/*.nii.gz : mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNI_Mask.mif -interp nearest -nthreads 1 -force 
 
-foreach -10 ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${NORMDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNIP_wm.mif ${WORKDIR}/${NORMDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNIP_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNIP_Mask.mif
+foreach -20 ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${NORMDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_wm.mif ${WORKDIR}/${NORMDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNIP_Mask.mif
+
+foreach -20 ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/*wm.mif : mrconvert IN ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_wm_str.mif -stride +1,2,3,4 -force -nthreads 1 
+
+foreach -20 ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/*wm_str.mif : mv IN ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_wm.mif
