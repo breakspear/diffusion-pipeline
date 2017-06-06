@@ -5,15 +5,15 @@ subj=$1
 WORKDIR=$2
 CATDIR=$3
 
-GMin=${WORKDIR}/${CATDIR}/${subj}/GMin.nii
-WMin=${WORKDIR}/${CATDIR}/${subj}/WMin.nii
-CSFin=${WORKDIR}/${CATDIR}/${subj}/CSFin.nii
+GMin=${WORKDIR}/${CATDIR}/${subj}/mri/p1T1.nii
+WMin=${WORKDIR}/${CATDIR}/${subj}/mri/p2T1.nii
+CSFin=${WORKDIR}/${CATDIR}/${subj}/mri/p3T1.nii
 
-OUTDIR=${WORKDIR}/Diff-wcust5tt/${subj}/preproc
+OUTDIR=${WORKDIR}/5TTcustwpreprocFSsp/${subj}
 
 mkdir -p ${OUTDIR}
 
-cd ${WORKDIR}/Diff/${subj}/preproc
+cd ${WORKDIR}/Diff/${subj}
 
 #temp co-reg of FS T1 to native T1 - will remove soon
 
