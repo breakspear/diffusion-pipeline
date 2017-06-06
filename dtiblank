@@ -20,8 +20,6 @@ pipedir=&&&&
 PATH=$PATH$( find $pipedir/ -not -path '*/\.*'  -type d -printf ":%p" )
 #export PATH:$PATH
 
-%%%% #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
-
 #Extract ID of subject and their corresponding folder holding raw image files
 
 subj=@@@@
