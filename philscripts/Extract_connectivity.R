@@ -6,7 +6,7 @@ ph=read.table("/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/analy
 
 DATADIR=as.character("/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/AFD2/seedtracking")
 #DATADIR=as.character(args[1])
-OUTDIR=as.character("/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/AFD2/analysis-new")
+OUTDIR=as.character("/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/AFD2/analysis")
 #OUTDIR=as.character(args[2])
 
 PatientIDs<-list.dirs(path = DATADIR, full.names = FALSE, recursive = FALSE)
