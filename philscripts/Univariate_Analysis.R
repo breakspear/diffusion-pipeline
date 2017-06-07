@@ -5,7 +5,7 @@ Baseoutput="CONvars"
 OUTDIR="/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/AFD2/analysis"
 dat=read.table(fname.in,header=T,stringsAsFactors=F,sep="\t")
 
-indvars=cbind("age","geschlecht","disease_duration","age_onset","side_of_onset","T-Score","updrs_iii_on_gesamt","updrs_off_iii_gesamt","medication_response","disprogress","rs1800497")
+indvars=cbind("age","geschlecht","disease_duration","age_onset","side_of_onset","AR.Score","updrs_iii_on_gesamt","updrs_off_iii_gesamt","medication_response","disprogress","rs1800497")
 tracksint=cbind("RSTNtoHCPRSMA","LSTNtoHCPLSMA","RSTNtoHCPRIFG")
 
 DVs=NULL
