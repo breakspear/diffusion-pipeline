@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 
-fname.in="/working/lab_michaebr/alistaiP/Park/AFD/analysis-new/Patients_trackconnectivity.dat"
+fname.in="/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/AFD2/analysis/Patients_trackconnectivity.dat"
 Baseoutput="CONvars"
-OUTDIR="/working/lab_michaebr/alistaiP/Park/AFD/analysis-new"
+OUTDIR="/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/AFD2/analysis"
 dat=read.table(fname.in,header=T,stringsAsFactors=F,sep="\t")
 
-indvars=cbind("Age","Sex","Clinical_Subtype","Tremor.Akinesia_Subtype","Hoehn_._Yahr_Stage","Years_Since_Diagnosis","Side_of_Onset","Pre_LEDD","Pre_BIS_Total","Pre_EQ_Total","Pre_ICD.Total","Pre_QUIP.Total","Pre_CarerBIS_Total","Pre_CarerEQ_Total","LN_HaylingCatAErrors","LN_HaylingCatBErrors","LN_HaylingABErrorScore","LN_ELF_RuleViolations","LN_DelayDiscount_K")
-tracksint=cbind("RSTNtoHCPRSMA","LSTNtoHCPLSMA")
+indvars=cbind("age","geschlecht","disease_duration","age_onset","side_of_onset","updrs_iii_on_gesamt","updrs_off_iii_gesamt","medication_response","disprogress","rs1800497")
+tracksint=cbind("RSTNtoHCPRSMA","LSTNtoHCPLSMA","RSTNtoHCPRIFG")
 
 DVs=NULL
 for(i in 1:length(tracksint))
