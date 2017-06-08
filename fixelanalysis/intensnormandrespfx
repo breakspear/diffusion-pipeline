@@ -42,7 +42,7 @@ foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -adc ${WORKD
 
 mkdir -p ${WORKDIR}/${OUTDIR}/FODS
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2response dhollander IN ${WORKDIR}/${OUTDIR}/FODS/UNI_wm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_gm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_csf.txt -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 1 -force 
+foreach -5 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2response dhollander IN ${WORKDIR}/${OUTDIR}/FODS/UNI_wm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_gm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_csf.txt -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 1 -force 
 
 rm ${WORKDIR}/${OUTDIR}/FODS/avg_wm_resp.txt
 
