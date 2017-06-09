@@ -89,31 +89,31 @@ tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -seed_image L
 
 
 #NOWIFG
-#Right
-flirt -in /mnt/lustre/home/$USER/base/HCP_RIFG.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RIFG_FS.nii.gz
+#Ant
+flirt -in /mnt/lustre/home/$USER/base/HCP_RIFG_Ant.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RIFG_Ant_FS.nii.gz
 
-gunzip HCP_RIFG_FS.nii.gz -f
+gunzip HCP_RIFG_Ant_FS.nii.gz -f
  
-mrconvert HCP_RIFG_FS.nii HCP_RIFG_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+mrconvert HCP_RIFG_Ant_FS.nii HCP_RIFG_Ant_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
  
-flirt -in HCP_RIFG_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_RIFG_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+flirt -in HCP_RIFG_Ant_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_RIFG_Ant_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
-gunzip HCP_RIFG_diff.nii.gz -f
+gunzip HCP_RIFG_Ant_diff.nii.gz -f
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG.tck -seed_image RSTN_diff.nii -include HCP_RIFG_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds RSTNseedstoIFG.txt
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG_Ant.tck -seed_image RSTN_diff.nii -include HCP_RIFG_Ant_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds RSTNseedstoRIFG_Ant.txt
 
-#Left
-flirt -in /mnt/lustre/home/$USER/base/HCP_LIFG.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_LIFG_FS.nii.gz
+#Post
+flirt -in /mnt/lustre/home/$USER/base/HCP_RIFG_Post.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out HCP_RIFG_Post_FS.nii.gz
 
-gunzip HCP_LIFG_FS.nii.gz -f
+gunzip HCP_RIFG_Post_FS.nii.gz -f
  
-mrconvert HCP_LIFG_FS.nii HCP_LIFG_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+mrconvert HCP_RIFG_Post_FS.nii HCP_RIFG_Post_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
  
-flirt -in HCP_LIFG_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_LIFG_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+flirt -in HCP_RIFG_Post_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_RIFG_Post_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
-gunzip HCP_LIFG_diff.nii.gz -f
+gunzip HCP_RIFG_Post_diff.nii.gz -f
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLIFG.tck -seed_image LSTN_diff.nii -include HCP_LIFG_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds LSTNseedstoIFG.txt
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG_Post.tck -seed_image RSTN_diff.nii -include HCP_RIFG_Post_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds RSTNseedstoRIFG_Post.txt
 #calculate normalized tensor images - note will turn off once data has been constructed again (from intensitynormalization)
 
 #dwi2tensor ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_DWI.mif ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
@@ -137,14 +137,14 @@ tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ${WORKDIR}/${NORMDIR}/D
 mrthreshold LSTNtoHCPLSMA_tdi.nii LSTNtoHCPLSMA_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
 
 
-tckmap RSTNtoHCPRIFG.tck RSTNtoHCPRIFG_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+tckmap RSTNtoHCPRIFG_Ant.tck RSTNtoHCPRIFG_Ant_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
-mrthreshold RSTNtoHCPRIFG_tdi.nii RSTNtoHCPRIFG_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+mrthreshold RSTNtoHCPRIFG_Ant_tdi.nii RSTNtoHCPRIFG_Ant_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
 
 
-tckmap LSTNtoHCPLIFG.tck LSTNtoHCPLIFG_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+tckmap LSTNtoHCPRIFG_Post.tck LSTNtoHCPRIFG_Post_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
-mrthreshold LSTNtoHCPLIFG_tdi.nii LSTNtoHCPLIFG_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+mrthreshold RSTNtoHCPRIFG_Post_tdi.nii RSTNtoHCPRIFG_Post_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
 
 
 #FA
@@ -153,9 +153,9 @@ mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask RSTNtoHCPRSMA_tdi_thr
 
 mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -nthreads $ncpus -force -output mean > LSTNtoHCPLSMA_meanFA.txt
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask RSTNtoHCPRIFG_tdi_thr.nii -nthreads $ncpus -force -output mean > RSTNtoHCPRIFG_meanFA.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask RSTNtoHCPRIFG_Ant_tdi_thr.nii -nthreads $ncpus -force -output mean > RSTNtoHCPRIFG_Ant_meanFA.txt
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask LSTNtoHCPLIFG_tdi_thr.nii -nthreads $ncpus -force -output mean > LSTNtoHCPLIFG_meanFA.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask RSTNtoHCPRIFG_Post_tdi_thr.nii -nthreads $ncpus -force -output mean > RSTNtoHCPRIFG_Post_meanFA.txt
 
 #MD
 
@@ -163,9 +163,9 @@ mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask RSTNtoHCPRSMA_tdi_thr
 
 mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -nthreads $ncpus -force -output mean > LSTNtoHCPLSMA_meanMD.txt
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask RSTNtoHCPRIFG_tdi_thr.nii -nthreads $ncpus -force -output mean > RSTNtoHCPRIFG_meanMD.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask RSTNtoHCPRIFG_Ant_tdi_thr.nii -nthreads $ncpus -force -output mean > RSTNtoHCPRIFG_Ant_meanMD.txt
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask LSTNtoHCPLIFG_tdi_thr.nii -nthreads $ncpus -force -output mean > LSTNtoHCPLIFG_meanMD.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask RSTNtoHCPRIFG_Post_tdi_thr.nii -nthreads $ncpus -force -output mean > RSTNtoHCPRIFG_Post_meanMD.txt
 
 #AFD
 
@@ -173,9 +173,10 @@ afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRSMA.tck -nth
 
 afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -nthreads $ncpus -all_fixels -force -afd_map LSTNtoHCPLSMA_AFD.nii > LSTNtoHCPLSMA_AFD.txt
 
-afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG.tck -nthreads $ncpus -all_fixels -force -afd_map RSTNtoHCPRIFG_AFD.nii > RSTNtoHCPRIFG_AFD.txt
+afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG_Ant.tck -nthreads $ncpus -all_fixels -force -afd_map RSTNtoHCPRIFG_Ant_AFD.nii > RSTNtoHCPRIFG_Ant_AFD.txt
 
-afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLIFG.tck -nthreads $ncpus -all_fixels -force -afd_map LSTNtoHCPLIFG_AFD.nii > LSTNtoHCPLIFG_AFD.txt
+afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif RSTNtoHCPRIFG_Post.tck -nthreads $ncpus -all_fixels -force -afd_map RSTNtoHCPRIFG_Post_AFD.nii > RSTNtoHCPRIFG_Post_AFD.txt
+
 
 #Extract successful seeds as images
 cut -d ',' -f 3-5 LSTNseeds.txt > LSTNcolseeds.txt
