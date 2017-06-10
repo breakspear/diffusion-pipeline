@@ -142,7 +142,7 @@ tckmap RSTNtoHCPRIFG_Ant.tck RSTNtoHCPRIFG_Ant_tdi.nii -template ${WORKDIR}/${NO
 mrthreshold RSTNtoHCPRIFG_Ant_tdi.nii RSTNtoHCPRIFG_Ant_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
 
 
-tckmap LSTNtoHCPRIFG_Post.tck LSTNtoHCPRIFG_Post_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+tckmap RSTNtoHCPRIFG_Post.tck RSTNtoHCPRIFG_Post_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
 mrthreshold RSTNtoHCPRIFG_Post_tdi.nii RSTNtoHCPRIFG_Post_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
 
