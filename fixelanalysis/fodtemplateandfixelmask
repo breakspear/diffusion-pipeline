@@ -1,0 +1,34 @@
+#!/bin/bash
+#file: fodtemplateandfixelmask
+#usage: fodtemplateandfixelmask $WORKDIR $OUTDIR
+
+WORKDIR=$1
+NORMDIR=$2
+OUTDIR=$3
+
+cd ${WORKDIR}/${NORMDIR}
+
+mkdir ${OUTDIR}
+
+DATADIR=${WORKDIR}/${NORMDIR}/upsample
+
+population_template ${WORKDIR}/${NORMDIR}/FODS -mask_dir ${WORKDIR}/${NORMDIR}/Masks ./${OUTDIR}/fod_template.mif -warps_dir ./${OUTDIR}/warps -tempdir . -force -nthreads 10
+
+foreach ./${OUTDIR}/warps/* : warpconvert -type warpfull2deformation -template ./${OUTDIR}/fod_template.mif IN ./${OUTDIR}/warps/PRE2template_warp.mif -force -nthreads 1
+
+foreach ${DATADIR}/FODS/*wm.mif : mrregister IN -mask1 ${DATADIR}/Masks/PRE_Mask.mif ./${OUTDIR}/fod_template.mif -nl_warp ./${OUTDIR}/warps/PRE2template_warp.mif ./${OUTDIR}/warps/template2PRE_warp.mif -force -nthreads 1
+
+foreach ${DATADIR}/Masks/*.mif : mrtransform IN -warp ./${OUTDIR}/warps/PRE2template_warp.mif -interp nearest ./${OUTDIR}/warps/PRE_mask_in_template_space.mif -force -nthreads 1
+
+mrmath ./${OUTDIR}/warps/*mask_in_template_space.mif min ./${OUTDIR}/mask_intersection.mif -force -nthreads 10
+
+
+mkdir ./${OUTDIR/fixel_temp
+
+fod2fixel ./${OUTDIR}/fod_template.mif -mask ./${OUTDIR}/mask_intersection.mif ./${OUTDIR}/fixel_temp -peak ./${OUTDIR}/fixel_temp/peaks.mif -force -nthreads 10
+
+mrthreshold ./${OUTDIR}/fixel_temp/peaks.mif -abs 0.33 ./${OUTDIR}/fixel_temp/mask.mif -force -nthreads 10
+
+fixel2voxel ./${OUTDIR}/fixel_temp/mask.mif max - | mrfilter - median ./${OUTDIR}/voxel_mask.mif -force -nthreads 10
+
+fod2fixel -mask ./${OUTDIR}/voxel_mask.mif -fmls_peak_value 0.2 ./${OUTDIR}/fod_template.mif ./${OUTDIR}/fixel_mask -force -nthreads 10
