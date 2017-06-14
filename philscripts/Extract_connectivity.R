@@ -2,7 +2,8 @@
 
 args = commandArgs(TRUE)
 
-ph=read.table("/working/lab_michaebr/alistaiP/Park/analysis/Baseline_Data_Subjects_29-64_fixid.dat",header=T,stringsAsFactors=T,sep="\t",colClasses="character")
+ph=read.table("/working/lab_michaebr/alistaiP/Park/analysis/Baseline+Long_Data_Subjects_29-64_fixid.csv",header=T,stringsAsFactors=T,sep="\t",colClasses="character")
+ph$ID<-paste("0",ph$ID,sep="")
 
 DATADIR=as.character("/working/lab_michaebr/alistaiP/Park/AFD3/seedtracking")
 #DATADIR=as.character(args[1])
