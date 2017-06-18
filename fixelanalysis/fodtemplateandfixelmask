@@ -22,7 +22,7 @@ foreach -10 ${DATADIR}/Masks/*.mif : mrtransform IN -warp ./${OUTDIR}/warps/UNI2
 
 mrmath ./${OUTDIR}/warps/*mask_in_template_space.mif min ./${OUTDIR}/mask_intersection.mif -force -nthreads 10
 
-rm -rf fixeltemp
+rm -rf ./${OUTDIR}/fixeltemp
 
 mkdir ./${OUTDIR}/fixeltemp
 
