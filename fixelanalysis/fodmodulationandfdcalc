@@ -1,0 +1,35 @@
+#!/bin/bash
+#file: fodtemplateandfixelmask
+#usage: fodtemplateandfixelmask $WORKDIR $OUTDIR
+
+WORKDIR=$1
+NORMDIR=$2
+TEMPLATEDIR=$3
+
+cd ${WORKDIR}/${NORMDIR}
+
+DATADIR=${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}
+
+foreach -n 10 ${WORKDIR}/${NORMDIR}/upsample/FODS/wm/*.mif : mrtransform IN -warp ${DATADIR}/warps/UNI2template_warp.mif -noreorientation ${DATADIR}/warps/UNIfod_in_template_space.mif
+
+mkdir ${DATADIR}/fixels
+
+foreach -n 10 ${DATADIR}/warps/*fod_in_template_space.mif : fod2fixel IN -mask ${DATADIR}/voxel_mask.mif ${DATADIR}/fixels/UNIfixel_in_template_space -afd fd.mif --force -nthreads 1
+
+foreach -n 10 ${DATADIR}/fixels/*fixel_in_template_space : fixelreorient ${DATADIR}/fixels/UNIfixel_in_template_space ${DATADIR}/warps/UNI2template_warp.mif ${DATADIR}/fixels/UNIfixel_in_template_space --force -nthreads 1
+
+foreach -n 10 ${DATADIR}/fixels/*fixel_in_template_space : fixelcorrespondence ${DATADIR}/fixels/UNIfixel_in_template_space/fd.mif ${DATADIR}/fixel_mask ${DATADIR}/fixels/fd UNI.mif
+
+foreach -n 10 * : warp2metric IN/subject2template_warp.mif -fc ../template/fixel_mask ../template/fc IN.mif
+
+mkdir ../template/log_fc
+
+cp ../template/fc/index.mif ../template/fc/directions.mif ../template/log_fc
+
+foreach * : mrcalc ../template/fc/IN.mif -log ../template/log_fc/IN.mif
+
+mkdir ../template/fdc
+
+cp ../template/fc/index.mif cp ../template/fc/directions.mif ../template/fdc
+
+foreach * : mrcalc ../template/fd/IN.mif ../template/fc/IN.mif -mult ../template/fdc/IN.mif
