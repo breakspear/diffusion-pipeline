@@ -10,26 +10,28 @@ cd ${WORKDIR}/${NORMDIR}
 
 DATADIR=${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}
 
-foreach -n 10 ${WORKDIR}/${NORMDIR}/upsample/FODS/wm/*.mif : mrtransform IN -warp ${DATADIR}/warps/UNI2template_warp.mif -noreorientation ${DATADIR}/warps/UNIfod_in_template_space.mif
+foreach -n 10 ${WORKDIR}/${NORMDIR}/upsample/FODS/wm/*.mif : mrtransform IN -warp ${DATADIR}/warps/UNI2template_warp.mif -noreorientation ${DATADIR}/warps/UNIwm_in_template_space.mif
 
-mkdir ${DATADIR}/fixels
+mkdir -p ${DATADIR}/fixels/intemplatespace
 
-foreach -n 10 ${DATADIR}/warps/*fod_in_template_space.mif : fod2fixel IN -mask ${DATADIR}/voxel_mask.mif ${DATADIR}/fixels/UNIfixel_in_template_space -afd fd.mif --force -nthreads 1
+foreach -n 10 ${DATADIR}/warps/*wm_in_template_space.mif : fod2fixel IN -mask ${DATADIR}/voxel_mask.mif ${DATADIR}/fixels/intemplatespace/UNI -afd fd.mif --force -nthreads 1
 
-foreach -n 10 ${DATADIR}/fixels/*fixel_in_template_space : fixelreorient ${DATADIR}/fixels/UNIfixel_in_template_space ${DATADIR}/warps/UNI2template_warp.mif ${DATADIR}/fixels/UNIfixel_in_template_space --force -nthreads 1
+foreach -n 10 ${DATADIR}/fixels/intemplatespace/* : fixelreorient IN ${DATADIR}/warps/PRE2template_warp.mif ${DATADIR}/fixels/intemplatespace/PRE --force -nthreads 1
 
-foreach -n 10 ${DATADIR}/fixels/*fixel_in_template_space : fixelcorrespondence ${DATADIR}/fixels/UNIfixel_in_template_space/fd.mif ${DATADIR}/fixel_mask ${DATADIR}/fixels/fd UNI.mif
+foreach -n 10 ${DATADIR}/fixels/intemplatespace/* : fixelcorrespondence IN/fd.mif ${DATADIR}/fixel_mask ${DATADIR}/fixels/fd PRE.mif --force -nthreads 1
 
-foreach -n 10 * : warp2metric IN/subject2template_warp.mif -fc ../template/fixel_mask ../template/fc IN.mif
+foreach -n 10 ${WORKDIR}/${NORMDIR}/upsample/FODS/wm/*.mif : warp2metric ${DATADIR}/warps/UNI2template_warp.mif -fc ${DATADIR}/fixel_mask ${DATADIR}/fixels/fc UNI.mif --force -nthreads 1
 
-mkdir ../template/log_fc
 
-cp ../template/fc/index.mif ../template/fc/directions.mif ../template/log_fc
+mkdir -p ${DATADIR}/fixels/log_fc
 
-foreach * : mrcalc ../template/fc/IN.mif -log ../template/log_fc/IN.mif
+cp ${DATADIR}/fixels/fc/index.mif ${DATADIR}/fixels/fc/directions.mif ${DATADIR}/fixels/log_fc
 
-mkdir ../template/fdc
+foreach -n 10 ${WORKDIR}/${NORMDIR}/upsample/FODS/wm/*.mif : mrcalc ${DATADIR}/fixels/fc/UNI.mif -log ${DATADIR}/fixels/log_fc/UNI.mif -nthreads 1 --force
 
-cp ../template/fc/index.mif cp ../template/fc/directions.mif ../template/fdc
 
-foreach * : mrcalc ../template/fd/IN.mif ../template/fc/IN.mif -mult ../template/fdc/IN.mif
+mkdir -p ${DATADIR}/fixels/fdc
+
+cp ${DATADIR}/fixels/fc/index.mif ${DATADIR}/fixels/fc/directions.mif ${DATADIR}/fixels/fdc
+
+foreach -n 10 ${WORKDIR}/${NORMDIR}/upsample/FODS/wm/*.mif : mrcalc ${DATADIR}/fixels/fd/UNI.mif ${DATADIR}/fixels/fc/UNI.mif -mult ${DATADIR}/fixels/fdc/UNI.mif -nthreads 1 --force
