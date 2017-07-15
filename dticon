@@ -31,12 +31,12 @@ while read line
 do
 	subj=$(basename $line)
 	subjDIRECTORY=$line
-	cp dtiblank batch/dti$subj.sh
-	sed -i "s;&&&&;$pipedir;" batch/dti$subj.sh
+	cp dtiblank batch/${SCRIPT}_$subj.sh
+	sed -i "s;&&&&;$pipedir;" batch/${SCRIPT}_$subj.sh
         #sed -i "s;&&&&;${WORKDIR};" batch/dti$subj.sh
-	sed -i "s/@@@@/$subj/" batch/dti$subj.sh
-	sed -i "s!????!$subjDIRECTORY!" batch/dti$subj.sh
-	sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" batch/dti$subj.sh
+	sed -i "s/@@@@/$subj/" batch/${SCRIPT}_$subj.sh
+	sed -i "s!????!$subjDIRECTORY!" batch/${SCRIPT}_$subj.sh
+	sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" batch/${SCRIPT}_$subj.sh
 
 done < scans.txt #List of folders containing each subject data to be analysed
 
