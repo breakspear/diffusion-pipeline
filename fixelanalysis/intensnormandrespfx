@@ -27,11 +27,11 @@ rsync ${DATADIR}/${subj}/preproc/biascorr.mif ${WORKDIR}/${OUTDIR}/DWI/${subj}_D
 rsync ${DATADIR}/${subj}/preproc/biasmeanb0bet_mask.nii.gz ${WORKDIR}/${OUTDIR}/Masks/${subj}_Mask.nii.gz
 done
 
-echo "NumberOfThreads: 10" > /mnt/lustre/home/${USER}/.mrtrix.conf
+#echo "NumberOfThreads: 10" > /mnt/lustre/home/${USER}/.mrtrix.conf
 
 dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/${OUTDIR}/DWInorm ${WORKDIR}/${OUTDIR}/fa_template.mif ${WORKDIR}/${OUTDIR}/fa_template_wm_mask.mif -tempdir . -nocleanup -force -nthreads $ncpus
 
-rm /mnt/lustre/home/$USER/.mrtrix.conf
+#rm /mnt/lustre/home/$USER/.mrtrix.conf
 
 foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2tensor IN ${WORKDIR}/${OUTDIR}/DWInorm/UNI_dt.mif -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 1 -force
 
@@ -40,7 +40,7 @@ foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -fa ${WORKDI
 foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -adc ${WORKDIR}/${OUTDIR}/DWInorm/UNI_md.nii -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 1 -force
 
 
-echo "NumberOfThreads: 1" > /mnt/lustre/home/${USER}/.mrtrix.conf
+#echo "NumberOfThreads: 1" > /mnt/lustre/home/${USER}/.mrtrix.conf
 
 mkdir -p ${WORKDIR}/${OUTDIR}/FODS
 
@@ -54,6 +54,6 @@ average_response ${WORKDIR}/${OUTDIR}/FODS/*wm.txt ${WORKDIR}/${OUTDIR}/FODS/avg
 
 average_response ${WORKDIR}/${OUTDIR}/FODS/*csf.txt ${WORKDIR}/${OUTDIR}/FODS/avg_csf_resp.txt
 
-rm /mnt/lustre/home/${USER}/.mrtrix.conf
+#rm /mnt/lustre/home/${USER}/.mrtrix.conf
 
 foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${OUTDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_wm.mif ${WORKDIR}/${OUTDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz
