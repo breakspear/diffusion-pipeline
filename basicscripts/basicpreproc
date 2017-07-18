@@ -6,7 +6,8 @@
 subj=$1
 WORKDIR=$2
 
-scannum=$(basename $WORKDIR)
+currdir=$(pwd)
+scannum=$(basename $currdir)
 
 mkdir -p $WORKDIR/Diff/$subj/preproc/${scannum}
 
@@ -48,7 +49,7 @@ bet2 eddyb0.nii eddyb0brain -m -f 0.15
 
 #Bias correction
 
-dwibiascorrect -mask eddyb0brain_mask.nii.gz -fsl eddycorr.mif biascorr.mif -force -nthreads $ncpus -tempdir ./dir
+dwibiascorrect -mask eddyb0brain_mask.nii.gz -fsl eddycorr.mif biascorr.mif -force -nthreads $ncpus -tempdir .
 
 mrconvert biascorr.mif biasb0.nii -coord 3 0 -force -nthreads $ncpus
 bet2 biasb0.nii biasb0brain -m -f 0.15
