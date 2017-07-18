@@ -5,11 +5,11 @@ WORKDIR=$2
 tracksbasename=$3
 CNTMEPREFIX=$4
 
-rundir=$(pwd)
-baserundir=$(basename $rundir)
+currdir=$(pwd)
+scannum=$(basename $rundir)
 
-if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
-cd $WORKDIR/Diff/$subj/preproc
+if [ "$currdir" != "$WORKDIR/Diff/$subj/preproc/${scannum}" ]; then
+cd $WORKDIR/Diff/$subj/preproc/${scannum}
 fi
 
 echo "Realigning template into subject space"
