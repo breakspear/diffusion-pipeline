@@ -27,19 +27,19 @@ cd $WORKDIR/Diff/$subj/preproc/${scannum}
 
 #Denoise the rawdata
 
-dwidenoise rawdata.mif rawdata-dn.mif -force -nthreads $ncpus
+dwidenoise rawdataAP.mif rawdataAP-dn.mif -force -nthreads $ncpus
 
 #Re-convert to the correct stride
 
-mrconvert rawdata-dn.mif rawdata-dnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataAP-dn.mif rawdataAP-dnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
  
-mrconvert rawdata-dnstr.mif  rawdata-dn.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataAP-dnstr.mif  rawdataAP-dn.mif -stride +1,2,3,4 -force -nthreads $ncpus
 
-rm rawdata-dnstr.mif
+rm rawdataAP-dnstr.mif
 
 #Eddy and motion correction
 
-dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -verbose -tempdir . -nocleanup -force
+dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAP-dn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -verbose -tempdir . -nocleanup -force
 
 #Construct the b0 mask for future processing 
 
