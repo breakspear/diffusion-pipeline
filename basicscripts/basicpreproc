@@ -37,7 +37,7 @@ rm rawdata-dnstr.mif
 
 #Eddy and motion correction
 
-dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -nthreads $ncpus -verbose -tempdir . -nocleanup -force
+dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -verbose -tempdir . -nocleanup -force
 
 #Construct the b0 mask for future processing 
 
