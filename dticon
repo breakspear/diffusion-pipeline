@@ -18,7 +18,7 @@ SCRIPT=$2 #Script to be called
 nargs=$#
 extargs=${@:3}
 
-find $1/Raw/* -maxdepth 0 -type d > scans.txt #Creates list of folders containing the subject data to be analysed
+find $1/Raw/*/scan1 -maxdepth 0 -type d > scans.txt #Creates list of folders containing the subject data to be analysed
 
 pipedir=$(pwd)
 #PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
@@ -29,7 +29,7 @@ mkdir batch
 
 while read line
 do
-	subj=$(basename $line)
+	subj=$(awk -F "/" '{print $7}' $line)
 	subjDIRECTORY=$line
 	cp dtiblank batch/${SCRIPT}_$subj.sh
 	sed -i "s;&&&&;$pipedir;" batch/${SCRIPT}_$subj.sh
