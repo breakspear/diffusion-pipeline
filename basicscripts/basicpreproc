@@ -6,22 +6,24 @@
 subj=$1
 WORKDIR=$2
 
-mkdir -p $WORKDIR/Diff/$subj/preproc
+scannum=$(basename $WORKDIR)
 
-rsync *rawdata* $WORKDIR/Diff/$subj/preproc
+mkdir -p $WORKDIR/Diff/$subj/preproc/${scannum}
 
-rsync *encoding* $WORKDIR/Diff/$subj/preproc
+rsync *rawdata* $WORKDIR/Diff/$subj/preproc/${scannum}
 
-cd $WORKDIR/Diff/$subj/preproc
+rsync *encoding* $WORKDIR/Diff/$subj/preproc/${scannum}
+
+cd $WORKDIR/Diff/$subj/preproc/${scannum}
 
 
 #Import gradient table for MRtrix specs
 
-mrconvert rawdata.nii.gz rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads $ncpus
+#mrconvert rawdata.nii.gz rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads $ncpus
 
-cp rawdata.mif preproc 
+#cp rawdata.mif preproc 
 
-cd preproc
+#cd preproc
 
 #Denoise the rawdata
 
