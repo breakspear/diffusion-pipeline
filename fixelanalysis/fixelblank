@@ -9,9 +9,7 @@
 # *ncpus* is the number of cores required by each process
 # *mem* is the amount of memory required by each process
 
-#PBS -v MRTRIX=/software/mrtrix3/mrtrix3-AP,ncpus=10
-
-#PBS -l walltime=168:00:00
+#PBS -l walltime=47:00:00
 # *walltime* is the total time required in hours:minutes:seconds
 # to run the job. 
 # Warning: all processes still running at the end of this period
