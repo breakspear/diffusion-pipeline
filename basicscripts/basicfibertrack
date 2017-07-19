@@ -13,11 +13,14 @@ fi
 
 #Generate response function by spherical deconvolution
 
-dwi2response dhollander -mask biasb0brain_mask.nii.gz biascorr.mif wm.txt gm.txt csf.txt -force -nthreads $ncpus
+dwi2response dhollander -mask biasb0brain_mask.nii.gz biascorr.mif wm.txt gm.txt csf.txt -lmax 0,6 -force -nthreads $ncpus
 
 #Fiber orientation estimates
 
 dwi2fod msmt_csd biascorr.mif wm.txt wm.mif csf.txt csf.mif -force -mask biasb0brain_mask.nii.gz -nthreads $ncpus
+
+mrconvert wm.mif wmstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mv wmstr.mif wm.mif
 fod2dec wm.mif foddec.mif -force -nthreads $ncpus
 
 #Extract filtered mask for improving tracking
@@ -31,7 +34,7 @@ fod2dec wm.mif foddec.mif -force -nthreads $ncpus
 
 #Fiber tracking
 
-tckgen -algorithm iFOD2 wm.mif ${numfibers}.tck -seed_image biasb0brain_mask.nii.gz -minlength 10 -maxlength 250 -number $numfibers -nthreads $ncpus -mask biasb0brain_mask.nii.gz -output_seeds sucesstrackseeds.txt
+tckgen -algorithm iFOD2 wm.mif ${numfibers}.tck -seed_image biasb0brain_mask.nii.gz -minlength 10 -maxlength 250 -select $numfibers -nthreads $ncpus -mask biasb0brain_mask.nii.gz -output_seeds sucesstrackseeds.txt -force
 
 #Track density image for vis purposes
-tckmap ${numfibers}.tck ${numfibers}_tdi.nii -vox 0.5
+tckmap ${numfibers}.tck ${numfibers}_tdi.nii -vox 0.5 -force
