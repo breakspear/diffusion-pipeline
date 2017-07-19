@@ -6,7 +6,7 @@ tracksbasename=$3
 CNTMEPREFIX=$4
 
 currdir=$(pwd)
-scannum=$(basename $rundir)
+scannum=$(basename $currdir)
 
 if [ "$currdir" != "$WORKDIR/Diff/$subj/preproc/${scannum}" ]; then
 cd $WORKDIR/Diff/$subj/preproc/${scannum}
