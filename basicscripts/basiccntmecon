@@ -3,7 +3,8 @@
 subj=$1
 WORKDIR=$2
 tracksbasename=$3
-CNTMEPREFIX=$4
+parc=$4
+CNTMEPREFIX=$5
 
 currdir=$(pwd)
 scannum=$(basename $currdir)
