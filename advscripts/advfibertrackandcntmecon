@@ -43,11 +43,11 @@ fod2dec wm.mif  foddec.mif -mask biasmeanb0bet_mask.nii.gz -force -nthreads $ncp
 
 #Fiber tracking
 
-tckgen wm.mif ${numfibers}.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -maxlength 250 -number ${numfibers} -mask biasmeanb0bet_mask.nii.gz -output_seeds succeeds.txt -force -nthreads $ncpus
+tckgen wm.mif ${numfibers}.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -maxlength 250 -select ${numfibers} -mask biasmeanb0bet_mask.nii.gz -output_seeds succeeds.txt -force -nthreads $ncpus
 
 tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
 
-tckgen wm.mif 1M.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -maxlength 250 -number 1M -mask biasmeanb0bet_mask.nii.gz -output_seeds succeeds1M.txt -force -nthreads $ncpus
+tckgen wm.mif 1M.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -maxlength 250 -select 1M -mask biasmeanb0bet_mask.nii.gz -output_seeds succeeds1M.txt -force -nthreads $ncpus
 
 tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads $ncpus
 
