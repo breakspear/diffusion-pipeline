@@ -54,13 +54,13 @@ tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads $ncpus
 
 #Global tractography 
 
-if [ $ismultishell==1 ]
-then
+#if [ $ismultishell==1 ]
+#then
 
-tckglobal biascorr.mif wm.txt -riso csf.txt -riso gm.txt -mask biasmeanb0bet_mask.nii.gz -niter ${numfibers} -fod wmiso.mif -fiso csfiso.mif GT_${numfibers}.tck
-tckmap GT_${numfibers}.tck GT_${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
-tckmap GT_${numfibers}.tck GT_${numfibers}ends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
-fi
+#tckglobal biascorr.mif wm.txt -riso csf.txt -riso gm.txt -mask biasmeanb0bet_mask.nii.gz -niter ${numfibers} -fod wmiso.mif -fiso csfiso.mif GT_${numfibers}.tck
+#tckmap GT_${numfibers}.tck GT_${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
+#tckmap GT_${numfibers}.tck GT_${numfibers}ends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
+#fi
 
 
 #Visualise streamline ends for quality checking purposes
@@ -104,12 +104,12 @@ tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthwei
 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads $ncpus
 
 
-if [ $ismultishell==1 ]
-then
-tck2connectome GT_${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights_GT.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
+#if [ $ismultishell==1 ]
+#then
+#tck2connectome GT_${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights_GT.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
 
-tck2connectome GT_${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodeweights_GT.csv  -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
+#tck2connectome GT_${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodeweights_GT.csv  -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
 
-fi
+#fi
 
 
