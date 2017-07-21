@@ -23,35 +23,35 @@ cd $WORKDIR/Diff/$subj/preproc
 mrinfo rawdataAP.mif -export_grad_mrtrix rawencoding.b -force
 mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 
-if [ $ismosiac = 1 ];
-then
+#if [ $ismosiac = 1 ];
+#then
 
-	mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads $ncpus
+#	mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads $ncpus
 
-	nvols=$(fslnvols rawdataAP.nii)
-	adjvols=$(expr $nvols - 1)
+#	nvols=$(fslnvols rawdataAP.nii)
+#	adjvols=$(expr $nvols - 1)
 
-	fslroi rawdataAP.nii rawdataAPrem 1 $adjvols
+#	fslroi rawdataAP.nii rawdataAPrem 1 $adjvols
 
-	sed '1d' rawencoding.b > rawencodingrem.b
-	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
+#	sed '1d' rawencoding.b > rawencodingrem.b
+#	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
 
-	mv rawdataAPrem.mif rawdataAP.mif
+#	mv rawdataAPrem.mif rawdataAP.mif
 
-fi
+#fi
 
-if [ $ismosiac = 1 ] && [ $fullreverseseq = 1 ]; then
+#if [ $ismosiac = 1 ] && [ $fullreverseseq = 1 ]; then
 
-	mrconvert rawdataPA.mif rawdataPA.nii -force -nthreads $ncpus
-	fslroi rawdataPA.nii rawdataPArem 1 $adjvols
-	sed '1d' rawrevencoding.b > rawrevencodingrem.b
-        mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
-	mv rawdataPArem.mif rawdataPA.mif
+#	mrconvert rawdataPA.mif rawdataPA.nii -force -nthreads $ncpus
+#	fslroi rawdataPA.nii rawdataPArem 1 $adjvols
+#	sed '1d' rawrevencoding.b > rawrevencodingrem.b
+#       mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
+#	mv rawdataPArem.mif rawdataPA.mif
 	
-else
+#else
 	
-	dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
-	mv rawdataPArem.mif rawdataPA.mif
+#	dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
+#	mv rawdataPArem.mif rawdataPA.mif
 	
 fi
 
