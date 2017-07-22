@@ -4,7 +4,7 @@
 # All required resource statements start with "#PBS -l"
 # These will be interpreted by the job submission system (PBS pro)
 
-#PBS -v ncpus=8
+#PBS -v ncpus=8 MRTRIX=/software/mrtrix3/mrtrix3-20170707
 #PBS -l ncpus=8,mem=2G
 # *select* is the number of parallel processes
 # *ncpus* is the number of cores required by each process
