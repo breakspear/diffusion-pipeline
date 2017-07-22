@@ -53,7 +53,7 @@ mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 #	dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
 #	mv rawdataPArem.mif rawdataPA.mif
 	
-fi
+#fi
 
 #Denoise
 

@@ -43,7 +43,7 @@ fslmaths T1bet.nii.gz -mas FS2FSLbet_mask.nii.gz T1betFSmasked.nii.gz
 
 fast -B --nopve T1betFSmasked.nii.gz
 
-5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTFSmasked.nii -nthreads $ncpus -force
+5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTFSmasked.nii -nthreads $ncpus -force -tempdir . -nocleanup
 
 5tt2gmwmi 5TTFSmasked.nii 5TTgmwmi.nii -nthreads $ncpus -force
 
@@ -92,6 +92,10 @@ transformconvert diff2FS.mat biasmeanb0bet.nii.gz $SUBJECTS_DIR/$subj/mri/brain.
 mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFS.nii -linear diff2FSMR.mat -inverse -force
 
 mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFSrg.nii -linear diff2FSMR.mat -inverse -template fa.nii -force
+
+mrconvert rFSrg.nii rFSrgstr.nii -stride +1,2,3 -nthreads $ncpus -force 
+
+mv rFSrgstr.nii rFSrg.nii
 
 
 #Move other files from T1 space
