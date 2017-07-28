@@ -1,0 +1,100 @@
+#!/bin/bash
+
+workingdir=$(pwd)
+
+mkdir -p 5ttgen_man
+
+cp $1 5ttgen_man
+
+cd 5ttgen_man
+
+mrconvert $1 T1.nii -stride +1,+2,+3
+
+fast -N -o T1 -g T1.nii
+
+run_first_all -s L_Accu,R_Accu,L_Caud,R_Caud,L_Pall,R_Pall,L_Puta,R_Puta,L_Thal,R_Thal,L_Amyg,R_Amyg,L_Hipp,R_Hipp -i T1.nii -o first -b
+
+meshconvert first-L_Accu_first.vtk L_Accu.vtk -transform_first2real T1.nii
+
+mesh2pve L_Accu.vtk T1.nii mesh2pve_L_Accu.mif
+
+meshconvert first-R_Accu_first.vtk R_Accu.vtk -transform_first2real T1.nii
+
+mesh2pve R_Accu.vtk T1.nii mesh2pve_R_Accu.mif
+
+meshconvert first-L_Caud_first.vtk L_Caud.vtk -transform_first2real T1.nii
+
+mesh2pve L_Caud.vtk T1.nii mesh2pve_L_Caud.mif
+
+meshconvert first-R_Caud_first.vtk R_Caud.vtk -transform_first2real T1.nii
+
+mesh2pve R_Caud.vtk T1.nii mesh2pve_R_Caud.mif
+
+meshconvert first-L_Pall_first.vtk L_Pall.vtk -transform_first2real T1.nii
+
+mesh2pve L_Pall.vtk T1.nii mesh2pve_L_Pall.mif
+
+meshconvert first-R_Pall_first.vtk R_Pall.vtk -transform_first2real T1.nii
+
+mesh2pve R_Pall.vtk T1.nii mesh2pve_R_Pall.mif
+
+meshconvert first-L_Puta_first.vtk L_Puta.vtk -transform_first2real T1.nii
+
+mesh2pve L_Puta.vtk T1.nii mesh2pve_L_Puta.mif
+
+meshconvert first-R_Puta_first.vtk R_Puta.vtk -transform_first2real T1.nii
+
+mesh2pve R_Puta.vtk T1.nii mesh2pve_R_Puta.mif
+
+meshconvert first-L_Thal_first.vtk L_Thal.vtk -transform_first2real T1.nii
+
+mesh2pve L_Thal.vtk T1.nii mesh2pve_L_Thal.mif
+
+meshconvert first-R_Thal_first.vtk R_Thal.vtk -transform_first2real T1.nii
+
+mesh2pve R_Thal.vtk T1.nii mesh2pve_R_Thal.mif
+
+meshconvert first-L_Amyg_first.vtk L_Amyg.vtk -transform_first2real T1.nii
+
+mesh2pve L_Amyg.vtk T1.nii mesh2pve_L_Amyg.mif
+
+meshconvert first-R_Amyg_first.vtk R_Amyg.vtk -transform_first2real T1.nii
+
+mesh2pve R_Amyg.vtk T1.nii mesh2pve_R_Amyg.mif
+
+meshconvert first-L_Hipp_first.vtk L_Hipp.vtk -transform_first2real T1.nii
+
+mesh2pve L_Hipp.vtk T1.nii mesh2pve_L_Hipp.mif
+
+meshconvert first-R_Hipp_first.vtk R_Hipp.vtk -transform_first2real T1.nii
+
+mesh2pve R_Hipp.vtk T1.nii mesh2pve_R_Hipp.mif
+
+mrmath mesh2pve_L_Accu.mif mesh2pve_R_Accu.mif mesh2pve_L_Caud.mif mesh2pve_R_Caud.mif mesh2pve_L_Pall.mif mesh2pve_R_Pall.mif mesh2pve_L_Puta.mif mesh2pve_R_Puta.mif mesh2pve_L_Thal.mif mesh2pve_R_Thal.mif mesh2pve_L_Amyg.mif mesh2pve_R_Amyg.mif mesh2pve_L_Hipp.mif mesh2pve_R_Hipp.mif sum - | mrcalc - 1.0 -min all_sgms.mif
+
+mrthreshold T1_pve_2.nii.gz - -abs 0.001 | maskfilter - connect wm_mask.mif -largest
+
+mrconvert T1_pve_0.nii.gz csf.mif
+
+mrcalc 1.0 csf.mif -sub all_sgms.mif -min sgm.mif
+
+mrcalc 1.0 csf.mif sgm.mif -add -sub T1_pve_1.nii.gz T1_pve_2.nii.gz -add -div multiplier.mif
+
+mrcalc multiplier.mif -finite multiplier.mif 0.0 -if multiplier_noNAN.mif
+
+mrcalc T1_pve_1.nii.gz multiplier_noNAN.mif -mult cgm.mif
+
+mrcalc T1_pve_2.nii.gz multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif
+
+mrcalc 0 wm.mif -min path.mif
+
+mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4
+
+mrconvert combined_precrop.mif result.mif
+
+mrconvert result.mif $2 -force
+
+mv $2 $workingdir
+
+cd $workingdir
+
