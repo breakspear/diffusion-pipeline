@@ -8,16 +8,20 @@ T1in=$1
 
 if [ -n "$3" ]; then
 echo "Skip FSL cortical segmentation"
+
 subjPRESEGDIR=$3
 
-rsync ${subjPRESEGDIR}/GM.nii ${subjPRESEGDIR}/WM.nii ${subjPRESEGDIR}/CSF.nii .
 GMin=${subjPRESEGDIR}/GMin.nii
+
 WMin=${subjPRESEGDIR}/WMin.nii
+
 CSFin=${subjPRESEGDIR}/CSFin.nii
+
+rsync $GMin $WMin $CSFin .
 
 else
 
-echo "FSL cortical segmentation to be performed"
+echo "FSL cortical segmentation to be performed | Change tissue-type inputs to output from fast"
 
 GMin=T1_pve_1.nii.gz
 
@@ -26,6 +30,7 @@ WMin=T1_pve_2.nii.gz
 CSFin=T1_pve_0.nii.gz
 
 fi
+
 
 mkdir -p 5ttgen_man
 
@@ -45,87 +50,101 @@ fast -N -o T1 -g T1.nii
 fi 
 
 
+#perform subcortical segmentation with FIRST
+
 run_first_all -s L_Accu,R_Accu,L_Caud,R_Caud,L_Pall,R_Pall,L_Puta,R_Puta,L_Thal,R_Thal,L_Amyg,R_Amyg,L_Hipp,R_Hipp -i T1.nii -o first -b
 
-meshconvert first-L_Accu_first.vtk L_Accu.vtk -transform_first2real T1.nii
 
-mesh2pve L_Accu.vtk T1.nii mesh2pve_L_Accu.mif
+#exract and combine subcortical areas
 
-meshconvert first-R_Accu_first.vtk R_Accu.vtk -transform_first2real T1.nii
+meshconvert first-L_Accu_first.vtk L_Accu.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve R_Accu.vtk T1.nii mesh2pve_R_Accu.mif
+mesh2pve L_Accu.vtk T1.nii mesh2pve_L_Accu.mif -nthreads $ncpus
 
-meshconvert first-L_Caud_first.vtk L_Caud.vtk -transform_first2real T1.nii
+meshconvert first-R_Accu_first.vtk R_Accu.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve L_Caud.vtk T1.nii mesh2pve_L_Caud.mif
+mesh2pve R_Accu.vtk T1.nii mesh2pve_R_Accu.mif -nthreads $ncpus
 
-meshconvert first-R_Caud_first.vtk R_Caud.vtk -transform_first2real T1.nii
+meshconvert first-L_Caud_first.vtk L_Caud.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve R_Caud.vtk T1.nii mesh2pve_R_Caud.mif
+mesh2pve L_Caud.vtk T1.nii mesh2pve_L_Caud.mif -nthreads $ncpus
 
-meshconvert first-L_Pall_first.vtk L_Pall.vtk -transform_first2real T1.nii
+meshconvert first-R_Caud_first.vtk R_Caud.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve L_Pall.vtk T1.nii mesh2pve_L_Pall.mif
+mesh2pve R_Caud.vtk T1.nii mesh2pve_R_Caud.mif -nthreads $ncpus
 
-meshconvert first-R_Pall_first.vtk R_Pall.vtk -transform_first2real T1.nii
+meshconvert first-L_Pall_first.vtk L_Pall.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve R_Pall.vtk T1.nii mesh2pve_R_Pall.mif
+mesh2pve L_Pall.vtk T1.nii mesh2pve_L_Pall.mif -nthreads $ncpus
 
-meshconvert first-L_Puta_first.vtk L_Puta.vtk -transform_first2real T1.nii
+meshconvert first-R_Pall_first.vtk R_Pall.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve L_Puta.vtk T1.nii mesh2pve_L_Puta.mif
+mesh2pve R_Pall.vtk T1.nii mesh2pve_R_Pall.mif -nthreads $ncpus
 
-meshconvert first-R_Puta_first.vtk R_Puta.vtk -transform_first2real T1.nii
+meshconvert first-L_Puta_first.vtk L_Puta.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve R_Puta.vtk T1.nii mesh2pve_R_Puta.mif
+mesh2pve L_Puta.vtk T1.nii mesh2pve_L_Puta.mif -nthreads $ncpus
 
-meshconvert first-L_Thal_first.vtk L_Thal.vtk -transform_first2real T1.nii
+meshconvert first-R_Puta_first.vtk R_Puta.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve L_Thal.vtk T1.nii mesh2pve_L_Thal.mif
+mesh2pve R_Puta.vtk T1.nii mesh2pve_R_Puta.mif -nthreads $ncpus
 
-meshconvert first-R_Thal_first.vtk R_Thal.vtk -transform_first2real T1.nii
+meshconvert first-L_Thal_first.vtk L_Thal.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve R_Thal.vtk T1.nii mesh2pve_R_Thal.mif
+mesh2pve L_Thal.vtk T1.nii mesh2pve_L_Thal.mif -nthreads $ncpus
 
-meshconvert first-L_Amyg_first.vtk L_Amyg.vtk -transform_first2real T1.nii
+meshconvert first-R_Thal_first.vtk R_Thal.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve L_Amyg.vtk T1.nii mesh2pve_L_Amyg.mif
+mesh2pve R_Thal.vtk T1.nii mesh2pve_R_Thal.mif -nthreads $ncpus
 
-meshconvert first-R_Amyg_first.vtk R_Amyg.vtk -transform_first2real T1.nii
+meshconvert first-L_Amyg_first.vtk L_Amyg.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve R_Amyg.vtk T1.nii mesh2pve_R_Amyg.mif
+mesh2pve L_Amyg.vtk T1.nii mesh2pve_L_Amyg.mif -nthreads $ncpus
 
-meshconvert first-L_Hipp_first.vtk L_Hipp.vtk -transform_first2real T1.nii
+meshconvert first-R_Amyg_first.vtk R_Amyg.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve L_Hipp.vtk T1.nii mesh2pve_L_Hipp.mif
+mesh2pve R_Amyg.vtk T1.nii mesh2pve_R_Amyg.mif -nthreads $ncpus
 
-meshconvert first-R_Hipp_first.vtk R_Hipp.vtk -transform_first2real T1.nii
+meshconvert first-L_Hipp_first.vtk L_Hipp.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mesh2pve R_Hipp.vtk T1.nii mesh2pve_R_Hipp.mif
+mesh2pve L_Hipp.vtk T1.nii mesh2pve_L_Hipp.mif -nthreads $ncpus
 
-mrmath mesh2pve_L_Accu.mif mesh2pve_R_Accu.mif mesh2pve_L_Caud.mif mesh2pve_R_Caud.mif mesh2pve_L_Pall.mif mesh2pve_R_Pall.mif mesh2pve_L_Puta.mif mesh2pve_R_Puta.mif mesh2pve_L_Thal.mif mesh2pve_R_Thal.mif mesh2pve_L_Amyg.mif mesh2pve_R_Amyg.mif mesh2pve_L_Hipp.mif mesh2pve_R_Hipp.mif sum - | mrcalc - 1.0 -min all_sgms.mif
+meshconvert first-R_Hipp_first.vtk R_Hipp.vtk -transform_first2real T1.nii -nthreads $ncpus
 
-mrthreshold $WMin - -abs 0.001 | maskfilter - connect wm_mask.mif -largest
+mesh2pve R_Hipp.vtk T1.nii mesh2pve_R_Hipp.mif -nthreads $ncpus
 
-mrconvert $CSFin csf.mif
+mrmath mesh2pve_L_Accu.mif mesh2pve_R_Accu.mif mesh2pve_L_Caud.mif mesh2pve_R_Caud.mif mesh2pve_L_Pall.mif mesh2pve_R_Pall.mif mesh2pve_L_Puta.mif mesh2pve_R_Puta.mif mesh2pve_L_Thal.mif mesh2pve_R_Thal.mif mesh2pve_L_Amyg.mif mesh2pve_R_Amyg.mif mesh2pve_L_Hipp.mif mesh2pve_R_Hipp.mif sum - -nthreads $ncpus | mrcalc - 1.0 -min all_sgms.mif -nthreads $ncpus -force
 
-mrcalc 1.0 csf.mif -sub all_sgms.mif -min sgm.mif
 
-mrcalc 1.0 csf.mif sgm.mif -add -sub $GMin $WMin -add -div multiplier.mif
+#integrate subcortical structures with cortical tissues
 
-mrcalc multiplier.mif -finite multiplier.mif 0.0 -if multiplier_noNAN.mif
+mrthreshold $WMin - -abs 0.001 | maskfilter - connect wm_mask.mif -largest -nthreads $ncpus -force
 
-mrcalc $GMin multiplier_noNAN.mif -mult cgm.mif
+mrconvert $CSFin csf.mif -nthreads $ncpus -force
 
-mrcalc $WMin multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif
+mrcalc 1.0 csf.mif -sub all_sgms.mif -min sgm.mif -nthreads $ncpus -force
 
-mrcalc 0 wm.mif -min path.mif
+mrcalc 1.0 csf.mif sgm.mif -add -sub $GMin $WMin -add -div multiplier.mif -nthreads $ncpus -force
 
-mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4
+mrcalc multiplier.mif -finite multiplier.mif 0.0 -if multiplier_noNAN.mif -nthreads $ncpus -force
 
-mrconvert combined_precrop.mif result.mif
+mrcalc $GMin multiplier_noNAN.mif -mult cgm.mif -nthreads $ncpus -force
 
-mrconvert result.mif $2 -force
+mrcalc $WMin multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif -nthreads $ncpus -force
+
+mrcalc 0 wm.mif -min path.mif -nthreads $ncpus -force
+
+
+#combine all tissue types into resulting 5ttoutput
+
+mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads $ncpus | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4 -nthreads $ncpus -force
+
+mrconvert combined_precrop.mif result.mif -nthreads $ncpus -force
+
+mrconvert result.mif $2 -force -nthreads $ncpus -force
+
+
+#move files back to processing dir
 
 rsync $2 $workingdir
 
