@@ -27,6 +27,7 @@ echo "Subject segmentations located in ${subjPRESEGDIR}"
 
 fi
 
+
 #prepare anatomical volume for segmentation, parcellation correction, and then co-registration to diffusion space
 
 mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -stride +1,2,3 -nthreads $ncpus -force
@@ -54,8 +55,8 @@ fast -B --nopve T1betFSmasked.nii.gz
 #5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTfsl.nii -nthreads $ncpus -force -tempdir . -nocleanup
 
 if [ -n "$4" ]; then
-
 echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM.nii CSF.nii"
+
 5ttgen_manual T1.nii 5TT.nii ${subjPRESEGDIR}
 
 else
@@ -81,9 +82,9 @@ rm parc_fixsubcort.nii
 mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -stride -1,2,3 -force -nthreads $ncpus
 
 if [ $parctype=="DES" ]; then
-       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus
+       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
 elif [ $parctype=="DST" ]; then
-       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus
+       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
 fi
 
 mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -stride +1,2,3 -force -nthreads $ncpus
@@ -106,11 +107,11 @@ rm parcFSLtempstr.nii.gz
 
 bbregister --s $subj --mov biasmeanb0bet.nii.gz --init-fsl --reg register.dat --dti --fslmat diff2FS.mat
 
-transformconvert diff2FS.mat biasmeanb0bet.nii.gz $SUBJECTS_DIR/$subj/mri/brain.mgz flirt_import diff2FSMR.mat -force
+transformconvert diff2FS.mat biasmeanb0bet.nii.gz $SUBJECTS_DIR/$subj/mri/brain.mgz flirt_import diff2FSMR.mat -force -nthreads $ncpus
 
-mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFS.nii -linear diff2FSMR.mat -inverse -force
-
-mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFSrg.nii -linear diff2FSMR.mat -inverse -template fa.nii -force
+mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFS.nii -linear diff2FSMR.mat -inverse -force -nthreads $ncpus
+ 
+mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFSrg.nii -linear diff2FSMR.mat -inverse -template fa.nii -force -nthreads $ncpus
 
 mrconvert rFSrg.nii rFSrgstr.nii -stride +1,2,3 -nthreads $ncpus -force 
 
@@ -119,15 +120,15 @@ mv rFSrgstr.nii rFSrg.nii
 
 #Move other files from T1 space
 
-transformconvert FS2FSL.mat brainFSsp.nii T1bet.nii.gz flirt_import FS2FSLMR.mat -force
+transformconvert FS2FSL.mat brainFSsp.nii T1bet.nii.gz flirt_import FS2FSLMR.mat -force -nthreads $ncpus
 
-mrtransform 5TTfsl.nii 5TTFSspmasked.nii -linear FS2FSLMR.mat -inverse -force
+mrtransform 5TTfsl.nii 5TTFSspmasked.nii -linear FS2FSLMR.mat -inverse -force -nthreads $ncpus
 
-mrtransform 5TTgmwmi.nii 5TTFSspgmwmi.nii -linear FS2FSLMR.mat -inverse -force
+mrtransform 5TTgmwmi.nii 5TTFSspgmwmi.nii -linear FS2FSLMR.mat -inverse -force -nthreads $ncpus
 
-mrtransform 5TTFSspgmwmi.nii r5TTgmwmi.nii -linear diff2FSMR.mat -inverse -force
+mrtransform 5TTFSspgmwmi.nii r5TTgmwmi.nii -linear diff2FSMR.mat -inverse -force -nthreads $ncpus
 
-mrtransform 5TTFSspmasked.nii r5TT.nii -linear diff2FSMR.mat -inverse -force
+mrtransform 5TTFSspmasked.nii r5TT.nii -linear diff2FSMR.mat -inverse -force -nthreads $ncpus
 
 convert_xfm -omat FSL2FS.mat -inverse FS2FSL.mat
 
