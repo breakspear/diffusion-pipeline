@@ -1,16 +1,49 @@
 #!/bin/bash
+#usage: 5ttgen_manual T1input 5TToutput PRESEGDIR[optional] 
 
 workingdir=$(pwd)
 
+T1in=$1
+5TToutput=$2
+
+if [ -n "$3" ]; then
+echo "Skip FSL cortical segmentation"
+subjPRESEGDIR=$3
+
+rsync ${subjPRESEGDIR}/GM.nii ${subjPRESEGDIR}/WM.nii ${subjPRESEGDIR}/CSF.nii .
+GMin=${subjPRESEGDIR}/GMin.nii
+WMin=${subjPRESEGDIR}/WMin.nii
+CSFin=${subjPRESEGDIR}/CSFin.nii
+
+else
+
+echo "FSL cortical segmentation to be performed"
+
+GMin=T1_pve_1.nii.gz
+
+WMin=T1_pve_2.nii.gz
+
+CSFin=T1_pve_0.nii.gz
+
+fi
+
 mkdir -p 5ttgen_man
 
-cp $1 5ttgen_man
+rsync $1 5ttgen_man
 
 cd 5ttgen_man
 
 mrconvert $1 T1.nii -stride +1,+2,+3
 
+
+if [ ! -n "$3" ]; then
+
+echo "FSL cortical segmentation running now.."
+
 fast -N -o T1 -g T1.nii
+
+fi 
+
 
 run_first_all -s L_Accu,R_Accu,L_Caud,R_Caud,L_Pall,R_Pall,L_Puta,R_Puta,L_Thal,R_Thal,L_Amyg,R_Amyg,L_Hipp,R_Hipp -i T1.nii -o first -b
 
@@ -72,19 +105,19 @@ mesh2pve R_Hipp.vtk T1.nii mesh2pve_R_Hipp.mif
 
 mrmath mesh2pve_L_Accu.mif mesh2pve_R_Accu.mif mesh2pve_L_Caud.mif mesh2pve_R_Caud.mif mesh2pve_L_Pall.mif mesh2pve_R_Pall.mif mesh2pve_L_Puta.mif mesh2pve_R_Puta.mif mesh2pve_L_Thal.mif mesh2pve_R_Thal.mif mesh2pve_L_Amyg.mif mesh2pve_R_Amyg.mif mesh2pve_L_Hipp.mif mesh2pve_R_Hipp.mif sum - | mrcalc - 1.0 -min all_sgms.mif
 
-mrthreshold T1_pve_2.nii.gz - -abs 0.001 | maskfilter - connect wm_mask.mif -largest
+mrthreshold $WMin - -abs 0.001 | maskfilter - connect wm_mask.mif -largest
 
-mrconvert T1_pve_0.nii.gz csf.mif
+mrconvert $CSFin csf.mif
 
 mrcalc 1.0 csf.mif -sub all_sgms.mif -min sgm.mif
 
-mrcalc 1.0 csf.mif sgm.mif -add -sub T1_pve_1.nii.gz T1_pve_2.nii.gz -add -div multiplier.mif
+mrcalc 1.0 csf.mif sgm.mif -add -sub $GMin $WMin -add -div multiplier.mif
 
 mrcalc multiplier.mif -finite multiplier.mif 0.0 -if multiplier_noNAN.mif
 
-mrcalc T1_pve_1.nii.gz multiplier_noNAN.mif -mult cgm.mif
+mrcalc $GMin multiplier_noNAN.mif -mult cgm.mif
 
-mrcalc T1_pve_2.nii.gz multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif
+mrcalc $WMin multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif
 
 mrcalc 0 wm.mif -min path.mif
 
@@ -94,7 +127,7 @@ mrconvert combined_precrop.mif result.mif
 
 mrconvert result.mif $2 -force
 
-mv $2 $workingdir
+rsync $2 $workingdir
 
 cd $workingdir
 
