@@ -7,6 +7,7 @@
 subj=$1
 WORKDIR=$2
 parctype=$3
+PRESEGDIR=$4
 
 rundir=$(pwd)
 baserundir=$(basename $rundir)
@@ -16,6 +17,15 @@ cd $WORKDIR/Diff/$subj/preproc
 fi
 
 SUBJECTS_DIR=${WORKDIR}/FS
+
+if [ -n "$4" ]; then
+echo "SEGMENTATION HAS ALREADY BEEN PERFORMED"
+
+subjPRESEGDIR=${WORKDIR}/${PRESEGDIR}/${subj}
+
+echo "Subject segmentations located in ${subjPRESEGDIR}"
+
+fi
 
 #prepare anatomical volume for segmentation, parcellation correction, and then co-registration to diffusion space
 
@@ -29,13 +39,11 @@ mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -nthreads $ncpus -force
 
 #flirt -in $FSLDIR/data/standard/MNI152_T1_1mm_brain.nii.gz -ref brainFS.nii -omat FS2mni.mat -dof 12 -applyxfm -init FS2mni.mat
 
-#5ttgen_alt brainFS.nii FS2mni.mat 5TTFSmasked.nii
+#5ttgen_alt brainFS.nii FS2mni.mat 5TTfsl.nii
 
 bet2 T1.nii T1bet -f 0.15
 
 mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -force
-
-flirt -ref T1bet.nii.gz -in brainFSsp.nii -dof 6 -out FS2FSL -omat FS2FSL.mat
 
 bet2 FS2FSL.nii.gz FS2FSLbet -f 0.15 -m
 
@@ -43,9 +51,20 @@ fslmaths T1bet.nii.gz -mas FS2FSLbet_mask.nii.gz T1betFSmasked.nii.gz
 
 fast -B --nopve T1betFSmasked.nii.gz
 
-5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTFSmasked.nii -nthreads $ncpus -force -tempdir . -nocleanup
+#5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTfsl.nii -nthreads $ncpus -force -tempdir . -nocleanup
 
-5tt2gmwmi 5TTFSmasked.nii 5TTgmwmi.nii -nthreads $ncpus -force
+if [ -n "$4" ]; then
+
+echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM.nii CSF.nii"
+5ttgen_manual T1.nii 5TT.nii ${subjPRESEGDIR}
+
+else
+
+5ttgen_manual T1.nii 5TT.nii
+
+fi
+
+5tt2gmwmi 5TT.nii 5TTgmwmi.nii -nthreads $ncpus -force
 
 if [ $parctype=="DES" ]; then
 	echo "${parctype} parcellation being constructed"
@@ -102,7 +121,7 @@ mv rFSrgstr.nii rFSrg.nii
 
 transformconvert FS2FSL.mat brainFSsp.nii T1bet.nii.gz flirt_import FS2FSLMR.mat -force
 
-mrtransform 5TTFSmasked.nii 5TTFSspmasked.nii -linear FS2FSLMR.mat -inverse -force
+mrtransform 5TTfsl.nii 5TTFSspmasked.nii -linear FS2FSLMR.mat -inverse -force
 
 mrtransform 5TTgmwmi.nii 5TTFSspgmwmi.nii -linear FS2FSLMR.mat -inverse -force
 
@@ -124,7 +143,7 @@ flirt -ref fa.nii -in parc_fixsubcortFS.nii.gz -applyxfm -init FS2diff.mat -out 
 #FS co-registration of T1 to diffusion image (& subsequent 5TT file)
 
 
-#mrconvert 5TTFSmasked.nii wmseg.nii -coord 3 2
+#mrconvert 5TTfsl.nii wmseg.nii -coord 3 2
 
 #flirt -ref brain.nii -in fa.nii -out DiffinFS -omat DiffinFS.mat -dof 6 -cost bbr  -wmseg wmseg.nii
 
@@ -132,7 +151,7 @@ flirt -ref fa.nii -in parc_fixsubcortFS.nii.gz -applyxfm -init FS2diff.mat -out 
 
 #mrtransform T1FS.nii -linear DiffinFSMR.mat rT1FSbbr.nii -force -inverse
 
-#mrtransform 5TTFSmasked.nii -linear FSinDiffMR.mat r5TTFSmasked.nii -force 
+#mrtransform 5TTfsl.nii -linear FSinDiffMR.mat r5TTfsl.nii -force 
 
 
 gunzip -f rparc_fixsubcort.nii.gz
