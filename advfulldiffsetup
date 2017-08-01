@@ -13,7 +13,6 @@ parc=DST
 ismultishell=1
 numfibers=25M
 
-
 #Full diffusion pipeline, from pre-processing to connectome construction - using the advanced version
 
 #Advanced preprocessing
@@ -23,7 +22,7 @@ advpreproc $subj $WORKDIR $ismosaic $isfullrevsequence $ismultiband
  
 #Segmentation, parcellation and co-registration of T1 images
 
-segparcandcoregT1 $subj $WORKDIR $parc
+segparcandcoregT1 $subj $WORKDIR $parc CATSEG
 
 #Fiber construction and connectome construction
 
