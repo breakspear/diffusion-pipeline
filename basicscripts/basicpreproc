@@ -13,12 +13,14 @@ mkdir -p $WORKDIR/Diff/$subj/preproc/${scannum}
 
 rsync *rawdata* $WORKDIR/Diff/$subj/preproc/${scannum}
 
-rsync *encoding* $WORKDIR/Diff/$subj/preproc/${scannum}
+rsync *.json $WORKDIR/Diff/$subj/preproc/${scannum}
 
 cd $WORKDIR/Diff/$subj/preproc/${scannum}
 
 
-#Import gradient table for MRtrix specs
+#Extract gradient table for MRtrix specs
+
+mrinfo rawdataAP.mif -export_grad_mrtrix rawencoding.b -force
 
 #mrconvert rawdata.nii.gz rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads $ncpus
 
