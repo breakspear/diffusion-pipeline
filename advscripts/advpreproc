@@ -42,17 +42,21 @@ mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 
 #if [ $ismosiac = 1 ] && [ $fullreverseseq = 1 ]; then
 
-#	mrconvert rawdataPA.mif rawdataPA.nii -force -nthreads $ncpus
-#	fslroi rawdataPA.nii rawdataPArem 1 $adjvols
-#	sed '1d' rawrevencoding.b > rawrevencodingrem.b
-#       mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
-#	mv rawdataPArem.mif rawdataPA.mif
+
+
+mrconvert rawdataPA.mif rawdataPA.nii -json_export json_rawdataPA.json -force -nthreads $ncpus
+nvols=$(fslnvols rawdataPA.nii)
+fslroi rawdataPA.nii rawdataPArem 1 $nvols
+sed '1d' rawrevencoding.b > rawrevencodingrem.b
+mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
+mv rawdataPArem.mif rawdataPA.mif
 	
 #else
 	
-#	dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
-#	mv rawdataPArem.mif rawdataPA.mif
-	
+dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
+mrconvert rawdataPArem.mif rawdataPA.mif -json_import json_rawdataPA.json -nthreads $ncpus -force
+rm rawdataPArem.mif	
+
 #fi
 
 #Denoise
@@ -102,7 +106,7 @@ dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force -
 bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
 
 dwibiascorrect -mask eddymeanb0bet_mask.nii.gz -fsl eddycorr.mif biascorr.mif -nthreads $ncpus -force
-dwishellmath biascorr.mif mean meanshell.mif -force
+dwishellmath biascorr.mif mean meanshell.nii -nthreads $ncpus -force
 
 #Create tensor and FA images
 

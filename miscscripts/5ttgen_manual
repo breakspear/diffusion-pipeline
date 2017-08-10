@@ -38,7 +38,7 @@ rsync $1 5ttgen_man
 
 cd 5ttgen_man
 
-#mrconvert $1 T1.nii -stride +1,+2,+3 -nthreads $ncpus -force
+mrconvert $1 T1.nii -stride +1,+2,+3 -nthreads $ncpus -force
 
 
 if [ ! -n "$3" ]; then

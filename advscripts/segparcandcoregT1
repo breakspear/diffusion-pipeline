@@ -62,11 +62,11 @@ fast -B --nopve T1betFSmasked.nii.gz
 if [ -n "$4" ]; then
 echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM.nii CSF.nii"
 
-5ttgen_manual T1.nii 5TT.nii ${subjPRESEGDIR}
+5ttgen_manual T1betFSmasked.nii.gz 5TT.nii ${subjPRESEGDIR}
 
 else
 
-5ttgen_manual T1.nii 5TT.nii
+5ttgen_manual T1betFSmasked.nii.gz 5TT.nii
 
 fi
 
