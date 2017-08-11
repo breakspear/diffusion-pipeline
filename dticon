@@ -29,7 +29,7 @@ mkdir ${WORKDIR}/batch
 
 while read line
 do
-	subj=$(echo $line | cut -d / -f 10)
+        subj=$(echo $line | cut -d / -f 8)
         scannum=$(basename $line)
 	subjDIRECTORY=$line
 	cp dtiblank ${WORKDIR}/batch/${SCRIPT}_${subj}_$scannum.sh
