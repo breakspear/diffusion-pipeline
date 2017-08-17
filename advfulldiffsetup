@@ -19,7 +19,7 @@ numfibers=25M
 #Advanced preprocessing
 #Parameters: mosaic fullrevsequence multiband (1 if yes)
 
-#advpreproc $subj $WORKDIR $ismosaic $isfullrevsequence $ismultiband
+advpreproc $subj $WORKDIR $ismosaic $isfullrevsequence $ismultiband
  
 #Segmentation, parcellation and co-registration of T1 images
 
