@@ -1,25 +1,5 @@
 #!/bin/bash
-#Template file which sets up PBS requirements for all jobs
-
-# All required resource statements start with "#PBS -l"
-# These will be interpreted by the job submission system (PBS pro)
-
-#PBS -v ncpus=8,MRTRIX=/software/mrtrix3/mrtrix3-20170707
-#PBS -l ncpus=8,mem=2G
-# *select* is the number of parallel processes
-# *ncpus* is the number of cores required by each process
-# *mem* is the amount of memory required by each process
-
-#PBS -l walltime=47:00:00
-# *walltime* is the total time required in hours:minutes:seconds
-# to run the job. 
-# Warning: all processes still running at the end of this period
-# of time will be killed and any temporary data will be erased.
-
-#PBS -m abe 
-#NOTE: if you want to receive notifications about job status, enter your QIMR email after the "abe" above
-# *m* situations under which to email a) aborted b) begin e) end
-# *M* email address to send emails to
+#Template file which sets up SGE requirements for all jobs
 
 export OMP_NUM_THREADS=8
 
@@ -30,20 +10,19 @@ pipedir=&&&&
 PATH=$PATH$( find $pipedir/ -not -path '*/\.*'  -type d -printf ":%p" )
 #export PATH:$PATH
 
-
 ####
 #Load all required software
-module load mrtrix3/20170707
-module load freesurfer/6.0.0
-module load ANTs/20160509
-module load fsl/5.0.9_eddy
+MRTRIXDIR=/clusterdata/apps/mrtrix3/bin
 
+FSLDIR=/clusterdata/apps/fsl
+. ${FSLDIR}/etc/fslconf/fsl.sh
 
-####
-#Setup dir for temp MRtrix files to be written - otherwise they get sent to nodes tmp dir
+export FREESURFER_HOME=/clusterdata/apps.freesurfer-6.0
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
-#WORKDIR=&&&&
-#echo "TempDir: ${WORKDIR}/tmp" > /mnt/lustre/$USER/.mrtrix.conf
+ANTsDIR=/clusterdata/apps/ANTs/bin
+
+export PATH=$PATH=${MRTRIXDIR}:${FSLDIR}:${ANTsDIR}:$PATH
 
 #Extract ID of subject and their corresponding folder holding raw image files
 
