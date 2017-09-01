@@ -7,4 +7,5 @@ WORKDIR=$2
 SUBJECTS_DIR=${WORKDIR}/FS
 mkdir -p ${SUBJECTS_DIR}
 
-recon-all -all -i T1.nii -subjid $subj -sd $SUBJECTS_DIR -no-isrunning -mprage
+mrconvert ${WORKDIR}/${subj}/MP2RAGE/UNIDEN/*uniden* ${WORKDIR}/${subj}/MP2RAGE/UNIDEN/T1.nii -stride +1,2,3 -force -nothreads 1
+recon-all -all -i ${WORKDIR}/${subj}/MP2RAGE/UNIDEN/T1.nii -subjid $subj -sd $SUBJECTS_DIR -no-isrunning -mp2rage
