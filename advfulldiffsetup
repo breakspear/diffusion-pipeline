@@ -6,8 +6,7 @@ WORKDIR=$2
 #FS_DIR=$3
 
 #arguments to be set
-ismosaic=1
-isfullrevsequence=0
+isfullrevsequence=1
 ismultiband=1
 parc=DST
 ismultishell=1
@@ -19,11 +18,11 @@ numfibers=25M
 #Advanced preprocessing
 #Parameters: mosaic fullrevsequence multiband (1 if yes)
 
-advpreproc $subj $WORKDIR $ismosaic $isfullrevsequence $ismultiband
+advpreproc $subj $WORKDIR $isfullrevsequence $ismultiband
  
 #Segmentation, parcellation and co-registration of T1 images
 
-segparcandcoregT1 $subj $WORKDIR $parc CATSEG
+segparcandcoregT1 $subj $WORKDIR $parc
 
 #Fiber construction and connectome construction
 
