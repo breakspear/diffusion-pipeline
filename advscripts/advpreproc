@@ -6,17 +6,24 @@
 
 subj=$1
 WORKDIR=$2
-ismosiac=$3
-fullreverseseq=$4
-ismultiband=$5
+fullreverseseq=$3
+ismultiband=$4
 
 mkdir -p $WORKDIR/Diff/$subj/preproc 
 
-rsync *rawdata* $WORKDIR/Diff/$subj/preproc
+mrconvert ${WORKDIR}/Raw/${subj}/A-P_BLOCK_1 $WORKDIR/Diff/$subj/preproc/rawdataAP1.mif -stride +1,2,3,4 -force -nthreads 1
+mrconvert ${WORKDIR}/Raw/${subj}/A-P_BLOCK_2 $WORKDIR/Diff/$subj/preproc/rawdataAP2.mif -stride +1,2,3,4 -force -nthreads 1
+mrconvert ${WORKDIR}/Raw/${subj}/P-A_BLOCK_1 $WORKDIR/Diff/$subj/preproc/rawdataPA1.mif -stride +1,2,3,4 -force -nthreads 1
+mrconvert ${WORKDIR}/Raw/${subj}/P-A_BLOCK_2 $WORKDIR/Diff/$subj/preproc/rawdataPA2.mif -stride +1,2,3,4 -force -nthreads 1
 
-rsync T1.nii $WORKDIR/Diff/$subj/preproc
+rsync ${WORKDIR}/${subj}/MP2RAGE/UNIDEN/T1.nii $WORKDIR/Diff/$subj/preproc
 
 cd $WORKDIR/Diff/$subj/preproc
+
+
+#combine blocks
+mrcat rawdataAP1.mif rawdataAP2.mif rawdataAP.mif -axis 3 -nthreads 1 -force
+mrcat rawdataPA1.mif rawdataPA2.mif rawdataAP.mif -axis 3 -nthreads 1 -force	
 
 #Extract encoding
 
@@ -44,18 +51,18 @@ mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 
 
 
-mrconvert rawdataPA.mif rawdataPA.nii -json_export json_rawdataPA.json -force -nthreads $ncpus
-nvols=$(fslnvols rawdataPA.nii)
-fslroi rawdataPA.nii rawdataPArem 1 $nvols
-sed '1d' rawrevencoding.b > rawrevencodingrem.b
-mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
-mv rawdataPArem.mif rawdataPA.mif
+#mrconvert rawdataPA.mif rawdataPA.nii -json_export json_rawdataPA.json -force -nthreads $ncpus
+#nvols=$(fslnvols rawdataPA.nii)
+#fslroi rawdataPA.nii rawdataPArem 1 $nvols
+#sed '1d' rawrevencoding.b > rawrevencodingrem.b
+#mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
+#mv rawdataPArem.mif rawdataPA.mif
 	
 #else
 	
-dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
-mrconvert rawdataPArem.mif rawdataPA.mif -json_import json_rawdataPA.json -nthreads $ncpus -force
-rm rawdataPArem.mif	
+#dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
+#mrconvert rawdataPArem.mif rawdataPA.mif -json_import json_rawdataPA.json -nthreads $ncpus -force
+#rm rawdataPArem.mif	
 
 #fi
 
