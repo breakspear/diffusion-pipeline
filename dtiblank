@@ -17,7 +17,7 @@ MRTRIXDIR=/clusterdata/apps/mrtrix3/bin
 FSLDIR=/clusterdata/apps/fsl
 . ${FSLDIR}/etc/fslconf/fsl.sh
 
-export FREESURFER_HOME=/clusterdata/apps.freesurfer-6.0
+export FREESURFER_HOME=/clusterdata/apps/freesurfer-6.0
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 ANTsDIR=/clusterdata/apps/ANTs/bin
