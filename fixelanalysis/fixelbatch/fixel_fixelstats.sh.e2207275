@@ -1,0 +1,5 @@
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/fixelstats: line 15: ${print $NF}: bad substitution
+fixelcfestats: number of fixels: 71900
+fixelcfestats: preloading data for "fdc/directions.mif"...  [=]
+fixelcfestats: loading template fixel directions and positions...  [==================================================]
+fixelcfestats: [ERROR] number of input files does not match number of rows in design matrix

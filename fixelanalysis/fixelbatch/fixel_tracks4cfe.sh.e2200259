@@ -1,0 +1,4 @@
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/tracks4cfe: line 11: cd: /mnt/data/alistairp/Park//working/lab_michaebr/alistaiP/Park/AFD4: No such file or directory
+tckgen: [ERROR] failed to open key/value file "voxel_mask.mif": No such file or directory
+tckgen: [ERROR] error opening image "voxel_mask.mif"
+tcksift: [ERROR] required input file "tracks_20_million.tck" not found

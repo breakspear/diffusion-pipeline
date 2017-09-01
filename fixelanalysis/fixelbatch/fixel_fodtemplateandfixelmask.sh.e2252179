@@ -1,0 +1,34 @@
+mkdir: cannot create directory ‘templateoutput’: File exists
+population_template: numpy not found. using replacement functions
+population_template: [03;32mGenerating a population-average template from 33 input images[0m
+population_template: [01;31m[ERROR] mask directory not found[0m
+population_template: [03;32mChanging back to original directory (/mnt/lustre/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp)[0m
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrresize: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mv: cannot stat ‘./templateoutput/fod_template_rg.mif’: No such file or directory
+warpconvert: [WARNING] existing output files will be overwritten
+warpconvert: [ERROR] failed to open key/value file "./templateoutput/warps/*.mif": No such file or directory
+warpconvert: [ERROR] error opening image "./templateoutput/warps/*.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [ERROR] failed to open key/value file "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/*.mif_wm.mif": No such file or directory
+mrregister: [ERROR] error opening image "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/*.mif_wm.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/*.mif": No such file or directory
+mrtransform: [ERROR] error opening image "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/*.mif"
+mrmath: [WARNING] existing output files will be overwritten
+mrmath: [ERROR] mrmath requires either multiple input images, or the -axis option to be provided
+fod2fixel: [WARNING] existing output files will be overwritten
+fod2fixel: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+fod2fixel: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: [ERROR] failed to open key/value file "./templateoutput/fixeltemp/peaks.mif": No such file or directory
+mrthreshold: [ERROR] error opening image "./templateoutput/fixeltemp/peaks.mif"
+mrfilter: [WARNING] existing output files will be overwritten
+fixel2voxel: [ERROR] failed to open key/value file "./templateoutput/fixeltemp/mask.mif": No such file or directory
+fixel2voxel: [ERROR] error opening image "./templateoutput/fixeltemp/mask.mif"
+mrfilter: [ERROR] no filename supplied to standard input (broken pipe?)
+mrfilter: [ERROR] error opening image "-"
+fod2fixel: [WARNING] existing output files will be overwritten
+fod2fixel: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+fod2fixel: [ERROR] error opening image "./templateoutput/fod_template.mif"

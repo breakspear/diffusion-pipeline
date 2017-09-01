@@ -1,0 +1,42 @@
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: [  0%]        1 seeds,        1 streamlines,        1 selected
+tckgen: [  0%]       11 seeds,        9 streamlines,        8 selected
+tckgen: [  0%]       21 seeds,       18 streamlines,       15 selected
+tckgen: [  0%]       81 seeds,       72 streamlines,       58 selected
+tckgen: [  0%]      211 seeds,      194 streamlines,      163 selected
+tckgen: [  0%]      561 seeds,      524 streamlines,      455 selected
+tckgen: [  0%]     1661 seeds,     1572 streamlines,     1365 selected
+tckgen: [  0%]     4251 seeds,     4056 streamlines,     3547 selected
+tckgen: [  0%]     9671 seeds,     9225 streamlines,     8072 selected
+tckgen: [  0%]    19771 seeds,    18847 streamlines,    16474 selected
+tckgen: [  0%]    38881 seeds,    37125 streamlines,    32404 selected
+tckgen: [  0%]    76211 seeds,    72746 streamlines,    63539 selected
+tckgen: [  0%]   157161 seeds,   150009 streamlines,   130959 selected
+tckgen: [  1%]   331401 seeds,   316078 streamlines,   276050 selected
+tckgen: [  2%]   689301 seeds,   657858 streamlines,   574438 selected
+tckgen: [  5%]  1392781 seeds,  1329408 streamlines,  1160881 selected
+tckgen: [ 11%]  2823381 seeds,  2695334 streamlines,  2353395 selected
+tckgen: [ 23%]  5642681 seeds,  5387625 streamlines,  4704126 selected
+tckgen: [ 43%] 10415671 seeds,  9944378 streamlines,  8682731 selected
+tckgen: [ 78%] 18852251 seeds, 17999737 streamlines, 15716560 selected
+tckgen: [100%] 23992416 seeds, 22907487 streamlines, 20000000 selected
+tcksift: [WARNING] existing output files will be overwritten
+tcksift: Creating homogeneous processing mask...  [==================================================]
+tcksift: segmenting FODs...  [==================================================]
+tcksift: mapping tracks to image...  [==================================================]
+tcksift:        Iteration     Removed     Remaining     Cost fn
+tcksift: [   .]       2       124831      19802513       95.52%
+tcksift: [ .  ]       3       166609      19635904       92.66%
+tcksift: [  . ]       4        89559      19546345       91.30%
+tcksift: [   .]       6       146347      19247905       87.54%
+tcksift: [ .  ]      10       162998      18729492       82.57%
+tcksift: [ .  ]      18       152756      17630131       74.59%
+tcksift: [  . ]      34        90478      16033761       66.01%
+tcksift: [   .]      66        62549      13912005       57.57%
+tcksift: [  . ]     130        32450      11533286       50.95%
+tcksift: [ .  ]     258        18334       9096097       46.19%
+tcksift: [  . ]     514         9168       6718295       42.60%
+tcksift: [  . ]    1026         3356       4559765       39.72%
+tcksift: [   .]    2050          433       2852222       37.51%
+tcksift: [done]    3261          541       2000000       36.36%
+tcksift: Writing filtered tracks output file...  [==================================================]

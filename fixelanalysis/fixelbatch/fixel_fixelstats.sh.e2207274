@@ -1,0 +1,4 @@
+fixelcfestats: number of fixels: 71900
+fixelcfestats: preloading data for "fdc/directions.mif"...  [=]
+fixelcfestats: loading template fixel directions and positions...  [==================================================]
+fixelcfestats: [ERROR] input fixel image not found: fdc//working/lab_michaebr/alistaiP/Park/AFD4/templateoutput/fixels/fdc/Patient_029.mif

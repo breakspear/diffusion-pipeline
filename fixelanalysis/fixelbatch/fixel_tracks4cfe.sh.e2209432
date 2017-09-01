@@ -1,0 +1,5 @@
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: [ERROR] unknown format for image "voxelmask"
+tckgen: [ERROR] error opening image "voxelmask"
+tcksift: [WARNING] existing output files will be overwritten
+tcksift: [ERROR] required input file "tracks_20_million_defang.tck" not found

@@ -1,0 +1,17 @@
+tckgen: [  0%]        1 seeds,        1 streamlines,        1 selected
+tckgen: [  0%]       81 seeds,       79 streamlines,       62 selected
+tckgen: [  0%]      111 seeds,      108 streamlines,       88 selected
+tckgen: [  0%]      211 seeds,      207 streamlines,      173 selected
+tckgen: [  0%]      541 seeds,      526 streamlines,      446 selected
+tckgen: [  0%]     1301 seeds,     1278 streamlines,     1078 selected
+tckgen: [  0%]     3371 seeds,     3298 streamlines,     2755 selected
+tckgen: [  0%]     9211 seeds,     9005 streamlines,     7543 selected
+tckgen: [  0%]    24231 seeds,    23679 streamlines,    19754 selected
+tckgen: [  0%]    56281 seeds,    54927 streamlines,    45920 selected
+tckgen: [  0%]   122661 seeds,   119795 streamlines,   100106 selected
+tckgen: [  1%]   255521 seeds,   249556 streamlines,   208793 selected
+tckgen: [  2%]   520521 seeds,   508251 streamlines,   425535 selected
+tckgen: [  4%]  1054951 seeds,  1030125 streamlines,   862656 selected
+tckgen: [  8%]  2095161 seeds,  2045930 streamlines,  1713727 selected
+
+tckgen: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command

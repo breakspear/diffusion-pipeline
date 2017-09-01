@@ -1,0 +1,333 @@
+mkdir: cannot create directory ‘/working/lab_michaebr/alistaiP/Park/AFD4/upsample’: File exists
+mkdir: cannot create directory ‘/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI’: File exists
+mkdir: cannot create directory ‘/working/lab_michaebr/alistaiP/Park/AFD4/upsample/Masks’: File exists
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_035_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_039_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_038_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_034_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_030_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_032_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_037_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_029_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_040_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_031_DWI.mif"...  [==============================================================================================================================================================================================================================================================================================================================================================================================================]
+=====]
+==========mrresize: [WARNING] existing output files will be overwritten
+==mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_041_DWI.mif"...  [mrresize: [WARNING] existing output files will be overwritten
+======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_042_DWI.mif"...  [===============]
+================mrresize: [WARNING] existing output files will be overwritten
+===mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_043_DWI.mif"...  [=========================]
+===========]
+=mrresize: [WARNING] existing output files will be overwritten
+====mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_044_DWI.mif"...  [============================mrresize: [WARNING] existing output files will be overwritten
+===mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_045_DWI.mif"...  [======]
+======]
+===]
+====mrresize: [WARNING] existing output files will be overwritten
+=mrresize: [WARNING] existing output files will be overwritten
+=]
+=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_046_DWI.mif"...  [===mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_047_DWI.mif"...  [=mrresize: [WARNING] existing output files will be overwritten
+======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_048_DWI.mif"...  [=====]
+===========mrresize: [WARNING] existing output files will be overwritten
+============mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_049_DWI.mif"...  [====mrresize: [WARNING] existing output files will be overwritten
+=====mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_050_DWI.mif"...  [===========================================================================================================================================================================================================================]
+===========mrresize: [WARNING] existing output files will be overwritten
+===]
+=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_051_DWI.mif"...  [=============mrresize: [WARNING] existing output files will be overwritten
+=======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_052_DWI.mif"...  [===================================================]
+=============mrresize: [WARNING] existing output files will be overwritten
+=======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_053_DWI.mif"...  [==========================]
+======================]
+=]
+=======mrresize: [WARNING] existing output files will be overwritten
+==mrresize: [WARNING] existing output files will be overwritten
+=mrresize: [WARNING] existing output files will be overwritten
+=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_054_DWI.mif"...  [==mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_055_DWI.mif"...  [===mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_056_DWI.mif"...  [=======================]
+============mrresize: [WARNING] existing output files will be overwritten
+======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_057_DWI.mif"...  [==]
+=============mrresize: [WARNING] existing output files will be overwritten
+======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_058_DWI.mif"...  [=======================================]
+==========================================================mrresize: [WARNING] existing output files will be overwritten
+=======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_060_DWI.mif"...  [=====================================]
+========mrresize: [WARNING] existing output files will be overwritten
+====mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_061_DWI.mif"...  [========================================================================================================================]
+============mrresize: [WARNING] existing output files will be overwritten
+===mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_062_DWI.mif"...  [========================]
+======================================================mrresize: [WARNING] existing output files will be overwritten
+=====]
+==mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_063_DWI.mif"...  [===========mrresize: [WARNING] existing output files will be overwritten
+=========mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_064_DWI.mif"...  [=]
+==============================]
+===================]
+=====]
+======]
+======================================================================]
+===========================]
+===========================]
+=============]
+===========]
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_032_Mask.nii.gz"...  [=mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_034_Mask.nii.gz"...  [=mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_035_Mask.nii.gz"...  [========mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_040_Mask.nii.gz"...  [==mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_038_Mask.nii.gz"...  [==mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_031_Mask.nii.gz"...  [=====mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_037_Mask.nii.gz"...  [===]
+mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_030_Mask.nii.gz"...  [=]
+=]
+===mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_039_Mask.nii.gz"...  [======mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_029_Mask.nii.gz"...  [=====]
+==]
+==]
+]
+====]
+=]
+=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_032_Mask.nii.gz"...  [=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_034_Mask.nii.gz"...  [=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_040_Mask.nii.gz"...  []
+mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_035_Mask.nii.gz"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_038_Mask.nii.gz"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_037_Mask.nii.gz"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_031_Mask.nii.gz"...  [===mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_039_Mask.nii.gz"...  [=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_029_Mask.nii.gz"...  [==mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_030_Mask.nii.gz"...  [====================================================================================================================================================]
+========================================]
+==================mrresize: [WARNING] existing output files will be overwritten
+==================mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_041_Mask.nii.gz"...  [==========mrresize: [WARNING] existing output files will be overwritten
+==================mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_042_Mask.nii.gz"...  [======]
+=============================]
+=======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_041_Mask.nii.gz"...  [=======================mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_042_Mask.nii.gz"...  [========]
+==================================]
+==========]
+==]
+==mrresize: [WARNING] existing output files will be overwritten
+=====================]
+====]
+=]
+=========]
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+=mrresize: [WARNING] existing output files will be overwritten
+=mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_043_Mask.nii.gz"...  [==========mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_044_Mask.nii.gz"...  [==mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_045_Mask.nii.gz"...  [====mrresize: [WARNING] existing output files will be overwritten
+====mrresize: [WARNING] existing output files will be overwritten
+=mrresize: [WARNING] existing output files will be overwritten
+]
+==mrresize: [WARNING] existing output files will be overwritten
+==========]
+=]
+===mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_049_Mask.nii.gz"...  [=====mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_046_Mask.nii.gz"...  [=mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_047_Mask.nii.gz"...  [====]
+=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_043_Mask.nii.gz"...  [=======]
+=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_044_Mask.nii.gz"...  [mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_048_Mask.nii.gz"...  [==]
+mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_050_Mask.nii.gz"...  [=======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_045_Mask.nii.gz"...  [===]
+=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_047_Mask.nii.gz"...  [===mrresize: [WARNING] existing output files will be overwritten
+]
+==mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_049_Mask.nii.gz"...  [=]
+=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_046_Mask.nii.gz"...  [==mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_048_Mask.nii.gz"...  [=====mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_050_Mask.nii.gz"...  [=========mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_051_Mask.nii.gz"...  [==============================]
+=================================]
+=======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_051_Mask.nii.gz"...  [=========================================mrresize: [WARNING] existing output files will be overwritten
+================mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_052_Mask.nii.gz"...  [====================================]
+========================]
+========mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_052_Mask.nii.gz"...  [=====================================mrresize: [WARNING] existing output files will be overwritten
+===================================]
+=============]
+mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_053_Mask.nii.gz"...  [================]
+====================mrresize: [WARNING] existing output files will be overwritten
+]
+=======mrresize: [WARNING] existing output files will be overwritten
+===========mrresize: [WARNING] existing output files will be overwritten
+===]
+mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_055_Mask.nii.gz"...  [=======mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_053_Mask.nii.gz"...  [================]
+===mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_054_Mask.nii.gz"...  [=========]
+===]
+====mrresize: [WARNING] existing output files will be overwritten
+=======]
+mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_055_Mask.nii.gz"...  [=mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_057_Mask.nii.gz"...  [=============]
+=]
+=mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_056_Mask.nii.gz"...  [=]
+mrresize: [WARNING] existing output files will be overwritten
+====mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_054_Mask.nii.gz"...  [mrresize: [WARNING] existing output files will be overwritten
+mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_058_Mask.nii.gz"...  [====mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_057_Mask.nii.gz"...  [====mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_060_Mask.nii.gz"...  [=====mrresize: [WARNING] existing output files will be overwritten
+=mrresize: [WARNING] existing output files will be overwritten
+=]
+]
+======mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_062_Mask.nii.gz"...  [==mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_061_Mask.nii.gz"...  []
+===]
+========mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_058_Mask.nii.gz"...  [=====]
+=====]
+====mrresize: [WARNING] existing output files will be overwritten
+=mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_060_Mask.nii.gz"...  [===mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_056_Mask.nii.gz"...  [==========mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_061_Mask.nii.gz"...  [=====mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_062_Mask.nii.gz"...  [=====mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_063_Mask.nii.gz"...  [===========================]
+==========================mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_063_Mask.nii.gz"...  [=========================================]
+========================================mrresize: [WARNING] existing output files will be overwritten
+=================mrresize: uncompressing image "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_064_Mask.nii.gz"...  [=====================]
+===========]
+========================================mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/Masks/Patient_064_Mask.nii.gz"...  [=]
+=======================================]
+========]
+===================================================]
+==============]
+==]
+=]
+================]
+===========================]
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_035_DWI.mif"...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_037_DWI.mif"...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_032_DWI.mif"...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_029_DWI.mif"...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_038_DWI.mif"...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_040_DWI.mif"...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_031_DWI.mif"...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_034_DWI.mif"...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_030_DWI.mif"...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_039_DWI.mif"...  [=================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [====]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==========]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [=]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [===]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [========]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [====]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [===============================================================================================================================================================================================================================================================================================================================================================================================]
+==dwi2fod: [WARNING] existing output files will be overwritten
+=dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_041_DWI.mif"...  [==========================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==============================]
+=====dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_042_DWI.mif"...  [=======================================]
+====dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_043_DWI.mif"...  [=====================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [=========================]
+==dwi2fod: [WARNING] existing output files will be overwritten
+=dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_044_DWI.mif"...  [========================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==================================================]
+===dwi2fod: [WARNING] existing output files will be overwritten
+=]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_045_DWI.mif"...  [=======================]
+===========dwi2fod: [WARNING] existing output files will be overwritten
+==dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_046_DWI.mif"...  [====================================================]
+===========dwi2fod: [WARNING] existing output files will be overwritten
+==dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_047_DWI.mif"...  [===]
+=======]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [=======dwi2fod: [WARNING] existing output files will be overwritten
+=dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_048_DWI.mif"...  [==============================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==========================================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [============]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==================================]
+=dwi2fod: [WARNING] existing output files will be overwritten
+=dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_049_DWI.mif"...  [============]
+=============dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_050_DWI.mif"...  [=======================================================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==============]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [=========================================================================================================================================================================================================================================================================================]
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_051_DWI.mif"...  [========================================================]
+===dwi2fod: [WARNING] existing output files will be overwritten
+=dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_052_DWI.mif"...  [==]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [===================================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==]
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_053_DWI.mif"...  [==================================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [=========================]
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_054_DWI.mif"...  [=================================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [=]
+===dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_055_DWI.mif"...  [===================================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==========]
+==dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_056_DWI.mif"...  [==================================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [======]
+==dwi2fod: [WARNING] existing output files will be overwritten
+=dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_057_DWI.mif"...  [======================================]
+====dwi2fod: [WARNING] existing output files will be overwritten
+=dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_058_DWI.mif"...  [===========================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [====================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [==========]
+=dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_060_DWI.mif"...  [===============================]
+============dwi2fod: [WARNING] existing output files will be overwritten
+==dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_061_DWI.mif"...  [===================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [===================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [=================================================================================================================================================================================================================================================================]
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_062_DWI.mif"...  [============================================]
+=====dwi2fod: [WARNING] existing output files will be overwritten
+=dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_063_DWI.mif"...  [===============]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [============================================================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [=======================================================]
+=====dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI/Patient_064_DWI.mif"...  [===============]
+============]
+=============]
+============================]
+dwi2fod: performing multi-shell, multi-tissue CSD...  [===================================]
+========]
+=================]
+============]
+=======================================================]
+===================]
+===========]
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "/working/l.../FODS/wm/Patient_034_wm.mif" to "/working/l...S/wm/Patient_034_wm_str.mif"...  [mrconvert: copying from "/working/l.../FODS/wm/Patient_030_wm.mif" to "/working/l...S/wm/Patient_030_wm_str.mif"...  [mrconvert: copying from "/working/l.../FODS/wm/Patient_031_wm.mif" to "/working/l...S/wm/Patient_031_wm_str.mif"...  [mrconvert: copying from "/working/l.../FODS/wm/Patient_038_wm.mif" to "/working/l...S/wm/Patient_038_wm_str.mif"...  [mrconvert: copying from "/working/l.../FODS/wm/Patient_039_wm.mif" to "/working/l...S/wm/Patient_039_wm_str.mif"...  [mrconvert: copying from "/working/l.../FODS/wm/Patient_029_wm.mif" to "/working/l...S/wm/Patient_029_wm_str.mif"...  [mrconvert: copying from "/working/l.../FODS/wm/Patient_032_wm.mif" to "/working/l...S/wm/Patient_032_wm_str.mif"...  [mrconvert: copying from "/working/l.../FODS/wm/Patient_040_wm.mif" to "/working/l...S/wm/Patient_040_wm_str.mif"...  [mrconvert: copying from "/working/l.../FODS/wm/Patient_037_wm.mif" to "/working/l...S/wm/Patient_037_wm_str.mif"...  [mrconvert: copying from "/working/l.../FODS/wm/Patient_035_wm.mif" to "/working/l...S/wm/Patient_035_wm_str.mif"...  [==================================================================================================================================================================================================================================================================================================================================================================================================================]
+===]
+=========]
+========================mrconvert: [WARNING] existing output files will be overwritten
+=======]
+==mrconvert: copying from "/working/l.../FODS/wm/Patient_041_wm.mif" to "/working/l...S/wm/Patient_041_wm_str.mif"...  [===mrconvert: [WARNING] existing output files will be overwritten
+===mrconvert: [WARNING] existing output files will be overwritten
+=========mrconvert: copying from "/working/l.../FODS/wm/Patient_042_wm.mif" to "/working/l...S/wm/Patient_042_wm_str.mif"...  [===mrconvert: copying from "/working/l.../FODS/wm/Patient_043_wm.mif" to "/working/l...S/wm/Patient_043_wm_str.mif"...  [================]
+==============mrconvert: [WARNING] existing output files will be overwritten
+==]
+===========mrconvert: copying from "/working/l.../FODS/wm/Patient_044_wm.mif" to "/working/l...S/wm/Patient_044_wm_str.mif"...  [===]
+=]
+========mrconvert: [WARNING] existing output files will be overwritten
+==========]
+=mrconvert: copying from "/working/l.../FODS/wm/Patient_045_wm.mif" to "/working/l...S/wm/Patient_045_wm_str.mif"...  [=====mrconvert: [WARNING] existing output files will be overwritten
+========mrconvert: copying from "/working/l.../FODS/wm/Patient_046_wm.mif" to "/working/l...S/wm/Patient_046_wm_str.mif"...  [====]
+===mrconvert: [WARNING] existing output files will be overwritten
+===========mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: copying from "/working/l.../FODS/wm/Patient_047_wm.mif" to "/working/l...S/wm/Patient_047_wm_str.mif"...  [============mrconvert: copying from "/working/l.../FODS/wm/Patient_048_wm.mif" to "/working/l...S/wm/Patient_048_wm_str.mif"...  [====mrconvert: [WARNING] existing output files will be overwritten
+========mrconvert: copying from "/working/l.../FODS/wm/Patient_049_wm.mif" to "/working/l...S/wm/Patient_049_wm_str.mif"...  [==mrconvert: [WARNING] existing output files will be overwritten
+================mrconvert: copying from "/working/l.../FODS/wm/Patient_050_wm.mif" to "/working/l...S/wm/Patient_050_wm_str.mif"...  [========================================================================================================================================================================================]
+=======================mrconvert: [WARNING] existing output files will be overwritten
+=============mrconvert: copying from "/working/l.../FODS/wm/Patient_051_wm.mif" to "/working/l...S/wm/Patient_051_wm_str.mif"...  [=================================================]
+==================================================================mrconvert: [WARNING] existing output files will be overwritten
+====]
+=============mrconvert: copying from "/working/l.../FODS/wm/Patient_052_wm.mif" to "/working/l...S/wm/Patient_052_wm_str.mif"...  [=======================]
+===]
+====]
+==============mrconvert: [WARNING] existing output files will be overwritten
+===========]
+=mrconvert: copying from "/working/l.../FODS/wm/Patient_053_wm.mif" to "/working/l...S/wm/Patient_053_wm_str.mif"...  [=========mrconvert: [WARNING] existing output files will be overwritten
+==]
+=======mrconvert: copying from "/working/l.../FODS/wm/Patient_054_wm.mif" to "/working/l...S/wm/Patient_054_wm_str.mif"...  [mrconvert: [WARNING] existing output files will be overwritten
+=====mrconvert: [WARNING] existing output files will be overwritten
+======mrconvert: copying from "/working/l.../FODS/wm/Patient_055_wm.mif" to "/working/l...S/wm/Patient_055_wm_str.mif"...  [=====mrconvert: copying from "/working/l.../FODS/wm/Patient_056_wm.mif" to "/working/l...S/wm/Patient_056_wm_str.mif"...  [=====================]
+===============================mrconvert: [WARNING] existing output files will be overwritten
+=============mrconvert: [WARNING] existing output files will be overwritten
+==mrconvert: copying from "/working/l.../FODS/wm/Patient_057_wm.mif" to "/working/l...S/wm/Patient_057_wm_str.mif"...  [======]
+=====mrconvert: copying from "/working/l.../FODS/wm/Patient_058_wm.mif" to "/working/l...S/wm/Patient_058_wm_str.mif"...  [======mrconvert: [WARNING] existing output files will be overwritten
+==============mrconvert: copying from "/working/l.../FODS/wm/Patient_060_wm.mif" to "/working/l...S/wm/Patient_060_wm_str.mif"...  [======]
+=======================mrconvert: [WARNING] existing output files will be overwritten
+==============mrconvert: copying from "/working/l.../FODS/wm/Patient_061_wm.mif" to "/working/l...S/wm/Patient_061_wm_str.mif"...  [========mrconvert: [WARNING] existing output files will be overwritten
+=============mrconvert: copying from "/working/l.../FODS/wm/Patient_062_wm.mif" to "/working/l...S/wm/Patient_062_wm_str.mif"...  [================================================================================================================================================================================================]
+==========]
+=]
+=================================mrconvert: [WARNING] existing output files will be overwritten
+=======mrconvert: [WARNING] existing output files will be overwritten
+========mrconvert: copying from "/working/l.../FODS/wm/Patient_063_wm.mif" to "/working/l...S/wm/Patient_063_wm_str.mif"...  [=======mrconvert: copying from "/working/l.../FODS/wm/Patient_064_wm.mif" to "/working/l...S/wm/Patient_064_wm_str.mif"...  [====]
+===================================================]
+==================]
+=============]
+===========================================]
+=]
+=========]
+===]
+==========================================]

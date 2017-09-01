@@ -1,0 +1,407 @@
+mkdir: cannot create directory ‘templateoutput’: File exists
+population_template: numpy not found. using replacement functions
+population_template: [03;32mGenerating a population-average template from 33 input images[0m
+population_template: [03;32mSH Series detected, performing FOD registration[0m
+population_template: [03;32minitial alignment of images: mass[0m
+population_template: [03;32mlinear registration stages:[0m
+population_template: [03;32m(00) rigid     scale: 0.3000, niter: 100, lmax: 2[0m
+population_template: [03;32m(01) rigid     scale: 0.4000, niter: 100, lmax: 2[0m
+population_template: [03;32m(02) rigid     scale: 0.6000, niter: 100, lmax: 2[0m
+population_template: [03;32m(03) rigid     scale: 0.8000, niter: 100, lmax: 4[0m
+population_template: [03;32m(04) rigid     scale: 1.0000, niter: 100, lmax: 4[0m
+population_template: [03;32m(05) rigid     scale: 1.0000, niter: 100, lmax: 4[0m
+population_template: [03;32m(06) affine    scale: 0.3000, niter: 500, lmax: 2[0m
+population_template: [03;32m(07) affine    scale: 0.4000, niter: 500, lmax: 2[0m
+population_template: [03;32m(08) affine    scale: 0.6000, niter: 500, lmax: 2[0m
+population_template: [03;32m(09) affine    scale: 0.8000, niter: 500, lmax: 4[0m
+population_template: [03;32m(10) affine    scale: 1.0000, niter: 500, lmax: 4[0m
+population_template: [03;32m(11) affine    scale: 1.0000, niter: 500, lmax: 4[0m
+population_template: [03;32mnonlinear registration stages:[0m
+population_template: [03;32m(00) nonlinear scale: 0.3000, niter: 5, lmax: 2[0m
+population_template: [03;32m(01) nonlinear scale: 0.4000, niter: 5, lmax: 2[0m
+population_template: [03;32m(02) nonlinear scale: 0.5000, niter: 5, lmax: 2[0m
+population_template: [03;32m(03) nonlinear scale: 0.6000, niter: 5, lmax: 2[0m
+population_template: [03;32m(04) nonlinear scale: 0.7000, niter: 5, lmax: 2[0m
+population_template: [03;32m(05) nonlinear scale: 0.8000, niter: 5, lmax: 2[0m
+population_template: [03;32m(06) nonlinear scale: 0.9000, niter: 5, lmax: 2[0m
+population_template: [03;32m(07) nonlinear scale: 1.0000, niter: 5, lmax: 2[0m
+population_template: [03;32m(08) nonlinear scale: 1.0000, niter: 5, lmax: 4[0m
+population_template: [03;32m(09) nonlinear scale: 1.0000, niter: 5, lmax: 4[0m
+population_template: [03;32m(10) nonlinear scale: 1.0000, niter: 5, lmax: 4[0m
+population_template: [03;32m(11) nonlinear scale: 1.0000, niter: 5, lmax: 4[0m
+population_template: [03;32m(12) nonlinear scale: 1.0000, niter: 5, lmax: 4[0m
+population_template: [03;32m(13) nonlinear scale: 1.0000, niter: 5, lmax: 4[0m
+population_template: [03;32m(14) nonlinear scale: 1.0000, niter: 5, lmax: 4[0m
+population_template: [03;32m(15) nonlinear scale: 1.0000, niter: 5, lmax: 4[0m
+population_template: [03;32mGenerated temporary directory: /mnt/lustre/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/population_template-tmp-VAX6FT/[0m
+population_template: [03;32mChanging to temporary directory (/mnt/lustre/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/population_template-tmp-VAX6FT/)[0m
+population_template: [03;32mGenerating initial template[0m
+[03;36mCommand:[0m  mraverageheader /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_029_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_030_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_031_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_032_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_034_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_035_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_037_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_038_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_039_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_040_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_041_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_042_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_043_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_044_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_045_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_046_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_047_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_048_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_049_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_050_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_051_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_052_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_053_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_054_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_055_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_056_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_057_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_058_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_060_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_061_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_062_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_063_wm.mif /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_064_wm.mif average_header.mif -fill
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_029_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_029_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_030_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_030_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_031_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_031_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_032_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_032_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_034_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_034_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_035_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_035_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_037_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_037_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_038_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_038_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_039_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_039_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_040_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_040_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_041_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_041_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_042_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_042_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_043_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_043_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_044_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_044_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_045_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_045_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_046_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_046_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_047_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_047_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_048_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_048_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_049_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_049_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_050_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_050_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_051_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_051_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_052_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_052_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_053_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_053_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_054_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_054_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_055_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_055_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_056_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_056_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_057_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_057_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_058_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_058_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_060_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_060_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_061_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_061_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_062_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_062_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_063_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_063_Mask.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_064_Mask.mif -interp nearest -template average_header.mif masks_transformed/Patient_064_Mask.mif
+[03;36mCommand:[0m  mrmath masks_transformed/Patient_029_Mask.mif masks_transformed/Patient_030_Mask.mif masks_transformed/Patient_031_Mask.mif masks_transformed/Patient_032_Mask.mif masks_transformed/Patient_034_Mask.mif masks_transformed/Patient_035_Mask.mif masks_transformed/Patient_037_Mask.mif masks_transformed/Patient_038_Mask.mif masks_transformed/Patient_039_Mask.mif masks_transformed/Patient_040_Mask.mif masks_transformed/Patient_041_Mask.mif masks_transformed/Patient_042_Mask.mif masks_transformed/Patient_043_Mask.mif masks_transformed/Patient_044_Mask.mif masks_transformed/Patient_045_Mask.mif masks_transformed/Patient_046_Mask.mif masks_transformed/Patient_047_Mask.mif masks_transformed/Patient_048_Mask.mif masks_transformed/Patient_049_Mask.mif masks_transformed/Patient_050_Mask.mif masks_transformed/Patient_051_Mask.mif masks_transformed/Patient_052_Mask.mif masks_transformed/Patient_053_Mask.mif masks_transformed/Patient_054_Mask.mif masks_transformed/Patient_055_Mask.mif masks_transformed/Patient_056_Mask.mif masks_transformed/Patient_057_Mask.mif masks_transformed/Patient_058_Mask.mif masks_transformed/Patient_060_Mask.mif masks_transformed/Patient_061_Mask.mif masks_transformed/Patient_062_Mask.mif masks_transformed/Patient_063_Mask.mif masks_transformed/Patient_064_Mask.mif max mask_initial.mif
+[03;36mCommand:[0m  mrcrop average_header.mif -mask mask_initial.mif average_header_cropped.mif
+[03;36mFunction:[0m posix.remove(mask_initial.mif)
+[03;36mFunction:[0m posix.remove(average_header.mif)
+[03;36mFunction:[0m shutil.move(average_header_cropped.mif, average_header.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_029_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_030_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_031_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_032_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_034_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_035_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_037_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_038_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_039_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_040_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_041_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_042_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_043_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_044_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_045_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_046_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_047_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_048_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_049_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_050_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_051_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_052_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_053_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_054_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_055_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_056_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_057_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_058_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_060_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_061_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_062_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_063_Mask.mif)
+[03;36mFunction:[0m posix.remove(masks_transformed/Patient_064_Mask.mif)
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_029_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_029_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_029.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_029_wm.mif -linear linear_transforms_initial/Patient_029.txt -datatype float32 input_transformed/Patient_029_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_029_Mask.mif -linear linear_transforms_initial/Patient_029.txt -datatype float32 masks_transformed/Patient_029_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_030_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_030_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_030.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_030_wm.mif -linear linear_transforms_initial/Patient_030.txt -datatype float32 input_transformed/Patient_030_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_030_Mask.mif -linear linear_transforms_initial/Patient_030.txt -datatype float32 masks_transformed/Patient_030_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_031_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_031_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_031.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_031_wm.mif -linear linear_transforms_initial/Patient_031.txt -datatype float32 input_transformed/Patient_031_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_031_Mask.mif -linear linear_transforms_initial/Patient_031.txt -datatype float32 masks_transformed/Patient_031_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_032_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_032_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_032.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_032_wm.mif -linear linear_transforms_initial/Patient_032.txt -datatype float32 input_transformed/Patient_032_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_032_Mask.mif -linear linear_transforms_initial/Patient_032.txt -datatype float32 masks_transformed/Patient_032_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_034_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_034_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_034.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_034_wm.mif -linear linear_transforms_initial/Patient_034.txt -datatype float32 input_transformed/Patient_034_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_034_Mask.mif -linear linear_transforms_initial/Patient_034.txt -datatype float32 masks_transformed/Patient_034_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_035_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_035_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_035.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_035_wm.mif -linear linear_transforms_initial/Patient_035.txt -datatype float32 input_transformed/Patient_035_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_035_Mask.mif -linear linear_transforms_initial/Patient_035.txt -datatype float32 masks_transformed/Patient_035_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_037_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_037_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_037.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_037_wm.mif -linear linear_transforms_initial/Patient_037.txt -datatype float32 input_transformed/Patient_037_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_037_Mask.mif -linear linear_transforms_initial/Patient_037.txt -datatype float32 masks_transformed/Patient_037_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_038_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_038_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_038.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_038_wm.mif -linear linear_transforms_initial/Patient_038.txt -datatype float32 input_transformed/Patient_038_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_038_Mask.mif -linear linear_transforms_initial/Patient_038.txt -datatype float32 masks_transformed/Patient_038_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_039_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_039_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_039.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_039_wm.mif -linear linear_transforms_initial/Patient_039.txt -datatype float32 input_transformed/Patient_039_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_039_Mask.mif -linear linear_transforms_initial/Patient_039.txt -datatype float32 masks_transformed/Patient_039_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_040_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_040_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_040.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_040_wm.mif -linear linear_transforms_initial/Patient_040.txt -datatype float32 input_transformed/Patient_040_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_040_Mask.mif -linear linear_transforms_initial/Patient_040.txt -datatype float32 masks_transformed/Patient_040_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_041_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_041_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_041.txt
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_041_wm.mif -linear linear_transforms_initial/Patient_041.txt -datatype float32 input_transformed/Patient_041_translated.mif
+[03;36mCommand:[0m  mrtransform /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_041_Mask.mif -linear linear_transforms_initial/Patient_041.txt -datatype float32 masks_transformed/Patient_041_translated.mif
+[03;36mCommand:[0m  mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_042_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_042_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_042.txt
+population_template: [03;32m[0m
+population_template: [01;31m[ERROR] Command failed: mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_042_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_042_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_042.txt[0m[03;34m (population_template:470)[0m
+population_template: [03;32mOutput of failed command:[0m
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_042_wm.mif"...  [==================================================]
+mrregister: preloading data for "average_header.mif"...  [======================================
+mrregister: [SYSTEM FATAL CODE: SIGBUS (7)] Bus error: Accessing invalid address (out of storage space?)
+population_template: [03;32mChanging back to original directory (/mnt/lustre/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp)[0m
+population_template: [00;31mScript failed while executing the command: mrregister /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_042_wm.mif average_header.mif -mask1 /working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/Masks/Patient_042_Mask.mif -rigid_scale 1  -rigid_niter 0  -type rigid  -noreorientation  -rigid_init_translation mass  -datatype float32 -rigid linear_transforms_initial/Patient_042.txt[0m
+population_template: [00;31mFor debugging, inspect contents of temporary directory: /mnt/lustre/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/population_template-tmp-VAX6FT/[0m
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrresize: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mv: cannot stat ‘./templateoutput/fod_template_rg.mif’: No such file or directory
+warpconvert: [WARNING] existing output files will be overwritten
+warpconvert: [ERROR] failed to open key/value file "./templateoutput/warps/*.mif": No such file or directory
+warpconvert: [ERROR] error opening image "./templateoutput/warps/*.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_035_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_037_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_032_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_029_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_034_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_030_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_038_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_031_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_040_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_039_wm.mif"...  [===================================================================================================================================================================================================================================================================================================================================================================================================================================================================]
+=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+=]
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_041_wm.mif"...  [====]
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_042_wm.mif"...  [=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_043_wm.mif"...  [=]
+=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_044_wm.mif"...  [==========]
+===mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_045_wm.mif"...  [===============================]
+==]
+=]
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_046_wm.mif"...  [mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_048_wm.mif"...  [mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_047_wm.mif"...  [=================]
+=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+=mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_049_wm.mif"...  [=============================================================]
+=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_050_wm.mif"...  [=======================================================================================================================================================================================================================================================================================================================]
+====mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_051_wm.mif"...  [==========================]
+==mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+=mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_052_wm.mif"...  [=]
+===mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_053_wm.mif"...  [==========]
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+=mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_054_wm.mif"...  [======================]
+==]
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_055_wm.mif"...  [=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+=mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_056_wm.mif"...  [=================================]
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+=mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_057_wm.mif"...  [===========================]
+===mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+=mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_058_wm.mif"...  [=========================================================]
+===mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_060_wm.mif"...  [====================================================]
+==mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+=mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_061_wm.mif"...  [==================================================================================================================================================================================================]
+=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_062_wm.mif"...  [====================================================]
+=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_063_wm.mif"...  [=============]
+==mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrregister: [WARNING] existing output files will be overwritten
+mrregister: preloading data for "/working/lab_michaebr/alistaiP/Park/AFD5-regridtemp/upsample/FODS/wm/Patient_064_wm.mif"...  [=====================================]
+=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+==]
+==mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+========]
+=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+==========================================================]
+===mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+=============]
+==mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+=========]
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+===============================================]
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+=====================================]
+=mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+===========]
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+==]
+mrregister: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+mrregister: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0322template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0322template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0352template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0352template_warp.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0302template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0302template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0382template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0382template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0292template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0292template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0312template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0312template_warp.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0372template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0372template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0342template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0342template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0392template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0392template_warp.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0402template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0402template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0422template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0422template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0412template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0412template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0442template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0442template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0432template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0432template_warp.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0452template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0452template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0472template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0472template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0462template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0462template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0492template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0492template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0522template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0522template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0502template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0502template_warp.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0512template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0512template_warp.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0532template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0532template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0542template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0542template_warp.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0482template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0482template_warp.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0572template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0572template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0562template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0562template_warp.mif"
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [WARNING] existing output files will be overwritten
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0582template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0582template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0602template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0602template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0612template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0612template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0632template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0632template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0642template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0642template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0622template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0622template_warp.mif"
+mrtransform: [ERROR] failed to open key/value file "./templateoutput/warps/Patient_0552template_warp.mif": No such file or directory
+mrtransform: [ERROR] error opening image "./templateoutput/warps/Patient_0552template_warp.mif"
+mrmath: [WARNING] existing output files will be overwritten
+mrmath: [ERROR] mrmath requires either multiple input images, or the -axis option to be provided
+fod2fixel: [WARNING] existing output files will be overwritten
+fod2fixel: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+fod2fixel: [ERROR] error opening image "./templateoutput/fod_template.mif"
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: [ERROR] failed to open key/value file "./templateoutput/fixeltemp/peaks.mif": No such file or directory
+mrthreshold: [ERROR] error opening image "./templateoutput/fixeltemp/peaks.mif"
+mrfilter: [WARNING] existing output files will be overwritten
+fixel2voxel: [ERROR] failed to open key/value file "./templateoutput/fixeltemp/mask.mif": No such file or directory
+fixel2voxel: [ERROR] error opening image "./templateoutput/fixeltemp/mask.mif"
+mrfilter: [ERROR] no filename supplied to standard input (broken pipe?)
+mrfilter: [ERROR] error opening image "-"
+fod2fixel: [WARNING] existing output files will be overwritten
+fod2fixel: [ERROR] failed to open key/value file "./templateoutput/fod_template.mif": No such file or directory
+fod2fixel: [ERROR] error opening image "./templateoutput/fod_template.mif"

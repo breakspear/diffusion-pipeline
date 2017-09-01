@@ -1,0 +1,33 @@
+mkdir: cannot create directory ‘/working/lab_michaebr/alistaiP/Park/AFD4/upsample’: File exists
+mkdir: cannot create directory ‘/working/lab_michaebr/alistaiP/Park/AFD4/upsample/DWI’: File exists
+mkdir: cannot create directory ‘/working/lab_michaebr/alistaiP/Park/AFD4/upsample/Masks’: File exists
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_038_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_035_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_034_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_029_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_040_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_032_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_039_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_030_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_037_DWI.mif"...  [mrresize: reslicing "/working/lab_michaebr/alistaiP/Park/AFD4/DWInorm/Patient_031_DWI.mif"...  [==================================================================
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command
+
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command
+
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command
+
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command
+
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command
+
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command
+
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command
+
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command
+
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command
+
+mrresize: [SYSTEM FATAL CODE: SIGTERM (15)] Terminated by kill command

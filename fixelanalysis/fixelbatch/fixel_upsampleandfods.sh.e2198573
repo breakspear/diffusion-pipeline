@@ -1,0 +1,14 @@
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/upsampleandfods: line 11: cd: /working/lab_michaebr/alistaiP/Park/1.5: No such file or directory
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [ERROR] failed to open key/value file "/working/lab_michaebr/alistaiP/Park/1.5/DWInorm/*DWI.mif": No such file or directory
+mrresize: [ERROR] error opening image "/working/lab_michaebr/alistaiP/Park/1.5/DWInorm/*DWI.mif"
+mrresize: [WARNING] existing output files will be overwritten
+mrresize: [ERROR] cannot access file "/working/lab_michaebr/alistaiP/Park/1.5/DWInorm/*.nii.gz": No such file or directory
+mrresize: [ERROR] error opening image "/working/lab_michaebr/alistaiP/Park/1.5/DWInorm/*.nii.gz"
+dwi2fod: [WARNING] existing output files will be overwritten
+dwi2fod: [ERROR] failed to open key/value file "/working/lab_michaebr/alistaiP/Park/1.5//DWI/*DWI.mif": No such file or directory
+dwi2fod: [ERROR] error opening image "/working/lab_michaebr/alistaiP/Park/1.5//DWI/*DWI.mif"
+mrconvert: [WARNING] existing output files will be overwritten
+mrconvert: [ERROR] failed to open key/value file "/working/lab_michaebr/alistaiP/Park/1.5//FODS/wm/*wm.mif": No such file or directory
+mrconvert: [ERROR] error opening image "/working/lab_michaebr/alistaiP/Park/1.5//FODS/wm/*wm.mif"
+mv: cannot stat ‘/working/lab_michaebr/alistaiP/Park/1.5//FODS/wm/*wm_str.mif’: No such file or directory

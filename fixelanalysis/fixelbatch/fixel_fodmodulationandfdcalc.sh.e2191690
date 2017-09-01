@@ -1,0 +1,11 @@
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/fodmodulationandfdcalc: line 13: foreach: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/fodmodulationandfdcalc: line 17: foreach: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/fodmodulationandfdcalc: line 19: foreach: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/fodmodulationandfdcalc: line 21: foreach: command not found
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/fodmodulationandfdcalc: line 23: foreach: command not found
+cp: cannot stat ‘/working/lab_michaebr/alistaiP/Park/AFD3/templateoutput_test/fixels/fc/index.mif’: No such file or directory
+cp: cannot stat ‘/working/lab_michaebr/alistaiP/Park/AFD3/templateoutput_test/fixels/fc/directions.mif’: No such file or directory
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/fodmodulationandfdcalc: line 30: foreach: command not found
+cp: cannot stat ‘/working/lab_michaebr/alistaiP/Park/AFD3/templateoutput_test/fixels/fc/index.mif’: No such file or directory
+cp: cannot stat ‘/working/lab_michaebr/alistaiP/Park/AFD3/templateoutput_test/fixels/fc/directions.mif’: No such file or directory
+/mnt/lustre/home/alistaiP/bundle/test/diffusion-pipeline/fixelanalysis/fodmodulationandfdcalc: line 37: foreach: command not found

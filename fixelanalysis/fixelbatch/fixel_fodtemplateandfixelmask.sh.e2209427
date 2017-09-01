@@ -1,0 +1,8 @@
+mkdir: cannot create directory ‘templateoutput’: File exists
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: thresholding "./templateoutput/fixeltemp/peaks.mif" at intensity 0.25...  [==================================================]
+mrfilter: [WARNING] existing output files will be overwritten
+fixel2voxel: converting sparse fixel data to scalar image...  [==================================================]
+mrfilter: applying median filter to image -...  [==================================================]
+fod2fixel: [WARNING] existing output files will be overwritten
+fod2fixel: [ERROR] Expected fixel directory ./templateoutput/fixel_mask to be empty.

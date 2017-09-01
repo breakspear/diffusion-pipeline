@@ -1,0 +1,33 @@
+fixelcfestats: [WARNING] existing output files will be overwritten
+fixelcfestats: number of fixels: 92030
+fixelcfestats: preloading data for "fd/directions.mif"...  [=]
+fixelcfestats: loading template fixel directions and positions...  [==================================================]
+fixelcfestats: validating input files......   done
+fixelcfestats: pre-computing fixel-fixel connectivity...  [==================================================]
+fixelcfestats: normalising and thresholding fixel-fixel connectivity matrix...  [==================================================]
+fixelcfestats: loading input images...  [=================]
+fixelcfestats: outputting beta coefficients, effect size and standard deviation...  .. done
+fixelcfestats: running 100 permutations...  [==================================================]
+fixelcfestats: outputting final results...   done
+fixelcfestats: [WARNING] existing output files will be overwritten
+fixelcfestats: number of fixels: 92030
+fixelcfestats: preloading data for "log_fc/directions.mif"...  [=]
+fixelcfestats: loading template fixel directions and positions...  [==================================================]
+fixelcfestats: validating input files......   done
+fixelcfestats: pre-computing fixel-fixel connectivity...  [==================================================]
+fixelcfestats: normalising and thresholding fixel-fixel connectivity matrix...  [==================================================]
+fixelcfestats: loading input images...  [=================]
+fixelcfestats: outputting beta coefficients, effect size and standard deviation...  .. done
+fixelcfestats: running 100 permutations...  [==================================================]
+fixelcfestats: outputting final results...   done
+fixelcfestats: [WARNING] existing output files will be overwritten
+fixelcfestats: number of fixels: 92030
+fixelcfestats: preloading data for "fdc/directions.mif"...  [=]
+fixelcfestats: loading template fixel directions and positions...  [==================================================]
+fixelcfestats: validating input files......   done
+fixelcfestats: pre-computing fixel-fixel connectivity...  [==================================================]
+fixelcfestats: normalising and thresholding fixel-fixel connectivity matrix...  [==================================================]
+fixelcfestats: loading input images...  [=================]
+fixelcfestats: outputting beta coefficients, effect size and standard deviation...  . done
+fixelcfestats: running 100 permutations...  [==================================================]
+fixelcfestats: outputting final results...   done

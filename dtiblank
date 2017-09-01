@@ -23,6 +23,7 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 ANTsDIR=/clusterdata/apps/ANTs/bin
 
 export PATH=$PATH=${MRTRIXDIR}:${FSLDIR}:${ANTsDIR}:$PATH
+export ncpus=8
 
 #Extract ID of subject and their corresponding folder holding raw image files
 

@@ -1,0 +1,4 @@
+tckgen: [WARNING] existing output files will be overwritten
+tckgen: [ERROR] image "voxel_mask.mif" does not contain SH coefficients - unexpected number of coefficients
+tcksift: [WARNING] existing output files will be overwritten
+tcksift: [ERROR] required input file "tracks_20_million_adv.tck" not found

@@ -1,0 +1,10 @@
+fixelcfestats: number of fixels: 71900
+fixelcfestats: preloading data for "fdc/directions.mif"...  [=]
+fixelcfestats: loading template fixel directions and positions...  [==================================================]
+fixelcfestats: validating input files......   done
+fixelcfestats: pre-computing fixel-fixel connectivity...  [==================================================]
+fixelcfestats: normalising and thresholding fixel-fixel connectivity matrix...  [==================================================]
+fixelcfestats: loading input images...  [=================]
+fixelcfestats: outputting beta coefficients, effect size and standard deviation...  . done
+fixelcfestats: running 100 permutations...  [==================================================]
+fixelcfestats: outputting final results...   done

@@ -1,0 +1,15 @@
+tckgen: [ERROR] output file "tracks_20_million.tck" already exists (use -force option to force overwrite)
+tcksift: Creating homogeneous processing mask...  [==================================================]
+tcksift: segmenting FODs...  [==================================================]
+tcksift: mapping tracks to image...  [==================================================]
+tcksift:        Iteration     Removed     Remaining     Cost fn
+tcksift: [   .]       2        47158       2988524       93.34%
+tcksift: [ .  ]       3        37746       2950778       90.94%
+tcksift: [.   ]       4        28514       2922264       88.90%
+tcksift: [  . ]       6        25843       2863537       85.89%
+tcksift: [.   ]      10        30689       2753901       81.17%
+tcksift: [ .  ]      18        16904       2600585       76.01%
+tcksift: [ .  ]      34        10595       2371382       70.23%
+tcksift: [.   ]      66         8607       2063340       64.37%
+tcksift: [done]      75         4821       2000000       63.36%
+tcksift: Writing filtered tracks output file...  [==================================================]
