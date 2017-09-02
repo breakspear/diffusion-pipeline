@@ -13,6 +13,7 @@ PATH=$PATH$( find $pipedir/ -not -path '*/\.*'  -type d -printf ":%p" )
 ####
 #Load all required software
 MRTRIXDIR=/clusterdata/apps/mrtrix3/bin
+export MRTRIXDIR
 
 FSLDIR=/clusterdata/apps/fsl
 . ${FSLDIR}/etc/fslconf/fsl.sh

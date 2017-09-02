@@ -66,7 +66,7 @@ echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM
 
 else
 
-5ttgen_manual T1betFSmasked.nii.gz 5TT.nii
+5ttgen fsl T1betFSmasked.nii.gz 5TT.nii -nocrop -sgm_amyg_hipp -force -nocleanup -nthreads $ncpus -tempdir .
 
 fi
 
@@ -74,10 +74,10 @@ fi
 
 if [ $parctype=="DES" ]; then
 	echo "${parctype} parcellation being constructed"
-	labelconvert $SUBJECTS_DIR/$subj/mri/aparc+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc.nii -nthreads $ncpus -force
+	labelconvert $SUBJECTS_DIR/$subj/mri/aparc+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIXDIR/share/mrtrix3/labelconvert/fs_default.txt parc.nii -nthreads $ncpus -force
 elif [ $parctype=="DST" ]; then
 	echo "${parctype} parcellation being constructed"
-	labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc.nii -nthreads $ncpus -force
+	labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIXDIR/share/mrtrix3/labelconvert/fs_a2009s.txt parc.nii -nthreads $ncpus -force
 fi
 
 flirt -ref T1bet.nii.gz -in parc.nii -applyxfm -init FS2FSL.mat -interp nearestneighbour -out parcFSL.nii.gz
@@ -87,9 +87,9 @@ rm parc_fixsubcort.nii
 mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -stride -1,2,3 -force -nthreads $ncpus
 
 if [ $parctype=="DES" ]; then
-       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
+       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIXDIR/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
 elif [ $parctype=="DST" ]; then
-       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
+       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIXDIR/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
 fi
 
 mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -stride +1,2,3 -force -nthreads $ncpus
