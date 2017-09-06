@@ -59,6 +59,8 @@ fast -B --nopve T1betFSmasked.nii.gz
 
 #5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTfsl.nii -nthreads $ncpus -force -tempdir . -nocleanup
 
+unset SGE_ROOT
+
 if [ -n "$4" ]; then
 echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM.nii CSF.nii"
 
