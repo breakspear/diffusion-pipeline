@@ -33,7 +33,7 @@ mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 #if [ $ismosiac = 1 ];
 #then
 
-#	mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads $ncpus
+#	mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads 8
 
 #	nvols=$(fslnvols rawdataAP.nii)
 #	adjvols=$(expr $nvols - 1)
@@ -41,7 +41,7 @@ mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 #	fslroi rawdataAP.nii rawdataAPrem 1 $adjvols
 
 #	sed '1d' rawencoding.b > rawencodingrem.b
-#	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
+#	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4 -nthreads 8
 
 #	mv rawdataAPrem.mif rawdataAP.mif
 
@@ -51,39 +51,39 @@ mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 
 
 
-#mrconvert rawdataPA.mif rawdataPA.nii -json_export json_rawdataPA.json -force -nthreads $ncpus
+#mrconvert rawdataPA.mif rawdataPA.nii -json_export json_rawdataPA.json -force -nthreads 8
 #nvols=$(fslnvols rawdataPA.nii)
 #fslroi rawdataPA.nii rawdataPArem 1 $nvols
 #sed '1d' rawrevencoding.b > rawrevencodingrem.b
-#mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
+#mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4 -nthreads 8
 #mv rawdataPArem.mif rawdataPA.mif
 	
 #else
 	
 #dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
-#mrconvert rawdataPArem.mif rawdataPA.mif -json_import json_rawdataPA.json -nthreads $ncpus -force
+#mrconvert rawdataPArem.mif rawdataPA.mif -json_import json_rawdataPA.json -nthreads 8 -force
 #rm rawdataPArem.mif	
 
 #fi
 
 #Denoise
 
-dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads $ncpus
-dwidenoise rawdataPA.mif rawdataPAdn.mif -force -nthreads $ncpus
+dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads 8
+dwidenoise rawdataPA.mif rawdataPAdn.mif -force -nthreads 8
 
-mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
-mrconvert rawdataAPdnstr.mif  rawdataAPdn.mif  -force -nthreads $ncpus
+mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -stride +1,2,3,4 -force -nthreads 8
+mrconvert rawdataAPdnstr.mif  rawdataAPdn.mif  -force -nthreads 8
 
-mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
-mrconvert rawdataPAdnstr.mif  rawdataPAdn.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -stride +1,2,3,4 -force -nthreads 8
+mrconvert rawdataPAdnstr.mif  rawdataPAdn.mif -stride +1,2,3,4 -force -nthreads 8
 
 rm rawdataAPdnstr.mif
 rm rawdataPAdnstr.mif 
 
 #Generate a b0 base image for each phase-encoding direction
 
-mrconvert rawdataAPdn.mif b0AP.mif -coord 3 0 -force -nthreads $ncpus
-mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads $ncpus
+mrconvert rawdataAPdn.mif b0AP.mif -coord 3 0 -force -nthreads 8
+mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads 8
 
 #Preprocessing steps including eddy correction & bias correction
 
@@ -91,36 +91,36 @@ dwiextract rawdataAPdn.mif APb0s.mif -bzero -force
 
 if ([ $ismultiband = 1 ] && [ $fullreverseseq = 0 ]); then
 
-        mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
-	echo "Preprocessing command...:dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup"
-	dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup
+        mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads 8
+	echo "Preprocessing command...:dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads 8 -force -tempdir . -nocleanup"
+	dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads 8 -force -tempdir . -nocleanup
 
 elif ([ $ismultiband = 1 ] && [ $fullreverseseq = 1 ]); then
         
-	mrcat rawdataAPdn.mif rawdataPAdn.mif allDWIs.mif -axis 3 -force -nthreads $ncpus
-	echo "Preprocessing command...:dwipreproc -rpe_all -export_grad_mrtrix adjencoding.b -pe_dir AP allDWIs.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup"
-	dwipreproc -rpe_all -export_grad_mrtrix adjencoding.b -pe_dir AP allDWIs.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup
+	mrcat rawdataAPdn.mif rawdataPAdn.mif allDWIs.mif -axis 3 -force -nthreads 8
+	echo "Preprocessing command...:dwipreproc -rpe_all -export_grad_mrtrix adjencoding.b -pe_dir AP allDWIs.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads 8 -force -tempdir . -nocleanup"
+	dwipreproc -rpe_all -export_grad_mrtrix adjencoding.b -pe_dir AP allDWIs.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads 8 -force -tempdir . -nocleanup
 
 else
 
-	mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
-	echo "Preprocessing command...:dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled " -nthreads $ncpus -force -tempdir . -nocleanup"
-	dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled " -nthreads $ncpus -force -tempdir . -nocleanup
+	mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads 8
+	echo "Preprocessing command...:dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled " -nthreads 8 -force -tempdir . -nocleanup"
+	dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled " -nthreads 8 -force -tempdir . -nocleanup
 
 fi
 
-dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force -nthreads $ncpus
+dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force -nthreads 8
 bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
 
-dwibiascorrect -mask eddymeanb0bet_mask.nii.gz -fsl eddycorr.mif biascorr.mif -nthreads $ncpus -force
-dwishellmath biascorr.mif mean meanshell.nii -nthreads $ncpus -force
+dwibiascorrect -mask eddymeanb0bet_mask.nii.gz -fsl eddycorr.mif biascorr.mif -nthreads 8 -force
+dwishellmath biascorr.mif mean meanshell.nii -nthreads 8 -force
 
 #Create tensor and FA images
 
-dwiextract biascorr.mif -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -force -nthreads $ncpus
+dwiextract biascorr.mif -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -force -nthreads 8
 
 bet2 biasmeanb0.nii biasmeanb0bet -f 0.15 -m 
 
-dwi2tensor biascorr.mif dt.nii -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus -force
+dwi2tensor biascorr.mif dt.nii -mask biasmeanb0bet_mask.nii.gz -nthreads 8 -force
 
-tensor2metric dt.nii -fa fa.nii -nthreads $ncpus -force
+tensor2metric dt.nii -fa fa.nii -nthreads 8 -force
