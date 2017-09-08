@@ -23,7 +23,7 @@ cd $WORKDIR/Diff/$subj/preproc
 
 #combine blocks
 mrcat rawdataAP1.mif rawdataAP2.mif rawdataAP.mif -axis 3 -nthreads 1 -force
-mrcat rawdataPA1.mif rawdataPA2.mif rawdataAP.mif -axis 3 -nthreads 1 -force	
+mrcat rawdataPA1.mif rawdataPA2.mif rawdataPA.mif -axis 3 -nthreads 1 -force	
 
 #Extract encoding
 
