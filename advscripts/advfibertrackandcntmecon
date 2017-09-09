@@ -74,14 +74,14 @@ tckmap 1M.tck 1Mends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
 
 tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads $ncpus
 
-tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads $ncpus
+#tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads $ncpus
 
 
 #Alter sift tracks for visualisation purposes
 
-tckedit 1M.tck -tck_weights_in 1Msift_weightfactor.txt  1Msift.tck -force -nthreads $ncpus
+#tckedit 1M.tck -tck_weights_in 1Msift_weightfactor.txt  1Msift.tck -force -nthreads $ncpus
 
-tckmap 1Msift.tck 1Msift.mif -vox 0.5 -force -nthreads $ncpus
+#tckmap 1Msift.tck 1Msift.mif -vox 0.5 -force -nthreads $ncpus
 
 
 #Connectome construction
