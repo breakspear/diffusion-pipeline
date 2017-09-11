@@ -66,7 +66,7 @@ echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM
 
 else
 
-5ttgen fsl T1betFSmasked_restore.nii.gz 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads $ncpus -force -nocleanup -tempdir .
+5ttgen fsl T1betFSmasked.nii.gz 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads $ncpus -force -nocleanup -tempdir .
 
 fi
 
