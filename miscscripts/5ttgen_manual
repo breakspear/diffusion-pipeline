@@ -118,9 +118,9 @@ mrmath mesh2pve_L_Accu.mif mesh2pve_R_Accu.mif mesh2pve_L_Caud.mif mesh2pve_R_Ca
 
 #integrate subcortical structures with cortical tissues
 
-mrthreshold $WMin - -abs 0.001 | maskfilter - connect wm_mask.mif -largest -nthreads $ncpus -force
+mrthreshold $WMin - -abs 0.001 -nthreads $ncpus | maskfilter - connect - -connectivity | mrcalc 1 - 1 -gt -sub remove_unconnected_wm_mask.mif -datatype bit -nthreads $ncpus -force
 
-mrconvert $CSFin csf.mif -nthreads $ncpus -force
+mrcalc $CSFin remove_unconnected_wm_mask.mif -mult csf.mif -nthreads $ncpus -force
 
 mrcalc 1.0 csf.mif -sub all_sgms.mif -min sgm.mif -nthreads $ncpus -force
 
@@ -140,6 +140,8 @@ mrcalc 0 wm.mif -min path.mif -nthreads $ncpus -force
 mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads $ncpus | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4 -nthreads $ncpus -force
 
 mrconvert combined_precrop.mif result.mif -nthreads $ncpus -force
+
+5ttcheck result.mif
 
 mrconvert result.mif $output -force -nthreads $ncpus -force
 
