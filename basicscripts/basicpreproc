@@ -19,9 +19,7 @@ cd $WORKDIR/Diff/$subj/preproc
 
 mrconvert rawdata.nii.gz rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads $ncpus
 
-cp rawdata.mif preproc 
-
-cd preproc
+#cp rawdata.mif preproc 
 
 #Denoise the rawdata
 
@@ -37,7 +35,7 @@ rm rawdata-dnstr.mif
 
 #Eddy and motion correction
 
-dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -verbose -tempdir . -nocleanup -force
+dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -debug -tempdir ./dwipreproc -nocleanup -force
 
 #Construct the b0 mask for future processing 
 

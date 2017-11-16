@@ -6,6 +6,6 @@ WORKDIR=$2
 
 niifile=$(find * -name "*.nii*")
 
-mrconvert $niifile rawdataAP.mif -fslgrad *bvec* *bval* -stride +1,2,3,4 -nthreads 1 -force
+mrconvert $niifile rawdata.mif -fslgrad *bvec* *bval* -stride +1,2,3,4 -nthreads 1 -force
 
-mrinfo rawdataAP.mif -dwgrad rawencoding.b -nthreads 1 -force
+mrinfo rawdata.mif -export_grad_mrtrix rawencoding.b -nthreads 1 -force
