@@ -1,0 +1,11 @@
+#!/bin/bash
+# file: convert2mrtrix
+
+subj=$1
+WORKDIR=$2
+
+niifile=$(find * -name "*.nii*")
+
+mrconvert $niifile rawdataAP.mif -fslgrad *bvec* *bval* -stride +1,2,3,4 -nthreads 1 -force
+
+mrinfo rawdataAP.mif -dwgrad rawencoding.b -nthreads 1 -force
