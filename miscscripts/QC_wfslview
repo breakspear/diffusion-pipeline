@@ -1,0 +1,47 @@
+#!/bin/bash
+subj=$1
+WORKDIR=$2
+OUTDIR=$3
+
+tckbasename=$4
+parcbasename=$5
+
+rundir=$(pwd)
+baserundir=$(basename $rundir)
+
+if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+cd $WORKDIR/Diff/$subj/preproc
+fi
+
+
+mkdir -p ${WORKDIR}/${OUTDIR}
+
+mkdir -p ${WORKDIR}/${OUTDIR}/FA
+mkdir -p ${WORKDIR}/${OUTDIR}/meanDWI
+mkdir -p ${WORKDIR}/${OUTDIR}/tdi
+mkdir -p ${WORKDIR}/${OUTDIR}/parc
+
+#fa
+
+slicer fa.nii -a fa_sliced.ppm
+convert fa_sliced.ppm ${WORKDIR}/${OUTDIR}/FA/${subj}_fa.png
+
+#b3000
+
+mrconvert meanshell.nii mean3000.nii -coord 3 1 -force
+slicer mean3000.nii -a 3000_sliced.ppm
+convert 3000_sliced.ppm ${WORKDIR}/${OUTDIR}/meanDWI/${subj}_b3000.png
+
+#tdi
+
+slicer _tdi.nii -a tdi_sliced.ppm
+convert tdi_sliced.ppm ${WORKDIR}/${OUTDIR}/tdi/${subj}_tdi.png
+
+#parc
+
+overlay 1 1 fa.nii -A flirted_uniform.nii 1 `fslstats $parcbasename.nii -R | awk -F " " '{print $2}'` parc_overlay.nii.gz
+slicer parc_overlay.nii.gz  -a parcoverlay_sliced.ppm
+convert parcoverlay_sliced.ppm ${WORKDIR}/${OUTDIR}/parc/${subj}_parcoverlay.png 
+rm parc_overlay.nii.gz
+
+rm *.ppm

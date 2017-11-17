@@ -31,7 +31,7 @@ fod2dec wm.mif foddec.mif -force -nthreads $ncpus
 
 #Fiber tracking
 
-tckgen -algorithm iFOD2 wm.mif ${numfibers}.tck -seed_image biasb0brain_mask.nii.gz -minlength 10 -maxlength 250 -number $numfibers -nthreads $ncpus -mask biasb0brain_mask.nii.gz -output_seeds sucesstrackseeds.txt
+tckgen -algorithm iFOD2 wm.mif ${numfibers}.tck -seed_image biasb0brain_mask.nii.gz -minlength 10 -maxlength 250 -select $numfibers -nthreads $ncpus -mask biasb0brain_mask.nii.gz -output_seeds sucesstrackseeds.txt
 
 #Track density image for vis purposes
 tckmap ${numfibers}.tck ${numfibers}_tdi.nii -vox 0.5

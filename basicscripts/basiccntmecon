@@ -2,8 +2,9 @@
 
 subj=$1
 WORKDIR=$2
-tracksbasename=$3
-CNTMEPREFIX=$4
+parc=$3
+tracksbasename=$4
+CNTMEPREFIX=$5
 
 rundir=$(pwd)
 baserundir=$(basename $rundir)
