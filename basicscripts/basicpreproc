@@ -35,7 +35,7 @@ rm rawdata-dnstr.mif
 
 #Eddy and motion correction
 
-dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -debug -tempdir ./dwipreproc -nocleanup -force
+dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -debug -tempdir . -nocleanup -force
 
 #Construct the b0 mask for future processing 
 
@@ -44,7 +44,7 @@ bet2 eddyb0.nii eddyb0brain -m -f 0.15
 
 #Bias correction
 
-dwibiascorrect -mask eddyb0brain_mask.nii.gz -fsl eddycorr.mif biascorr.mif -force -nthreads $ncpus -tempdir ./dir
+dwibiascorrect -mask eddyb0brain_mask.nii.gz -fsl eddycorr.mif biascorr.mif -force -nthreads $ncpus -tempdir .
 
 mrconvert biascorr.mif biasb0.nii -coord 3 0 -force -nthreads $ncpus
 bet2 biasb0.nii biasb0brain -m -f 0.15
