@@ -3,7 +3,7 @@
 
 subj=$1
 WORKDIR=$2
-ismultishell=0
+ismultishell=1
 numfibers=25M
 parc=DST
 
@@ -12,7 +12,7 @@ parc=DST
 #Advanced preprocessing
 #Parameters: mosaic fullrevsequence multiband (1 if yes)
 
-#advpreproc_phil $subj $WORKDIR
+advpreproc_phil $subj $WORKDIR
  
 #Segmentation, parcellation and co-registration of T1 images
 
