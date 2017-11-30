@@ -15,9 +15,9 @@ numfibers=25M
 #Full diffusion pipeline, from pre-processing to connectome construction - using the advanced version
 
 #Advanced preprocessing
-#Parameters: mosaic fullrevsequence multiband (1 if yes)
+#Parameters: multiband (1 if yes)
 
-#advpreproc $subj $WORKDIR $ismultiband
+advpreproc $subj $WORKDIR $ismultiband
  
 #Segmentation, parcellation and co-registration of T1 images
 
@@ -25,6 +25,6 @@ segparcandcoregT1 $subj $WORKDIR $parc
 
 #Fiber construction and connectome construction
 
-#advfibertrackandcntmecon $subj $WORKDIR $ismultishell $numfibers $parc
+advfibertrackandcntmecon $subj $WORKDIR $ismultishell $numfibers $parc
 
 
