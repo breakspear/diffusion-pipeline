@@ -9,7 +9,7 @@ PARCDIR=$4
 seedtracklist=$5
 
 #convert to convert appropriate directory structure
-PARCDIR=${WORKDIR}/${PARCIDIR}
+PARCDIR=${WORKDIR}/${PARCDIR}
 seedtracklist=${WORKDIR}/${seedtracklist}
 
 #option to include extra  argument ($4), if diffusion data directory has changed
@@ -40,12 +40,11 @@ convert_xfm -omat MNIhires2FS.mat -inverse FS2MNIhires.mat
 
 convert_xfm -omat FS2diff.mat -inverse ${DATADIR}/${subj}/preproc/diff2FS.mat
 
-
 while read line
-do
 
-seed=$(awk -F " " '{print $1}' $seedtracklist)
-target=$(awk -F " " '{print $2}' $seedtracklist)
+do 
+seed=$(echo $line | cut -d " " -f 1) 
+target=$(echo $line | cut -d " " -f 2)
 
 echo "tracking for $seed to $target" #may do reverse later
 
@@ -87,7 +86,7 @@ flirt -in ${target}_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out ${tar
 
 gunzip ${target}_diff.nii.gz -f
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -select 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
 
 
 #repeat for left-hemisphere
