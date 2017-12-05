@@ -53,7 +53,7 @@ xall=rbind(xall,out)
 xall=data.frame(xall,stringsAsFactors=F)
 names(xall)=c("ID",varnames)
 
-if( exists("preextdata") {
+if( exists("preextdata")) {
 
 fname.out=paste(DATADIR,"Subjs_seedconnectivity_wprexdata.dat",sep="/")
 tmp=merge(preextdata,xall,by.x="ID",by.y="ID",sort=F)
