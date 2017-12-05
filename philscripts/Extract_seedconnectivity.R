@@ -18,6 +18,7 @@ SubjIDs<-list.dirs(path = DATADIR, full.names = FALSE, recursive = FALSE)
 SubjIDs<-t(SubjIDs)
 SubjIDs<-as.character(SubjIDs)
 
+egsubject<-SubjIDs[1]
 convars=cbind("meanFA","meanMD","AFD")
 
 convarstrings = NULL
