@@ -55,7 +55,7 @@ names(xall)=c("ID",varnames)
 
 if( exists("preextdata")) {
 
-ph<-read.table(preextdata,row.names=F,col.names=T,sep="\t",quote=F)
+ph<-read.table(preextdata,row.names=F,col.names=T,sep="\t")
 fname.out=paste(DATADIR,"Subjs_seedconnectivity_wprexdata.dat",sep="/")
 tmp=merge(ph,xall,by.x="ID",by.y="ID",sort=F)
 write.table(tmp,file=fname.out,row.names=F,col.names=T,sep="\t",quote=F)
