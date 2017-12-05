@@ -18,6 +18,7 @@ SubjIDs<-list.dirs(path = DATADIR, full.names = FALSE, recursive = FALSE)
 SubjIDs<-t(SubjIDs)
 SubjIDs<-as.character(SubjIDs)
 
+egsubject<-SubjIDs[1]
 convars=cbind("meanFA","meanMD","AFD")
 
 convarstrings = NULL
@@ -52,7 +53,7 @@ xall=rbind(xall,out)
 xall=data.frame(xall,stringsAsFactors=F)
 names(xall)=c("ID",varnames)
 
-if( exists("preextdata") {
+if( exists("preextdata")) {
 
 fname.out=paste(DATADIR,"Subjs_seedconnectivity_wprexdata.dat",sep="/")
 tmp=merge(preextdata,xall,by.x="ID",by.y="ID",sort=F)
