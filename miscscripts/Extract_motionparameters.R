@@ -2,7 +2,7 @@
 
 
 if (length(args)==0) {
-  stop("At least two arguments must be supplied (input file).n", call.=FALSE)
+  stop("At least one argument must be supplied (input file).n", call.=FALSE)
 }
 
 args = commandArgs(trailingOnly=TRUE)
