@@ -12,7 +12,7 @@ seedtracklist=$5
 PARCDIR=${WORKDIR}/${PARCDIR}
 seedtracklist=${WORKDIR}/${seedtracklist}
 
-#option to include extra  argument ($4), if diffusion data directory has changed
+#option to include extra  argument ($6), if diffusion data directory has changed
 #e.g: if files are now located in "Diff-wcust5tt"
 #usage: seedbasedtracking $subj $WORKDIR $NORMDIR Diff-wcust5tt
 

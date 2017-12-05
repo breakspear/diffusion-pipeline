@@ -2,7 +2,7 @@
 
 #SBATCH -n 1 # 1 per CPU
 #SBATCH -c 5 # number of cpus per task
-#SBATCH --nice=5
+#SBATCH --nice=10
 #SBATCH -p blade-a
 
 source /daten/bin/setup_fsl-5.0.9-cscor.sh
