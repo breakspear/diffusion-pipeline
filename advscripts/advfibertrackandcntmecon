@@ -112,4 +112,5 @@ tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengt
 
 #fi
 
-
+#
+connectome2tck ${numfibers}.tck -exemplars rparc_fixsubcort.nii -files single streamlineassignment.txt ${numbers}_connectomeexem.tck -nthreads $ncpus -force
