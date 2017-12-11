@@ -95,24 +95,29 @@ dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force
 
 bet2 eddymeanb0.nii eddyb0brainfsl -m -f 0.15
 
-dwi2mask eddycorr.mif eddymaskMR.nii -force -nthreads $ncpus
-
-
 #create optimal mask
 
 fslmaths eddyb0brainfsl_mask -mas eddymaskMR.nii iterbrainmask
 
 gunzip iterbrainmask.nii.gz -f
 
-fslmaths eddyb0.nii -mas eddymaskMR.nii eddyb0brain
-
-gunzip eddyb0brain.nii.gz
 
 
 #bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
 
 dwibiascorrect -mask iterbrainmask.nii -ants eddycorr.mif biascorr.mif -nthreads $ncpus -force
+
+
+#create optimal mask
+
+dwi2mask biascorr.mif biasmaskMR.nii -force -nthreads $ncpus
+
+fslmaths eddyb0brainfsl_mask -mas biasmaskMR.nii iterbrainmask
+
+gunzip iterbrainmask.nii.gz -f
+
 dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
+
 
 #Create tensor and FA images
 

@@ -43,22 +43,19 @@ mrconvert eddycorr.mif eddyb0.nii -coord 3 0 -force -nthreads $ncpus
 
 bet2 eddyb0.nii eddyb0brainfsl -m -f 0.15
 
-dwi2mask eddycorr.mif eddymaskMR.nii -force -nthreads $ncpus
-
-
-#create optimal mask
-
-fslmaths eddyb0brainfsl_mask -mas eddymaskMR.nii iterbrainmask
-
-gunzip iterbrainmask.nii.gz -f
-
-fslmaths eddyb0.nii -mas eddymaskMR.nii eddyb0brain
-
-gunzip eddyb0brain.nii.gz
 
 #Bias correction
 
 dwibiascorrect -mask iterbrainmask.nii -fsl eddycorr.mif biascorr.mif -force -nthreads $ncpus -tempdir .
+
+
+#create optimal mask
+
+dwi2mask biascorr.mif biasmaskMR.nii -force -nthreads $ncpus
+
+fslmaths eddyb0brainfsl_mask -mas biasmaskMR.nii iterbrainmask
+
+gunzip iterbrainmask.nii.gz -f
 
 fslmaths biasmeanb0.nii -mask iterbrainmask.nii biasmeanb0bet
 
@@ -68,5 +65,7 @@ fslmaths biasmeanb0.nii -mask iterbrainmask.nii biasmeanb0bet
 #Generate tensor and fa images
 
 dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
+
 dwi2tensor biascorr.mif dt.nii -mask iterbrainmask.nii -force -nthreads $ncpus
+
 tensor2metric dt.nii -fa fa.nii -force -nthreads $ncpus
