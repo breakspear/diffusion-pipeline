@@ -95,17 +95,11 @@ dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force
 
 bet2 eddymeanb0.nii eddyb0brainfsl -m -f 0.15
 
-#create optimal mask
-
-fslmaths eddyb0brainfsl_mask -mas eddymaskMR.nii iterbrainmask
-
-gunzip iterbrainmask.nii.gz -f
-
 
 
 #bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
 
-dwibiascorrect -mask iterbrainmask.nii -ants eddycorr.mif biascorr.mif -nthreads $ncpus -force
+dwibiascorrect -mask eddyb0brainfsl_mask -ants eddycorr.mif biascorr.mif -nthreads $ncpus -force
 
 
 #create optimal mask

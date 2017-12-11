@@ -46,7 +46,7 @@ bet2 eddyb0.nii eddyb0brainfsl -m -f 0.15
 
 #Bias correction
 
-dwibiascorrect -mask iterbrainmask.nii -fsl eddycorr.mif biascorr.mif -force -nthreads $ncpus -tempdir .
+dwibiascorrect -mask eddyb0brainfsl_mask.nii.gz -fsl eddycorr.mif biascorr.mif -force -nthreads $ncpus -tempdir .
 
 
 #create optimal mask
