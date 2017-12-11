@@ -24,7 +24,7 @@ flirt -ref fa.nii -in $FSLDIR/data/standard/FMRIB58_FA_1mm.nii.gz -out MNItofa -
 
 flirt -ref fa.nii -in $parc -out ${CNTMEPREFIX}_flirted_uniform.nii -applyxfm -init MNItofa.mat -interp nearestneighbour
 
-gunzip -f flirted_uniform.nii.gz
+gunzip -f ${CNTMEPREFIX}_flirted_uniform.nii.gz
 
 #Connectome construction
 #Track lengths
