@@ -15,9 +15,15 @@ rsync *encoding* $WORKDIR/Diff/$subj/preproc
 cd $WORKDIR/Diff/$subj/preproc
 
 
+#Catch whether diffusion files are stored as .mif or nii
+
+if [ ! -e rawdata.mif ]; then
+
 #Import gradient table for MRtrix specs
 
-mrconvert rawdata.nii.gz rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert *rawdata.nii* rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads $ncpus
+
+fi
 
 #cp rawdata.mif preproc 
 
