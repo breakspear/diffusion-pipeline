@@ -70,7 +70,7 @@ fslmaths biasmeanb0.nii -mask iterbrainmask.nii biasmeanb0bet
 
 #Generate tensor and fa images
 
-dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
+#dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
 
 dwi2tensor biascorr.mif dt.nii -mask iterbrainmask.nii -force -nthreads $ncpus
 

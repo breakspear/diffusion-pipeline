@@ -111,7 +111,7 @@ fslmaths eddyb0brainfsl_mask.nii.gz -mas biasmaskMR.nii iterbrainmask
 
 gunzip iterbrainmask.nii.gz -f
 
-dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
+#dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
 
 
 #Create tensor and FA images
