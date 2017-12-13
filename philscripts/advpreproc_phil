@@ -34,7 +34,7 @@ if [ $nvols == "103" ]; then
 
 	sed '1d' rawencoding.b > rawencodingrem.b
 
-	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4
+	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -nthreads $ncpus -force -grad rawencodingrem.b -stride +1,2,3,4
 
 	mv rawdataAPrem.mif rawdataAP.mif
 
@@ -72,12 +72,13 @@ mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads $ncpus
 
 #Preprocessing steps including eddy correction & bias correction
 
-dwiextract rawdataAPdn.mif APb0s.mif -bzero -force
+dwiextract rawdataAPdn.mif APb0s.mif -nthreads $ncpus -bzero -force
 mrconvert APb0s.mif AP7b0s.mif -coord 3 0,1,3,5,7,9,10 -force -nthreads $ncpus
 
 #dwiextract rawdataPAdn.mif rawdatPAdnrem.mif -bzero -force -nthreads $ncpus 
 #mv rawdataPAdnrem.mif rawdataPAdn.mif
 mrconvert rawdataPAdn.mif rawdataPAdnrem.mif -coord 3 0,1,2,3,4,5,6 -force -nthreads $ncpus
+
 mv rawdataPAdnrem.mif rawdataPAdn.mif
 
 mrcat AP7b0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
@@ -91,7 +92,7 @@ dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencodi
 #awk -F " " '{print $2}' ${preprocdir}/dwi_post_eddy.eddy_movement_rms > FD.txt
 #awk '{ total += $1 } END { print total/NR }' FD.txt > meanFD.txt
 
-dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force
+dwiextract eddycorr.mif -nthreads $ncpus -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -nthreads $ncpus -force
 
 bet2 eddymeanb0.nii eddyb0brainfsl -m -f 0.15
 
@@ -99,14 +100,14 @@ bet2 eddymeanb0.nii eddyb0brainfsl -m -f 0.15
 
 #bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
 
-dwibiascorrect -mask eddyb0brainfsl_mask -ants eddycorr.mif biascorr.mif -nthreads $ncpus -force
+dwibiascorrect -mask eddyb0brainfsl_mask.nii.gz -ants eddycorr.mif biascorr.mif -nthreads $ncpus -force
 
 
 #create optimal mask
 
 dwi2mask biascorr.mif biasmaskMR.nii -force -nthreads $ncpus
 
-fslmaths eddyb0brainfsl_mask -mas biasmaskMR.nii iterbrainmask
+fslmaths eddyb0brainfsl_mask.nii.gz -mas biasmaskMR.nii iterbrainmask
 
 gunzip iterbrainmask.nii.gz -f
 
@@ -115,7 +116,7 @@ dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
 
 #Create tensor and FA images
 
-dwiextract biascorr.mif -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -force
+dwiextract biascorr.mif -nthreads $ncpus -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -nthreads $ncpus -force
 
 fslmaths biasmeanb0.nii -mask iterbrainmask.nii biasmeanb0bet
 

@@ -16,10 +16,10 @@ advpreproc_phil $subj $WORKDIR
  
 #Segmentation, parcellation and co-registration of T1 images
 
-segparcandcoregT1 $subj $WORKDIR $parc CATSEG
+segparcandcoregT1 $subj $WORKDIR $parc
 
 #Fiber construction and connectome construction
 
-advfibertrackandcntmecon $subj $WORKDIR $ismultishell $numfibers $parc
+advfibertrackandcntmecon_phil $subj $WORKDIR $ismultishell $numfibers $parc
 
 

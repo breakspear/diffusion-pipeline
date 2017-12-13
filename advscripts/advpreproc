@@ -51,7 +51,7 @@ mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 	
 #else
 	
-dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
+dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force -nthreads $ncpus
 #mrconvert rawdataPArem.mif rawdataPA.mif -json_import json_rawdataPA.json -nthreads $ncpus -force
 #rm rawdataPArem.mif	
 
@@ -100,7 +100,7 @@ else
 
 fi
 
-dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force -nthreads $ncpus
+dwiextract eddycorr.mif -nthreads $ncpus -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force -nthreads $ncpus
 
 bet2 eddymeanb0.nii eddyb0brainfsl -m -f 0.15
 
@@ -125,7 +125,7 @@ dwishellmath biascorr.mif mean meanshell.mif -nthreads $ncpus -force
 
 #Create tensor and FA images
 
-dwiextract biascorr.mif -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -force -nthreads $ncpus
+dwiextract biascorr.mif -nthreads $ncpus -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -force -nthreads $ncpus
 
 fslmaths biasmeanb0.nii -mask iterbrainmask.nii biasmeanb0bet
 
