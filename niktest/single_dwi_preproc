@@ -48,6 +48,6 @@ rsync eddy_mask ../dwiintensitynorm/mask_input/
 
 #perform intensity norm
 
-dwiintensitynorm ../dwiintensitynorm/dwi_input/ ../dwiintensitynorm/mask_input/ ../dwiintensitynorm/dwi_output/ ../dwiintensitynorm/fa_template.mif ../dwiintensitynorm/fa_temp_wm_mask.mif -nthreads $ncpus -force
+dwiintensitynorm ../dwiintensitynorm/dwi_input/ ../dwiintensitynorm/mask_input/ ../dwiintensitynorm/dwi_output/ ../dwiintensitynorm/fa_template.mif ../dwiintensitynorm/fa_temp_wm_mask.mif -nthreads $ncpus -force -force
 
 rsync dwi_output/* bias_norm_corr.mif
