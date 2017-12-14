@@ -1,0 +1,106 @@
+#!/bin/bash
+
+subj=$1
+WORKDIR=$2
+parc=$3
+tracksbasename=$4
+CNTMEPREFIX=$5
+
+rundir=$(pwd)
+baserundir=$(basename $rundir)
+
+if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+cd $WORKDIR/Diff/$subj/preproc
+fi
+
+echo "Realigning template into subject space"
+
+dwi2response tournier bias_norm_corr.mif response.txt -nthreads $ncpus -force
+
+average_response */response.txt ../group_average_response.txt -nthreads $ncpus -force
+
+mrresize bias_norm_corr.mif -vox 1.25 bias_ups.mif -nthreads $ncpus -force
+
+# Compute upsampled brain mask images
+
+dwi2mask bias_ups.mif ups_mask.mif -nthreads $ncpus -force
+
+# FOD estimation
+
+dwiextract bias_ups.mif - \| dwi2fod msmt_csd - ../group_average_response.txt wmfod.mif -mask ups_mask.mif -nthreads $ncpus -force
+
+# Study-specific unbiased FOD template
+
+mkdir -p ../template/fod_input
+mkdir ../template/mask_input
+
+rsync wmfod.mif ../template/fod_input
+rsync upsmask ../template/mask_input
+
+#construct population template
+
+population_template ../template/fod_input -mask_dir ../template/mask_input ../template/wmfod_template.mif -voxel_size 1.25 -nthreads $ncpus -force
+
+warpconvert -type warpfull2deformation -template ../template/wmfod_template.mif IN subject2template_warp.mif -nthreads $ncpus -force
+
+#register all subjects FOD images to the FOD template
+
+mrregister wmfod.mif -mask1 ups_mask.mif ../template/wmfod_template.mif -nl_warp subject2template_warp.mif template2subject_warp.mif -nthreads $ncpus -force
+
+#compute intersection of all subject masks in template space
+
+mrtransform ups_mask.mif -warp subject2template_warp.mif -interp nearest mask_in_template_space.mif -nthreads $ncpus -force
+
+mrmath mask_in_template_space.mif min ../template/mask_intersection.mif -nthreads $ncpus -force
+
+#Compute a white matter template analysis fixel mask
+
+fod2fixel ../template/wmfod_template.mif -mask ../template/mask_intersection.mif ../template/fixel_temp -peak peaks.mif -nthreads $ncpus -force
+
+mrthreshold ../template/fixel_temp/peaks.mif -abs 0.33 ../template/fixel_temp/mask.mif -nthreads $ncpus -force
+
+#analysis voxel mask
+
+fixel2voxel ../template/fixel_temp/mask.mif max - | mrfilter - median ../template/voxel_mask.mif -nthreads $ncpus -force
+
+#recompute fixel mask
+
+fod2fixel -mask ../template/voxel_mask.mif -fmls_peak_value 0.2 ../template/wmfod_template.mif ../template/fixel_mask -nthreads $ncpus -force
+
+#warp FOD images to template space
+
+mrtransform wmfod.mif -warp subject2template_warp.mif -noreorientation fod_in_temp_space.mif -nthreads $ncpus -force
+
+#segment FOD images to estimate fixels and their apparent fibre density (FD)
+
+fod2fixel fod_in_temp_space.mif -mask ../template/voxel_mask.mif fixel_in_temp_space -afd fd.mif -nthreads $ncpus -force
+
+#Reorient fixel orientations
+
+fixelreorient fixel_in_temp_space subject2template_warp.mif fixel_in_temp_space -nthreads $ncpus -force
+
+#assign subject fixels to temp fixels
+
+warp2metric subject2template_warp.mif -fc ../template/fixel_mask ../template/fd pre.mif -nthreads $ncpus -force
+
+mkdir ../template/log_fc
+cp ../template/fc/index.mif ../template/fc/directions.mif ../template/log_fc
+foreach * : mrcalc ../template/fc/IN.mif -log ../template/log_fc/IN.mif -nthreads $ncpus -force
+
+#compute a combined measure of fibre density and cross-section (FDC)
+
+mkdir ../template/fdc
+cp ../template/fc/index.mif cp ../template/fc/directions.mif ../template/fdc
+foreach * : mrcalc ../template/fd/IN.mif ../template/fc/IN.mif -mult ../template/fdc/IN.mif -nthreads $ncpus -force
+
+#Perform whole-brain fibre tractography on the FOD template
+
+cd ../template
+tckgen -angle 22.5 -maxlen 250 -minlen 10 -power 1.0 wmfod_template.mif -seed_image voxel_mask.mif -mask voxel_mask.mif -select 20000000 20M.tck -nthreads $ncpus -force
+
+#reduce biases in tractogram densities
+
+tcksift 20M.tck fod_template.mif 2M_sift.tck -term_number 2000000
+
+
+
