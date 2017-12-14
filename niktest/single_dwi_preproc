@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# All required resource statements start with "#PBS -l"
+# These will be interpreted by the job submission system (PBS pro)
+
+subj=$1
+WORKDIR=$2
+
+mkdir -p $WORKDIR/Diff/$subj/preproc
+
+rsync *rawdata* $WORKDIR/Diff/$subj/preproc
+
+rsync *encoding* $WORKDIR/Diff/$subj/preproc
+
+cd $WORKDIR/Diff/$subj/preproc
+
+#denoise the rawdata
+
+dwidenoise rawdata.mif rawdata-dn.mif -force -nthreads $npus
+
+#re-convert to the correct stride
+
+mrconvert rawdata-dn.mif rawdata-dnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
+
+mrconvert rawdata-dnstr.mif rawdata-dn.mif -stride +1,2,3,4 -force -nthreads $ncpus
+
+rm rawdata-dnstr.mif
+
+#eddy and motion correction
+
+dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -nthreads $ncpus -debug -tempdir . -nocleanup -force
+
+#Construct brain mask
+
+dwi2mask eddycorr.mif eddy_mask.mif -nthreads $ncpus -force
+
+#bias field correction
+
+dwibiascorrect -ants -mask eddy_mask.mif eddycorr.mif biascorr.mif -nthreads $ncpus -force
+
+# global intensity normalisation across subjects
+
+mkdir -p ../dwiintensitynorm/dwi_input
+mkdir ../dwiintensitynorm/mask_input
+
+rsync biascorr.mif ../dwiintensitynorm/dwi_input/
+rsync eddy_mask ../dwiintensitynorm/mask_input/
+
+#perform intensity norm
+
+dwiintensitynorm ../dwiintensitynorm/dwi_input/ ../dwiintensitynorm/mask_input/ ../dwiintensitynorm/dwi_output/ ../dwiintensitynorm/fa_template.mif ../dwiintensitynorm/fa_temp_wm_mask.mif -nthreads $ncpus -force
+
+rsync dwi_output/* bias_norm_corr.mif
