@@ -17,25 +17,25 @@ fi
 
 #Multi-tissue spherical deconvolution
 
-dwi2response dhollander biascorr.mif wm.txt gm.txt csf.txt -mask iterbrainmask.nii -nthreads $ncpus -force
+dwi2response dhollander biascorr.mif wm.txt gm.txt csf.txt -mask biasmeanb0brain_mask.nii.gz -nthreads $ncpus -force
 
-dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask iterbrainmask.nii -nthreads $ncpus
+dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask biasmeanb0brain_mask.nii.gz -nthreads $ncpus
 
 
 mrconvert wm.mif wmstr.mif -stride +1,2,3,4 -nthreads $ncpus -force
 
 mv wmstr.mif wm.mif
 
-fod2dec wm.mif  foddec.mif -mask iterbrainmask.nii -force -nthreads $ncpus
+fod2dec wm.mif  foddec.mif -mask biasmeanb0brain_mask.nii.gz -force -nthreads $ncpus
 
 
 #Fiber tracking
 
-tckgen wm.mif ${numfibers}.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask iterbrainmask.nii -output_seeds succeeds.txt -force -nthreads $ncpus
+tckgen wm.mif ${numfibers}.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask biasmeanb0brain_mask.nii.gz -output_seeds succeeds.txt -force -nthreads $ncpus
 
 tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
 
-tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select 1M -mask iterbrainmask.nii -output_seeds succeeds1M.txt -force -nthreads $ncpus
+tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select 1M -mask biasmeanb0brain_mask.nii.gz -output_seeds succeeds1M.txt -force -nthreads $ncpus
 
 tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads $ncpus
 
@@ -45,7 +45,7 @@ tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads $ncpus
 #if [ $ismultishell==1 ]
 #then
 
-#tckglobal biascorr.mif wm.txt -riso csf.txt -riso gm.txt -mask iterbrainmask.nii -niter ${numfibers} -fod wmiso.mif -fiso csfiso.mif GT_${numfibers}.tck
+#tckglobal biascorr.mif wm.txt -riso csf.txt -riso gm.txt -mask biasmeanb0brain_mask.nii.gz -niter ${numfibers} -fod wmiso.mif -fiso csfiso.mif GT_${numfibers}.tck
 #tckmap GT_${numfibers}.tck GT_${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
 #tckmap GT_${numfibers}.tck GT_${numfibers}ends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
 #fi
