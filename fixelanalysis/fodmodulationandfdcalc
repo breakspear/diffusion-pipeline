@@ -4,7 +4,8 @@
 
 WORKDIR=$1
 NORMDIR=$2
-TEMPLATEDIR=$3
+
+TEMPLATEDIR=fodtemplate
 
 cd ${WORKDIR}/${NORMDIR}
 

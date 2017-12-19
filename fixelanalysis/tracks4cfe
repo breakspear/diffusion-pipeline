@@ -1,12 +1,13 @@
 #!/bin/bash
-#usage: tracks4cfe WORKDIR NORMDIR TEMPLATEDIR
+#usage: tracks4cfe WORKDIR NORMDIR
 
 #compulsory arguments that are called automatically:
 #subj=$1
 
 WORKDIR=$1
 NORMDIR=$2
-TEMPLATEDIR=$3
+
+TEMPLATEDIR=fodtemplate
 
 cd ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}
 
