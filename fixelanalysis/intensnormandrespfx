@@ -24,7 +24,7 @@ find ${DATADIR}/* -maxdepth 0 -type d | awk -F "/" '{print $NF}' > ${WORKDIR}/${
 
 for subj in `cat ${WORKDIR}/${OUTDIR}/scans.txt`; do
 rsync ${DATADIR}/${subj}/preproc/biascorr.mif ${WORKDIR}/${OUTDIR}/DWI/${subj}_DWI.mif
-rsync ${DATADIR}/${subj}/preproc/biasmeanb0brain_mask.nii.gz ${WORKDIR}/${OUTDIR}/Masks/${subj}_Mask.nii.gz
+rsync ${DATADIR}/${subj}/preproc/iterbrainmask.nii ${WORKDIR}/${OUTDIR}/Masks/${subj}_Mask.nii
 done
 
 #echo "NumberOfThreads: 10" > /mnt/lustre/home/${USER}/.mrtrix.conf
@@ -33,18 +33,18 @@ dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/
 
 #rm /mnt/lustre/home/$USER/.mrtrix.conf
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2tensor IN ${WORKDIR}/${OUTDIR}/DWInorm/UNI_dt.mif -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 1 -force
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2tensor IN ${WORKDIR}/${OUTDIR}/DWInorm/UNI_dt.mif -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii -nthreads 1 -force
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -fa ${WORKDIR}/${OUTDIR}/DWInorm/UNI_fa.nii -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 1 -force
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -fa ${WORKDIR}/${OUTDIR}/DWInorm/UNI_fa.nii -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii -nthreads 1 -force
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -adc ${WORKDIR}/${OUTDIR}/DWInorm/UNI_md.nii -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 1 -force
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*dt.mif : tensor2metric IN -adc ${WORKDIR}/${OUTDIR}/DWInorm/UNI_md.nii -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii -nthreads 1 -force
 
 
 #echo "NumberOfThreads: 1" > /mnt/lustre/home/${USER}/.mrtrix.conf
 
 mkdir -p ${WORKDIR}/${OUTDIR}/FODS
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2response dhollander IN ${WORKDIR}/${OUTDIR}/FODS/UNI_wm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_gm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_csf.txt -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz -nthreads 1 -force 
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2response dhollander IN ${WORKDIR}/${OUTDIR}/FODS/UNI_wm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_gm.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_csf.txt -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii -nthreads 1 -force 
 
 rm ${WORKDIR}/${OUTDIR}/FODS/avg_wm_resp.txt
 
