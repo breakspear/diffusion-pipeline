@@ -56,4 +56,4 @@ average_response ${WORKDIR}/${OUTDIR}/FODS/*csf.txt ${WORKDIR}/${OUTDIR}/FODS/av
 
 #rm /mnt/lustre/home/${USER}/.mrtrix.conf
 
-foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${OUTDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_wm.mif ${WORKDIR}/${OUTDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii.gz
+foreach -10 ${WORKDIR}/${OUTDIR}/DWInorm/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${OUTDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_wm.mif ${WORKDIR}/${OUTDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${OUTDIR}/FODS/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${OUTDIR}/Masks/UNI_Mask.nii
