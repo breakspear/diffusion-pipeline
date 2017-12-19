@@ -118,7 +118,7 @@ dwibiascorrect -mask eddyb0brainfsl_mask.nii.gz -fsl eddycorr.mif biascorr.mif -
 
 dwiextract biascorr.mif -nthreads $ncpus -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -nthreads $ncpus -force
 
-bet2 biasmeanb0.nii biasmeanb0brain -f 0.2 -m
+bet2 biasmeanb0.nii biasmeanb0bet -f 0.2 -m
 
 #fslmaths biasmeanb0.nii -mask iterbrainmask.nii biasmeanb0bet
 
