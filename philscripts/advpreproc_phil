@@ -124,6 +124,6 @@ bet2 biasmeanb0.nii biasmeanb0bet -f 0.2 -m
 
 #gunzip biasmeanb0bet.nii.gz -f 
 
-dwi2tensor biascorr.mif dt.nii -mask biasmeanb0brain_mask.nii.gz -nthreads $ncpus -force
+dwi2tensor biascorr.mif dt.nii -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus -force
 
 tensor2metric dt.nii -fa fa.nii -nthreads $ncpus -force
