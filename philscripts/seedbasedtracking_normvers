@@ -56,7 +56,7 @@ antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-tran
 
 #convert_xfm -omat tempinbrainFS.mat -inverse FS2MNIhires.mat
 
-c3d_affine_tool -ref brainFSintempWarped.nii.gz -src brainFSbet.nii -itk brainFSintempGenericAffine.mat -ras2fsl -o brainFSintemp-fsl.mat
+c3d_affine_tool -ref brainFSintempWarped.nii.gz -src brainFSbet.nii -itk brainFSintemp0GenericAffine.mat -ras2fsl -o brainFSintemp-fsl.mat
 
 #now inverse it
 
@@ -110,7 +110,7 @@ flirt -in ${target}_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out ${tar
 
 gunzip ${target}_diff.nii.gz -f
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
 
 
 #repeat for left-hemisphere
