@@ -20,7 +20,7 @@ mkdir -p ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/csf
 
 foreach -10 ${WORKDIR}/${NORMDIR}/DWInorm/*DWI.mif : mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/UNI_DWI.mif -nthreads 1 -force 
 
-foreach -10 ${WORKDIR}/${NORMDIR}/Masks/*.nii.gz : mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNI_Mask.mif -interp nearest -nthreads 1 -force 
+foreach -10 ${WORKDIR}/${NORMDIR}/Masks/*.nii* : mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNI_Mask.mif -interp nearest -nthreads 1 -force 
 
 foreach -10 ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${NORMDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/UNI_wm.mif ${WORKDIR}/${NORMDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/csf/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNI_Mask.mif
 
