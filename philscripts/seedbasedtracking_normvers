@@ -80,7 +80,7 @@ gunzip ${seed}_FS.nii.gz -f
 
 mrconvert ${seed}_FS.nii ${seed}_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
 
-flirt -in ${seed}_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out ${seed}_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+flirt -in ${seed}_FS_str.nii -ref ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -out ${seed}_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
 gunzip ${seed}_diff.nii.gz -f
 
@@ -106,7 +106,7 @@ gunzip ${target}_FS.nii.gz -f
  
 mrconvert ${target}_FS.nii ${target}_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
  
-flirt -in ${target}_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out ${target}_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+flirt -in ${target}_FS_str.nii -ref ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -out ${target}_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
 gunzip ${target}_diff.nii.gz -f
  
