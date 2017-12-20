@@ -1,6 +1,6 @@
 #!/bin/bash
 #file: fodtemplateandfixelmask
-#usage: fodtemplateandfixelmask $WORKDIR $OUTDIR
+#usage: fodtemplateandfixelmask $WORKDIR $OUTDIR $VOXSIZE
 
 WORKDIR=$1
 NORMDIR=$2
