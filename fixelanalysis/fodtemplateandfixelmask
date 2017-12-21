@@ -16,15 +16,17 @@ DATADIR=${WORKDIR}/${NORMDIR}/upsample
 
 population_template ${DATADIR}/FODS/wm -mask_dir ${DATADIR}/Masks ./${OUTDIR}/fod_template.mif -warp_dir ./${OUTDIR}/warps -voxel_size ${VOXSIZE} -transformed_dir ./${OUTDIR}/transformed -template_mask ./${OUTDIR}/template_mask.mif -nocleanup -tempdir . -force -nthreads 10
 
-#foreach -10 ./${OUTDIR}/warps/*.mif : warpconvert -type warpfull2deformation -template ./${OUTDIR}/fod_template.mif IN ./${OUTDIR}/warps/PRE2template_warp.mif -force -nthreads 1
+#foreach -10 ./${OUTDIR}/warps/*.mif : warpconvert IN warpfull2deformation -template ./${OUTDIR}/fod_template.mif ./${OUTDIR}/warps/PRE2template_warp.mif -force -nthreads 1
 
-foreach -10 ${DATADIR}/Masks/*.mif : mrregister ${DATADIR}/FODS/wm/UNI_wm.mif -mask1 IN ./${OUTDIR}/fod_template.mif -nl_warp ./${OUTDIR}/warps/PRE2template_warp.mif ./${OUTDIR}/warps/template2UNI_warp.mif -force -nthreads 1
+foreach -10 ${DATADIR}/FODS/wm/*.mif : mrregister IN -mask1 ${DATADIR}/Masks/UNI_Mask.mif ./${OUTDIR}/fod_template.mif -nl_warp ./${OUTDIR}/warps/UNI2template_warp.mif ./${OUTDIR}/warps/template2UNI_warp.mif -force -nthreads 1
 
 foreach -10 ${DATADIR}/Masks/*.mif : mrtransform IN -warp ./${OUTDIR}/warps/UNI2template_warp.mif -interp nearest ./${OUTDIR}/warps/UNI_mask_in_template_space.mif -force -nthreads 1
 
 mrmath ./${OUTDIR}/warps/*mask_in_template_space.mif min ./${OUTDIR}/mask_intersection.mif -force -nthreads 10
 
 rm -rf ./${OUTDIR}/fixeltemp
+
+rm -rf ./${OUTDIR}/fixel_mask
 
 mkdir ./${OUTDIR}/fixeltemp
 
