@@ -1,5 +1,5 @@
 #!/bin/bash
-#usage: tracks4cfe WORKDIR NORMDIR TEMPLATEDIR
+#usage: tracks4cfe WORKDIR NORMDIR COGVARS CONTRASTMATRIX
 
 #compulsory arguments that are called automatically:
 #subj=$1
@@ -7,6 +7,7 @@
 WORKDIR=$1
 NORMDIR=$2
 COGVARS=$3
+CONMATRIX=$4
 
 TEMPLATEDIR=fodtemplate
 
@@ -15,8 +16,23 @@ cd ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/fixels
 #find ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/fixels/fdc/*Patient* -name "*Patient*" -maxdepth 0 > fdcfiles.txt
 #awk -F "/" '{print $NF}' fdcfiles.txt > subjs.txt
 
-fixelcfestats fd filelist.txt ${COGVARS}.txt contrast_matrix_betgrps.txt ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fd_$COGVARS -nperms 100 -force -nthreads 10 -neg 
+#find subjects with fixel files
 
-fixelcfestats log_fc filelist.txt ${COGVARS}.txt contrast_matrix_betgrps.txt ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_logfc_$COGVARS -neg -nperms 100 -force -nthreads 10 
+find fd/ -type f ! -name index.mif ! -name directions.mif > filelist.txt 
 
-fixelcfestats fdc filelist.txt ${COGVARS}.txt contrast_matrix_betgrps.txt ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fdc_$COGVARS -nperms 100 -force -nthreads 10 -neg
+awk -F "/" '{print $NF}' filelist.txt > subjs.txt
+
+sort subjs.txt > subjssort.txt
+
+mv subjssort.txt analysissubjs.txt
+
+rm subjs.txt
+
+
+#start analysis now
+
+fixelcfestats fd analysissubjs.txt ${COGVARS}.txt ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fd_$COGVARS -nperms 100 -force -nthreads 10 -neg 
+
+fixelcfestats log_fc analysissubjs.txt ${COGVARS}.txt ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_logfc_$COGVARS -neg -nperms 100 -force -nthreads 10 
+
+fixelcfestats fdc analysissubjs.txt ${COGVARS}.txt ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fdc_$COGVARS -nperms 100 -force -nthreads 10 -neg
