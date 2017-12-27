@@ -19,9 +19,11 @@ foreach -10 ${DATADIR}/warps/*wm_in_template_space.mif : fod2fixel IN -mask ${DA
 
 foreach -10 ${DATADIR}/fixels/intemplatespace/* : fixelreorient IN ${DATADIR}/warps/NAME2template_warp.mif ${DATADIR}/fixels/intemplatespace/NAME --force -nthreads 1 -debug
 
-foreach -10 ${DATADIR}/fixels/intemplatespace/* : fixelcorrespondence IN/fd.mif ${DATADIR}/fixel_mask ${DATADIR}/fixels/fd NAME.mif --force -nthreads 10 -debug
+#NOTE: Leave fixelcorrespondence and warp2metric as "foreach -1" - see: http://community.mrtrix.org/t/fixel-analysis-pipeline-index-mif-files-are-smaller-than-expected/1010/6
 
-foreach -10 ${WORKDIR}/${NORMDIR}/upsample/FODS/wm/*.mif : warp2metric ${DATADIR}/warps/UNI2template_warp.mif -fc ${DATADIR}/fixel_mask ${DATADIR}/fixels/fc UNI.mif --force -nthreads 10 -debug
+foreach -1 ${DATADIR}/fixels/intemplatespace/* : fixelcorrespondence IN/fd.mif ${DATADIR}/fixel_mask ${DATADIR}/fixels/fd NAME.mif --force -nthreads 10 -debug
+
+foreach -1 ${WORKDIR}/${NORMDIR}/upsample/FODS/wm/*.mif : warp2metric ${DATADIR}/warps/UNI2template_warp.mif -fc ${DATADIR}/fixel_mask ${DATADIR}/fixels/fc UNI.mif --force -nthreads 10 -debug
 
 
 mkdir -p ${DATADIR}/fixels/log_fc
