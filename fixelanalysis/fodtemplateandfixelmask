@@ -10,11 +10,11 @@ OUTDIR=fodtemplate
 
 cd ${WORKDIR}/${NORMDIR}
 
-mkdir ${OUTDIR}
+mkdir -r ${OUTDIR}
 
 DATADIR=${WORKDIR}/${NORMDIR}/upsample
 
-#population_template ${DATADIR}/FODS/wm -mask_dir ${DATADIR}/Masks ./${OUTDIR}/fod_template.mif -voxel_size ${VOXSIZE} -warp_dir ./${OUTDIR}/warps -transformed_dir ./${OUTDIR}/transformed -template_mask ./${OUTDIR}/template_mask.mif -nocleanup -tempdir . -force -nthreads 10
+population_template ${DATADIR}/FODS/wm -mask_dir ${DATADIR}/Masks ./${OUTDIR}/fod_template.mif -voxel_size ${VOXSIZE} -warp_dir ./${OUTDIR}/warps -transformed_dir ./${OUTDIR}/transformed -template_mask ./${OUTDIR}/template_mask.mif -nocleanup -tempdir . -force -nthreads 10
 
 foreach -10 ./${OUTDIR}/warps/*.mif : warpconvert IN warpfull2deformation -template ./${OUTDIR}/fod_template.mif ./${OUTDIR}/warps/PRE2template_warp.mif -force -nthreads 1
 
