@@ -1,0 +1,22 @@
+#!/bin/bash
+#usage: mniseg subj WORKDIR OUTDIR
+
+subj=$1
+WORKDIR=$2
+OUTDIR=$3
+
+rundir=$(pwd)
+baserundir=$(basename $rundir)
+
+if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+cd $WORKDIR/Diff/$subj/preproc
+fi
+
+#ROIs
+#insula
+fslmaths T1bet.nii.gz -mul 0 -add 1 -roi 50 1 118 1 106 1 0 1 $OUTDIR/insula_point -odt float
+fslmaths $OUTDIR/insula_point.nii.gz -kernel sphere 5 -fmean $OUTDIR/insula_mask -odt float
+
+#temporal pole
+fslmaths T1bet.nii.gz -mul 0 -add 1 -roi 127 1 114 1 67 1 0 1 $OUTDIR/temp_pole_point -odt float
+fslmaths $OUTDIR/temp_pole_point.nii.gz -kernel sphere 5 -fmean $OUTDIR/temp_pole_mask -odt float
