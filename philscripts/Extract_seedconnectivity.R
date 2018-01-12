@@ -40,8 +40,14 @@ SubjDir<-paste(DATADIR,SubjIDs[i],sep="/")
 xx=NULL
 for(j in 1:length(convarstrings))
 {
+
 confile=paste(SubjDir, convarstrings[j], sep="/")
 condata=scan(confile)
+
+if(length(condata)==0) {
+condata<-"NaN"
+}
+
 xx=c(xx,condata)
 }
 
@@ -55,8 +61,10 @@ names(xall)=c("ID",varnames)
 
 if( exists("preextdata")) {
 
+ph<-read.table(preextdata, sep=",", header=T)
+
 fname.out=paste(DATADIR,"Subjs_seedconnectivity_wprexdata.dat",sep="/")
-tmp=merge(preextdata,xall,by.x="ID",by.y="ID",sort=F)
+tmp=merge(ph,xall,by.x="ID",by.y="ID",sort=F)
 write.table(tmp,file=fname.out,row.names=F,col.names=T,sep="\t",quote=F)
 
 } else {
