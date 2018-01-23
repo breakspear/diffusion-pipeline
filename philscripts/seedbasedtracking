@@ -79,22 +79,6 @@ gunzip RPFC_diff.nii.gz -f
 
 #Setup include masks in diffusion space, plus tracking 
 
-
-flirt -in ${currrundir}/rinsula.nii.gz -ref ${currrundir}/brainFS.nii -applyxfm -init MNIhires2FS.mat -interp nearestneighbour -out rinsula_FS.nii.gz
-
-gunzip rinsula_FS.nii.gz
- 
-mrconvert rinsula_FS.nii rinsula_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
- 
-flirt -in rinsula_FS_str.nii -ref ${currrundir}/fa.nii -out rinsula_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
-
-gunzip rinsula_diff.nii.gz
- 
-tckgen ${currrundir}/wm.mif RPFCtoRInsula.tck -seed_image RPFC_diff.nii -include rinsula_diff.nii -act ${currrundir}/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus
-
-
-
-
 flirt -in ${currrundir}/rinsula.nii.gz -ref ${currrundir}/brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out rinsula_FS.nii.gz
 
 gunzip rinsula_FS.nii.gz -f
