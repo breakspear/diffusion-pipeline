@@ -1,16 +1,19 @@
 #!/bin/bash
-#usage: seedbasedtracking $subj $WORKDIR $parcimageref
+#usage: seedbasedtracking $subj $WORKDIR $PARCDIR $parcimageref
 
 #compulsory arguments that are called automatically:
 subj=$1
 WORKDIR=$2
-parcimageref=$3
+PARCDIR=$3
+parcimageref=$4
 
 #option to include extra command argument ($3), if diffusion data directory has changed
 #e.g: if files are now located in "Diff-wcust5tt"
 #usage: seedbasedtracking $subj $WORKDIR Diff-wcust5tt
 
-nargs=$#
+#convert to appropriate directory structure
+
+PARCDIR=${WORKDIR}/${PARCDIR}
 
 rundir=$(pwd)
 
