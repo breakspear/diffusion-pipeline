@@ -59,7 +59,7 @@ convert_xfm -omat FS2diff.mat -inverse diff2FS.mat
 
 #Setup STN seeds in diffusion space
 
-flirt -in ${currrundir}/RPFC.nii.gz -ref ${currrundir}/brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out RPFC_FS.nii.gz
+flirt -in ${PARCDIR}/RPFC.nii.gz -ref brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out RPFC_FS.nii.gz
 
 gunzip RPFC_FS.nii.gz -f
 
@@ -86,7 +86,7 @@ gunzip RPFC_diff.nii.gz -f
 
 #Setup include masks in diffusion space, plus tracking 
 
-flirt -in ${currrundir}/rinsula.nii.gz -ref ${currrundir}/brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out rinsula_FS.nii.gz
+flirt -in ${currrundir}/rinsula.nii.gz -ref brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out rinsula_FS.nii.gz
 
 gunzip rinsula_FS.nii.gz -f
  
