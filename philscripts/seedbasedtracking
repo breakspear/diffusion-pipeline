@@ -96,7 +96,7 @@ flirt -in rinsula_FS_str.nii -ref ${currrundir}/biasmeanb0bet.nii.gz -out rinsul
 
 gunzip rinsula_diff.nii.gz -f
  
-tckgen wm.mif RPFC2Insula.tck -seed_image RPFC_diff.nii -include rinsula_diff.nii -mask iterbrainmask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds RPFC_seeds.txt
+tckgen ${currrundir}/wm.mif RPFC2Insula.tck -seed_image RPFC_diff.nii -include rinsula_diff.nii -mask ${currrundir}/iterbrainmask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds RPFC_seeds.txt
 
 #repeat for left-hemisphere
 
