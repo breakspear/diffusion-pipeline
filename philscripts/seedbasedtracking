@@ -11,6 +11,7 @@ seedtracklist=$5
 #convert to appropriate directory structure
 
 PARCDIR=${WORKDIR}/${PARCDIR}
+seedtracklist=${WORKDIR}/${seedtracklist}
 
 rundir=$(pwd)
 
