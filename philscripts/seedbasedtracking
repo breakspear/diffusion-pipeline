@@ -46,8 +46,8 @@ c3d_affine_tool -ref brainFSintempWarped.nii.gz -src brainFSbet.nii -itk brainFS
 
 #now inverse it
 
-rsync ${currrundir}/FS2diff.mat .
-rsync ${currrundir}/diff2FS.mat .
+rsync ${DATADIR}/${subj}/preproc/FS2diff.mat .
+rsync ${DATADIR}/${subj}/preproc/diff2FS.mat .
 
 convert_xfm -omat tempinbrainFS.mat -inverse brainFSintemp-fsl.mat
 
