@@ -1,5 +1,5 @@
 #!/bin/bash
-#usage: seedbasedtracking $subj $WORKDIR $PARCDIR $parcimageref
+#usage: seedbasedtracking $subj $WORKDIR $NORMDIR $PARCDIR $parcimageref $seedtracklist.txt
 
 #compulsory arguments that are called automatically:
 subj=$1
@@ -14,8 +14,6 @@ seedtracklist=$6
 DATADIR=${WORKDIR}/Diff
 PARCDIR=${WORKDIR}/${PARCDIR}
 seedtracklist=${WORKDIR}/${seedtracklist}
-
-rundir=$(pwd)
 
 cd ${WORKDIR}/${NORMDIR}
 
