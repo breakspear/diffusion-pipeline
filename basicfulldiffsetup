@@ -11,8 +11,8 @@ basicpreproc $subj $WORKDIR
 
 #Fiber construction
 
-basicfibertrack $subj $WORKDIR 5M
+basicfibertrack $subj $WORKDIR 25M
 
 #Connectome construction
 
-basiccntmecon $subj $WORKDIR $WORKDIR/parcs/parc2fmrib.nii 5M 512
+basiccntmecon $subj $WORKDIR $WORKDIR/parcs/parc2fmrib.nii 25M 512
