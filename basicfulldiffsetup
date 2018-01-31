@@ -15,4 +15,4 @@ basicfibertrack $subj $WORKDIR 5M
 
 #Connectome construction
 
-basiccntmecon $subj $WORKDIR /mnt/backedup/home/alistaiP/base/parc2fmrib.nii 5M 512
+basiccntmecon $subj $WORKDIR $WORKDIR/parcs/parc2fmrib.nii 5M 512
