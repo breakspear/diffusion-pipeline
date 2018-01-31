@@ -110,7 +110,7 @@ flirt -in ${target}_FS_str.nii -ref ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii
 
 gunzip ${target}_diff.nii.gz -f
  
-tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
 
 
 #repeat for left-hemisphere
