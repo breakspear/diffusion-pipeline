@@ -63,15 +63,16 @@ fslmaths eddyb0brainfsl_mask -mas biasmaskMR.nii iterbrainmask
 
 gunzip iterbrainmask.nii.gz -f
 
-fslmaths biasmeanb0.nii -mask iterbrainmask.nii biasmeanb0bet
+dwiextract biascorr.mif -nthreads $ncpus -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -force -nthreads $ncpus
 
-#mrconvert biascorr.mif biasb0.nii -coord 3 0 -force -nthreads $ncpus
-#bet2 biasb0.nii biasb0brain -m -f 0.15
+fslmaths biasmeanb0.nii -mas iterbrainmask.nii biasmeanb0masked
 
-#Generate tensor and fa images
+#gunzip -f biasmeanb0bet.nii.gz
 
-#dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
+#add further bet2 option so later pipeline doesn't break!
 
-dwi2tensor biascorr.mif dt.nii -mask iterbrainmask.nii -force -nthreads $ncpus
+bet2 biasmeanb0masked biasmeanb0bet -f 0.10 -m 
 
-tensor2metric dt.nii -fa fa.nii -force -nthreads $ncpus
+dwi2tensor biascorr.mif dt.nii -mask iterbrainmask.nii -nthreads $ncpus -force
+
+tensor2metric dt.nii -fa fa.nii -nthreads $ncpus -force
