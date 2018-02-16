@@ -36,13 +36,13 @@ export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
 
 parcimageref=${parcimageref}.nii
 
-antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-transforms 1 --output [brainFSintemp,brainFSintempWarped.nii.gz,brainFSintempInverseWarped.nii.gz] --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [0.005,0.995] --initial-moving-transform [${PARCDIR}/${parcimageref},brainFSbet.nii,1] --transform Rigid[0.1] --metric MI[${PARCDIR}/${parcimageref},brainFSbet.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform Affine[0.1] --metric MI[${PARCDIR}/${parcimageref},brainFSbet.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform SyN[0.1,3,0] --metric CC[${PARCDIR}/${parcimageref},brainFSbet.nii,1,4] --convergence [100x70x50x20,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox
+#antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-transforms 1 --output [brainFSintemp,brainFSintempWarped.nii.gz,brainFSintempInverseWarped.nii.gz] --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [0.005,0.995] --initial-moving-transform [${PARCDIR}/${parcimageref},brainFSbet.nii,1] --transform Rigid[0.1] --metric MI[${PARCDIR}/${parcimageref},brainFSbet.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform Affine[0.1] --metric MI[${PARCDIR}/${parcimageref},brainFSbet.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform SyN[0.1,3,0] --metric CC[${PARCDIR}/${parcimageref},brainFSbet.nii,1,4] --convergence [100x70x50x20,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox
 
-#flirt -ref ${PARCDIR}/mni_hires_t1_brain.nii -in ${DATADIR}/${subj}/preproc/brainFS.nii -omat FS2MNIhires.mat -out FS2MNIhiris -dof 12
+flirt -ref ${PARCDIR}/${parcimageref} -in brainFSbet.nii -omat FS2MNI.mat -out FS2MNI -dof 12
 
-#convert_xfm -omat tempinbrainFS.mat -inverse FS2MNIhires.mat
+convert_xfm -omat tempinbrainFS.mat -inverse FS2MNI.mat
 
-c3d_affine_tool -ref brainFSintempWarped.nii.gz -src brainFSbet.nii -itk brainFSintemp0GenericAffine.mat -ras2fsl -o brainFSintemp-fsl.mat
+#c3d_affine_tool -ref brainFSintempWarped.nii.gz -src brainFSbet.nii -itk brainFSintemp0GenericAffine.mat -ras2fsl -o brainFSintemp-fsl.mat
 
 #now inverse it
 
