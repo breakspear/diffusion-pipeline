@@ -49,7 +49,7 @@ convert_xfm -omat tempinbrainFS.mat -inverse FS2MNI.mat
 rsync ${DATADIR}/${subj}/preproc/FS2diff.mat .
 rsync ${DATADIR}/${subj}/preproc/diff2FS.mat .
 
-convert_xfm -omat tempinbrainFS.mat -inverse brainFSintemp-fsl.mat
+#convert_xfm -omat tempinbrainFS.mat -inverse brainFSintemp-fsl.mat
 
 convert_xfm -omat FS2diff.mat -inverse diff2FS.mat
 
