@@ -51,7 +51,7 @@ mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 	
 #else
 	
-dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force -nthreads $ncpus
+#dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force -nthreads $ncpus
 #mrconvert rawdataPArem.mif rawdataPA.mif -json_import json_rawdataPA.json -nthreads $ncpus -force
 #rm rawdataPArem.mif	
 
@@ -78,11 +78,11 @@ mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads $ncpus
 
 #Preprocessing steps including eddy correction & bias correction
 
-dwiextract rawdataAPdn.mif APb0s.mif -bzero -force -nthreads $ncpus
+#dwiextract rawdataAPdn.mif APb0s.mif -bzero -force -nthreads $ncpus
 
 if ([ $ismultiband = 1 ]); then
 
-        mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
+        mrcat b0AP.mif b0PA.mif allb0s.mif -axis 3 -force -nthreads $ncpus
 	echo "Preprocessing command...:dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup"
 	dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup
 
