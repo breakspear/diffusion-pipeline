@@ -252,7 +252,10 @@ seedtargvalue=$(cat ${seed}_to_${target}_AFD.txt)
 
 targseedvalue=$(cat ${target}_to_${seed}_AFD.txt)
 
-echo "$seedtargvalue + $targseedvalue" / 2 | bc > ${seed}_to_${target}_COMB_AFD.txt
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_AFD.txt
+
 
 #FA
 
@@ -260,7 +263,10 @@ seedtargvalue=$(cat ${seed}_to_${target}_meanFA.txt)
 
 targseedvalue=$(cat ${target}_to_${seed}_meanFA.txt)
 
-echo "$seedtargvalue + $targseedvalue" / 2 | bc > ${seed}_to_${target}_COMB_meanFA.txt
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_meanFA.txt
+
 
 #MD
 
@@ -268,9 +274,12 @@ seedtargvalue=$(cat ${seed}_to_${target}_meanMD.txt)
 
 targseedvalue=$(cat ${target}_to_${seed}_meanMD.txt)
 
-echo "$seedtargvalue + $targseedvalue" / 2 | bc > ${seed}_to_${target}_COMB_meanMD.txt
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
 
-done < $seedtracklist
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_meanMD.txt
+
+
+one < $seedtracklist
 
 
 #Extract successful seeds as images
