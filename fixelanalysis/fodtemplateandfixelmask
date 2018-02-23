@@ -10,7 +10,7 @@ OUTDIR=fodtemplate
 
 cd ${WORKDIR}/${NORMDIR}
 
-mkdir -r ${OUTDIR}
+mkdir -p ${OUTDIR}
 
 DATADIR=${WORKDIR}/${NORMDIR}/upsample
 

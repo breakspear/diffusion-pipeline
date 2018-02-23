@@ -217,6 +217,30 @@ afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.t
 
 #afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}toHCPRIFG_Post.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}toHCPRIFG_Post_AFD.nii > ${seed}toHCPRIFG_Post_AFD.txt
 
+
+#now reverse!
+
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -seed_image ${target}_diff.nii -include ${seed}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${target}_seeds.txt
+
+tckmap ${target}_to_${seed}.tck ${target}_to_${seed}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+
+mrthreshold ${target}_to_${seed}_tdi.nii ${target}_to_${seed}_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+
+
+#stats
+
+#FA
+
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${target}_to_${seed}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${target}_to_${seed}_meanFA.txt
+
+#MD
+
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${target}_to_${seed}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${target}_to_${seed}_meanMD.txt
+
+#AFD
+
+afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -nthreads $ncpus -all_fixels -force -afd_map ${target}_to_${seed}_AFD.nii > ${target}_to_${seed}_AFD.txt
+
 done < $seedtracklist
 
 #Extract successful seeds as images
