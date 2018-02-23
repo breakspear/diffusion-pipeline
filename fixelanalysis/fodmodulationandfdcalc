@@ -1,6 +1,6 @@
 #!/bin/bash
-#file: fodtemplateandfixelmask
-#usage: fodtemplateandfixelmask $WORKDIR $OUTDIR
+#file: fodmodulationandfdcalc
+#usage: fodmodulationandfdcalc $WORKDIR $OUTDIR
 
 WORKDIR=$1
 NORMDIR=$2
