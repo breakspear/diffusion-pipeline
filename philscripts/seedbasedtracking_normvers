@@ -279,7 +279,7 @@ totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
 echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_meanMD.txt
 
 
-one < $seedtracklist
+done < $seedtracklist
 
 
 #Extract successful seeds as images
