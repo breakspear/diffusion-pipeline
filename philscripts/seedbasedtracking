@@ -107,4 +107,65 @@ mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}_to_${target}_
 
 afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}_to_${target}_AFD.nii > ${seed}_to_${target}_AFD.txt
 
+#now reverse!
+
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -seed_image ${target}_diff.nii -include ${seed}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${target}_seeds.txt
+
+tckmap ${target}_to_${seed}.tck ${target}_to_${seed}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+
+mrthreshold ${target}_to_${seed}_tdi.nii ${target}_to_${seed}_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+
+#stats
+
+#FA
+
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${target}_to_${seed}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${target}_to_${seed}_meanFA.txt
+
+#MD
+
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${target}_to_${seed}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${target}_to_${seed}_meanMD.txt
+
+#AFD
+
+afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -nthreads $ncpus -all_fixels -force -afd_map ${target}_to_${seed}_AFD.nii > ${target}_to_${seed}_AFD.txt
+
+###
+
+
+
+
+#Calculate combined scores
+
+#AFD
+
+seedtargvalue=$(cat ${seed}_to_${target}_AFD.txt)
+
+targseedvalue=$(cat ${target}_to_${seed}_AFD.txt)
+
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_AFD.txt
+
+
+#FA
+
+seedtargvalue=$(cat ${seed}_to_${target}_meanFA.txt)
+
+targseedvalue=$(cat ${target}_to_${seed}_meanFA.txt)
+
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_meanFA.txt
+
+
+#MD
+
+seedtargvalue=$(cat ${seed}_to_${target}_meanMD.txt)
+
+targseedvalue=$(cat ${target}_to_${seed}_meanMD.txt)
+
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_meanMD.txt
+
 done < $seedtracklist
