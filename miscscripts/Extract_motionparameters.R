@@ -40,6 +40,15 @@ for(i in 1:length(SubjIDs))
     if (i==1){
     nvols<-length(FD[,1])
 }
+  
+  if(length(FD)==0) {
+     meanFDval<-"NaN"
+     FDvals<-matrix(, nrow = nvols, ncol = 2)
+     FDvals[,]<-"NaN"
+     FDout=c(SubjIDs[i],FDvals)
+     FDall=rbind(FDall,FDout)
+           
+} else {
 
     FDvals<-FD$V2
     meanFDval<-mean(FDvals)
@@ -50,6 +59,7 @@ for(i in 1:length(SubjIDs))
     meanFDout=c(SubjIDs[i],meanFDval)
     meanFDall=rbind(meanFDall,meanFDout)
   
+}
 }
 
 meanFDall=data.frame(meanFDall,stringsAsFactors=F)
