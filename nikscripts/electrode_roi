@@ -1,0 +1,17 @@
+#!/bin/bash
+#usage: mniseg subj WORKDIR
+
+subj=$1
+WORKDIR=$2
+
+rundir=$(pwd)
+baserundir=$(basename $rundir)
+mkdir -p $WORKDIR/parcs/$subj/
+
+if [ "$rundir" != "$WORKDIR/parcs/$subj/" ]; then
+cd $WORKDIR/parcs/$subj
+fi
+
+#get coords from csv
+
+
