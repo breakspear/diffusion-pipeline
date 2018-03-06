@@ -30,3 +30,7 @@ do
   gunzip ${X}_${Y}_${Z}_electrode_MNI.nii.gz
   
 done < $COORDS_FILE
+
+#get rid of question marks
+
+find . -type f -name '*\?*' | while read f; do mv "$f" "${f//\?/}"; done
