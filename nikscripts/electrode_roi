@@ -11,6 +11,8 @@ rundir=$(pwd)
 baserundir=$(basename $rundir)
 mkdir -p $WORKDIR/$PARCDIR/coords/$subj
 COORD_DIR=$WORKDIR/$PARCDIR/coords/$subj
+## setup proper file structure
+COORDS_FILE=$WORKDIR/$COORDS_FILE
 
 if [ "$rundir" != "$WORKDIR/$NORMDIR/seedtracking/$subj/" ]; then
 cd $WORKDIR/$NORMDIR/seedtracking/$subj/
@@ -19,11 +21,9 @@ fi
 #get coords from csv
 
 IFS=','
-
-i=1
 while read -r X Y Z
 do
-  test $i -eq 1 && ((i=i+1)) && continue
+
   echo "Constructing ROI for MNI coords $X $Y $Z"
   fslmaths $WORKDIR/$PARCDIR/mni_icbm152_t1_tal_nlin_asym_09c_brain.nii -mul 0 -add 1 -roi $X 1 $Y 1 $Z 1 $COORD_DIR/$X$Y$Z_point -odt float
   fslmaths $COORD_DIR/$X$Y$Z_point -kernel sphere 2 -fmean $COORD_DIR/$X$Y$Z_sphere
