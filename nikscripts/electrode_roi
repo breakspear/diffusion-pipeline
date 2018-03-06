@@ -34,3 +34,7 @@ done < $COORDS_FILE
 #get rid of question marks
 
 find . -type f -name '*\?*' | while read f; do mv "$f" "${f//\?/}"; done
+
+#setup roi list for seedbasedtracking
+
+find ./* -maxdepth 0 -type f > ${WORKDIR}/${subj}_seeds.txt
