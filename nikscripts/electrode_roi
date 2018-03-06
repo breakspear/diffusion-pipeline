@@ -17,8 +17,8 @@ fi
 
 #get coords from csv
 
-IFS=','
-while read -r X Y Z
+
+while IFS=',' read -r X Y Z
 do
 
   echo "Constructing ROI for MNI coords $X $Y $Z"
