@@ -3,9 +3,8 @@
 
 subj=$1
 WORKDIR=$2
-NORMDIR=$3
-PARCDIR=$4
-COORDS_FILE=$5
+PARCDIR=$3
+COORDS_FILE=$4
 
 rundir=$(pwd)
 baserundir=$(basename $rundir)
@@ -14,8 +13,8 @@ COORD_DIR=$WORKDIR/$PARCDIR/coords/$subj
 ## setup proper file structure
 COORDS_FILE=$WORKDIR/$COORDS_FILE
 
-if [ "$rundir" != "$WORKDIR/$NORMDIR/seedtracking/$subj/" ]; then
-cd $WORKDIR/$NORMDIR/seedtracking/$subj/
+if [ "$rundir" != "$WORKDIR/$PARCDIR/coords/$subj" ]; then
+cd $WORKDIR/$PARCDIR/coords/$subj
 fi
 
 #get coords from csv
