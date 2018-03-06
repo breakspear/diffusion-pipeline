@@ -22,7 +22,7 @@ while IFS=',' read -r X Y Z
 do
 
   echo "Constructing ROI for MNI coords $X $Y $Z"
-  fslmaths $WORKDIR/$PARCDIR/mni_icbm152_t1_tal_nlin_asym_09c_brain.nii -mul 0 -add 1 -roi $X 1 $Y 1 $Z 1 $X_$Y_$Z_point -odt float
+  fslmaths $WORKDIR/$PARCDIR/mni_icbm152_t1_tal_nlin_asym_09c_brain.nii -mul 0 -add 1 -roi $X 1 $Y 1 $Z 1 0 1 $X_$Y_$Z_point -odt float
   fslmaths $X_$Y_$Z_point -kernel sphere 2 -fmean $X_$Y_$Z_sphere
   fslmaths $X_$Y_$Z_sphere -bin $X_$Y_$Z_electrode_MNI
   rm $X_$Y_$Z_point.nii.gz
