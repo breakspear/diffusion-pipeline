@@ -42,7 +42,9 @@ done < $COORDS_FILE
 #setup roi list for seedbasedtracking
 
 find ./* -maxdepth 0 -type f > ${WORKDIR}/${subj}_seeds.txt
-cut -d_ -f 1-5 ${WORKDIR}/${subj}_seeds.txt
+cut -d_ -f 1-4 ${WORKDIR}/${subj}_seeds.txt
+sed -i 's/\.//g' ${WORKDIR}/${subj}_seeds.txt
+sed -i 's/\///g' ${WORKDIR}/${subj}_seeds.txt
 
 while read aline
 do
