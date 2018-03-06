@@ -47,6 +47,7 @@ cut -d_ -f 1-5 ${WORKDIR}/${subj}_seeds.txt
 while read aline
 do
   while read bline
+  do
     echo $aline" "$bline >> ${WORKDIR}/${subj}_tracklist.txt
   done < ${WORKDIR}/${subj}_seeds.txt
 done < ${WORKDIR}/${subj}_seeds.txt
