@@ -17,6 +17,9 @@ fi
 
 #get coords from csv
 
+#delete carriage returns
+
+sed -i 's/\r//g' $COORDS_FILE
 
 while IFS=',' read -r X Y Z
 do
