@@ -1,17 +1,35 @@
 #!/bin/bash
-#usage: mniseg subj WORKDIR
+#usage: electrode_roi WORKDIR NORMDIR PARCDIR COORDS_FILE
 
 subj=$1
 WORKDIR=$2
+NORMDIR=$3
+PARCDIR=$4
+COORDS_FILE=$5
 
 rundir=$(pwd)
 baserundir=$(basename $rundir)
-mkdir -p $WORKDIR/parcs/$subj/
+mkdir -p $WORKDIR/$PARCDIR/coords/$subj
+COORD_DIR=$WORKDIR/$PARCDIR/coords/$subj
 
-if [ "$rundir" != "$WORKDIR/parcs/$subj/" ]; then
-cd $WORKDIR/parcs/$subj
+if [ "$rundir" != "$WORKDIR/$NORMDIR/seedtracking/$subj/" ]; then
+cd $WORKDIR/$NORMDIR/seedtracking/$subj/
 fi
 
 #get coords from csv
 
+IFS=','
 
+i=1
+while read -r X Y Z
+do
+  test $i -eq 1 && ((i=i+1)) && continue
+  echo "Constructing ROI for MNI coords $X $Y $Z"
+  fslmaths $WORKDIR/$PARCDIR/mni_icbm152_t1_tal_nlin_asym_09c_brain.nii -mul 0 -add 1 -roi $X 1 $Y 1 $Z 1 $COORD_DIR/$X$Y$Z_point -odt float
+  fslmaths $COORD_DIR/$X$Y$Z_point -kernel sphere 2 -fmean $COORD_DIR/$X$Y$Z_sphere
+  fslmaths $COORD_DIR/$X$Y$Z_sphere -bin $COORD_DIR/$X$Y$Z_electrode_MNI
+  rm $COORD_DIR/$X$Y$Z_point
+  rm $COORD_DIR/$X$Y$Z_sphere
+  gunzip $COORD_DIR/$X$Y$Z_electrode_MNI.nii.gz
+  
+done < $COORDS_FILE
