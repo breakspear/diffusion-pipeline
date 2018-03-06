@@ -22,6 +22,10 @@ while IFS=',' read -r X Y Z
 do
 
   echo "Constructing ROI for MNI coords $X $Y $Z"
+  #convert to voxel coords
+  vx=$X / 2 \* -1 + 45
+  vy=$Y / 2 + 63
+  vz=$Z / 2 + 36
   fslmaths $WORKDIR/$PARCDIR/mni_icbm152_t1_tal_nlin_asym_09c_brain.nii -mul 0 -add 1 -roi $X 1 $Y 1 $Z 1 0 1 ${X}_${Y}_${Z}_point -odt float
   fslmaths ${X}_${Y}_${Z}_point -kernel sphere 2 -fmean ${X}_${Y}_${Z}_sphere
   fslmaths ${X}_${Y}_${Z}_sphere -bin ${X}_${Y}_${Z}_electrode_MNI
