@@ -23,15 +23,15 @@ do
 
   echo "Constructing ROI for MNI coords $X $Y $Z"
   #convert to voxel coords
-  vx=$X / 2 \* -1 + 45
-  vy=$Y / 2 + 63
-  vz=$Z / 2 + 36
-  fslmaths $WORKDIR/$PARCDIR/mni_icbm152_t1_tal_nlin_asym_09c_brain.nii -mul 0 -add 1 -roi $X 1 $Y 1 $Z 1 0 1 ${X}_${Y}_${Z}_point -odt float
-  fslmaths ${X}_${Y}_${Z}_point -kernel sphere 2 -fmean ${X}_${Y}_${Z}_sphere
-  fslmaths ${X}_${Y}_${Z}_sphere -bin ${X}_${Y}_${Z}_electrode_MNI
-  rm ${X}_${Y}_${Z}_point.nii.gz
-  rm ${X}_${Y}_${Z}_sphere.nii.gz
-  gunzip ${X}_${Y}_${Z}_electrode_MNI.nii.gz
+  v_x=$(($X/2*-1+45))
+  v_y=$(($Y/2+63))
+  v_z=$(($Z/2+36))
+  fslmaths $WORKDIR/$PARCDIR/mni_icbm152_t1_tal_nlin_asym_09c_brain.nii -mul 0 -add 1 -roi $v_x 1 $v_y $v_z 1 0 1 ${v_x}_${v_y}_${v_z}_point -odt float
+  fslmaths ${v_x}_${v_y}_${v_z}_point -kernel sphere 2 -fmean ${v_x}_${v_y}_${v_z}_sphere
+  fslmaths ${v_x}_${v_y}_${v_z}_sphere -bin ${v_x}_${v_y}_${v_z}_electrode_MNI
+  rm ${v_x}_${v_y}_${v_z}_point.nii.gz
+  rm ${v_x}_${v_y}_${v_z}_sphere.nii.gz
+  gunzip ${v_x}_${v_y}_${v_z}_electrode_MNI.nii.gz
   
 done < $COORDS_FILE
 
