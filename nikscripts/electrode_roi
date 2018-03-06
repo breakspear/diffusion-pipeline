@@ -45,3 +45,4 @@ find . -type f -name '*\?*' | while read f; do mv "$f" "${f//\?/}"; done
 #setup roi list for seedbasedtracking
 
 find ./* -maxdepth 0 -type f > ${WORKDIR}/${subj}_seeds.txt
+sed -i '/.nii.gz/g' ${WORKDIR}/${subj}_seeds.txt
