@@ -47,6 +47,8 @@ sed -i '/.nii/g' ${WORKDIR}/${subj}_seeds.txt
 while read aline
 do
   while read bline
-    echo $aline" "$bline >> ${subj}_tracklist.txt
-  done < ${subj}_seeds.txt
-done < ${subj}_seeds.txt
+    echo $aline" "$bline >> ${WORKDIR}/${subj}_tracklist.txt
+  done < ${WORKDIR}/${subj}_seeds.txt
+done < ${WORKDIR}/${subj}_seeds.txt
+
+rm ${WORKDIR}/${subj}_seeds.txt
