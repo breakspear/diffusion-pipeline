@@ -1,13 +1,11 @@
 #!/bin/bash
-#usage: electrode_roi WORKDIR NORMDIR PARCDIR COORDS_FILE
+#usage: electrode_roi subj WORKDIR PARCDIR COORDS_FILE
 
 subj=$1
 WORKDIR=$2
 PARCDIR=$3
 COORDS_FILE=$4
 
-rundir=$(pwd)
-baserundir=$(basename $rundir)
 mkdir -p $WORKDIR/$PARCDIR/coords/$subj
 COORD_DIR=$WORKDIR/$PARCDIR/coords/$subj
 ## setup proper file structure
