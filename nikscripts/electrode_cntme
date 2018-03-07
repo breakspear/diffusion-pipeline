@@ -18,7 +18,13 @@ for ((i=1;i<=l;i++)) do
   for ((j=1;j<=l;j++)) do
   seed="$(awk "NR == ${i}" ${WORKDIR}/${subj}_seeds.txt)"
   target="$(awk "NR == ${j}" ${WORKDIR}/${subj}_seeds.txt)"
-  matrix[$i,$j]="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB*" \) -exec cat {} \; )"
+  AFD="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB*" \)"
+  
+  if [ -s -f ${AFD} == 1 ]; then
+    matrix[$i,$j]=0
+  else
+    matrix[$i,$j]="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB*" \) -exec cat {} \; )"
+  fi
   done
 done
 
