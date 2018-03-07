@@ -3,8 +3,10 @@
 # File used for collecting AFD values from pairwise electrode-to-electrode 
 # tracts in individual patients and making a matrix of them
 
-WORKDIR=$1
-NORMDIR=$2
+subj=$1
+WORKDIR=$2
+NORMDIR=$3
+
 #setup proper directory structure
 TRACKDIR=${WORKDIR}/${NORMDIR}/electrodetracking/${subj}
 cd $TRACKDIR
