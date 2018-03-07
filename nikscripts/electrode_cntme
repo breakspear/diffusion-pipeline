@@ -20,20 +20,22 @@ for ((i=1;i<=l;i++)) do
   for ((j=1;j<=l;j++)) do
   seed="$(awk "NR == ${i}" ${WORKDIR}/${subj}_seeds.txt)"
   target="$(awk "NR == ${j}" ${WORKDIR}/${subj}_seeds.txt)"
-  file="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB_AFD.txt" \) )"
+  file="$(find ./* \( -name "${seed}*" -a -name "*to_${target}*" -a -name "*COMB_AFD.txt" \) )"
   
     if [[ -f $file ]]
     then
       if [[ -s $file ]]
       then
-        matrix[$i,$j]="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB_AFD.txt" \) -exec cat {} \; )"
+        matrix[${i},${j}]="$(find ./* \( -name "${seed}*" -a -name "*to_${target}*" -a -name "*COMB_AFD.txt" \) -exec cat {} \; )"
       else
-        matrix[$i,$j]=0
+        matrix[${i},${j}]=0
       fi
     else
       matrix[$i,$j]=0
     fi
   done
+  echo "${matrix[@]}" > ${WORKDIR}/${subj}_col_${i}_cntme.txt
+  cat ${WORKDIR}/${subj}_col_${i}_cntme.txt >> 
 done
 
-echo "${matrix[@]}" > ${WORKDIR}/${subj}_cntme.txt
+
