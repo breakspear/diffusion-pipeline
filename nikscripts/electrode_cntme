@@ -20,13 +20,13 @@ for ((i=1;i<=l;i++)) do
   for ((j=1;j<=l;j++)) do
   seed="$(awk "NR == ${i}" ${WORKDIR}/${subj}_seeds.txt)"
   target="$(awk "NR == ${j}" ${WORKDIR}/${subj}_seeds.txt)"
-  AFD="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB_AFD.txt" \) )"
+  file="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB_AFD.txt" \) )"
   
-    if [[ -f $AFD ]]
+    if [[ -f $file ]]
     then
-      if [[ -s $AFD ]]
+      if [[ -s $file ]]
       then
-        matrix[$i,$j]="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB*" \) -exec cat {} \; )"
+        matrix[$i,$j]="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB_AFD.txt" \) -exec cat {} \; )"
       else
         matrix[$i,$j]=0
       fi
