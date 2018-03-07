@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# File used for collecting AFD values from pairwise electrode-to-electrode 
+# tracts in individual patients and making a matrix of them
+
