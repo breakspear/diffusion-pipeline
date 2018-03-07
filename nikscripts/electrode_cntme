@@ -13,13 +13,13 @@ cd $TRACKDIR
 declare -A matrix
 
 shopt -s nullglob
-l="$(wc -l < ${subj}_seeds.txt)"
+l="$(wc -l < ${WORKDIR}/${subj}_seeds.txt)"
 for ((i=1;i<=l;i++)) do
   for ((j=1;j<=l;j++)) do
-  seed="$(awk "NR == ${i}" ${subj}_seeds.txt)"
-  target="$(awk "NR == ${j}" ${subj}_seeds.txt)"
+  seed="$(awk "NR == ${i}" ${WORKDIR}/${subj}_seeds.txt)"
+  target="$(awk "NR == ${j}" ${WORKDIR}/${subj}_seeds.txt)"
   matrix[$i,$j]="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB*" \) -exec cat {} \; )"
   done
 done
 
-echo "${matrix[@]}" > ${WORKDIR}/${NORMDIR}/${subj}_cntme.txt
+echo "${matrix[@]}" > ${WORKDIR}/${subj}_cntme.txt
