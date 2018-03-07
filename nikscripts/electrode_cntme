@@ -3,3 +3,20 @@
 # File used for collecting AFD values from pairwise electrode-to-electrode 
 # tracts in individual patients and making a matrix of them
 
+WORKDIR=$1
+NORMDIR=$2
+#setup proper directory structure
+TRACKDIR=${WORKDIR}/${NORMDIR}/electrodetracking/${subj}
+cd $TRACKDIR
+
+#construct matrix
+declare -A matrix
+
+shopt -s nullglob
+while read aline 
+do
+  while read bline 
+  do
+    matrix[$aline,$bline]=${find ./* \( -name "${aline}*" -a -name "*${bline}*" -a -name "*COMB*" \) -exec cat {} \;}
+  done < ${WORKDIR}/${subj}_seeds.txt
+done < ${WORKDIR}/${subj}_seeds.txt
