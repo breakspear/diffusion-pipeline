@@ -53,5 +53,3 @@ do
     echo $aline" "$bline >> ${WORKDIR}/${subj}_tracklist.txt
   done < ${WORKDIR}/${subj}_seeds.txt
 done < ${WORKDIR}/${subj}_seeds.txt
-
-rm ${WORKDIR}/${subj}_seeds.txt
