@@ -20,10 +20,10 @@ for ((i=1;i<=l;i++)) do
   target="$(awk "NR == ${j}" ${WORKDIR}/${subj}_seeds.txt)"
   AFD="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB_AFD.txt" \) )"
   
-  if [ -s -f ${AFD} == 1 ]; then
-    matrix[$i,$j]=0
-  else
+  if [ -s ${AFD} ]; then
     matrix[$i,$j]="$(find ./* \( -name "${seed}*" -a -name "*${target}*" -a -name "*COMB*" \) -exec cat {} \; )"
+  else
+    matrix[$i,$j]=0
   fi
   done
 done
