@@ -21,4 +21,4 @@ do
   done < ${WORKDIR}/${subj}_seeds.txt
 done < ${WORKDIR}/${subj}_seeds.txt
 
-echo "${matrix[@]}" > cntme.txt
+echo "${matrix[@]}" > ${subj}_cntme.txt
