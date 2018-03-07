@@ -11,7 +11,7 @@ NORMDIR=$3
 TRACKDIR=${WORKDIR}/${NORMDIR}/electrodetracking/${subj}
 cd $TRACKDIR
 
-rm ${subj}_cntme.txt
+echo "0x0" > ${subj}_cntme.txt
 
 #construct matrix
 declare -A matrix
@@ -20,21 +20,22 @@ shopt -s nullglob
 l="$(wc -l < ${WORKDIR}/${subj}_seeds.txt)"
 for ((i=1;i<=l;i++)) do
   for ((j=1;j<=l;j++)) do
-  seed="$(awk "NR == ${i}" ${WORKDIR}/${subj}_seeds.txt)"
-  target="$(awk "NR == ${j}" ${WORKDIR}/${subj}_seeds.txt)"
-  file="$(find ./* \( -name "${seed}*" -a -name "*to_${target}*" -a -name "*COMB_AFD.txt" \) )"
+    seed="$(awk "NR == ${i}" ${WORKDIR}/${subj}_seeds.txt)"
+    target="$(awk "NR == ${j}" ${WORKDIR}/${subj}_seeds.txt)"
+    file="$(find ./* \( -name "${seed}*" -a -name "*to_${target}*" -a -name "*COMB_AFD.txt" \) )"
   
     if [[ -f $file ]]
     then
       if [[ -s $file ]]
       then
-        matrix[${j}]="$(find ./* \( -name "${seed}*" -a -name "*to_${target}*" -a -name "*COMB_AFD.txt" \) -exec cat {} \; )"
+        matrix[$j]="$(find ./* \( -name "${seed}*" -a -name "*to_${target}*" -a -name "*COMB_AFD.txt" \) -exec cat {} \; )"
       else
-        matrix[${j}]=0
+        matrix[$j]=0
       fi
     else
-      matrix[${j}]=0
+      matrix[$j]=0
     fi
   done
-  echo "${matrix[@]}" >> ${WORKDIR}/${subj}_cntme.txt
+  echo "${matrix[@]}" > {i}.txt
+  paste ${subj}_cntme.txt {i}.txt | column -s $'\t' -tn
 done
