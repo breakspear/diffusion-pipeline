@@ -31,7 +31,7 @@ do
   v_z=$(($Z/2+36))
   echo "Equivalent to voxel coords $v_x $v_y $v_z"
   fslmaths $WORKDIR/$PARCDIR/mni_icbm152_t1_tal_nlin_asym_09c_brain.nii -mul 0 -add 1 -roi $v_x 1 $v_y 1 $v_z 1 0 1 ${v_x}_${v_y}_${v_z}_point -odt float
-  fslmaths ${v_x}_${v_y}_${v_z}_point -kernel sphere 2 -fmean ${v_x}_${v_y}_${v_z}_sphere
+  fslmaths ${v_x}_${v_y}_${v_z}_point -kernel sphere 5 -fmean ${v_x}_${v_y}_${v_z}_sphere
   fslmaths ${v_x}_${v_y}_${v_z}_sphere -bin ${v_x}_${v_y}_${v_z}_electrode_MNI
   rm ${v_x}_${v_y}_${v_z}_point.nii.gz
   rm ${v_x}_${v_y}_${v_z}_sphere.nii.gz
