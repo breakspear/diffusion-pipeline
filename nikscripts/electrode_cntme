@@ -20,3 +20,5 @@ do
     matrix[$aline,$bline]=${find ./* \( -name "${aline}*" -a -name "*${bline}*" -a -name "*COMB*" \) -exec cat {} \;}
   done < ${WORKDIR}/${subj}_seeds.txt
 done < ${WORKDIR}/${subj}_seeds.txt
+
+echo "${matrix[@]}" > cntme.txt
