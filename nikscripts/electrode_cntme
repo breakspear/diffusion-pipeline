@@ -11,7 +11,8 @@ NORMDIR=$3
 TRACKDIR=${WORKDIR}/${NORMDIR}/electrodetracking/${subj}
 cd $TRACKDIR
 
-echo "0x0" > ${WORKDIR}/${subj}_cntme.txt
+rm ${subj}_cntme.txt
+echo "" > ${WORKDIR}/${subj}_cntme.txt
 
 #construct matrix
 declare -A matrix
@@ -37,5 +38,5 @@ for ((i=1;i<=l;i++)) do
     fi
   done
   echo "${matrix[@]}" > ${i}.txt
-  paste ${WORKDIR}/${subj}_cntme.txt ${i}.txt | column -s $'\t' -t
+  paste ${WORKDIR}/${subj}_cntme.txt ${i}.txt --delimiters '\n'
 done
