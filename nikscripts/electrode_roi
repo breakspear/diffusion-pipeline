@@ -10,6 +10,8 @@ mkdir -p $WORKDIR/$PARCDIR/coords/$subj
 COORD_DIR=$WORKDIR/$PARCDIR/coords/$subj
 ## setup proper file structure
 COORDS_FILE=$WORKDIR/$COORDS_FILE
+rm ${WORKDIR}/${subj}_seeds.txt
+rm ${WORKDIR}/${subj}_tracklist.txt
 
 if [ "$rundir" != $COORD_DIR ]; then
 cd $COORD_DIR
