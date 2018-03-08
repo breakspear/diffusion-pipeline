@@ -12,7 +12,6 @@ TRACKDIR=${WORKDIR}/${NORMDIR}/electrodetracking/${subj}
 cd $TRACKDIR
 
 rm ${subj}_cntme.txt
-echo "" > ${WORKDIR}/${subj}_cntme.txt
 
 #construct matrix
 declare -A matrix
