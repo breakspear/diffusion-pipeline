@@ -37,6 +37,5 @@ for ((i=1;i<=l;i++)) do
       matrix[$j]=0
     fi
   done
-  echo "${matrix[@]}" > ${i}.txt
-  paste ${WORKDIR}/${subj}_cntme.txt ${i}.txt --delimiters '\n'
+  echo "${matrix[@]}" >> ${subj}_cntme.txt
 done
