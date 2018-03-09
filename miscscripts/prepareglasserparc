@@ -1,0 +1,43 @@
+#!/bin/bash
+#file : prepareglasserparc
+#usage: prepareglasserparc <subj> <WORKDIR> <OUTDIR>
+
+subj=$1
+WORKDIR=$2
+
+SUBJECTS_DIR=${WORKDIR}/FS
+
+cd $SUBJECTS_DIR
+
+if exist
+
+rsync -vaz ${FREESURFER_HOME}/subjects/average .
+
+end
+
+if exist
+
+rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/miscscripts/create_subj_volume_parcellation.sh .
+
+end
+
+printf ${subj} > ${subj}.txt
+
+if exist
+
+lh.HCPMMP1.annot
+
+rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/
+
+rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/
+
+end
+
+
+bash create_subj_volume_parcellation -L ${subj}.txt -a HCPMMP1 -d ${OUTDIR}
+
+
+
+
+
+
