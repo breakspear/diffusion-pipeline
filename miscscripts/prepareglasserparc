@@ -4,8 +4,9 @@
 
 subj=$1
 WORKDIR=$2
+OUTDIR=$3
 
-SUBJECTS_DIR=${WORKDIR}/FS
+export SUBJECTS_DIR=${WORKDIR}/FS
 
 cd $SUBJECTS_DIR
 
@@ -30,7 +31,7 @@ fi
 
 printf ${subj} > ${subj}.txt
 
-bash create_subj_volume_parcellation -L ${subj}.txt -a HCPMMP1 -d ${OUTDIR}
+bash create_subj_volume_parcellation.sh -L ${subj}.txt -a HCPMMP1 -d ${OUTDIR} -m "YES"
 
 
 
