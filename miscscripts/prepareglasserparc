@@ -11,7 +11,7 @@ cd $SUBJECTS_DIR
 
 if [ ! -d fsaverage ]; then
 
-rsync -vaz ${FREESURFER_HOME}/subjects/average .
+rsync -vaz ${FREESURFER_HOME}/subjects/fsaverage .
 
 fi
 
@@ -23,8 +23,8 @@ fi
 
 if [ ! -f lh.HCPMMP1.annot ]; then
 
-rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/lh.HCPMMP1.annot .
-rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/rh.HCPMMP1.annot .
+rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/data/lh.HCPMMP1.annot .
+rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/data/rh.HCPMMP1.annot .
 
 fi
 
