@@ -43,7 +43,7 @@ done < $COORDS_FILE
 
 #setup roi list for seedbasedtracking
 
-find ./* -maxdepth 0 -type f -name "*electrode*" > ${WORKDIR}/${subj}_seeds.txt | sort -V
+find ./* -maxdepth 0 -type f -name "*electrode*" | sort -V > ${WORKDIR}/${subj}_seeds.txt
 sed -i 's/\.[^.]*$//' ${WORKDIR}/${subj}_seeds.txt
 sed -i 's/\.//g' ${WORKDIR}/${subj}_seeds.txt
 sed -i 's/\///g' ${WORKDIR}/${subj}_seeds.txt
