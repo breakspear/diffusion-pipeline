@@ -11,7 +11,7 @@ NORMDIR=$3
 TRACKDIR=${WORKDIR}/${NORMDIR}/electrodetracking/${subj}
 cd $TRACKDIR
 
-rm ${subj}_cntme.txt
+rm ${WORKDIR}/${subj}_cntme.txt
 
 #construct matrix
 declare -A matrix
