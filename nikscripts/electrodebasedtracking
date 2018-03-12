@@ -69,7 +69,7 @@ if [[ -e ${seed}_diff.nii ]]; then
 
 	if [[ -e ${target}_diff.nii ]]; then
 		
-		tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
+		tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus
 
 		tckmap ${seed}_to_${target}.tck ${seed}_to_${target}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
@@ -89,7 +89,7 @@ if [[ -e ${seed}_diff.nii ]]; then
 
 		#now reverse!
 
-		tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -seed_image ${target}_diff.nii -include ${seed}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${target}_seeds.txt
+		tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -seed_image ${target}_diff.nii -include ${seed}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus
 
 		tckmap ${target}_to_${seed}.tck ${target}_to_${seed}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
@@ -107,6 +107,16 @@ if [[ -e ${seed}_diff.nii ]]; then
 		#AFD
 
 		afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -nthreads $ncpus -all_fixels -force -afd_map ${target}_to_${seed}_AFD.nii > ${target}_to_${seed}_AFD.txt
+		
+		rm ${seed}_to_${target}_tdi_thr.nii
+		rm ${target}_to_${seed}_tdi_thr.nii
+		rm ${seed}_to_${target}_tdi.nii
+		rm ${target}_to_${seed}_tdi.nii
+		rm ${seed}_to_${target}.tck
+		rm ${target}_to_${seed}.tck
+		rm ${target}_to_${seed}_AFD.nii
+		rm ${seed}_to_${target}_AFD.nii
+		
 	else
 	
 		flirt -in ${PARCDIR}/${target}.nii -ref brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out ${target}_FS.nii.gz
@@ -119,7 +129,7 @@ if [[ -e ${seed}_diff.nii ]]; then
 
 		gunzip ${target}_diff.nii.gz -f
 		
-		tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
+		tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus
 
                 tckmap ${seed}_to_${target}.tck ${seed}_to_${target}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
@@ -139,7 +149,7 @@ if [[ -e ${seed}_diff.nii ]]; then
 
                 #now reverse!
 
-                tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -seed_image ${target}_diff.nii -include ${seed}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${target}_seeds.txt
+                tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -seed_image ${target}_diff.nii -include ${seed}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus
 
                 tckmap ${target}_to_${seed}.tck ${target}_to_${seed}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
@@ -157,7 +167,15 @@ if [[ -e ${seed}_diff.nii ]]; then
                 #AFD
 
                 afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -nthreads $ncpus -all_fixels -force -afd_map ${target}_to_${seed}_AFD.nii > ${target}_to_${seed}_AFD.txt
-
+		
+		rm ${seed}_to_${target}_tdi_thr.nii
+		rm ${target}_to_${seed}_tdi_thr.nii
+		rm ${seed}_to_${target}_tdi.nii
+		rm ${target}_to_${seed}_tdi.nii
+		rm ${seed}_to_${target}.tck
+		rm ${target}_to_${seed}.tck
+		rm ${target}_to_${seed}_AFD.nii
+		rm ${seed}_to_${target}_AFD.nii
 	fi
 else
 
@@ -171,7 +189,7 @@ else
 
 	gunzip ${seed}_diff.nii.gz -f
 
-	tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
+	tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus
 
         tckmap ${seed}_to_${target}.tck ${seed}_to_${target}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
@@ -190,7 +208,7 @@ else
 
         #now reverse!
 
-        tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -seed_image ${target}_diff.nii -include ${seed}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${target}_seeds.txt
+        tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -seed_image ${target}_diff.nii -include ${seed}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus
 
         tckmap ${target}_to_${seed}.tck ${target}_to_${seed}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
@@ -208,6 +226,14 @@ else
 
         afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -nthreads $ncpus -all_fixels -force -afd_map ${target}_to_${seed}_AFD.nii > ${target}_to_${seed}_AFD.txt
 
+	rm ${seed}_to_${target}_tdi_thr.nii
+	rm ${target}_to_${seed}_tdi_thr.nii
+	rm ${seed}_to_${target}_tdi.nii
+	rm ${target}_to_${seed}_tdi.nii
+	rm ${seed}_to_${target}.tck
+	rm ${target}_to_${seed}.tck
+	rm ${target}_to_${seed}_AFD.nii
+	rm ${seed}_to_${target}_AFD.nii
 
 fi
 
