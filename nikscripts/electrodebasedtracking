@@ -77,7 +77,7 @@ if [[ ! -e ${seed}_diff.nii ]]; then
 
 	gunzip ${seed}_diff.nii.gz -f
 	
-elif [ ! -e ${target}_diff.nii ]]; then
+elif [[ ! -e ${target}_diff.nii ]]; then
 	
 	flirt -in ${PARCDIR}/${target}.nii -ref brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out ${target}_FS.nii.gz
 
