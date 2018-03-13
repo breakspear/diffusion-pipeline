@@ -130,6 +130,40 @@ mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${target}_to_${seed}_
 
 afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -nthreads $ncpus -all_fixels -force -afd_map ${target}_to_${seed}_AFD.nii > ${target}_to_${seed}_AFD.txt
 		
+#Calculate combined scores
+
+#AFD
+
+seedtargvalue=$(cat ${seed}_to_${target}_AFD.txt)
+
+targseedvalue=$(cat ${target}_to_${seed}_AFD.txt)
+
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_AFD.txt
+
+
+#FA
+
+seedtargvalue=$(cat ${seed}_to_${target}_meanFA.txt)
+
+targseedvalue=$(cat ${target}_to_${seed}_meanFA.txt)
+
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_meanFA.txt
+
+
+#MD
+
+seedtargvalue=$(cat ${seed}_to_${target}_meanMD.txt)
+
+targseedvalue=$(cat ${target}_to_${seed}_meanMD.txt)
+
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_meanMD.txt
+
 rm ${seed}_to_${target}_tdi_thr.nii
 rm ${target}_to_${seed}_tdi_thr.nii
 rm ${seed}_to_${target}_tdi.nii
