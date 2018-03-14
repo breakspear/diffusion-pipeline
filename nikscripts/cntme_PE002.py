@@ -18,7 +18,7 @@ def main():
         seed = seed.replace("\n","")
         target = open(seeds_path,'r').readlines()[j]
         target = target.replace("\n","")
-        pattern = seed + '_to_' + target + '_AFD.txt'
+        pattern = seed + '_to_' + target + '_COMB_AFD.txt'
     
         if j > i:
           for dirpath, dirnames, files in os.walk(AFD_path):
