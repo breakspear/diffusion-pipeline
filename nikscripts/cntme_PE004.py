@@ -28,7 +28,7 @@ def main():
         else:
           array[i,j] = 0
 
-    file = open(PE004_cntme2.txt,'w')
+    file = open(PE004_cntme.txt,'w')
     file.write(array)
     file.close()
 
