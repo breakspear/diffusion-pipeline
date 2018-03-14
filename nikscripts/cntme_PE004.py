@@ -6,8 +6,8 @@ import numpy as np
 
 def main():
 
-    seeds_path="/home/nikitask/ldrive/Lab_ChristineG/NikitasK/SEEG/1_Data/diffusion/old_subjects/PE004_seeds.txt"
-    AFD_path="/home/nikitask/ldrive/Lab_ChristineG/NikitasK/SEEG/1_Data/diffusion/old_subjects/AFD/electrodetracking/PE004/"
+    seeds_path="/working/lab_michaebr/nikitasK/epilepsy/old_subjects/PE004_seeds.txt"
+    AFD_path="/working/lab_michaebr/nikitasK/epilepsy/old_subjects/AFD/electrodetracking/PE004/"
     array=np.empty([len(open(seeds_path).readlines()), len(open(seeds_path).readlines())])
 
     for i in range(0,len(open(seeds_path).readlines())):
