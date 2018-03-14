@@ -28,9 +28,7 @@ def main():
         else:
           array[i,j] = 0
 
-    file = open(PE002_cntme.txt,'w')
-    file.write(array)
-    file.close()
+    np.savetxt('PE002_cntme.txt', array)
 
 if __name__ == "__main__":
     print("Processing subject AFD connectome from files. This may take a long time...")
