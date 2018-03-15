@@ -60,7 +60,7 @@ mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 #Denoise
 
 dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads $ncpus
-dwidenoise rawdataPArem.mif rawdataPAdn.mif -force -nthreads $ncpus
+dwidenoise rawdataPA.mif rawdataPAdn.mif -force -nthreads $ncpus
 
 mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
 mrconvert rawdataAPdnstr.mif  rawdataAPdn.mif  -force -nthreads $ncpus
