@@ -1,0 +1,15 @@
+mkdir: cannot create directory ‘templateoutput’: File exists
+fod2fixel: [ERROR] Expected exactly 1 arguments (2 supplied)
+fod2fixel: [ERROR] Usage: fod2fixel fod
+fod2fixel: [ERROR] Yours: fod2fixel ./templateoutput/fod_template.mif ./templateoutput/fixeltemp
+mrthreshold: [WARNING] existing output files will be overwritten
+mrthreshold: [ERROR] failed to open key/value file "./templateoutput/fixeltemp/peaks.mif": No such file or directory
+mrthreshold: [ERROR] error opening image "./templateoutput/fixeltemp/peaks.mif"
+mrfilter: [WARNING] existing output files will be overwritten
+fixel2voxel: [ERROR] failed to open key/value file "./templateoutput/fixeltemp/mask.mif": No such file or directory
+fixel2voxel: [ERROR] error opening image "./templateoutput/fixeltemp/mask.mif"
+mrfilter: [ERROR] no filename supplied to standard input (broken pipe?)
+mrfilter: [ERROR] error opening image "-"
+fod2fixel: [ERROR] Expected exactly 1 arguments (2 supplied)
+fod2fixel: [ERROR] Usage: fod2fixel fod
+fod2fixel: [ERROR] Yours: fod2fixel ./templateoutput/fod_template.mif ./templateoutput/fixel_mask
