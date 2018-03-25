@@ -1,14 +1,50 @@
 #!/bin/bash
 #file : prepareglasserparc
-#usage: prepareglasserparc <subj> <WORKDIR> <OUTDIR>
+#usage: prepareglasserparc <WORKDIR> <OUTDIR>
 
-subj=$1
-WORKDIR=$2
-OUTDIR=$3
+#Template file which sets up PBS requirements for all job
+
+# All required resource statements start with "#PBS -l"
+# These will be interpreted by the job submission system (PBS pro)
+
+#PBS -v ncpus=8,MRTRIX=/software/mrtrix3/mrtrix3-AP
+#PBS -l ncpus=1,mem=20G
+# *select* is the number of parallel processes
+# *ncpus* is the number of cores required by each process
+# *mem* is the amount of memory required by each process
+
+#PBS -l walltime=47:00:00
+# *walltime* is the total time required in hours:minutes:seconds
+# to run the job. 
+# Warning: all processes still running at the end of this period
+# of time will be killed and any temporary data will be erased.
+
+#PBS -m abe 
+#NOTE: if you want to receive notifications about job status, enter your QIMR email after the "abe" above
+# *m* situations under which to email a) aborted b) begin e) end
+# *M* email address to send emails to
+
+WORKDIR=/working/lab_michaebr/alistaiP/Park/Phil
+OUTDIR=HCPMMP1out
+
+#PBS -e ${WORKDIR}/batch/prepareglassererror.txt
+#PBS -o ${WORKDIR}/batch/prepareglasseroutput.txt
+
+#Load all required software
+module load mrtrix3/AP
+module load freesurfer/5.3.0
+module load ANTs/20160509
+module load fsl/5.0.9_eddy
+
+export OMP_NUM_THREADS=8
 
 export SUBJECTS_DIR=${WORKDIR}/FS
 
 cd $SUBJECTS_DIR
+
+find ${WORKDIR}/Raw/* -maxdepth 0 -type d | awk -F "/" '{print $NF}' - > subjlist.txt
+
+#printf $(basename $subjfilelist) > subjlist.txt
 
 if [ ! -d fsaverage ]; then
 
@@ -29,12 +65,4 @@ rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/data/rh.HCPMMP1
 
 fi
 
-printf ${subj} > ${subj}.txt
-
-bash create_subj_volume_parcellation.sh -L ${subj}.txt -a HCPMMP1 -d ${OUTDIR} -m "YES"
-
-
-
-
-
-
+bash create_subj_volume_parcellation.sh -L subjlist.txt -a HCPMMP1 -d ${OUTDIR} -m "YES"
