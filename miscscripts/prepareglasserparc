@@ -18,23 +18,17 @@ fi
 
 if [ ! -f create_subj_volume_parcellation.sh ]; then
 
-rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/miscscripts/create_subj_volume_parcellation.sh .
+rsync /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/diffusion-pipeline/miscscripts/create_subj_volume_parcellation.sh .
 
 fi
 
 if [ ! -f lh.HCPMMP1.annot ]; then
 
-rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/data/lh.HCPMMP1.annot .
-rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/data/rh.HCPMMP1.annot .
+rsync /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/diffusion-pipeline/data/lh.HCPMMP1.annot .
+rsync /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/diffusion-pipeline/data/rh.HCPMMP1.annot .
 
 fi
 
 printf ${subj} > ${subj}.txt
 
 bash create_subj_volume_parcellation.sh -L ${subj}.txt -a HCPMMP1 -d ${OUTDIR} -m "YES"
-
-
-
-
-
-
