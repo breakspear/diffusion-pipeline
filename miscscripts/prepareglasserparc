@@ -1,40 +1,18 @@
 #!/bin/bash
 #file : prepareglasserparc
-#usage: prepareglasserparc <WORKDIR> <OUTDIR>
 
-#Template file which sets up PBS requirements for all job
+#SBATCH -c 5 # number of cpus per task
+#SBATCH --nice=10
+#SBATCH -p blade-a
 
-# All required resource statements start with "#PBS -l"
-# These will be interpreted by the job submission system (PBS pro)
+source /daten/bin/setup_fsl-5.0.9-cscor.sh
+source /beegfs/v1/bin2/setup_freesurfer_530.sh
 
-#PBS -v ncpus=8,MRTRIX=/software/mrtrix3/mrtrix3-AP
-#PBS -l ncpus=1,mem=20G
-# *select* is the number of parallel processes
-# *ncpus* is the number of cores required by each process
-# *mem* is the amount of memory required by each process
+MRTRIX=/beegfs/scratch/tnc_scratch/aperry/MRtrix/02032017
+export PATH=${MRTRIX}/release/bin:${MRTRIX}/scripts:$PATH
 
-#PBS -l walltime=47:00:00
-# *walltime* is the total time required in hours:minutes:seconds
-# to run the job. 
-# Warning: all processes still running at the end of this period
-# of time will be killed and any temporary data will be erased.
-
-#PBS -m abe 
-#NOTE: if you want to receive notifications about job status, enter your QIMR email after the "abe" above
-# *m* situations under which to email a) aborted b) begin e) end
-# *M* email address to send emails to
-
-WORKDIR=/working/lab_michaebr/alistaiP/Park/Phil
+WORKDIR=/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome
 OUTDIR=HCPMMP1out
-
-#PBS -e ${WORKDIR}/batch/prepareglassererror.txt
-#PBS -o ${WORKDIR}/batch/prepareglasseroutput.txt
-
-#Load all required software
-module load mrtrix3/AP
-module load freesurfer/5.3.0
-module load ANTs/20160509
-module load fsl/5.0.9_eddy
 
 export OMP_NUM_THREADS=8
 
@@ -54,14 +32,14 @@ fi
 
 if [ ! -f create_subj_volume_parcellation.sh ]; then
 
-rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/miscscripts/create_subj_volume_parcellation.sh .
+rsync /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/diffusion-pipeline/miscscripts/create_subj_volume_parcellation.sh .
 
 fi
 
 if [ ! -f lh.HCPMMP1.annot ]; then
 
-rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/data/lh.HCPMMP1.annot .
-rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/data/rh.HCPMMP1.annot .
+rsync /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/diffusion-pipeline/data/lh.HCPMMP1.annot .
+rsync /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/diffusion-pipeline/data/rh.HCPMMP1.annot .
 
 fi
 
