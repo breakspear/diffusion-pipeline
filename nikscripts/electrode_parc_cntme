@@ -1,0 +1,96 @@
+#!/bin/bash
+#usage: electrode_roi subj WORKDIR PARCDIR COORDS_FILE NUMFIBERS
+
+subj=$1
+WORKDIR=$2
+PARCDIR=$3
+COORDS_FILE=$4
+NUMFIBERS=$5
+
+mkdir -p $WORKDIR/$PARCDIR/coords/$subj
+COORD_DIR=$WORKDIR/$PARCDIR/coords/$subj
+## setup proper file structure
+COORDS_FILE=$WORKDIR/$COORDS_FILE
+rm ${WORKDIR}/${subj}_seeds.txt
+rm ${WORKDIR}/${subj}_tracklist.txt
+
+if [ "$rundir" != $COORD_DIR ]; then
+cd $COORD_DIR
+fi
+
+#get coords from csv
+
+#delete carriage returns
+
+sed -i 's/\r//g' $COORDS_FILE
+
+while IFS=',' read -r X Y Z region
+do
+
+  echo "Constructing ROI for MNI coords $X $Y $Z in region $region"
+  #convert to voxel coords
+  v_x=$(($X*-1+90))
+  v_y=$(($Y+126))
+  v_z=$(($Z+72))
+  echo "Equivalent to voxel coords $v_x $v_y $v_z"
+  fslmaths ${FSLDIR}/data/standard/MNI152_T1_1mm_brain -mul 0 -add 1 -roi $v_x 1 $v_y 1 $v_z 1 0 1 ${v_x}_${v_y}_${v_z}_point -odt float
+  fslmaths ${v_x}_${v_y}_${v_z}_point -kernel sphere 3 -fmean ${v_x}_${v_y}_${v_z}_sphere
+  fslmaths ${v_x}_${v_y}_${v_z}_sphere -bin ${v_x}_${v_y}_${v_z}_electrode_MNI
+  rm ${v_x}_${v_y}_${v_z}_point.nii.gz
+  rm ${v_x}_${v_y}_${v_z}_sphere.nii.gz
+  gunzip -f ${v_x}_${v_y}_${v_z}_electrode_MNI.nii.gz
+  
+done < $COORDS_FILE
+
+#setup blank image so that fsl can put rois onto it
+
+fslmaths ${FSLDIR}/data/standard/MNI152_T1_1mm_brain -uthr 0 -thr 0 blank
+
+for file in *.nii
+do
+
+  echo "Queuing ${file} to parcellation image..."
+  #convert to single list of files to add to parcellation
+  var=$var' -add '$file
+  
+done
+
+#make parcellation image from electrode rois
+fslmaths blank.nii.gz $var ${subj}_parc
+gunzip -f ${subj}_parc.nii.gz
+
+#cleanup
+rm blank.nii.gz
+
+#run fiber and connectome construction
+parc=${subj}_parc.nii.gz
+parcdir=${pwd}
+
+#move to diffusion directory
+cd ${WORKDIR}/Diff/${subj}/preproc
+
+#parcellation reference into subject space
+flirt -ref fa.nii -in ${FSLDIR}/data/standard/MNI152_T1_1mm_brain -out MNItofa -omat MNItofa.mat -cost normmi
+
+#parcellation template into subject space
+flirt -ref fa.nii -in ${parcdir}/${parc} -out seeg_flirt -applyxfm -init MNItofa.mat -interp nearestneighbour
+
+gunzip -f seeg_flirt.nii.gz
+
+#track construction try 25 million?
+
+tckgen -algorithm iFOD2 wm.mif ${NUMFIBERS}.tck -seed_image seeg_flirt.nii -minlength 10 -maxlength 250 -select ${NUMFIBERS} -force -nthreads $ncpus -mask iterbrainmask.nii -output_seeds seeg_seeds.txt
+
+#sift2
+
+tcksift2 ${NUMFIBERS}.tck wm.mif seeg_sift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads $ncpus
+
+#connectome construction (weights from sift2)
+
+tck2connectome ${NUMFIBERS}.tck seeg_flirt.nii seeg_streamweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments seeg_streamlineassignment.txt -force -nthreads $ncpus
+
+tck2connectome ${NUMFIBERS}.tck seeg_flirt.nii seeg_invlengthweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
+
+tck2connectome ${NUMFIBERS}.tck seeg_flirt.nii seeg_invnodeweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
+
+tck2connectome ${NUMFIBERS}.tck seeg_flirt.nii seeg_meanfiberlengths.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
