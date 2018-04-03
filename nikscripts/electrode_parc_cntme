@@ -1,5 +1,5 @@
 #!/bin/bash
-#usage: electrode_roi subj WORKDIR PARCDIR COORDS_FILE NUMFIBERS
+#usage: electrode_parc_cntme subj WORKDIR PARCDIR COORDS_FILE NUMFIBERS
 
 subj=$1
 WORKDIR=$2
