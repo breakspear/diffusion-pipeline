@@ -107,14 +107,14 @@ awk '{print $2}' ${output_dir}/temp_${first}_${last}/colortab_${annotation_file}
 
 # Create lists with regions that actually have corresponding labels
 for labelsL in `cat ${output_dir}/temp_${first}_${last}/list_labels_${annotation_file}L1`
-	do if [ -e ${output_dir}/label/lh.${labelsL}.label ]
+	do if [[ -e ${output_dir}/label/lh.${labelsL}.label ]]
 		then
 		echo lh.${labelsL}.label >> ${output_dir}/temp_${first}_${last}/list_labels_${annotation_file}L
 		grep " ${labelsL} " ${output_dir}/temp_${first}_${last}/colortab_${annotation_file}_L2 >> ${output_dir}/temp_${first}_${last}/colortab_${annotation_file}_L3
 	fi
 done
 for labelsR in `cat ${output_dir}/temp_${first}_${last}/list_labels_${annotation_file}R1`
-	do if [ -e ${output_dir}/label/rh.${labelsR}.label ]
+	do if [[ -e ${output_dir}/label/rh.${labelsR}.label ]]
 		then
 		echo rh.${labelsR}.label >> ${output_dir}/temp_${first}_${last}/list_labels_${annotation_file}R
 		grep " ${labelsR} " ${output_dir}/temp_${first}_${last}/colortab_${annotation_file}_R2 >> ${output_dir}/temp_${first}_${last}/colortab_${annotation_file}_R3
@@ -125,18 +125,13 @@ done
 number_labels_R=`wc -l < ${output_dir}/temp_${first}_${last}/list_labels_${annotation_file}R` 
 number_labels_L=`wc -l < ${output_dir}/temp_${first}_${last}/list_labels_${annotation_file}L`
 
-echo $number_labels_L
-echo $number_labels_R
-
 for ((i=1;i<=${number_labels_L};i+=1))
-	do 
-        num=`echo "${i}+1000" | bc`
+	do num=`echo "${i}+1000" | bc`
 	printf "$num\n" >> ${output_dir}/temp_${first}_${last}/LUT_number_table_${annotation_file}L
 	printf "$i\n" >> ${output_dir}/temp_${first}_${last}/${annotation_file}_number_tableL
 done
 for ((i=1;i<=${number_labels_R};i+=1))
-	do 
-        num=`echo "${i}+2000" | bc`
+	do num=`echo "${i}+2000" | bc`
 	printf "$num\n" >> ${output_dir}/temp_${first}_${last}/LUT_number_table_${annotation_file}R
 	printf "$i\n" >> ${output_dir}/temp_${first}_${last}/${annotation_file}_number_tableR
 done
