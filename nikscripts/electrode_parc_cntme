@@ -50,7 +50,7 @@ done < $COORDS_FILE
 
 fslmaths ${FSLDIR}/data/standard/MNI152_T1_1mm_brain -uthr 0 -thr 0 blank
 
-for file in *.nii
+for file in $( find . -name "*electrode*" | sort -V )
 do
 
   echo "Queuing ${file} to parcellation image..."
