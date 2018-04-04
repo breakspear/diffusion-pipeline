@@ -68,7 +68,7 @@ rm blank.nii.gz
 
 #run fiber and connectome construction
 parc=${subj}_parc
-parcdir=${pwd}
+parcdir=$(pwd)
 
 #move to diffusion directory
 cd ${WORKDIR}/Diff/${subj}/preproc
