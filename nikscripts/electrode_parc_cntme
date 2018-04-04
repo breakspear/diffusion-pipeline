@@ -94,7 +94,7 @@ convert_xfm -omat FS2diff.mat -inverse diff2FS.mat
 
 #Setup seed in diffusion space
 
-flirt -in $parc -ref brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out ${parc}FS.nii.gz
+flirt -in $parc -ref brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out ${parc}_FS.nii.gz
 
 gunzip ${parc}_FS.nii.gz -f
 
