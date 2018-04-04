@@ -42,7 +42,7 @@ do
   rm ${v_x}_${v_y}_${v_z}_sphere.nii.gz
   rm ${v_x}_${v_y}_${v_z}_bin.nii.gz
   gunzip -f ${v_x}_${v_y}_${v_z}_electrode_MNI.nii.gz
-  $j=$j+1
+  j=$j+1
   
 done < $COORDS_FILE
 
