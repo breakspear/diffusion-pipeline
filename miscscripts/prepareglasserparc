@@ -24,7 +24,7 @@
 # *m* situations under which to email a) aborted b) begin e) end
 # *M* email address to send emails to
 
-WORKDIR=/working/lab_michaebr/alistaiP/Park/Phil
+WORKDIR=/working/lab_michaebr/alistaiP/poldrack/myconnectomedata/T1working
 OUTDIR=HCPMMP1out
 
 #PBS -e ${WORKDIR}/batch/prepareglassererror.txt
