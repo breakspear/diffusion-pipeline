@@ -63,12 +63,12 @@ gunzip -f ${subj}_parc.nii.gz
 rm blank.nii.gz
 
 #run fiber and connectome construction
-parc=${subj}_parc.nii
+parc=${subj}_parc
 parcdir=${pwd}
 
 #move to diffusion directory
 cd ${WORKDIR}/Diff/${subj}/preproc
-rsync $parcdir/$parc .
+rsync $parcdir/${parc}.nii .
 
 #parcellation reference into subject space - change to ANTS
 
