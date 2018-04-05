@@ -55,12 +55,12 @@ do
 
   echo "Queuing ${file} to parcellation image..."
   #convert to single list of files to add to parcellation
-  var=$var' -add '$file
+  var=$var' -add 1 -mul '$file
   
 done
 
 #make parcellation image from electrode rois
-fslmaths blank.nii.gz $var ${subj}_parc
+fslmaths blank.nii.gz$var ${subj}_parc
 gunzip -f ${subj}_parc.nii.gz
 
 #cleanup
