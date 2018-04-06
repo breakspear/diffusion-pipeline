@@ -6,6 +6,7 @@ WORKDIR=$2
 IMAGEDIR=$3
 
 mkdir -p ${WORKDIR}/${IMAGEDIR}/${subj}
+cd ${WORKDIR}/${IMAGEDIR}/${subj}
 
 flirt -in CT.nii -ref T1.nii -out rCT -cost normmi
 
