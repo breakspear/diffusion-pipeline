@@ -23,6 +23,7 @@ fi
 #delete carriage returns
 
 sed -i 's/\r//g' $COORDS_FILE
+j=1
 
 while IFS=',' read -r X Y Z region
 do
@@ -34,11 +35,14 @@ do
   v_z=$(($Z+72))
   echo "Equivalent to voxel coords $v_x $v_y $v_z"
   fslmaths ${FSLDIR}/data/standard/MNI152_T1_1mm_brain -mul 0 -add 1 -roi $v_x 1 $v_y 1 $v_z 1 0 1 ${v_x}_${v_y}_${v_z}_point -odt float
-  fslmaths ${v_x}_${v_y}_${v_z}_point -kernel sphere 3 -fmean ${v_x}_${v_y}_${v_z}_sphere
-  fslmaths ${v_x}_${v_y}_${v_z}_sphere -bin ${v_x}_${v_y}_${v_z}_electrode_MNI
+  fslmaths ${v_x}_${v_y}_${v_z}_point -kernel sphere 1.5 -fmean ${v_x}_${v_y}_${v_z}_sphere
+  fslmaths ${v_x}_${v_y}_${v_z}_sphere -bin ${v_x}_${v_y}_${v_z}_bin
+  fslmaths ${v_x}_${v_y}_${v_z}_bin -mul $j ${v_x}_${v_y}_${v_z}_electrode_MNI  
   rm ${v_x}_${v_y}_${v_z}_point.nii.gz
   rm ${v_x}_${v_y}_${v_z}_sphere.nii.gz
+  rm ${v_x}_${v_y}_${v_z}_bin.nii.gz
   gunzip -f ${v_x}_${v_y}_${v_z}_electrode_MNI.nii.gz
+  j=$(($j+1))
   
 done < $COORDS_FILE
 
@@ -46,51 +50,78 @@ done < $COORDS_FILE
 
 fslmaths ${FSLDIR}/data/standard/MNI152_T1_1mm_brain -uthr 0 -thr 0 blank
 
-for file in *.nii
+for file in $( find . -name "*electrode*" | sort -V )
 do
 
   echo "Queuing ${file} to parcellation image..."
   #convert to single list of files to add to parcellation
-  var=$var' -add '$file
+  var=$var' -add 1 -mul '$file
   
 done
 
 #make parcellation image from electrode rois
-fslmaths blank.nii.gz $var ${subj}_parc
+fslmaths blank.nii.gz$var ${subj}_parc
 gunzip -f ${subj}_parc.nii.gz
 
 #cleanup
 rm blank.nii.gz
 
 #run fiber and connectome construction
-parc=${subj}_parc.nii.gz
-parcdir=${pwd}
+parc=${subj}_parc
+parcdir=$(pwd)
 
 #move to diffusion directory
 cd ${WORKDIR}/Diff/${subj}/preproc
+rsync $parcdir/${parc}.nii .
 
-#parcellation reference into subject space
-flirt -ref fa.nii -in ${FSLDIR}/data/standard/MNI152_T1_1mm_brain -out MNItofa -omat MNItofa.mat -cost normmi
+#parcellation reference into subject space - change to ANTS
 
-#parcellation template into subject space
-flirt -ref fa.nii -in ${parcdir}/${parc} -out seeg_flirt -applyxfm -init MNItofa.mat -interp nearestneighbour
+bet2 brainFS.nii brainFSbet -f 0.2 -m
 
-gunzip -f seeg_flirt.nii.gz
+gunzip -f brainFSbet.nii.gz
+
+#setup threads for ANTS
+
+ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$ncpus
+export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
+
+parcimageref=${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz
+
+antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-transforms 1 --output [brainFSintemp,brainFSintempWarped.nii.gz,brainFSintempInverseWarped.nii.gz] --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [0.005,0.995] --initial-moving-transform [${parcimageref},brainFSbet.nii,1] --transform Rigid[0.1] --metric MI[${parcimageref},brainFSbet.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform Affine[0.1] --metric MI[${parcimageref},brainFSbet.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform SyN[0.1,3,0] --metric CC[${parcimageref},brainFSbet.nii,1,4] --convergence [100x70x50x20,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox
+
+c3d_affine_tool -ref brainFSintempWarped.nii.gz -src brainFSbet.nii -itk brainFSintemp0GenericAffine.mat -ras2fsl -o brainFSintemp-fsl.mat
+
+#now inverse it
+convert_xfm -omat tempinbrainFS.mat -inverse brainFSintemp-fsl.mat
+
+convert_xfm -omat FS2diff.mat -inverse diff2FS.mat
+
+#Setup seed in diffusion space
+
+flirt -in ${parc}.nii -ref brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out ${parc}_FS.nii.gz
+
+gunzip ${parc}_FS.nii.gz -f
+
+mrconvert ${parc}_FS.nii ${parc}_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+
+flirt -in ${parc}_FS_str.nii -ref biasmeanb0bet.nii.gz -out ${parc}_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+
+gunzip ${parc}_diff.nii.gz -f
 
 #track construction try 25 million?
 
-tckgen -algorithm iFOD2 wm.mif ${NUMFIBERS}.tck -seed_image seeg_flirt.nii -minlength 10 -maxlength 250 -select ${NUMFIBERS} -force -nthreads $ncpus -mask iterbrainmask.nii -output_seeds seeg_seeds.txt
+tckgen wm.mif ${NUMFIBERS}_seeg.tck -seed_image ${parc}_diff.nii -minlength 10 -maxlength 250 -select ${NUMFIBERS} -force -nthreads $ncpus -mask iterbrainmask.nii -output_seeds seeg_seeds.txt
 
 #sift2
 
-tcksift2 ${NUMFIBERS}.tck wm.mif seeg_sift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads $ncpus
+tcksift2 ${NUMFIBERS}_seeg.tck wm.mif seeg_sift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads $ncpus
 
 #connectome construction (weights from sift2)
 
-tck2connectome ${NUMFIBERS}.tck seeg_flirt.nii seeg_streamweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments seeg_streamlineassignment.txt -force -nthreads $ncpus
+tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_streamweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments seeg_streamlineassignment.txt -force -nthreads $ncpus
 
-tck2connectome ${NUMFIBERS}.tck seeg_flirt.nii seeg_invlengthweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
+tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_invlengthweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
 
-tck2connectome ${NUMFIBERS}.tck seeg_flirt.nii seeg_invnodeweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
+tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_invnodeweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
 
-tck2connectome ${NUMFIBERS}.tck seeg_flirt.nii seeg_meanfiberlengths.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
+tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_meanfiberlengths.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
