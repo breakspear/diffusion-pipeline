@@ -1,0 +1,20 @@
+#!/bin/bash/
+#usage: CT_T1_registration subj WORKDIR IMAGEDIR
+
+subj=$1
+WORKDIR=$2
+IMAGEDIR=$3
+
+cd $WORKDIR/$IMAGEDIR/
+
+flirt -in CT.nii -ref T1.nii -out rCT -cost normmi
+
+temp=${FSLDIR}/data/standard/MNI152_T1_1mm.nii.gz
+
+antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-transforms 1 --output [T1intemp,T1intempWarped.nii.gz,T1intempInverseWarped.nii.gz] --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [0.005,0.995] --initial-moving-transform [${temp},T1.nii,1] --transform Rigid[0.1] --metric MI[${temp},T1.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform Affine[0.1] --metric MI[${temp},T1.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform SyN[0.1,3,0] --metric CC[${temp},T1.nii,1,4] --convergence [100x70x50x20,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox
+
+c3d_affine_tool -ref T1intempWarped.nii.gz -src T1.nii -itk T1intemp0GenericAffine.mat -ras2fsl -o T1intemp-fsl.mat
+
+flirt -in rCT -ref T1intempWarped -applyxfm -init T1intemp-fsl.mat -interp nearestneighbour -out rCT_warped
+
+gunzip *.nii.gz

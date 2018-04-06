@@ -1,0 +1,59 @@
+#!/bin/bash
+#usage: electrode_roi subj WORKDIR PARCDIR COORDS_FILE
+
+subj=$1
+WORKDIR=$2
+PARCDIR=$3
+COORDS_FILE=$4
+
+mkdir -p $WORKDIR/$PARCDIR/coords/$subj
+COORD_DIR=$WORKDIR/$PARCDIR/coords/$subj
+## setup proper file structure
+COORDS_FILE=$WORKDIR/$COORDS_FILE
+rm ${WORKDIR}/${subj}_seeds.txt
+rm ${WORKDIR}/${subj}_tracklist.txt
+
+if [ "$rundir" != $COORD_DIR ]; then
+cd $COORD_DIR
+fi
+
+#get coords from csv
+
+#delete carriage returns
+
+sed -i 's/\r//g' $COORDS_FILE
+
+while IFS=',' read -r X Y Z region
+do
+
+  echo "Constructing ROI for MNI coords $X $Y $Z in region $region"
+  #convert to voxel coords
+  v_x=$(($X*-1+90))
+  v_y=$(($Y+126))
+  v_z=$(($Z+72))
+  echo "Equivalent to voxel coords $v_x $v_y $v_z"
+  fslmaths ${FSLDIR}/data/standard/MNI152_T1_1mm_brain -mul 0 -add 1 -roi $v_x 1 $v_y 1 $v_z 1 0 1 ${v_x}_${v_y}_${v_z}_point -odt float
+  fslmaths ${v_x}_${v_y}_${v_z}_point -kernel sphere 2 -fmean ${v_x}_${v_y}_${v_z}_sphere
+  fslmaths ${v_x}_${v_y}_${v_z}_sphere -bin ${v_x}_${v_y}_${v_z}_electrode_MNI
+  rm ${v_x}_${v_y}_${v_z}_point.nii.gz
+  rm ${v_x}_${v_y}_${v_z}_sphere.nii.gz
+  gunzip -f ${v_x}_${v_y}_${v_z}_electrode_MNI.nii.gz
+  
+done < $COORDS_FILE
+
+#setup roi list for seedbasedtracking
+
+find ./* -maxdepth 0 -type f -name "*electrode*" | sort -V > ${WORKDIR}/${subj}_seeds.txt
+sed -i 's/\.[^.]*$//' ${WORKDIR}/${subj}_seeds.txt
+sed -i 's/\.//g' ${WORKDIR}/${subj}_seeds.txt
+sed -i 's/\///g' ${WORKDIR}/${subj}_seeds.txt
+
+rsync -vaz ${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz .
+
+while read aline
+do
+  while read bline
+  do
+    echo $aline" "$bline >> ${WORKDIR}/${subj}_tracklist.txt
+  done < ${WORKDIR}/${subj}_seeds.txt
+done < ${WORKDIR}/${subj}_seeds.txt
