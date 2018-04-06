@@ -5,7 +5,7 @@ subj=$1
 WORKDIR=$2
 IMAGEDIR=$3
 
-cd $WORKDIR/$IMAGEDIR/
+mkdir -p ${WORKDIR}/${IMAGEDIR}/${subj}
 
 flirt -in CT.nii -ref T1.nii -out rCT -cost normmi
 
