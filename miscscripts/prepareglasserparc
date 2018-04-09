@@ -24,7 +24,7 @@
 # *m* situations under which to email a) aborted b) begin e) end
 # *M* email address to send emails to
 
-WORKDIR=/working/lab_michaebr/alistaiP/poldrack/myconnectomedata/T1working
+WORKDIR=/working/lab_michaebr/alistaiP/Park/Phil
 OUTDIR=HCPMMP1out
 
 #PBS -e ${WORKDIR}/batch/prepareglassererror.txt
@@ -42,7 +42,15 @@ export SUBJECTS_DIR=${WORKDIR}/FS
 
 cd $SUBJECTS_DIR
 
+subjlist=/working/lab_michaebr/alistaiP/Park/Phil/newFSlist.txt
+
+if [ -z "$subjlist" ]
+then
+
 find ${WORKDIR}/Raw/* -maxdepth 0 -type d | awk -F "/" '{print $NF}' - > subjlist.txt
+subjlist=${SUBJECTS_DIR}/subjlist.txt
+
+fi
 
 #printf $(basename $subjfilelist) > subjlist.txt
 
@@ -65,4 +73,4 @@ rsync /mnt/backedup/home/alistaiP/bundle/test/diffusion-pipeline/data/rh.HCPMMP1
 
 fi
 
-bash create_subj_volume_parcellation.sh -L subjlist.txt -a HCPMMP1 -d ${OUTDIR} -m "YES"
+bash create_subj_volume_parcellation.sh -L $subjlist -a HCPMMP1 -d ${OUTDIR} -m "YES"

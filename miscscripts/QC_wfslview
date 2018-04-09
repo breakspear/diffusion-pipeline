@@ -46,12 +46,12 @@ convert meandwi_sliced.ppm ${WORKDIR}/${OUTDIR}/meanDWI/${subj}_meandwi.png
 
 #tdi
 
-slicer  ${tckbasename}_tdi.nii -a tdi_sliced.ppm
+slicer  ${tckbasename}.nii -a tdi_sliced.ppm
 convert tdi_sliced.ppm ${WORKDIR}/${OUTDIR}/tdi/${subj}_tdi.png
 
 #parc
 
-overlay 1 1 fa.nii -A flirted_uniform.nii 1 `fslstats $parcbasename.nii -R | awk -F " " '{print $2}'` parc_overlay.nii.gz
+overlay 1 1 fa.nii -A rparc_fixsubcort.nii 1 `fslstats rparc_fixsubcort.nii -R | awk -F " " '{print $2}'` parc_overlay.nii.gz
 slicer parc_overlay.nii.gz  -a parcoverlay_sliced.ppm
 convert parcoverlay_sliced.ppm ${WORKDIR}/${OUTDIR}/parc/${subj}_parcoverlay.png 
 rm parc_overlay.nii.gz
