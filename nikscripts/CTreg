@@ -1,4 +1,4 @@
-#!/bin/bash/
+#!/bin/bash
 #usage: CT_T1_registration subj WORKDIR IMAGEDIR
 
 subj=$1
