@@ -5,7 +5,6 @@ subj=$1
 WORKDIR=$2
 IMAGEDIR=$3
 
-mkdir -p ${WORKDIR}/${IMAGEDIR}/${subj}
 cd ${WORKDIR}/${IMAGEDIR}/${subj}
 
 #Register CT to T1 (linear)
