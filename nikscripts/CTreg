@@ -40,7 +40,7 @@ antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-tran
 
 bet2 brainw brainwbet -f 0.2 -m
 rm brainwbet.nii.gz
-mv brainwbet_mask.nii.gz brainmask
+mv brainwbet_mask.nii.gz brainmask.nii.gz
 
 #zero voxels outside of brain mask
 
