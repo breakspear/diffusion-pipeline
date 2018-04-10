@@ -74,11 +74,7 @@ rsync -z ${WORKDIR}/Diff/${subj}/preproc/parc_fixsubcort.nii .
 
 #warp parc region image to MNI space
 
-if [[ ! -f parcw0GenericAffine.mat ]]; then
-
-  antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-transforms 1 --output [parcw,parcw.nii.gz,parciw.nii.gz] --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [0.005,0.995] --initial-moving-transform [${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1] --transform Rigid[0.1] --metric MI[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform Affine[0.1] --metric MI[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform SyN[0.1,3,0] --metric CC[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1,4] --convergence [100x70x50x20,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox
-
-fi
+flirt -in parc_fixsubcort -ref brainw -out parcw -cost normmi
 
 fslmaths CTwmt_mask -mul parcw CTwparc
 
