@@ -56,7 +56,7 @@ fslmaths CTw -mas brainmask CTwm
 
 #threshold CT for voxel inspection (may need to be tweaked for each individual patient)
 
-fslmaths CTwm -thrp 0.95 CTwmt #12000 may be too high
+fslmaths CTwm -thrp 95 CTwmt #12000 may be too high
 
 #pull each voxel coordinate with a non-zero value in it
 
