@@ -13,7 +13,7 @@ flirt -in CT.nii -ref T1.nii -out CTr -cost normmi
 
 temp=${FSLDIR}/data/standard/MNI152_T1_1mm.nii.gz
 
-if [[ ! -f T1w0GenericAffine.mat ]]
+if [[ ! -f T1w0GenericAffine.mat ]]; then
 
   ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$ncpus
   export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
@@ -32,7 +32,7 @@ fi
 
 flirt -in CTr -ref T1w -applyxfm -init T1-fsl.mat -interp nearestneighbour -out CTw
 
-if [[ ! -f brainw0GenericAffine.mat ]]
+if [[ ! -f brainw0GenericAffine.mat ]]; then
 
   #generate brain mask for thresholding
 
@@ -42,13 +42,12 @@ if [[ ! -f brainw0GenericAffine.mat ]]
 
   antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-transforms 1 --output [brainw,brainw.nii.gz,brainiw.nii.gz] --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [0.005,0.995] --initial-moving-transform [${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,brainFS.nii,1] --transform Rigid[0.1] --metric MI[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,brainFS.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform Affine[0.1] --metric MI[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,brainFS.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform SyN[0.1,3,0] --metric CC[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,brainFS.nii,1,4] --convergence [100x70x50x20,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox
 
-  #create mask
-
-  bet2 brainw brainwbet -f 0.2 -m
-  rm brainwbet.nii.gz
-  mv brainwbet_mask.nii.gz brainmask.nii.gz
-
 fi
+#create mask
+
+bet2 brainw brainwbet -f 0.2 -m
+rm brainwbet.nii.gz
+mv brainwbet_mask.nii.gz brainmask.nii.gz
 
 #zero voxels outside of brain mask
 
@@ -75,7 +74,11 @@ rsync -z ${WORKDIR}/Diff/${subj}/preproc/parc_fixsubcort.nii .
 
 #warp parc region image to MNI space
 
-antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-transforms 1 --output [parcw,parcw.nii.gz,parciw.nii.gz] --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [0.005,0.995] --initial-moving-transform [${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1] --transform Rigid[0.1] --metric MI[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform Affine[0.1] --metric MI[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform SyN[0.1,3,0] --metric CC[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1,4] --convergence [100x70x50x20,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox
+if [[ ! -f parcw0GenericAffine.mat ]]; then
+
+  antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-transforms 1 --output [parcw,parcw.nii.gz,parciw.nii.gz] --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [0.005,0.995] --initial-moving-transform [${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1] --transform Rigid[0.1] --metric MI[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform Affine[0.1] --metric MI[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform SyN[0.1,3,0] --metric CC[${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz,parc_fixsubcort.nii,1,4] --convergence [100x70x50x20,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox
+
+fi
 
 fslmaths CTwmt_mask -mul parcw CTwparc
 
