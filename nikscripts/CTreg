@@ -13,7 +13,7 @@ flirt -in CT.nii -ref T1.nii -out CTr -cost normmi
 
 temp=${FSLDIR}/data/standard/MNI152_T1_1mm.nii.gz
 
-if [[ -f ! T1w0GenericAffine.mat ]]
+if [[ ! -f T1w0GenericAffine.mat ]]
 
   ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$ncpus
   export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
@@ -32,7 +32,7 @@ fi
 
 flirt -in CTr -ref T1w -applyxfm -init T1-fsl.mat -interp nearestneighbour -out CTw
 
-if [[ -f ! brainw0GenericAffine.mat ]]
+if [[ ! -f brainw0GenericAffine.mat ]]
 
   #generate brain mask for thresholding
 
