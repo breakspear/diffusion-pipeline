@@ -1,9 +1,9 @@
 #!/bin/bash
-#usage: electrode_parc_cntme subj WORKDIR PARCDIR COORDS_FILE NUMFIBERS
+#usage: electrode_parc_cntme subj WORKDIR ROIDIR COORDS_FILE NUMFIBERS
 
 subj=$1
 WORKDIR=$2
-PARCDIR=$3
+ROIDIR=$3
 COORDS_FILE=$4
 NUMFIBERS=$5
 
@@ -64,6 +64,7 @@ fslmaths blank.nii.gz$var ${subj}_parc
 gunzip -f ${subj}_parc.nii.gz
 
 #cleanup
+rm *electrode*
 rm blank.nii.gz
 
 #run fiber and connectome construction
