@@ -49,36 +49,47 @@ bet2 brainw brainwbet -f 0.2 -m
 rm brainwbet.nii.gz
 mv brainwbet_mask.nii.gz brainmask.nii.gz
 
+
+###
+
+###
+
+### Truncated (not working up to standard) ###
+
+###
+
+###
+
 #zero voxels outside of brain mask
 
-fslmaths CTw -mas brainmask CTwm
+#    fslmaths CTw -mas brainmask CTwm
 
 #threshold CT for voxel inspection (may need to be tweaked for each individual patient)
 
-fslmaths CTwm -thrP 99 CTwmt #2 iterations (may need to be verified)
-fslmaths CTwmt -thrP 99 CTwmt
+#    fslmaths CTwm -thrP 99 CTwmt #2 iterations (may need to be verified)
+#    fslmaths CTwmt -thrP 99 CTwmt
 
 #pull each voxel coordinate with a non-zero value in it
 
-fslmaths CTwmt -bin CTwmt_mask
+#    fslmaths CTwmt -bin CTwmt_mask
 
-fslmeants -i CTwmt -m CTwmt_mask --showall --transpose -o longcoords.txt
+#    fslmeants -i CTwmt -m CTwmt_mask --showall --transpose -o longcoords.txt
 
 #housekeeping
 
-cut -d' ' -f1,2,3 longcoords.txt
+#    cut -d' ' -f1,2,3 longcoords.txt
 
 # (for electrode tracking purposes) apply region masking
 
-rsync -z ${WORKDIR}/Diff/${subj}/preproc/parc_fixsubcort.nii .
+#    rsync -z ${WORKDIR}/Diff/${subj}/preproc/parc_fixsubcort.nii .
 
 #warp parc region image to MNI space
 
-flirt -in parc_fixsubcort -ref brainw -out parcw -cost normmi
+#    flirt -in parc_fixsubcort -ref brainw -out parcw -cost normmi
 
-fslmaths CTwmt_mask -mul parcw CTwparc
+#    fslmaths CTwmt_mask -mul parcw CTwparc
 
 #get electrode intensities that correspond to region in LUT (fs2009a in this case)
 
-fslmeants -i CTwparc -m CTwmt_mask --showall --transpose -o coordsinregions.txt
+#    fslmeants -i CTwparc -m CTwmt_mask --showall --transpose -o coordsinregions.txt
 
