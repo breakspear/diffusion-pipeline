@@ -7,8 +7,8 @@ ROIDIR=$3
 COORDS_FILE=$4
 NUMFIBERS=$5
 
-mkdir -p $WORKDIR/$PARCDIR/coords/$subj
-COORD_DIR=$WORKDIR/$PARCDIR/coords/$subj
+mkdir -p $WORKDIR/$ROIDIR/coords/$subj
+COORD_DIR=$WORKDIR/$ROIDIR/coords/$subj
 ## setup proper file structure
 COORDS_FILE=$WORKDIR/$COORDS_FILE
 rm ${WORKDIR}/${subj}_seeds.txt
