@@ -21,7 +21,7 @@ mkdir -p ${WORKDIR}/${OUTDIR}/meanDWI
 mkdir -p ${WORKDIR}/${OUTDIR}/tdi
 mkdir -p ${WORKDIR}/${OUTDIR}/parc
 
-nshells=$(mrinfo meanshell.mif -size)
+nshells=$(mrinfo biasmeanb0.nii -size)
 lastdwidim=$(echo $nshells | awk -F " " '{print $NF}')
 mrconvert eddycorr.mif meandwieddy.nii -coord 3 $(( $lastdwidim-1 )) -nthreads 1
 
@@ -46,7 +46,7 @@ convert meandwi_sliced.ppm ${WORKDIR}/${OUTDIR}/meanDWI/${subj}_meandwi.png
 
 #tdi
 
-slicer  ${tckbasename}_tdi.nii -a tdi_sliced.ppm
+slicer  ${tckbasename}.nii -a tdi_sliced.ppm
 convert tdi_sliced.ppm ${WORKDIR}/${OUTDIR}/tdi/${subj}_tdi.png
 
 #parc
