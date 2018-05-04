@@ -4,7 +4,6 @@ WORKDIR=$2
 OUTDIR=$3
 
 tckbasename=$4
-parcbasename=$5
 
 rundir=$(pwd)
 baserundir=$(basename $rundir)
@@ -40,7 +39,7 @@ convert fa_sliced.ppm ${WORKDIR}/${OUTDIR}/FA/${subj}_fa.png
 #nshells=$(mrinfo meanshell.mif -size)
 #nshells=$(mrinfo meanshell.mif -size)
 #lastdwidim=$(echo $nshells | awk -F " " '{print $NF}')
-mrconvert meanshell.mif meandwishell.nii -coord 3 $(( $lastdwidim-1 )) -nthreads 1
+mrconvert biasmeanb0.nii meandwishell.nii -coord 3 $(( $lastdwidim-1 )) -nthreads 1
 slicer meandwishell.nii -a meandwi_sliced.ppm
 convert meandwi_sliced.ppm ${WORKDIR}/${OUTDIR}/meanDWI/${subj}_meandwi.png
 
