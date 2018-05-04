@@ -22,7 +22,7 @@ mkdir -p ${WORKDIR}/${OUTDIR}/parc
 
 nshells=$(mrinfo biasmeanb0.nii -size)
 lastdwidim=$(echo $nshells | awk -F " " '{print $NF}')
-mrconvert eddycorr.mif meandwieddy.nii -coord 3 $(( $lastdwidim-1 )) -nthreads 1
+mrconvert eddycorr.mif meandwieddy.nii -coord 3 $(( $lastdwidim-1 )) -nthreads 1 -force
 
 #masks
 overlay 1 1 meandwieddy.nii -A iterbrainmask.nii 1 mask_overlay.nii.gz
@@ -39,7 +39,7 @@ convert fa_sliced.ppm ${WORKDIR}/${OUTDIR}/FA/${subj}_fa.png
 #nshells=$(mrinfo meanshell.mif -size)
 #nshells=$(mrinfo meanshell.mif -size)
 #lastdwidim=$(echo $nshells | awk -F " " '{print $NF}')
-mrconvert biasmeanb0.nii meandwishell.nii -coord 3 $(( $lastdwidim-1 )) -nthreads 1
+mrconvert biasmeanb0.nii meandwishell.nii -coord 3 $(( $lastdwidim-1 )) -nthreads 1 -force
 slicer meandwishell.nii -a meandwi_sliced.ppm
 convert meandwi_sliced.ppm ${WORKDIR}/${OUTDIR}/meanDWI/${subj}_meandwi.png
 
