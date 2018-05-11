@@ -1,18 +1,17 @@
 #!/bin/bash
-#usage: electrode_parc_cntme subj WORKDIR ROIDIR COORDS_FILE NUMFIBERS
+#usage: electrode_parc_cntme subj WORKDIR ROIDIR NUMFIBERS
 
 subj=$1
 WORKDIR=$2
 ROIDIR=$3
-COORDS_FILE=$4
-NUMFIBERS=$5
+NUMFIBERS=$4
 
 mkdir -p $WORKDIR/$ROIDIR/$subj/coords
 COORDS_DIR=$WORKDIR/$ROIDIR/$subj/coords
 ## setup proper file structure
-COORDS_FILE=$WORKDIR/$COORDS_FILE
-rm ${WORKDIR}/${subj}_seeds.txt
-rm ${WORKDIR}/${subj}_tracklist.txt
+COORDS_FILE=$WORKDIR/${subj}_coords.csv
+#rm ${WORKDIR}/${subj}_seeds.txt
+#rm ${WORKDIR}/${subj}_tracklist.txt
 
 if [ "$rundir" != $COORDS_DIR ]; then
 cd $COORDS_DIR
