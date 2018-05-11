@@ -147,10 +147,10 @@ tcksift2 ${NUMFIBERS}_seeg.tck wm.mif seeg_sift_weightfactor.txt -act r5TT.nii -
 
 #connectome construction (weights from sift2)
 
-tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_streamweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments seeg_streamlineassignment.txt -force -nthreads $ncpus
+tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_streamweights.csv -tck_weights_in seeg_sift_weightfactor.txt -scale_file seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments seeg_streamlineassignment.txt -force -nthreads $ncpus
 
-tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_invlengthweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
+tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_invlengthweights.csv -tck_weights_in seeg_sift_weightfactor.txt -scale_file seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
 
-tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_invnodeweights.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
+tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_invnodeweights.csv -tck_weights_in seeg_sift_weightfactor.txt -scale_file seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
 
-tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_meanfiberlengths.csv -tck_weights_in seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
+tck2connectome ${NUMFIBERS}_seeg.tck ${parc}_diff.nii seeg_meanfiberlengths.csv -tck_weights_in seeg_sift_weightfactor.txt -scale_file seeg_sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
