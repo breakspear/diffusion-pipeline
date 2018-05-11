@@ -109,7 +109,7 @@ ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$ncpus
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
 
 #parcimageref=${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz
-parcimageref=${ROIDIR}/$subj/T1w.nii
+parcimageref=${WORKDIR}/${ROIDIR}/$subj/T1w.nii
 
 #if [[ ! -f brainFSintemp0GenericAffine.mat ]]; then
 
