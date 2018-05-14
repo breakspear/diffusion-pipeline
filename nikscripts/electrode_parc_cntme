@@ -77,7 +77,7 @@ do
 
   echo "Queuing ${file} to parcellation image..."
   #convert to single list of files to add to parcellation
-  var=$var' -add 1 -mul '$file
+  var=$var' -add '$file
   
 done
 
