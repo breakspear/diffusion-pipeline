@@ -70,7 +70,7 @@ done < $COORDS_FILE
 
 #setup blank image so that fsl can put rois onto it
 
-fslmaths ${ROIDIR}/$subj/T1w.nii -uthr 0 -thr 0 blank
+fslmaths ${WORKDIR}/${ROIDIR}/$subj/T1w.nii -uthr 0 -thr 0 blank
 
 for file in $( find . -name "*electrode*" | sort -V )
 do
