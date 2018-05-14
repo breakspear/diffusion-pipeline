@@ -86,8 +86,8 @@ fslmaths blank.nii.gz$var ${subj}_parc
 gunzip -f ${subj}_parc.nii.gz
 
 #cleanup
-rm *electrode*
-rm blank.nii.gz
+#rm *electrode*
+#rm blank.nii.gz
 
 #run fiber and connectome construction
 parc=${subj}_parc
