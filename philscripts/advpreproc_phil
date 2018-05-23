@@ -85,7 +85,7 @@ mrcat AP7b0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
 
 #dwipreproc_cust -rpe_pair AP7b0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force
 
-dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -force -nocleanup -tempdir .
+dwipreproc -rpe_pair -se_epi allb0s.mif -align_seepi -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -force -eddyqc_all dwipreproc
 
 #extract motion parameters
 #preprocdir=$(find * -maxdepth 0 -name "*dwipreproc*" -type d)
