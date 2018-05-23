@@ -2,8 +2,9 @@
 
 subj=$1
 WORKDIR=$2
-tracksbasename=$3
-CNTMEPREFIX=$4
+parc=$3
+tracksbasename=$4
+CNTMEPREFIX=$5
 
 rundir=$(pwd)
 baserundir=$(basename $rundir)
@@ -21,19 +22,19 @@ flirt -ref fa.nii -in $FSLDIR/data/standard/FMRIB58_FA_1mm.nii.gz -out MNItofa -
 
 #Parcellation template into subject space
 
-flirt -ref fa.nii -in $parc -out flirted_uniform.nii -applyxfm -init MNItofa.mat -interp nearestneighbour
+flirt -ref fa.nii -in $parc -out ${CNTMEPREFIX}_flirted_uniform.nii -applyxfm -init MNItofa.mat -interp nearestneighbour
 
-gunzip -f flirted_uniform.nii.gz
+gunzip -f ${CNTMEPREFIX}_flirted_uniform.nii.gz
 
 #Connectome construction
 #Track lengths
 
-tck2connectome ${tracksbasename}.tck flirted_uniform.nii connectome_${CNTMEPREFIX}_tracklengths.csv -scale_length -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus -stat_edge mean
+tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_tracklengths.csv -scale_length -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus -stat_edge mean
 
 #Streamline/Length
-tck2connectome ${tracksbasename}.tck flirted_uniform.nii connectome_${CNTMEPREFIX}_invlengths.csv -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
+tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_invlengths.csv -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
 
 #Streamline count
-tck2connectome ${tracksbasename}.tck flirted_uniform.nii connectome_${CNTMEPREFIX}_trackcount.csv -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
+tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_trackcount.csv -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
 
-tck2connectome ${tracksbasename}.tck flirted_uniform.nii connectome_${CNTMEPREFIX}_invnodeandlengths.csv -scale_invnodevol -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
+tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_invnodeandlengths.csv -scale_invnodevol -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
