@@ -5,15 +5,15 @@ subj=$1
 WORKDIR=$2
 CATDIR=$3
 
-GMin=${WORKDIR}/${CATDIR}/${subj}/mri/p1T1.nii
-WMin=${WORKDIR}/${CATDIR}/${subj}/mri/p2T1.nii
-CSFin=${WORKDIR}/${CATDIR}/${subj}/mri/p3T1.nii
+GMin=${WORKDIR}/${CATDIR}/${subj}/GMin.nii
+WMin=${WORKDIR}/${CATDIR}/${subj}/WMin.nii
+CSFin=${WORKDIR}/${CATDIR}/${subj}/CSFin.nii
 
-OUTDIR=${WORKDIR}/5TTcustwpreprocFSsp/${subj}
+OUTDIR=${WORKDIR}/Diff-wcust5tt/${subj}/preproc
 
 mkdir -p ${OUTDIR}
 
-cd ${WORKDIR}/Diff/${subj}
+cd ${WORKDIR}/Diff/${subj}/preproc
 
 #temp co-reg of FS T1 to native T1 - will remove soon
 
@@ -38,9 +38,6 @@ rsync brainFSinT1.nii 5ttcust
 rsync $GMin $WMin $CSFin .
 
 cd 5ttcust
-
-#remove sending the job to more slurms
-export FSLSUB_IGNORE_SLURM=1
 
 run_first_all -s L_Accu,R_Accu,L_Caud,R_Caud,L_Pall,R_Pall,L_Puta,R_Puta,L_Thal,R_Thal,L_Amyg,R_Amyg,L_Hipp,R_Hipp -i brainFSinT1.nii -o first -b
 

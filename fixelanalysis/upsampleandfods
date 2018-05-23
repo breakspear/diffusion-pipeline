@@ -2,10 +2,11 @@
 #usage: upsampleandfods subj WORKDIR NORMDIR VOXSIZE OUTDIR
 
 #compulsory arguments that are called automatically:
-WORKDIR=$1
-NORMDIR=$2
-VOXSIZE=$3
-OUTDIR=$4
+subj=$1
+WORKDIR=$2
+NORMDIR=$3
+VOXSIZE=$4
+OUTDIR=$5
 
 cd ${WORKDIR}/${NORMDIR}
 
@@ -14,17 +15,8 @@ mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI
 mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks
 mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS
 
-echo "NumberOfThreads: 1" > /home/${USER}/.mrtrix.conf
-echo "TmpFileDir: /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/tmp" >> /home/${USER}/.mrtrix.conf
+mrresize ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_DWI.mif -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/${subj}_DWI.mif -nthreads 1 -force 
 
-foreach -20 ${WORKDIR}/${NORMDIR}/DWInorm/*DWI.mif : mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/UNIP_DWI.mif -nthreads 1 -force 
+mrresize ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_Mask.nii.gz -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/${subj}_Mask.mif -nthreads 1 -force 
 
-foreach -20 ${WORKDIR}/${NORMDIR}/Masks/*Mask.nii.gz : mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNIP_Mask.mif -nthreads 1 -force 
-
-foreach -20 ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${NORMDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNIP_wm.mif ${WORKDIR}/${NORMDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNIP_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNIP_Mask.mif
-
-foreach -20 ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/*wm.mif : mrconvert IN ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNIP_wm_str.mif -stride +1,2,3,4 -force -nthreads 1 
-
-foreach -20 ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/*wm_str.mif : mv IN ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNIP_wm.mif
-
-rm /home/${USER}/.mrtrix.conf
+dwi2fod msmt_csd ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/${subj}_DWI.mif ${WORKDIR}/${NORMDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_wm.mif ${WORKDIR}/${NORMDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/${subj}_Mask.mif

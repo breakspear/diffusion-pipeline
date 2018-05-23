@@ -2,18 +2,18 @@
 
 args = commandArgs(TRUE)
 
-ph=read.table("/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/analysis/kfo_ii_overview_2017-03-31_144956_en_tabdelim_extractedfull_removedash.csv",header=T,stringsAsFactors=T,sep="\t",colClasses="character")
+ph=read.table("/working/lab_michaebr/alistaiP/Park/analysis/Baseline_Data_Subjects_29-64_fixid.dat",header=T,stringsAsFactors=T,sep="\t",colClasses="character")
 
-DATADIR=as.character("/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/AFD2/seedtracking")
+DATADIR=as.character("/working/lab_michaebr/alistaiP/Park/AFD/seedtracking")
 #DATADIR=as.character(args[1])
-OUTDIR=as.character("/beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/AFD2/analysis")
+OUTDIR=as.character("/working/lab_michaebr/alistaiP/Park/AFD/analysis-new")
 #OUTDIR=as.character(args[2])
 
 PatientIDs<-list.dirs(path = DATADIR, full.names = FALSE, recursive = FALSE)
 PatientIDs<-t(PatientIDs)
 PatientIDs<-as.character(PatientIDs)
 
-IDs_noP<-gsub(pattern = "\\P$", "", PatientIDs)
+IDs_nopre<-gsub("^.*?_","",PatientIDs)
 
 convars=cbind("meanFA","meanMD","AFD")
 egsubject<-PatientIDs[1]
@@ -42,7 +42,7 @@ condata=scan(confile)
 xx=c(xx,condata)
 }
 
-out=c(IDs_noP[i],xx)
+out=c(IDs_nopre[i],xx)
 xall=rbind(xall,out)
 
 }
