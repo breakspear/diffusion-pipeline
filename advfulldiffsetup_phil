@@ -3,7 +3,6 @@
 
 subj=$1
 WORKDIR=$2
-ismultishell=1
 numfibers=25M
 parc=DST
 
@@ -20,6 +19,6 @@ segparcandcoregT1 $subj $WORKDIR $parc
 
 #Fiber construction and connectome construction
 
-advfibertrackandcntmecon_phil $subj $WORKDIR $ismultishell $numfibers $parc
+advfibertrackandcntmecon_phil $subj $WORKDIR $numfibers $parc
 
 

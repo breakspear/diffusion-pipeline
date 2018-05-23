@@ -4,9 +4,8 @@
 
 subj=$1
 WORKDIR=$2
-ismultishell=$3
-numfibers=$4
-CNTMEPREFIX=$5
+numfibers=$3
+CNTMEPREFIX=$4
 
 rundir=$(pwd)
 baserundir=$(basename $rundir)
