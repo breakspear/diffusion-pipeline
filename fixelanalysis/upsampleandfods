@@ -24,6 +24,6 @@ foreach -10 ${WORKDIR}/${NORMDIR}/Masks/*.nii* : mrresize IN -vox $VOXSIZE ${WOR
 
 foreach -10 ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/*DWI.mif : dwi2fod msmt_csd IN ${WORKDIR}/${NORMDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/UNI_wm.mif ${WORKDIR}/${NORMDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/csf/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNI_Mask.mif
 
-foreach -10 ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/*wm.mif : mrconvert IN ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/UNI_wm_str.mif -stride +1,2,3,4 -force -nthreads 1 
+foreach -10 ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/*wm.mif : mrconvert IN ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/UNI_wm_str.mif -strides +1,2,3,4 -force -nthreads 1 
 
 foreach -10 ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/*wm_str.mif : mv IN ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/UNI_wm.mif

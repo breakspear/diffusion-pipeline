@@ -38,7 +38,7 @@ rsync $1 5ttgen_man
 
 cd 5ttgen_man
 
-mrconvert $1 T1.nii -stride +1,+2,+3 -nthreads $ncpus -force
+mrconvert $1 T1.nii -strides +1,+2,+3 -nthreads $ncpus -force
 
 
 if [ ! -n "$3" ]; then
@@ -141,7 +141,7 @@ mrcalc 0 wm.mif -min path.mif -nthreads $ncpus -force
 
 #combine all tissue types into resulting 5ttoutput
 
-mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads $ncpus | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4 -nthreads $ncpus -force
+mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads $ncpus | mrconvert - combined_precrop.mif -strides +1,+2,+3,+4 -nthreads $ncpus -force
 
 mrconvert combined_precrop.mif result.mif -nthreads $ncpus -force
 

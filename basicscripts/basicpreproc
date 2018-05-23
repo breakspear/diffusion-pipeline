@@ -21,7 +21,7 @@ if [ ! -e rawdata.mif ]; then
 
 #Import gradient table for MRtrix specs
 
-mrconvert *rawdata.nii* rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert *rawdata.nii* rawdata.mif -grad rawencoding.b -strides +1,2,3,4 -force -nthreads $ncpus
 
 fi
 
@@ -33,9 +33,9 @@ dwidenoise rawdata.mif rawdata-dn.mif -force -nthreads $ncpus
 
 #Re-convert to the correct stride
 
-mrconvert rawdata-dn.mif rawdata-dnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdata-dn.mif rawdata-dnstr.mif -strides +1,2,3,4 -force -nthreads $ncpus
  
-mrconvert rawdata-dnstr.mif  rawdata-dn.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdata-dnstr.mif  rawdata-dn.mif -strides +1,2,3,4 -force -nthreads $ncpus
 
 rm rawdata-dnstr.mif
 

@@ -30,7 +30,7 @@ fi
 
 #prepare anatomical volume for segmentation, parcellation correction, and then co-registration to diffusion space
 
-mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -stride +1,2,3 -nthreads $ncpus -force
+mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -strides +1,2,3 -nthreads $ncpus -force
 
 mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -nthreads $ncpus -force
 
@@ -84,7 +84,7 @@ flirt -ref T1bet.nii.gz -in parc.nii -applyxfm -init FS2FSL.mat -interp nearestn
 
 rm parc_fixsubcort.nii
 
-mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -stride -1,2,3 -force -nthreads $ncpus
+mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -strides -1,2,3 -force -nthreads $ncpus
 
 #if [ $parctype=="DES" ]; then
 #      labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
@@ -92,7 +92,7 @@ mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -stride -1,2,3 -force -nthreads $
        labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
 #fi
 
-mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -stride +1,2,3 -force -nthreads $ncpus
+mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -strides +1,2,3 -force -nthreads $ncpus
 
 mv parc_fixsubcortstr.nii parc_fixsubcort.nii
 
@@ -118,7 +118,7 @@ mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFS.nii -linear diff2FSMR.mat -inv
  
 mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFSrg.nii -linear diff2FSMR.mat -inverse -template fa.nii -force -nthreads $ncpus
 
-mrconvert rFSrg.nii rFSrgstr.nii -stride +1,2,3 -nthreads $ncpus -force 
+mrconvert rFSrg.nii rFSrgstr.nii -strides +1,2,3 -nthreads $ncpus -force 
 
 mv rFSrgstr.nii rFSrg.nii
 

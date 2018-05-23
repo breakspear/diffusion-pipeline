@@ -34,7 +34,7 @@ dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force
 fi
 
 
-mrconvert wm.mif wmstr.mif -stride +1,2,3,4 -nthreads $ncpus -force
+mrconvert wm.mif wmstr.mif -strides +1,2,3,4 -nthreads $ncpus -force
 
 mv wmstr.mif wm.mif
 
