@@ -6,8 +6,6 @@ WORKDIR=$2
 #FS_DIR=$3
 
 #arguments to be set
-ismosaic=1
-isfullrevsequence=0
 ismultiband=1
 parc=DST
 ismultishell=1
@@ -17,9 +15,9 @@ numfibers=25M
 #Full diffusion pipeline, from pre-processing to connectome construction - using the advanced version
 
 #Advanced preprocessing
-#Parameters: mosaic fullrevsequence multiband (1 if yes)
+#Parameters: multiband (1 if yes)
 
-advpreproc $subj $WORKDIR $ismosaic $isfullrevsequence $ismultiband
+advpreproc $subj $WORKDIR $ismultiband
  
 #Segmentation, parcellation and co-registration of T1 images
 
