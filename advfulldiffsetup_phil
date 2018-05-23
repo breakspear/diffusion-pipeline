@@ -3,7 +3,6 @@
 
 subj=$1
 WORKDIR=$2
-#FS_DIR=$3
 numfibers=25M
 parc=DST
 
@@ -16,7 +15,7 @@ advpreproc_phil $subj $WORKDIR
  
 #Segmentation, parcellation and co-registration of T1 images
 
-segparcandcoregT1_phil $subj $WORKDIR
+segparcandcoregT1 $subj $WORKDIR $parc
 
 #Fiber construction and connectome construction
 
