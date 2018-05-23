@@ -6,9 +6,7 @@
 
 subj=$1
 WORKDIR=$2
-ismosiac=$3
-fullreverseseq=$4
-ismultiband=$5
+ismultiband=$3
 
 mkdir -p $WORKDIR/Diff/$subj/preproc 
 
@@ -23,38 +21,46 @@ cd $WORKDIR/Diff/$subj/preproc
 mrinfo rawdataAP.mif -export_grad_mrtrix rawencoding.b -force
 mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
 
-if [ $ismosiac = 1 ];
-then
+#if [ $ismosiac = 1 ];
+#then
 
-	mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads $ncpus
+#	mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads $ncpus
 
-	nvols=$(fslnvols rawdataAP.nii)
-	adjvols=$(expr $nvols - 1)
+#	nvols=$(fslnvols rawdataAP.nii)
+#	adjvols=$(expr $nvols - 1)
 
-	fslroi rawdataAP.nii rawdataAPrem 1 $adjvols
+#	fslroi rawdataAP.nii rawdataAPrem 1 $adjvols
 
-	sed '1d' rawencoding.b > rawencodingrem.b
-	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4
+#	sed '1d' rawencoding.b > rawencodingrem.b
+#	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
 
-	mv rawdataAPrem.mif rawdataAP.mif
-fi
+#	mv rawdataAPrem.mif rawdataAP.mif
 
-if [ $fullreverseseq = 1 ];
-then
-	mrconvert rawdataPA.mif rawdataPA.nii -force -nthreads $ncpus
-	fslroi rawdataPA.nii rawdataPArem 1 $adjvols
-	sed '1d' rawrevencoding.b > rawrevencodingrem.b
-        mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4
-	mv rawdataPArem.mif rawdataPA.mif
-else
-	dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
-	mv rawdataPArem.mif rawdataPA.mif
-fi
+#fi
+
+#if [ $ismosiac = 1 ] && [ $fullreverseseq = 1 ]; then
+
+
+
+#mrconvert rawdataPA.mif rawdataPA.nii -json_export json_rawdataPA.json -force -nthreads $ncpus
+#nvols=$(fslnvols rawdataPA.nii)
+#fslroi rawdataPA.nii rawdataPArem 1 $nvols
+#sed '1d' rawrevencoding.b > rawrevencodingrem.b
+#mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4 -nthreads $ncpus
+#mv rawdataPArem.mif rawdataPA.mif
+	
+#else
+	
+dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force -nthreads $ncpus
+#mrconvert rawdataPArem.mif rawdataPA.mif -json_import json_rawdataPA.json -nthreads $ncpus -force
+#rm rawdataPArem.mif	
+
+#fi
 
 #Denoise
 
 dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads $ncpus
-dwidenoise rawdataPA.mif rawdataPAdn.mif -force -nthreads $ncpus
+dwidenoise rawdataPArem.mif rawdataPAdn.mif -force -nthreads $ncpus
 
 mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
 mrconvert rawdataAPdnstr.mif  rawdataAPdn.mif  -force -nthreads $ncpus
@@ -72,33 +78,63 @@ mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads $ncpus
 
 #Preprocessing steps including eddy correction & bias correction
 
-dwiextract rawdataAPdn.mif APb0s.mif -bzero -force
+dwiextract rawdataAPdn.mif APb0s.mif -bzero -force -nthreads $ncpus
 
-if ([ $ismultiband = 1 ] && [ $fullreverseseq = 0 ]); then
-	echo "Preprocessing command...: ${MRTRIX}/scripts/dwipreproc_mb -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup"
-	${MRTRIX}/scripts/dwipreproc_mb -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup
+if ([ $ismultiband = 1 ]); then
 
-elif ([ $ismultiband = 1 ] && [ $fullreverseseq = 1 ]); then
-	echo "Preprocessing command...: ${MRTRIX}/scripts/dwipreproc_mb -rpe_all rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup"
-	${MRTRIX}/scripts/dwipreproc_mb -rpe_all rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup
+        mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
+	echo "Preprocessing command...:dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup"
+	dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup
+
+#elif ([ $ismultiband = 1 ] && [ $fullreverseseq = 1 ]); then
+        
+	#mrcat rawdataAPdn.mif rawdataPAdn.mif allDWIs.mif -axis 3 -force -nthreads $ncpus
+	#echo "Preprocessing command...:dwipreproc -rpe_all -export_grad_mrtrix adjencoding.b -pe_dir AP allDWIs.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup"
+	#dwipreproc -rpe_all -export_grad_mrtrix adjencoding.b -pe_dir AP allDWIs.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup
 
 else
-	echo "Preprocessing command...: ${MRTRIX}/scripts/dwipreproc_cust -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup"
-	${MRTRIX}/scripts/dwipreproc_cust -rpe_pair APb0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads $ncpus -verbose -force -tempdir . -nocleanup
+
+	mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
+	echo "Preprocessing command...:dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled " -nthreads $ncpus -force -tempdir . -nocleanup"
+	dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled " -nthreads $ncpus -force -tempdir . -nocleanup
+
 fi
 
-dwiextract eddycorr.mif -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force
-bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
+dwiextract eddycorr.mif -nthreads $ncpus -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force -nthreads $ncpus
 
-dwibiascorrect -mask eddymeanb0bet_mask.nii.gz -fsl eddycorr.mif biascorr.mif -nthreads $ncpus -force
-dwishellmath biascorr.mif mean meanshell.mif -force
+bet2 eddymeanb0.nii eddyb0brainfsl -m -f 0.15
+
+#dwi2mask eddycorr.mif eddymaskMR.nii -force -nthreads $ncpus
+
+
+#bias correction
+
+dwibiascorrect -mask eddyb0brainfsl_mask.nii.gz -fsl eddycorr.mif biascorr.mif -nthreads $ncpus -force
+
+
+#create optimal mask
+
+dwi2mask biascorr.mif biasmaskMR.nii -force -nthreads $ncpus
+
+fslmaths eddyb0brainfsl_mask -mas biasmaskMR.nii iterbrainmask
+
+gunzip iterbrainmask.nii.gz -f
+
+#dwishellmath biascorr.mif mean meanshell.mif -nthreads $ncpus -force
+
 
 #Create tensor and FA images
 
-dwiextract biascorr.mif -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -force
+dwiextract biascorr.mif -nthreads $ncpus -bzero - | mrmath -axis 3 - mean biasmeanb0.nii -force -nthreads $ncpus
 
-bet2 biasmeanb0.nii biasmeanb0bet -f 0.15 -m 
+fslmaths biasmeanb0.nii -mas iterbrainmask.nii biasmeanb0masked
 
-dwi2tensor biascorr.mif dt.nii -mask biasmeanb0bet_mask.nii.gz -nthreads $ncpus -force
+#gunzip -f biasmeanb0bet.nii.gz
+
+#add further bet2 option so later pipeline doesn't break!
+
+bet2 biasmeanb0masked biasmeanb0bet -f 0.10 -m 
+
+dwi2tensor biascorr.mif dt.nii -mask iterbrainmask.nii -nthreads $ncpus -force
 
 tensor2metric dt.nii -fa fa.nii -nthreads $ncpus -force
