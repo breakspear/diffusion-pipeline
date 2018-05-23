@@ -21,7 +21,7 @@ export PATH
 
 #now modules
 
-module load mrtrix3/AP
+module load mrtrix3/3.0_RC3
 module load freesurfer/6.0.0
 module load ANTs/20160509
 module load fsl/5.0.9_eddy
