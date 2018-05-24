@@ -115,9 +115,9 @@ mrcalc $WMin multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif -force
 
 mrcalc 0 wm.mif -min path.mif -force
 
-mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads 8 | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4 -force -nthreads 8
+mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads 8 | mrconvert - combined_precrop.mif -strides +1,+2,+3,+4 -force -nthreads 8
 
-mrconvert combined_precrop.mif 5TT.mif -stride +1,2,3,4 -force -nthreads 8
+mrconvert combined_precrop.mif 5TT.mif -strides +1,2,3,4 -force -nthreads 8
 
 mv all_sgms.mif 5TT.mif ${OUTDIR}
 

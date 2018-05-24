@@ -37,7 +37,7 @@ mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads $cpus
 fslroi rawdataAP.nii rawdataAPrem 1 89
 
 sed '1d' rawencoding.b > rawencodingrem.b
-mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4
+mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -strides +1,2,3,4
 
 mv rawdataAPrem.mif rawdataAP.mif
 
@@ -57,11 +57,11 @@ cd preproc
 dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads $cpus
 dwidenoise rawdataPA.mif rawdataPAdn.mif -force -nthreads $cpus
 
-mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -stride +1,2,3,4 -force -nthreads $cpus
+mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -strides +1,2,3,4 -force -nthreads $cpus
 mrconvert rawdataAPdnstr.mif  rawdataAPdn.mif  -force -nthreads $cpus
 
-mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -stride +1,2,3,4 -force -nthreads $cpus
-mrconvert rawdataPAdnstr.mif  rawdataPAdn.mif -stride +1,2,3,4 -force -nthreads $cpus
+mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -strides +1,2,3,4 -force -nthreads $cpus
+mrconvert rawdataPAdnstr.mif  rawdataPAdn.mif -strides +1,2,3,4 -force -nthreads $cpus
 
 rm rawdataAPdnstr.mif
 rm rawdataPAdnstr.mif 
@@ -98,9 +98,9 @@ tensor2metric dt.nii -fa fa.nii -nthreads $cpus -force
 
 #5ttgen freesurfer $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz  5TTFS.nii -nocrop -sgm_amyg_hipp -lut $FREESURFER_HOME/FreeSurferColorLUT.txt
 
-mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -stride +1,2,3 -nthreads $cpus -force
+mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -strides +1,2,3 -nthreads $cpus -force
 
-mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -stride +1,2,3 -nthreads $cpus -force
+mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -strides +1,2,3 -nthreads $cpus -force
 
 #flirt -in $FSLDIR/data/standard/MNI152_T1_1mm_brain.nii.gz -ref brainFS.nii -omat mni2FS.mat -dof 12
 
@@ -132,11 +132,11 @@ flirt -ref T1bet.nii.gz -in parc.nii -applyxfm -init FS2FSL.mat -interp nearestn
 
 rm parc_fixsubcort.nii
 
-mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -stride -1,2,3 -force -nthreads $cpus
+mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -strides -1,2,3 -force -nthreads $cpus
 
 labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRtrix/src/connectome/tables/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $cpus
 
-mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -stride +1,2,3 
+mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -strides +1,2,3 
 
 mv parc_fixsubcortstr.nii parc_fixsubcort.nii
 
@@ -211,7 +211,7 @@ dwi2response msmt_5tt biascorr.mif r5TT.nii wm.txt gm.txt csf.txt -mask biasmean
 
 dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask biasmeanb0bet_mask.nii.gz -nthreads $cpus
 
-mrconvert wm.mif wmstr.mif -stride +1,2,3,4 -nthreads $cpus -force
+mrconvert wm.mif wmstr.mif -strides +1,2,3,4 -nthreads $cpus -force
 
 mv wmstr.mif wm.mif
 
