@@ -43,11 +43,11 @@ srun -c 8 fod2dec wm.mif  foddec.mif -mask iterbrainmask.nii -force -nthreads 8
 
 #Fiber tracking
 
-srun -c 8 tckgen wm.mif ${numfibers}.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask iterbrainmask.nii -output_seeds succeeds.txt -force -nthreads 8
+srun -c 8 tckgen wm.mif ${numfibers}.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask wmseg025.nii -output_seeds succeeds.txt -force -nthreads 8
 
 srun -c 8 tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads 8
 
-srun -c 8 tckgen wm.mif 1M.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select 1M -mask iterbrainmask.nii -output_seeds succeeds1M.txt -force -nthreads 8
+srun -c 8 tckgen wm.mif 1M.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select 1M -mask wmseg025.nii -output_seeds succeeds1M.txt -force -nthreads 8
 
 srun -c 8 tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads 8
 
