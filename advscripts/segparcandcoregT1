@@ -57,7 +57,7 @@ mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -forc
 #fslmaths T1bet.nii.gz -mas FS2FSLbet_mask.nii.gz T1betFSmasked.nii.gz
 
 
-tkregister2 --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ $SUBJECTS_DIR/$subj/mri/rawavg.mgz --reg register.native.dat --noedit --regheader
+tkregister2 --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ $SUBJECTS_DIR/$subj/mri/rawavg.mgz --reg register.native.dat --noedit --regheader --fslregout FS2FSL.mat 
 
 mri_vol2vol --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ $SUBJECTS_DIR/$subj/mri/rawavg.mgz --regheader --o brainFSnat.nii
 
