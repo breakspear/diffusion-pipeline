@@ -57,9 +57,9 @@ mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -forc
 #fslmaths T1bet.nii.gz -mas FS2FSLbet_mask.nii.gz T1betFSmasked.nii.gz
 
 
-tkregister2 --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ ${subjFSDir}/mri/rawavg.mgz --reg register.native.dat --noedit --regheader
+tkregister2 --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ $SUBJECTS_DIR/$subj/mri/rawavg.mgz --reg register.native.dat --noedit --regheader
 
-mri_vol2vol --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ ${subjFSDir}/mri/rawavg.mgz --regheader --o brainFSnat.nii
+mri_vol2vol --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ $SUBJECTS_DIR/$subj/mri/rawavg.mgz --regheader --o brainFSnat.nii
 
 fast -B --nopve brainFSnat.nii
 
@@ -87,7 +87,7 @@ fi
 	labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc.nii -nthreads $ncpus -force
 #fi
 
-mri_vol2vol --mov parc.nii --targ ${subjFSDir}/mri/rawavg.mgz --reg register.native.dat --o parcFSL.nii.gz --nearest --keep-precision
+mri_vol2vol --mov parc.nii --targ $SUBJECTS_DIR/$subj/mri/rawavg.mgz --reg register.native.dat --o parcFSL.nii.gz --nearest --keep-precision
 
 #flirt -ref T1bet.nii.gz -in parc.nii -applyxfm -init FS2FSL.mat -interp nearestneighbour -out parcFSL.nii.gz
 
