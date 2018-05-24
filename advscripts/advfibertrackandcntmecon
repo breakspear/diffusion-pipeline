@@ -21,35 +21,35 @@ fi
 if [ $ismultishell==1 ]
 then
 
-dwi2response msmt_5tt biascorr.mif r5TT.nii wm.txt gm.txt csf.txt -mask iterbrainmask.nii -nthreads 8 -force
+srun -c 8 dwi2response msmt_5tt biascorr.mif r5TT.nii wm.txt gm.txt csf.txt -mask iterbrainmask.nii -nthreads 8 -force
 
-dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask iterbrainmask.nii -nthreads 8
+srun -c 8 dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask iterbrainmask.nii -nthreads 8
 
 else
 
-dwi2response dhollander biascorr.mif wm.txt gm.txt csf.txt -mask iterbrainmask.nii -nthreads 8 -force
+srun -c 8 dwi2response dhollander biascorr.mif wm.txt gm.txt csf.txt -mask iterbrainmask.nii -nthreads 8 -force
 
-dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask iterbrainmask.nii -nthreads 8
+srun -c 8 dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask iterbrainmask.nii -nthreads 8
 
 fi
 
 
-mrconvert wm.mif wmstr.mif -strides +1,2,3,4 -nthreads 8 -force
+srun -c 1 mrconvert wm.mif wmstr.mif -strides +1,2,3,4 -nthreads 1 -force
 
 mv wmstr.mif wm.mif
 
-fod2dec wm.mif  foddec.mif -mask iterbrainmask.nii -force -nthreads 8
+srun -c 8 fod2dec wm.mif  foddec.mif -mask iterbrainmask.nii -force -nthreads 8
 
 
 #Fiber tracking
 
-tckgen wm.mif ${numfibers}.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask iterbrainmask.nii -output_seeds succeeds.txt -force -nthreads 8
+srun -c 8 tckgen wm.mif ${numfibers}.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask iterbrainmask.nii -output_seeds succeeds.txt -force -nthreads 8
 
-tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads 8
+srun -c 8 tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads 8
 
-tckgen wm.mif 1M.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select 1M -mask iterbrainmask.nii -output_seeds succeeds1M.txt -force -nthreads 8
+srun -c 8 tckgen wm.mif 1M.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select 1M -mask iterbrainmask.nii -output_seeds succeeds1M.txt -force -nthreads 8
 
-tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads 8
+srun -c 8 tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads 8
 
 
 #Global tractography 
@@ -65,14 +65,14 @@ tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads 8
 
 #Visualise streamline ends for quality checking purposes
 
-tckmap ${numfibers}.tck ${numfibers}ends.nii -vox 0.5 -force -nthreads 8 -ends_only
+srun -c 8 tckmap ${numfibers}.tck ${numfibers}ends.nii -vox 0.5 -force -nthreads 8 -ends_only
 
-tckmap 1M.tck 1Mends.nii -vox 0.5 -force -nthreads 8 -ends_only
+srun -c 8 tckmap 1M.tck 1Mends.nii -vox 0.5 -force -nthreads 8 -ends_only
 
 
 #tcksift2
 
-tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads 8
+srun -c 8 tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads 8
 
 #tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads 8
 
@@ -87,21 +87,21 @@ tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -act r5TT.nii -fd_scale_g
 #Connectome construction
 #sifted
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads 8
+srun -c 8 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads 8
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads 8
+srun -c 8 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads 8
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodeweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads 8
+srun -c 8 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodeweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads 8
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads 8
+srun -c 8 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads 8
 
 
 #non-sifted
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads 8
+srun -c 8 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads 8
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads 8
+srun -c 8 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads 8
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads 8
+srun -c 8 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads 8
 
 
 #if [ $ismultishell==1 ]
@@ -113,4 +113,4 @@ tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengt
 #fi
 
 #
-connectome2tck ${numfibers}.tck -exemplars rparc_fixsubcort.nii -files single streamlineassignment.txt ${numbers}_connectomeexem.tck -nthreads 8 -force
+srun -c 8 connectome2tck ${numfibers}.tck -exemplars rparc_fixsubcort.nii -files single streamlineassignment.txt ${numbers}_connectomeexem.tck -nthreads 8 -force
