@@ -42,19 +42,26 @@ mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -nthreads $ncpus -force
 
 #5ttgen_alt brainFS.nii FS2mni.mat 5TTfsl.nii
 
+
 bet2 T1.nii T1bet -f 0.15
 
 mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -force
 
-flirt -ref T1bet.nii.gz -in brainFSsp.nii -dof 6 -out FS2FSL -omat FS2FSL.mat
 
-convert_xfm -omat FSL2FS.mat -inverse FS2FSL.mat
+#flirt -ref T1bet.nii.gz -in brainFSsp.nii -dof 6 -out FS2FSL -omat FS2FSL.mat
 
-bet2 FS2FSL.nii.gz FS2FSLbet -f 0.15 -m
+#convert_xfm -omat FSL2FS.mat -inverse FS2FSL.mat
 
-fslmaths T1bet.nii.gz -mas FS2FSLbet_mask.nii.gz T1betFSmasked.nii.gz
+#bet2 FS2FSL.nii.gz FS2FSLbet -f 0.15 -m
 
-fast -B --nopve T1betFSmasked.nii.gz
+#fslmaths T1bet.nii.gz -mas FS2FSLbet_mask.nii.gz T1betFSmasked.nii.gz
+
+
+tkregister2 --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ ${subjFSDir}/mri/rawavg.mgz --reg register.native.dat --noedit --regheader
+
+mri_vol2vol --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ ${subjFSDir}/mri/rawavg.mgz --regheader --o brainFSnat.nii
+
+fast -B --nopve brainFSnat.nii
 
 
 #5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTfsl.nii -nthreads $ncpus -force -tempdir . -nocleanup
@@ -62,11 +69,11 @@ fast -B --nopve T1betFSmasked.nii.gz
 if [ -n "$4" ]; then
 echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM.nii CSF.nii"
 
-5ttgen_manual T1betFSmasked_restore.nii.gz 5TT.nii ${subjPRESEGDIR}
+5ttgen_manual brainFSnat_restore.nii.gz 5TT.nii ${subjPRESEGDIR}
 
 else
 
-5ttgen fsl T1betFSmasked.nii.gz 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads $ncpus -force -nocleanup -tempdir .
+5ttgen fsl brainFSnat.nii 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads $ncpus -force -nocleanup -tempdir .
 
 fi
 
@@ -80,7 +87,9 @@ fi
 	labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc.nii -nthreads $ncpus -force
 #fi
 
-flirt -ref T1bet.nii.gz -in parc.nii -applyxfm -init FS2FSL.mat -interp nearestneighbour -out parcFSL.nii.gz
+mri_vol2vol --mov parc.nii --targ ${subjFSDir}/mri/rawavg.mgz --reg register.native.dat --o parcFSL.nii.gz --nearest --keep-precision
+
+#flirt -ref T1bet.nii.gz -in parc.nii -applyxfm -init FS2FSL.mat -interp nearestneighbour -out parcFSL.nii.gz
 
 rm parc_fixsubcort.nii
 
@@ -89,7 +98,7 @@ mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -strides -1,2,3 -force -nthreads 
 #if [ $parctype=="DES" ]; then
 #      labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
 #elif [ $parctype=="DST" ]; then
-       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
+       labelsgmfix parcFSLtempstr.nii.gz brainFSnat_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
 #fi
 
 mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -strides +1,2,3 -force -nthreads $ncpus
@@ -109,6 +118,7 @@ rm parcFSLtempstr.nii.gz
 #transformconvert T1FSLtoDiff.mat T1.nii eddyb0.nii flirt_import T1FSLtoDiffMR.mat -force
 
 #mrtransform 5TTFSL.nii -linear T1FSLtoDiffMR.mat r5TTFSL.nii -force
+
 
 bbregister --s $subj --mov biasmeanb0bet.nii.gz --init-fsl --reg register.dat --dti --fslmat diff2FS.mat
 
