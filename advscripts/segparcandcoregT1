@@ -155,7 +155,13 @@ srun -c 1 flirt -ref fa.nii -in parc_fixsubcortFS.nii.gz -applyxfm -init FS2diff
 #mrtransform parc_fixsubcort.nii rparc_fixsubcort.nii -linear diff2FSMR.mat -inverse -interp nearest -template biasmeanb0bet.nii.gz -force
 
 
-#FS co-registration of T1 to diffusion image (& subsequent 5TT file)
+# extract WM mask for tracking
+
+srun -c 1 mrconvert r5TT.nii r5TT.mif -force
+srun -c 1 mrconvert r5TT.mif wmseg.nii -coord 3 2 -force
+srun -c 1 mrthreshold wmseg.nii -abs 0.5 wmseg05.nii -force 
+srun -c 1 mrthreshold wmseg.nii -abs 0.25 wmseg025.nii -force 
+srun -c 1 mrthreshold wmseg.nii -abs 0.75 wmseg075.nii -force 
 
 
 #mrconvert 5TTfsl.nii wmseg.nii -coord 3 2
