@@ -83,8 +83,7 @@ dwiextract rawdataAPdn.mif APb0s.mif -bzero -force -nthreads $ncpus
 if ([ $ismultiband = 1 ]); then
 
         mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
-	echo "Preprocessing command...:dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -tempdir . -nocleanup"
-	dwipreproc -rpe_pair -se_epi allb0s.mif -align_seepi -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both " -nthreads $ncpus -force -eddyqc_all dwipreproc
+	dwipreproc -rpe_pair -se_epi allb0s.mif -align_seepi -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled --mb=2 --ol_type=both --slm=linear " -nthreads $ncpus -force -eddyqc_all dwipreproc
 
 #elif ([ $ismultiband = 1 ] && [ $fullreverseseq = 1 ]); then
         
@@ -95,8 +94,7 @@ if ([ $ismultiband = 1 ]); then
 else
 
 	mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
-	echo "Preprocessing command...:dwipreproc -rpe_pair -se_epi allb0s.mif -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled " -nthreads $ncpus -force -tempdir . -nocleanup"
-	dwipreproc -rpe_pair -se_epi allb0s.mif -align_seepi -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled " -nthreads $ncpus -force -eddyqc_all dwipreproc -nocleanup
+	dwipreproc -rpe_pair -se_epi allb0s.mif -align_seepi -pe_dir AP -export_grad_mrtrix adjencoding.b rawdataAPdn.mif eddycorr.mif -eddy_options " --repol --data_is_shelled " -nthreads $ncpus -force -eddyqc_all dwipreproc
 
 fi
 
