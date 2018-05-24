@@ -30,9 +30,9 @@ fi
 
 #prepare anatomical volume for segmentation, parcellation correction, and then co-registration to diffusion space
 
-mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -stride +1,2,3 -nthreads $ncpus -force
+mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFS.nii -stride +1,2,3 -nthreads 8 -force
 
-mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -nthreads $ncpus -force
+mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -nthreads 8 -force
 
 #flirt -in $FSLDIR/data/standard/MNI152_T1_1mm_brain.nii.gz -ref brainFS.nii -omat mni2FS.mat -dof 12
 
@@ -44,7 +44,7 @@ mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -nthreads $ncpus -force
 
 bet2 T1.nii T1bet -f 0.15
 
-mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -force
+mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads 8 -force
 
 flirt -ref T1bet.nii.gz -in brainFSsp.nii -dof 6 -out FS2FSL -omat FS2FSL.mat
 
@@ -57,7 +57,7 @@ fslmaths T1bet.nii.gz -mas FS2FSLbet_mask.nii.gz T1betFSmasked.nii.gz
 fast -B --nopve T1betFSmasked.nii.gz
 
 
-#5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTfsl.nii -nthreads $ncpus -force -tempdir . -nocleanup
+#5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTfsl.nii -nthreads 8 -force -tempdir . -nocleanup
 
 if [ -n "$4" ]; then
 echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM.nii CSF.nii"
@@ -66,33 +66,33 @@ echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM
 
 else
 
-5ttgen fsl T1betFSmasked.nii.gz 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads $ncpus -force -nocleanup -tempdir .
+5ttgen fsl T1betFSmasked.nii.gz 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads 8 -force -nocleanup -tempdir .
 
 fi
 
-5tt2gmwmi 5TT.nii 5TTgmwmi.nii -nthreads $ncpus -force
+5tt2gmwmi 5TT.nii 5TTgmwmi.nii -nthreads 8 -force
 
 #if [ $parctype=="DES" ]; then
 #	echo "${parctype} parcellation being constructed"
-#	labelconvert $SUBJECTS_DIR/$subj/mri/aparc+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc.nii -nthreads $ncpus -force
+#	labelconvert $SUBJECTS_DIR/$subj/mri/aparc+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc.nii -nthreads 8 -force
 #elif [ $parctype=="DST" ]; then
 	echo "${parctype} parcellation being constructed"
-	labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc.nii -nthreads $ncpus -force
+	labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc.nii -nthreads 8 -force
 #fi
 
 flirt -ref T1bet.nii.gz -in parc.nii -applyxfm -init FS2FSL.mat -interp nearestneighbour -out parcFSL.nii.gz
 
 rm parc_fixsubcort.nii
 
-mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -stride -1,2,3 -force -nthreads $ncpus
+mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -stride -1,2,3 -force -nthreads 8
 
 #if [ $parctype=="DES" ]; then
-#      labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
+#      labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads 8 -force
 #elif [ $parctype=="DST" ]; then
-       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
+       labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads 8 -force
 #fi
 
-mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -stride +1,2,3 -force -nthreads $ncpus
+mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -stride +1,2,3 -force -nthreads 8
 
 mv parc_fixsubcortstr.nii parc_fixsubcort.nii
 
@@ -112,28 +112,28 @@ rm parcFSLtempstr.nii.gz
 
 bbregister --s $subj --mov biasmeanb0bet.nii.gz --init-fsl --reg register.dat --dti --fslmat diff2FS.mat
 
-transformconvert diff2FS.mat biasmeanb0bet.nii.gz $SUBJECTS_DIR/$subj/mri/brain.mgz flirt_import diff2FSMR.mat -force -nthreads $ncpus
+transformconvert diff2FS.mat biasmeanb0bet.nii.gz $SUBJECTS_DIR/$subj/mri/brain.mgz flirt_import diff2FSMR.mat -force -nthreads 8
 
-mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFS.nii -linear diff2FSMR.mat -inverse -force -nthreads $ncpus
+mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFS.nii -linear diff2FSMR.mat -inverse -force -nthreads 8
  
-mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFSrg.nii -linear diff2FSMR.mat -inverse -template fa.nii -force -nthreads $ncpus
+mrtransform $SUBJECTS_DIR/$subj/mri/brain.mgz rFSrg.nii -linear diff2FSMR.mat -inverse -template fa.nii -force -nthreads 8
 
-mrconvert rFSrg.nii rFSrgstr.nii -stride +1,2,3 -nthreads $ncpus -force 
+mrconvert rFSrg.nii rFSrgstr.nii -stride +1,2,3 -nthreads 8 -force 
 
 mv rFSrgstr.nii rFSrg.nii
 
 
 #Move other files from T1 space
 
-transformconvert FS2FSL.mat brainFSsp.nii T1bet.nii.gz flirt_import FS2FSLMR.mat -force -nthreads $ncpus
+transformconvert FS2FSL.mat brainFSsp.nii T1bet.nii.gz flirt_import FS2FSLMR.mat -force -nthreads 8
 
-mrtransform 5TT.nii 5TTFSspmasked.nii -linear FS2FSLMR.mat -inverse -force -nthreads $ncpus
+mrtransform 5TT.nii 5TTFSspmasked.nii -linear FS2FSLMR.mat -inverse -force -nthreads 8
 
-mrtransform 5TTgmwmi.nii 5TTFSspgmwmi.nii -linear FS2FSLMR.mat -inverse -force -nthreads $ncpus
+mrtransform 5TTgmwmi.nii 5TTFSspgmwmi.nii -linear FS2FSLMR.mat -inverse -force -nthreads 8
 
-mrtransform 5TTFSspgmwmi.nii r5TTgmwmi.nii -linear diff2FSMR.mat -inverse -force -nthreads $ncpus
+mrtransform 5TTFSspgmwmi.nii r5TTgmwmi.nii -linear diff2FSMR.mat -inverse -force -nthreads 8
 
-mrtransform 5TTFSspmasked.nii r5TT.nii -linear diff2FSMR.mat -inverse -force -nthreads $ncpus
+mrtransform 5TTFSspmasked.nii r5TT.nii -linear diff2FSMR.mat -inverse -force -nthreads 8
 
 convert_xfm -omat FSL2FS.mat -inverse FS2FSL.mat
 

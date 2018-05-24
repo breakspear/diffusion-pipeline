@@ -29,12 +29,12 @@ gunzip -f ${CNTMEPREFIX}_flirted_uniform.nii.gz
 #Connectome construction
 #Track lengths
 
-tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_tracklengths.csv -scale_length -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus -stat_edge mean
+tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_tracklengths.csv -scale_length -zero_diagonal -assignment_radial_search 2 -force -nthreads 8 -stat_edge mean
 
 #Streamline/Length
-tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_invlengths.csv -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
+tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_invlengths.csv -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads 8
 
 #Streamline count
-tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_trackcount.csv -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
+tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_trackcount.csv -zero_diagonal -assignment_radial_search 2 -force -nthreads 8
 
-tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_invnodeandlengths.csv -scale_invnodevol -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
+tck2connectome ${tracksbasename}.tck ${CNTMEPREFIX}_flirted_uniform.nii connectome_${CNTMEPREFIX}_invnodeandlengths.csv -scale_invnodevol -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads 8

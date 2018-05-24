@@ -21,7 +21,7 @@ if [ ! -e rawdata.mif ]; then
 
 #Import gradient table for MRtrix specs
 
-mrconvert *rawdata.nii* rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert *rawdata.nii* rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads 8
 
 fi
 
@@ -29,35 +29,35 @@ fi
 
 #Denoise the rawdata
 
-dwidenoise rawdata.mif rawdata-dn.mif -force -nthreads $ncpus
+dwidenoise rawdata.mif rawdata-dn.mif -force -nthreads 8
 
 #Re-convert to the correct stride
 
-mrconvert rawdata-dn.mif rawdata-dnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdata-dn.mif rawdata-dnstr.mif -stride +1,2,3,4 -force -nthreads 8
  
-mrconvert rawdata-dnstr.mif  rawdata-dn.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdata-dnstr.mif  rawdata-dn.mif -stride +1,2,3,4 -force -nthreads 8
 
 rm rawdata-dnstr.mif
 
 #Eddy and motion correction
 
-dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -eddy_options " --repol " -nthreads $ncpus -debug -tempdir . -nocleanup -force
+dwipreproc -rpe_none -pe_dir AP -export_grad_mrtrix adjencoding.b rawdata-dn.mif eddycorr.mif -eddy_options " --repol " -nthreads 8 -debug -tempdir . -nocleanup -force
 
 #Construct the b0 mask for future processing 
 
-mrconvert eddycorr.mif eddyb0.nii -coord 3 0 -force -nthreads $ncpus
+mrconvert eddycorr.mif eddyb0.nii -coord 3 0 -force -nthreads 8
 
 bet2 eddyb0.nii eddyb0brainfsl -m -f 0.15
 
 
 #Bias correction
 
-dwibiascorrect -mask eddyb0brainfsl_mask.nii.gz -fsl eddycorr.mif biascorr.mif -force -nthreads $ncpus -tempdir .
+dwibiascorrect -mask eddyb0brainfsl_mask.nii.gz -fsl eddycorr.mif biascorr.mif -force -nthreads 8 -tempdir .
 
 
 #create optimal mask
 
-dwi2mask biascorr.mif biasmaskMR.nii -force -nthreads $ncpus
+dwi2mask biascorr.mif biasmaskMR.nii -force -nthreads 8
 
 fslmaths eddyb0brainfsl_mask -mas biasmaskMR.nii iterbrainmask
 
@@ -65,13 +65,13 @@ gunzip iterbrainmask.nii.gz -f
 
 fslmaths biasmeanb0.nii -mask iterbrainmask.nii biasmeanb0bet
 
-#mrconvert biascorr.mif biasb0.nii -coord 3 0 -force -nthreads $ncpus
+#mrconvert biascorr.mif biasb0.nii -coord 3 0 -force -nthreads 8
 #bet2 biasb0.nii biasb0brain -m -f 0.15
 
 #Generate tensor and fa images
 
-#dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
+#dwishellmath biascorr.mif mean meanshell.mif -force -nthreads 8
 
-dwi2tensor biascorr.mif dt.nii -mask iterbrainmask.nii -force -nthreads $ncpus
+dwi2tensor biascorr.mif dt.nii -mask iterbrainmask.nii -force -nthreads 8
 
-tensor2metric dt.nii -fa fa.nii -force -nthreads $ncpus
+tensor2metric dt.nii -fa fa.nii -force -nthreads 8

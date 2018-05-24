@@ -38,7 +38,7 @@ rsync $1 5ttgen_man
 
 cd 5ttgen_man
 
-mrconvert $1 T1.nii -stride +1,+2,+3 -nthreads $ncpus -force
+mrconvert $1 T1.nii -stride +1,+2,+3 -nthreads 8 -force
 
 
 if [ ! -n "$3" ]; then
@@ -57,97 +57,97 @@ run_first_all -s L_Accu,R_Accu,L_Caud,R_Caud,L_Pall,R_Pall,L_Puta,R_Puta,L_Thal,
 
 #exract and combine subcortical areas
 
-meshconvert first-L_Accu_first.vtk L_Accu.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-L_Accu_first.vtk L_Accu.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve L_Accu.vtk T1.nii mesh2pve_L_Accu.mif -nthreads $ncpus -force
+mesh2pve L_Accu.vtk T1.nii mesh2pve_L_Accu.mif -nthreads 8 -force
 
-meshconvert first-R_Accu_first.vtk R_Accu.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-R_Accu_first.vtk R_Accu.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve R_Accu.vtk T1.nii mesh2pve_R_Accu.mif -nthreads $ncpus -force
+mesh2pve R_Accu.vtk T1.nii mesh2pve_R_Accu.mif -nthreads 8 -force
 
-meshconvert first-L_Caud_first.vtk L_Caud.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-L_Caud_first.vtk L_Caud.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve L_Caud.vtk T1.nii mesh2pve_L_Caud.mif -nthreads $ncpus -force
+mesh2pve L_Caud.vtk T1.nii mesh2pve_L_Caud.mif -nthreads 8 -force
 
-meshconvert first-R_Caud_first.vtk R_Caud.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-R_Caud_first.vtk R_Caud.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve R_Caud.vtk T1.nii mesh2pve_R_Caud.mif -nthreads $ncpus -force
+mesh2pve R_Caud.vtk T1.nii mesh2pve_R_Caud.mif -nthreads 8 -force
 
-meshconvert first-L_Pall_first.vtk L_Pall.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-L_Pall_first.vtk L_Pall.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve L_Pall.vtk T1.nii mesh2pve_L_Pall.mif -nthreads $ncpus -force
+mesh2pve L_Pall.vtk T1.nii mesh2pve_L_Pall.mif -nthreads 8 -force
 
-meshconvert first-R_Pall_first.vtk R_Pall.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-R_Pall_first.vtk R_Pall.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve R_Pall.vtk T1.nii mesh2pve_R_Pall.mif -nthreads $ncpus -force
+mesh2pve R_Pall.vtk T1.nii mesh2pve_R_Pall.mif -nthreads 8 -force
 
-meshconvert first-L_Puta_first.vtk L_Puta.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-L_Puta_first.vtk L_Puta.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve L_Puta.vtk T1.nii mesh2pve_L_Puta.mif -nthreads $ncpus -force
+mesh2pve L_Puta.vtk T1.nii mesh2pve_L_Puta.mif -nthreads 8 -force
 
-meshconvert first-R_Puta_first.vtk R_Puta.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-R_Puta_first.vtk R_Puta.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve R_Puta.vtk T1.nii mesh2pve_R_Puta.mif -nthreads $ncpus -force
+mesh2pve R_Puta.vtk T1.nii mesh2pve_R_Puta.mif -nthreads 8 -force
 
-meshconvert first-L_Thal_first.vtk L_Thal.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-L_Thal_first.vtk L_Thal.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve L_Thal.vtk T1.nii mesh2pve_L_Thal.mif -nthreads $ncpus -force
+mesh2pve L_Thal.vtk T1.nii mesh2pve_L_Thal.mif -nthreads 8 -force
 
-meshconvert first-R_Thal_first.vtk R_Thal.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-R_Thal_first.vtk R_Thal.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve R_Thal.vtk T1.nii mesh2pve_R_Thal.mif -nthreads $ncpus -force
+mesh2pve R_Thal.vtk T1.nii mesh2pve_R_Thal.mif -nthreads 8 -force
 
-meshconvert first-L_Amyg_first.vtk L_Amyg.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-L_Amyg_first.vtk L_Amyg.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve L_Amyg.vtk T1.nii mesh2pve_L_Amyg.mif -nthreads $ncpus -force
+mesh2pve L_Amyg.vtk T1.nii mesh2pve_L_Amyg.mif -nthreads 8 -force
 
-meshconvert first-R_Amyg_first.vtk R_Amyg.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-R_Amyg_first.vtk R_Amyg.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve R_Amyg.vtk T1.nii mesh2pve_R_Amyg.mif -nthreads $ncpus -force
+mesh2pve R_Amyg.vtk T1.nii mesh2pve_R_Amyg.mif -nthreads 8 -force
 
-meshconvert first-L_Hipp_first.vtk L_Hipp.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-L_Hipp_first.vtk L_Hipp.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve L_Hipp.vtk T1.nii mesh2pve_L_Hipp.mif -nthreads $ncpus -force
+mesh2pve L_Hipp.vtk T1.nii mesh2pve_L_Hipp.mif -nthreads 8 -force
 
-meshconvert first-R_Hipp_first.vtk R_Hipp.vtk -transform first2real T1.nii -nthreads $ncpus -force
+meshconvert first-R_Hipp_first.vtk R_Hipp.vtk -transform first2real T1.nii -nthreads 8 -force
 
-mesh2pve R_Hipp.vtk T1.nii mesh2pve_R_Hipp.mif -nthreads $ncpus -force
+mesh2pve R_Hipp.vtk T1.nii mesh2pve_R_Hipp.mif -nthreads 8 -force
 
-mrmath mesh2pve_L_Accu.mif mesh2pve_R_Accu.mif mesh2pve_L_Caud.mif mesh2pve_R_Caud.mif mesh2pve_L_Pall.mif mesh2pve_R_Pall.mif mesh2pve_L_Puta.mif mesh2pve_R_Puta.mif mesh2pve_L_Thal.mif mesh2pve_R_Thal.mif mesh2pve_L_Amyg.mif mesh2pve_R_Amyg.mif mesh2pve_L_Hipp.mif mesh2pve_R_Hipp.mif sum - -nthreads $ncpus | mrcalc - 1.0 -min all_sgms.mif -nthreads $ncpus -force
+mrmath mesh2pve_L_Accu.mif mesh2pve_R_Accu.mif mesh2pve_L_Caud.mif mesh2pve_R_Caud.mif mesh2pve_L_Pall.mif mesh2pve_R_Pall.mif mesh2pve_L_Puta.mif mesh2pve_R_Puta.mif mesh2pve_L_Thal.mif mesh2pve_R_Thal.mif mesh2pve_L_Amyg.mif mesh2pve_R_Amyg.mif mesh2pve_L_Hipp.mif mesh2pve_R_Hipp.mif sum - -nthreads 8 | mrcalc - 1.0 -min all_sgms.mif -nthreads 8 -force
 
 
 #integrate subcortical structures with cortical tissues
 
-mrthreshold $WMin - -abs 0.001 -nthreads $ncpus | maskfilter - connect - -connectivity | mrcalc 1 - 1 -gt -sub remove_unconnected_wm_mask.mif -datatype bit -nthreads $ncpus -force
+mrthreshold $WMin - -abs 0.001 -nthreads 8 | maskfilter - connect - -connectivity | mrcalc 1 - 1 -gt -sub remove_unconnected_wm_mask.mif -datatype bit -nthreads 8 -force
 
-mrcalc $CSFin remove_unconnected_wm_mask.mif -mult csf.mif -nthreads $ncpus -force
+mrcalc $CSFin remove_unconnected_wm_mask.mif -mult csf.mif -nthreads 8 -force
 
-mrcalc 1.0 csf.mif -sub all_sgms.mif -min sgm.mif -nthreads $ncpus -force
+mrcalc 1.0 csf.mif -sub all_sgms.mif -min sgm.mif -nthreads 8 -force
 
-mrcalc 1.0 csf.mif sgm.mif -add -sub $GMin $WMin -add -div multiplier.mif -nthreads $ncpus -force
+mrcalc 1.0 csf.mif sgm.mif -add -sub $GMin $WMin -add -div multiplier.mif -nthreads 8 -force
 
-mrcalc multiplier.mif -finite multiplier.mif 0.0 -if multiplier_noNAN.mif -nthreads $ncpus -force
+mrcalc multiplier.mif -finite multiplier.mif 0.0 -if multiplier_noNAN.mif -nthreads 8 -force
 
 mrcalc $GMin multiplier_noNAN.mif -mult remove_unconnected_wm_mask.mif -mult cgm.mif
 
 mrcalc $WMin multiplier_noNAN.mif -mult remove_unconnected_wm_mask.mif -mult wm.mif
 
-#mrcalc $GMin multiplier_noNAN.mif -mult cgm.mif -nthreads $ncpus -force
+#mrcalc $GMin multiplier_noNAN.mif -mult cgm.mif -nthreads 8 -force
 
-#mrcalc $WMin multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif -nthreads $ncpus -force
+#mrcalc $WMin multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif -nthreads 8 -force
 
-mrcalc 0 wm.mif -min path.mif -nthreads $ncpus -force
+mrcalc 0 wm.mif -min path.mif -nthreads 8 -force
 
 
 #combine all tissue types into resulting 5ttoutput
 
-mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads $ncpus | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4 -nthreads $ncpus -force
+mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 -nthreads 8 | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4 -nthreads 8 -force
 
-mrconvert combined_precrop.mif result.mif -nthreads $ncpus -force
+mrconvert combined_precrop.mif result.mif -nthreads 8 -force
 
 5ttcheck result.mif
 
-mrconvert result.mif $output -force -nthreads $ncpus -force
+mrconvert result.mif $output -force -nthreads 8 -force
 
 
 #move files back to processing dir
