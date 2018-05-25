@@ -13,6 +13,9 @@ export PATH=${MRTRIX}/release/bin:${MRTRIX}/scripts:$PATH
 
 export OMP_NUM_THREADS=8
 
+#setup configuration file
+echo "TmpFileDir: ${DATADIR}/tmp" > /home/aperry/.mrtrix.conf #initially turn off temp dir config - appears to have issues with writing
+
 ####
 #Find all scripting files
 #currdir=$(pwd)
