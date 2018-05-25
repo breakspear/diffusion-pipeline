@@ -15,7 +15,7 @@ export OMP_NUM_THREADS=8
 
 #setup configuration file
 echo "TmpFileDir: /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/tmp" > /home/aperry/.mrtrix.conf 
-echo "ScriptTmpDir: /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/scripttmp" > /home/aperry/.mrtrix.conf
+echo "ScriptTmpDir: /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/scripttmp" >> /home/aperry/.mrtrix.conf
 
 ####
 #Find all scripting files
