@@ -46,11 +46,11 @@ mv rawdataPAaddenc.mif rawdataPA.mif
 srun -c 8 dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads 8
 srun -c 8 dwidenoise rawdataPA.mif rawdataPAdn.mif -force -nthreads 8
 
-srun -c 1 mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -stridess +1,2,3,4 -force -nthreads 1
+srun -c 1 mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -strides +1,2,3,4 -force -nthreads 1
 srun -c 1 mrconvert rawdataAPdnstr.mif  rawdataAPdn.mif  -force -nthreads 1
 
-srun -c 1 mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -stridess +1,2,3,4 -force -nthreads 1
-srun -c 1 mrconvert rawdataPAdnstr.mif rawdataPAdn.mif -stridess +1,2,3,4 -force -nthreads 1
+srun -c 1 mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -strides +1,2,3,4 -force -nthreads 1
+srun -c 1 mrconvert rawdataPAdnstr.mif rawdataPAdn.mif -strides +1,2,3,4 -force -nthreads 1
 
 rm rawdataAPdnstr.mif
 rm rawdataPAdnstr.mif 
