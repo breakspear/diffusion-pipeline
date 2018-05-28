@@ -61,6 +61,8 @@ srun -c 1 tkregister2 --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ $SUBJECTS_D
 
 srun -c 1 mri_vol2vol --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ $SUBJECTS_DIR/$subj/mri/rawavg.mgz --regheader --o brainFSnat.nii
 
+export FSLSUB_IGNORE_SLURM=1
+
 srun -c 1 fast -B --nopve brainFSnat.nii
 
 
@@ -73,7 +75,7 @@ srun -c 1 5ttgen_manual brainFSnat_restore.nii.gz 5TT.nii ${subjPRESEGDIR}
 
 else
 
-srun -c 8 5ttgen fsl brainFSnat.nii 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads 8 -force -nocleanup -tempdir .
+srun -c 8 5ttgen fsl brainFSnat_restore.nii.g 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads 8 -force -nocleanup -tempdir .
 
 fi
 
