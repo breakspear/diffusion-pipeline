@@ -75,7 +75,7 @@ srun -c 1 5ttgen_manual brainFSnat_restore.nii.gz 5TT.nii ${subjPRESEGDIR}
 
 else
 
-srun -c 8 5ttgen fsl brainFSnat_restore.nii.g 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads 8 -force -nocleanup -tempdir .
+srun -c 8 5ttgen fsl brainFSnat_restore.nii.gz 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads 8 -force -nocleanup -tempdir .
 
 fi
 
