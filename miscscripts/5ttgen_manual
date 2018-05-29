@@ -8,7 +8,7 @@ cp $1 5ttgen_man
 
 cd 5ttgen_man
 
-mrconvert $1 T1.nii -stride +1,+2,+3
+mrconvert $1 T1.nii -strides +1,+2,+3
 
 fast -N -o T1 -g T1.nii
 
@@ -88,7 +88,7 @@ mrcalc T1_pve_2.nii.gz multiplier_noNAN.mif -mult wm_mask.mif -mult wm.mif
 
 mrcalc 0 wm.mif -min path.mif
 
-mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 | mrconvert - combined_precrop.mif -stride +1,+2,+3,+4
+mrcat cgm.mif sgm.mif wm.mif csf.mif path.mif - -axis 3 | mrconvert - combined_precrop.mif -strides +1,+2,+3,+4
 
 mrconvert combined_precrop.mif result.mif
 

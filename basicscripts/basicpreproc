@@ -22,7 +22,7 @@ cd $WORKDIR/Diff/$subj/preproc/${scannum}
 
 mrinfo rawdataAP.mif -export_grad_mrtrix rawencoding.b -force
 
-#mrconvert rawdata.nii.gz rawdata.mif -grad rawencoding.b -stride +1,2,3,4 -force -nthreads $ncpus
+#mrconvert rawdata.nii.gz rawdata.mif -grad rawencoding.b -strides +1,2,3,4 -force -nthreads $ncpus
 
 #cp rawdata.mif preproc 
 
@@ -34,9 +34,9 @@ dwidenoise rawdataAP.mif rawdataAP-dn.mif -force -nthreads $ncpus
 
 #Re-convert to the correct stride
 
-mrconvert rawdataAP-dn.mif rawdataAP-dnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataAP-dn.mif rawdataAP-dnstr.mif -strides +1,2,3,4 -force -nthreads $ncpus
  
-mrconvert rawdataAP-dnstr.mif  rawdataAP-dn.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataAP-dnstr.mif  rawdataAP-dn.mif -strides +1,2,3,4 -force -nthreads $ncpus
 
 rm rawdataAP-dnstr.mif
 

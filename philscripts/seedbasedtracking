@@ -41,7 +41,7 @@ flirt -in /mnt/lustre/home/$USER/base/rRSTN_MNI.nii -ref ${currrundir}/brainFS.n
 
 gunzip RSTN_FS.nii.gz
 
-mrconvert RSTN_FS.nii RSTN_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+mrconvert RSTN_FS.nii RSTN_FS_str.nii -strides -1,3,-2 -force -nthreads $ncpus
 
 flirt -in RSTN_FS_str.nii -ref ${currrundir}/fa.nii -out RSTN_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
@@ -54,7 +54,7 @@ flirt -in /mnt/lustre/home/$USER/base/rLSTN_MNI.nii -ref ${currrundir}/brainFS.n
 
 gunzip LSTN_FS.nii.gz
 
-mrconvert LSTN_FS.nii LSTN_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+mrconvert LSTN_FS.nii LSTN_FS_str.nii -strides -1,3,-2 -force -nthreads $ncpus
 
 flirt -in LSTN_FS_str.nii -ref ${currrundir}/fa.nii -out LSTN_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
@@ -69,7 +69,7 @@ flirt -in /mnt/lustre/home/$USER/base/HCP_RSMA.nii -ref ${currrundir}/brainFS.ni
 
 gunzip HCP_RSMA_FS.nii.gz
  
-mrconvert HCP_RSMA_FS.nii HCP_RSMA_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+mrconvert HCP_RSMA_FS.nii HCP_RSMA_FS_str.nii -strides -1,3,-2 -force -nthreads $ncpus
  
 flirt -in HCP_RSMA_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_RSMA_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 
@@ -85,7 +85,7 @@ flirt -in /mnt/lustre/home/$USER/base/HCP_LSMA.nii -ref ${currrundir}/brainFS.ni
 
 gunzip HCP_LSMA_FS.nii.gz
  
-mrconvert HCP_LSMA_FS.nii HCP_LSMA_FS_str.nii -stride -1,3,-2 -force -nthreads $ncpus
+mrconvert HCP_LSMA_FS.nii HCP_LSMA_FS_str.nii -strides -1,3,-2 -force -nthreads $ncpus
  
 flirt -in HCP_LSMA_FS_str.nii -ref ${currrundir}/fa.nii -out HCP_LSMA_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
 

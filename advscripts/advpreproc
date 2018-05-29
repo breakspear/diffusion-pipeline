@@ -34,7 +34,7 @@ then
 	fslroi rawdataAP.nii rawdataAPrem 1 $adjvols
 
 	sed '1d' rawencoding.b > rawencodingrem.b
-	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4
+	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -strides +1,2,3,4
 
 	mv rawdataAPrem.mif rawdataAP.mif
 fi
@@ -44,7 +44,7 @@ then
 	mrconvert rawdataPA.mif rawdataPA.nii -force -nthreads $ncpus
 	fslroi rawdataPA.nii rawdataPArem 1 $adjvols
 	sed '1d' rawrevencoding.b > rawrevencodingrem.b
-        mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -stride +1,2,3,4
+        mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -strides +1,2,3,4
 	mv rawdataPArem.mif rawdataPA.mif
 else
 	dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force
@@ -56,11 +56,11 @@ fi
 dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads $ncpus
 dwidenoise rawdataPA.mif rawdataPAdn.mif -force -nthreads $ncpus
 
-mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -strides +1,2,3,4 -force -nthreads $ncpus
 mrconvert rawdataAPdnstr.mif  rawdataAPdn.mif  -force -nthreads $ncpus
 
-mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
-mrconvert rawdataPAdnstr.mif  rawdataPAdn.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -strides +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataPAdnstr.mif  rawdataPAdn.mif -strides +1,2,3,4 -force -nthreads $ncpus
 
 rm rawdataAPdnstr.mif
 rm rawdataPAdnstr.mif 

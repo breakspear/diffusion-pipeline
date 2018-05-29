@@ -34,7 +34,7 @@ if [ $nvols == "103" ]; then
 
 	sed '1d' rawencoding.b > rawencodingrem.b
 
-	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -stride +1,2,3,4
+	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -strides +1,2,3,4
 
 	mv rawdataAPrem.mif rawdataAP.mif
 
@@ -47,11 +47,11 @@ fi
 dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads $ncpus
 dwidenoise rawdataPA.mif rawdataPAdn.mif -force -nthreads $ncpus
 
-mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -strides +1,2,3,4 -force -nthreads $ncpus
 mrconvert rawdataAPdnstr.mif  rawdataAPdn.mif  -force -nthreads $ncpus
 
-mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
-mrconvert rawdataPAdnstr.mif  rawdataPAdn.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -strides +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataPAdnstr.mif  rawdataPAdn.mif -strides +1,2,3,4 -force -nthreads $ncpus
 
 rm rawdataAPdnstr.mif
 rm rawdataPAdnstr.mif 

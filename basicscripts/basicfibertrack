@@ -19,7 +19,7 @@ dwi2response dhollander -mask biasb0brain_mask.nii.gz biascorr.mif wm.txt gm.txt
 
 dwi2fod msmt_csd biascorr.mif wm.txt wm.mif csf.txt csf.mif -force -mask biasb0brain_mask.nii.gz -nthreads $ncpus
 
-mrconvert wm.mif wmstr.mif -stride +1,2,3,4 -force -nthreads $ncpus
+mrconvert wm.mif wmstr.mif -strides +1,2,3,4 -force -nthreads $ncpus
 mv wmstr.mif wm.mif
 fod2dec wm.mif foddec.mif -force -nthreads $ncpus
 
