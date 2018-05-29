@@ -92,7 +92,7 @@ srun -c 1 bet2 eddymeanb0.nii eddyb0brainfsl -m -f 0.15
 
 #bet2 eddymeanb0.nii eddymeanb0bet -m -f 0.15
 
-srun -c 8 dwibiascorrect -mask eddyb0brainfsl_mask.nii.gz -ants eddycorr.mif biascorr.mif -nthreads 8 -force
+srun -c 8 dwibiascorrect -mask eddyb0brainfsl_mask.nii.gz -fsl eddycorr.mif biascorr.mif -nthreads 8 -force
 
 
 #create optimal mask
