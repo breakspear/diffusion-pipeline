@@ -86,7 +86,7 @@ srun -c 1 5tt2gmwmi 5TT.nii 5TTgmwmi.nii -nthreads 1 -force
 #	labelconvert $SUBJECTS_DIR/$subj/mri/aparc+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc.nii -nthreads $ncpus -force
 #elif [ $parctype=="DST" ]; then
 	echo "${parctype} parcellation being constructed"
-	srun -c 8 labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc.nii -nthreads 8 -force #fi
+	srun -c 8 labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt /beegfs/scratch/tnc_scratch/aperry/MRtrix/RC3/share/mrtrix3/labelconvert/fs_a2009s.txt parc.nii -nthreads 8 -force #fi
 
 srun -c 1 mri_vol2vol --mov parc.nii --targ $SUBJECTS_DIR/$subj/mri/rawavg.mgz --reg register.native.dat --o parcFSL.nii.gz --nearest --keep-precision
 
@@ -99,7 +99,7 @@ srun -c 1 mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -strides -1,2,3 -force 
 #if [ $parctype=="DES" ]; then
 #      labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
 #elif [ $parctype=="DST" ]; then
-     srun -c 8 labelsgmfix parcFSLtempstr.nii.gz brainFSnat_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads 8 -force
+     srun -c 8 labelsgmfix parcFSLtempstr.nii.gz brainFSnat_restore.nii.gz /beegfs/scratch/tnc_scratch/aperry/MRtrix/RC3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads 8 -force
 #fi
 
 srun -c 1 mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -strides +1,2,3 -force -nthreads 1
