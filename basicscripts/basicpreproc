@@ -58,6 +58,6 @@ bet2 biasb0.nii biasb0brain -m -f 0.15
 
 #Generate tensor and fa images
 
-dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
+#dwishellmath biascorr.mif mean meanshell.mif -force -nthreads $ncpus
 dwi2tensor biascorr.mif dt.nii -mask biasb0brain_mask.nii.gz -force -nthreads $ncpus
 tensor2metric dt.nii -fa fa.nii -force -nthreads $ncpus
