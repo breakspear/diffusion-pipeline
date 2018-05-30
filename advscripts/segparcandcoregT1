@@ -136,7 +136,9 @@ mv rFSrgstr.nii rFSrg.nii
 
 #Move other files from T1 space
 
-srun -c 1 transformconvert FS2FSL.mat brainFSsp.nii T1bet.nii.gz flirt_import FS2FSLMR.mat -force -nthreads 1
+srun -c 1 mrconvert $SUBJECTS_DIR/$subj/mri/rawavg.mgz T1nat.nii -nthreads 1 -force
+
+srun -c 1 transformconvert FS2FSL.mat brainFSsp.nii T1nat.nii flirt_import FS2FSLMR.mat -force -nthreads 1
 
 srun -c 1 mrtransform 5TT.nii 5TTFSspmasked.nii -linear FS2FSLMR.mat -inverse -force -nthreads 1
 
