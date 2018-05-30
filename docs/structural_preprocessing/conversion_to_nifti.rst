@@ -15,7 +15,7 @@ To convert your structural (T1-weighted) scans from DICOMs (the format that will
    2 -   96 MR images 11:45:11 Mag_Images (*swi3d1r) [8] ORIGINAL PRIMARY M ND NORM
    3 -   96 MR images 11:45:12 Pha_Images (*swi3d1r) [9] ORIGINAL PRIMARY P ND
    4 -   89 MR images 11:45:23 mIP_Images(SW) (*swi3d1r) [10] ORIGINAL PRIMARY MNIP ND NORM
-?
+ ?
 
 You should then enter the integer corresponding to the image set of interest. For example, for the structural images in this study:
 
