@@ -43,6 +43,8 @@ fod2dec wm.mif  foddec.mif -mask iterbrainmask.nii -force -nthreads $ncpus
 
 #Fiber tracking
 
+rm *.tck.gz
+
 tckgen wm.mif ${numfibers}.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask iterbrainmask.nii -output_seeds succeeds.txt -force -nthreads $ncpus
 
 tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
@@ -113,4 +115,9 @@ tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengt
 #fi
 
 #
+
+gzip *.tck
+
 connectome2tck ${numfibers}.tck -exemplars rparc_fixsubcort.nii -files single streamlineassignment.txt ${numfibers}_connectomeexem.tck -nthreads $ncpus -force
+
+
