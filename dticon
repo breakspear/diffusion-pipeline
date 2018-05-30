@@ -18,7 +18,7 @@ SCRIPT=$2 #Script to be called
 nargs=$#
 extargs=${@:3}
 
-find $1/Raw/* -maxdepth 0 -type d > ${WORKDIR}/scans.txt #Creates list of folders containing the subject data to be analysed
+find ${WORKDIR}/Raw/* -maxdepth 0 -type d > ${WORKDIR}/scans.txt #Creates list of folders containing the subject data to be analysed
 
 pipedir=$(pwd)
 #PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
@@ -38,7 +38,7 @@ do
 	sed -i "s!????!$subjDIRECTORY!" ${WORKDIR}/batch/dti$subj.sh
 	sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" ${WORKDIR}/batch/dti$subj.sh
 
-done < scans.txt #List of folders containing each subject data to be analysed
+done < ${WORKDIR}/scans.txt #List of folders containing each subject data to be analysed
 
 #cd batch #Directory containing batch jobs to be called
 #call jobs
