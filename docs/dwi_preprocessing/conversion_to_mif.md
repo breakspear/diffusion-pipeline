@@ -1,5 +1,3 @@
-.. _conversion_to_mif
-
 # Conversion to MIF (Medical Image File)
 
 Much like the structural images, the diffusion images will need to be converted from DICOM to .mif, MRtrix's own format for processing files. This is done in much the same way:
