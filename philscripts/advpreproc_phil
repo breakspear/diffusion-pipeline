@@ -71,7 +71,7 @@ srun -c 8 dwiextract rawdataPAdn.mif PAb0s.mif -nthreads 8 -bzero -force
 #mv rawdataPAdnrem.mif rawdataPAdn.mif
 #mrconvert rawdataPAdn.mif rawdataPAdnrem.mif -coord 3 0,1,2,3,4,5,6 -force -nthreads 8
 
-mv rawdataPAdnrem.mif rawdataPAdn.mif
+#mv rawdataPAdnrem.mif rawdataPAdn.mif
 
 srun -c 1 mrcat APb0s.mif PAb0s.mif allb0s.mif -axis 3 -force -nthreads 1
 
