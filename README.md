@@ -26,7 +26,7 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 [Conversion to NiFTI for T1](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/structural_preprocessing/conversion_to_nifti.rst)
 
-[Conversion to MIF for DWI](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/conversion_to_mif.rst)
+[Conversion to MIF for DWI](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/conversion_to_mif.md)
 
 ## Structural image preprocessing
 
@@ -34,8 +34,12 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 ## Diffusion image preprocessing
 
-[Advanced preprocessing](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/advanced_preprocessing.rst)
+[Advanced preprocessing](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/advanced_preprocessing.md)
 
-[Segmentation and parcellation](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/segmentation_and_parcellation.rst)
+[Segmentation and parcellation](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/segmentation_and_parcellation.md)
 
-[Fibre and connectome construction](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/fibre_and_connectome_construction.rst)
+[Fibre and connectome construction](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/fibre_and_connectome_construction.md)
+
+All processed files (images, matrices, text files) can be found in `/working/your_lab_here/your_working_dir/Diff/your_sub/preproc/`.
+
+

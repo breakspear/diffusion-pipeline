@@ -1,0 +1,250 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Conversion to MIF (Medical Image File) &#8212; diffusion-pipeline 1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Advanced preprocessing" href="advanced_preprocessing.html" />
+    <link rel="prev" title="T1 Processing using FreeSurfer recon-all tool" href="../structural_preprocessing/t1_processing_in_freesurfer.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="conversion-to-mif-medical-image-file">
+<h1>Conversion to MIF (Medical Image File)<a class="headerlink" href="#conversion-to-mif-medical-image-file" title="Permalink to this headline">¶</a></h1>
+<p>Much like the structural images, the diffusion images will need to be converted from DICOM to .mif, MRtrix’s own format for processing files. This is done in much the same way:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mrinfo HIRF_MRI/
+<span class="go">mrinfo: [done] scanning DICOM folder &quot;HIRF_MRI&quot;</span>
+<span class="go">Select series (&#39;q&#39; to abort):</span>
+<span class="go">   0 -  192 MR images 11:33:16 t1_mprage_sag_p2_iso (*tfl3d1_16ns) [6] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   1 -   30 MR images 11:36:33 t2_tirm_tra_dark-fluid (*tir2d1_16) [7] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   2 -   96 MR images 11:45:11 Mag_Images (*swi3d1r) [8] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   3 -   96 MR images 11:45:12 Pha_Images (*swi3d1r) [9] ORIGINAL PRIMARY P ND</span>
+<span class="go">   4 -   89 MR images 11:45:23 mIP_Images(SW) (*swi3d1r) [10] ORIGINAL PRIMARY MNIP ND NORM</span>
+<span class="go">   5 -   96 MR images 11:45:23 SWI_Images (*swi3d1r) [11] ORIGINAL PRIMARY M SWI ND NORM</span>
+<span class="go">   6 -  192 MR images 11:59:16 t1_mp2rage_sag_p3_iso_INV1 (*tfl3d1_16ns) [12] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   7 -  192 MR images 11:59:16 t1_mp2rage_sag_p3_iso_INV2 (*tfl3d1_16ns) [13] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   8 -  192 MR images 11:59:18 t1_mp2rage_sag_p3_iso_UNI_Images (*tfl3d1_16ns) [14] DERIVED PRIMARY M ND UNI</span>
+<span class="go">   9 -   30 MR images 12:01:45 t2_tse_tra (*tse2d1_18) [15] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">  10 -  102 MR images 12:03:36 ep2d_diff_b3k_90dir_11b0_AP (*ep_b3000#27) [16] ORIGINAL PRIMARY DIFFUSION NONE ND MOSAIC</span>
+<span class="go">  11 -    9 MR images 12:33:34 ep2d_diff_b3k_1dir7b0_PA180 (*ep_b3000#8) [17] ORIGINAL PRIMARY DIFFUSION NONE ND MOSAIC</span>
+<span class="go">?</span>
+</pre></div>
+</div>
+<p>To perform EPI inhomogeneity correction, we will need both the raw anterior-posterior phase-encoded image and the raw posterior-anterior phase-encoded image. These are often labelled “AP” or “PA” and “diff”. These can also be labelled as “B_0” or “B0” for the PA direction, while the AP direction will have many images (sometimes up to 120 images for each direction).</p>
+<div class="section" id="conversion">
+<h2>Conversion:<a class="headerlink" href="#conversion" title="Permalink to this headline">¶</a></h2>
+<p>Look closer at these images by selected the image set of interest. For example:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">...</span>
+<span class="go">? 10</span>
+<span class="go">mrinfo: [100%] reading DICOM series &quot;ep2d_diff_b3k_90dir_11b0_AP&quot;</span>
+<span class="go">************************************************</span>
+<span class="go">Image:               &quot;15/MHS/94 PE002 (MHS94002) [MR] ep2d_diff_b3k_90dir_11b0_AP&quot;</span>
+<span class="go">************************************************</span>
+<span class="go">  Dimensions:        128 x 128 x 90 x 102</span>
+<span class="go">  Voxel size:        1.71875 x 1.71875 x 1.7 x ?</span>
+<span class="go">  Data strides:      [ -1 -2 3 4 ]</span>
+<span class="go">  Format:            DICOM</span>
+<span class="go">  Data type:         unsigned 16 bit integer (little endian)</span>
+<span class="go">  Intensity scaling: offset = 0, multiplier = 1</span>
+<span class="go">  Transform:                0.996     0.03461     0.08242      -115.6</span>
+<span class="go">                         -0.02333      0.9907     -0.1341      -80.63</span>
+<span class="go">                          -0.0863      0.1316      0.9875      -42.11</span>
+<span class="go">  EchoTime:          0.082</span>
+<span class="go">  PhaseEncodingDirection: j-</span>
+<span class="go">  TotalReadoutTime:  0.0473</span>
+<span class="go">  comments:          15/MHS/94 PE002 (MHS94002) [MR] ep2d_diff_b3k_90dir_11b0_AP</span>
+<span class="go">                     study: Research Brain Christine&#39;s FMRI [ ORIGINAL PRIMARY DIFFUSION NONE ND MOSAIC ]</span>
+<span class="go">                     DOS: 03/02/2016 12:03:36</span>
+<span class="go">  dw_scheme:         0,0,0,0</span>
+<span class="go">  [102 entries]      0,0,0,0</span>
+<span class="go">                     ...</span>
+<span class="go">                     0.48021215,-0.85957265000000005,-0.17473174999999999,3000</span>
+<span class="go">                     0,0,0,0</span>
+</pre></div>
+</div>
+<p>We can convert this image in much the same way as we did the T1 image:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot;10&quot;</span> <span class="p">|</span> mrconvert HIRF_MRI/ rawdataAP.mif -strides +1,2,3,4
+<span class="go">mrconvert: [done] scanning DICOM folder &quot;HIRF_MRI&quot;</span>
+<span class="go">Select series (&#39;q&#39; to abort):</span>
+<span class="go">   0 -  192 MR images 11:33:16 t1_mprage_sag_p2_iso (*tfl3d1_16ns) [6] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   1 -   30 MR images 11:36:33 t2_tirm_tra_dark-fluid (*tir2d1_16) [7] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   2 -   96 MR images 11:45:11 Mag_Images (*swi3d1r) [8] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   3 -   96 MR images 11:45:12 Pha_Images (*swi3d1r) [9] ORIGINAL PRIMARY P ND</span>
+<span class="go">   4 -   89 MR images 11:45:23 mIP_Images(SW) (*swi3d1r) [10] ORIGINAL PRIMARY MNIP ND NORM</span>
+<span class="go">   5 -   96 MR images 11:45:23 SWI_Images (*swi3d1r) [11] ORIGINAL PRIMARY M SWI ND NORM</span>
+<span class="go">   6 -  192 MR images 11:59:16 t1_mp2rage_sag_p3_iso_INV1 (*tfl3d1_16ns) [12] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   7 -  192 MR images 11:59:16 t1_mp2rage_sag_p3_iso_INV2 (*tfl3d1_16ns) [13] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">   8 -  192 MR images 11:59:18 t1_mp2rage_sag_p3_iso_UNI_Images (*tfl3d1_16ns) [14] DERIVED PRIMARY M ND UNI</span>
+<span class="go">   9 -   30 MR images 12:01:45 t2_tse_tra (*tse2d1_18) [15] ORIGINAL PRIMARY M ND NORM</span>
+<span class="go">  10 -  102 MR images 12:03:36 ep2d_diff_b3k_90dir_11b0_AP (*ep_b3000#27) [16] ORIGINAL PRIMARY DIFFUSION NONE ND MOSAIC</span>
+<span class="go">  11 -    9 MR images 12:33:34 ep2d_diff_b3k_1dir7b0_PA180 (*ep_b3000#8) [17] ORIGINAL PRIMARY DIFFUSION NONE ND MOSAIC</span>
+<span class="go">  12 -   13 MR images 12:38:58 ep2d_diff_B1000 12 DIRECTIONS (*ep_b1000#3) [18] ORIGINAL PRIMARY DIFFUSION NONE ND MOSAIC</span>
+<span class="go">mrconvert: [100%] reading DICOM series &quot;ep2d_diff_b3k_90dir_11b0_AP&quot;</span>
+<span class="go">mrconvert: [100%] reformatting DICOM mosaic images</span>
+<span class="go">mrconvert: [100%] copying from &quot;15/MHS/94 ...ep2d_diff_b3k_90dir_11b0_AP&quot; to &quot;rawdataAP.mif&quot;</span>
+</pre></div>
+</div>
+<p>To check that this was performed correctly, we can look at the converted image:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mrinfo rawdataAP.mif
+<span class="go">************************************************</span>
+<span class="go">Image:               &quot;rawdataAP.mif&quot;</span>
+<span class="go">************************************************</span>
+<span class="go">  Dimensions:        128 x 128 x 90 x 102</span>
+<span class="go">  Voxel size:        1.71875 x 1.71875 x 1.7 x ?</span>
+<span class="go">  Data strides:      [ 1 2 3 4 ]</span>
+<span class="go">  Format:            MRtrix</span>
+<span class="go">  Data type:         unsigned 16 bit integer (little endian)</span>
+<span class="go">  Intensity scaling: offset = 0, multiplier = 1</span>
+<span class="go">  Transform:                0.996     0.03461     0.08242      -115.6</span>
+<span class="go">                         -0.02333      0.9907     -0.1341      -80.63</span>
+<span class="go">                          -0.0863      0.1316      0.9875      -42.11</span>
+<span class="go">  EchoTime:          0.082</span>
+<span class="go">  PhaseEncodingDirection: j-</span>
+<span class="go">  TotalReadoutTime:  0.0473</span>
+<span class="go">  command_history:   mrconvert &quot;HIRF_MRI&quot; &quot;rawdataAP.mif&quot; &quot;-stride&quot; &quot;+1,2,3,4&quot;  (version=3.0_RC2-117-gf098f097)</span>
+<span class="go">  comments:          15/MHS/94 PE002 (MHS94002) [MR] ep2d_diff_b3k_90dir_11b0_AP</span>
+<span class="go">                     study: Research Brain Christine&#39;s FMRI [ ORIGINAL PRIMARY DIFFUSION NONE ND MOSAIC ]</span>
+<span class="go">                     DOS: 03/02/2016 12:03:36</span>
+<span class="go">  dw_scheme:         0,0,0,0</span>
+<span class="go">  [102 entries]      0,0,0,0</span>
+<span class="go">                     ...</span>
+<span class="go">                     0.48021215,-0.85957265000000005,-0.17473174999999999,3000</span>
+<span class="go">                     0,0,0,0</span>
+<span class="go">  mrtrix_version:    3.0_RC2-117-gf098f097</span>
+</pre></div>
+</div>
+<p>Do the same for the PA-encoded image. Copy these files to the Raw folder in your working directory. If the Raw folder does not exist, create it with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> /working/your_lab_here/your_username/your_working_dir
+<span class="gp">$</span> mkdir Raw/
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-advanced-preprocessing">
+<h2>Running the advanced preprocessing<a class="headerlink" href="#running-the-advanced-preprocessing" title="Permalink to this headline">¶</a></h2>
+<p>We can run the advanced pipeline on our diffusion images, using the structural images to constrain the tract generation (as described in <a class="reference external" href="http://mrtrix.readthedocs.io/en/latest/quantitative_structural_connectivity/act.html">http://mrtrix.readthedocs.io/en/latest/quantitative_structural_connectivity/act.html</a>). We can use the script <code class="docutils literal"><span class="pre">advfulldiffsetup</span></code> to process our diffusion images automatically. Make sure the settings in this file are set correctly. For example, if you wanted to process a single-shell, multi-band scanner setup:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> ~/diffusion-pipeline
+<span class="gp">$</span> vi advfulldiffsetup
+<span class="gp">#</span>!/bin/bash
+<span class="gp">#</span>file: advfulldiffsteps
+
+<span class="go">subj=$1</span>
+<span class="go">WORKDIR=$2</span>
+<span class="gp">#</span><span class="nv">FS_DIR</span><span class="o">=</span><span class="nv">$3</span>
+
+<span class="gp">#</span>arguments to be <span class="nb">set</span>
+<span class="go">ismultiband=1</span>
+<span class="go">parc=DST</span>
+<span class="go">ismultishell=0</span>
+<span class="go">numfibers=25M #this can be set manually. 25 million is a good number</span>
+
+
+<span class="gp">#</span>Full diffusion pipeline, from pre-processing to connectome construction - using the advanced version
+
+<span class="gp">#</span>Advanced preprocessing
+<span class="gp">#</span>Parameters: multiband <span class="o">(</span><span class="m">1</span> <span class="k">if</span> yes<span class="o">)</span>
+
+<span class="go">advpreproc $subj $WORKDIR $ismultiband</span>
+
+<span class="gp">#</span>Segmentation, parcellation and co-registration of T1 images
+
+<span class="go">segparcandcoregT1 $subj $WORKDIR $parc</span>
+
+<span class="gp">#</span>Fiber construction and connectome construction
+
+<span class="go">advfibertrackandcntmecon $subj $WORKDIR $ismultishell $numfibers $parc</span>
+</pre></div>
+</div>
+<p>Note that currently the only atlas parcellation used in the pipeline is Destrieux (148 regions) (<a class="reference external" href="https://surfer.nmr.mgh.harvard.edu/fswiki/CorticalParcellation">https://surfer.nmr.mgh.harvard.edu/fswiki/CorticalParcellation</a>). This is planned to be replaced by the Glasser multi-modal parcellation (<a class="reference external" href="https://doi.org/10.1038/nature18933">https://doi.org/10.1038/nature18933</a>).</p>
+</div>
+<div class="section" id="setting-up-the-scripts">
+<h2>Setting up the scripts<a class="headerlink" href="#setting-up-the-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Setup the subject batch scripts similarly to the FS processing command via:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> ~/diffusion-pipeline
+<span class="gp">$</span> sh dticon /working/your_lab_here/your_username/your_working_dir/ advfulldiffsetup
+<span class="gp">$</span> <span class="nb">cd</span> /working/your_lab_here/your_username/your_working_dir/batch
+<span class="gp">$</span> qsub advfulldiffsetup_yoursub.sh
+</pre></div>
+</div>
+<p>Check on the status of your jobs via:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> qstat -n -u <span class="nv">$USER</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../structural_preprocessing/t1_processing_in_freesurfer.html" title="previous chapter">T1 Processing using FreeSurfer recon-all tool</a></li>
+      <li>Next: <a href="advanced_preprocessing.html" title="next chapter">Advanced preprocessing</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Alistair Perry & Nikitas Koussis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/dwi_preprocessing/conversion_to_mif.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

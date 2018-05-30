@@ -1,0 +1,110 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Fibre and connectome construction &#8212; diffusion-pipeline 1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fibre-and-connectome-construction">
+<h1>Fibre and connectome construction<a class="headerlink" href="#fibre-and-connectome-construction" title="Permalink to this headline">¶</a></h1>
+<p>This pipeline provides the connectome and tractography given the patient anatomical image and diffusion images.</p>
+<div class="section" id="fibre-construction">
+<h2>Fibre construction<a class="headerlink" href="#fibre-construction" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Computing the response function for each tissue type (GM, WM, CSF), passed to the deconvolution algorithm (described in more detail at <a class="reference external" href="http://mrtrix.readthedocs.io/en/latest/constrained_spherical_deconvolution/response_function_estimation.html">http://mrtrix.readthedocs.io/en/latest/constrained_spherical_deconvolution/response_function_estimation.html</a>) Note: If the acquisition is single shell (i.e. ismultishell=0 in advfulldiffsetup), the “Dhollander” algorithm is used, while the multi-shell, multi-tissue (msmt_5tt) is used if multi-shell (i.e. ismultishell=1) is set.</li>
+<li>This response function is passed to the fibre orientation distribution function (fODF) -  multi-shell, multi-tissue constrained spherical deconvolution (msmt_csd). This outputs fibre orientation distribution images (FODs) that are then used to provide seeding for the tractography algorithm. Additionally, a WM FOD-based DEC map (weighted by the integral of the FOD) are computed.</li>
+<li>The tracking algorithm, provided the WM FOD image, computes a number of streamlines (set by the “numfibers” option in advfulldiffsetup, default 25 million). This is done by the second-order integration over FOD, where short curved “arcs” are drawn and underlying (trilinear-interpolated) FOD amplitudes along the arcs are sampled. These arcs are seeded randomly, provided by the WM FOD image, and the FOD amplitudes inform where the arcs are most likely to go. These arcs, or streamlines, have a number of parameters (e.g. termination, step size, cutoff threshold, etc), that are given by default as given by (cds.ismrm.org/protected/10MProceedings/files/1670_4298.pdf). The fibres are further refined by selection based on anatomical constraints (<a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2012.06.005">https://doi.org/10.1016/j.neuroimage.2012.06.005</a>), given by the 5TT image.</li>
+<li>Spurious fibres are pruned by determining an appropriate cross-sectional area multiplier for each streamline, as described by (<a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2015.06.092">https://doi.org/10.1016/j.neuroimage.2015.06.092</a>), otherwise known as the SIFT2 algorithm. These cross-sectional area multiplers are output as weights for each streamline in a text file - this is used for connectome weighting, allowing cross-subject analysis and normalisation.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="connectome-construction">
+<h2>Connectome construction<a class="headerlink" href="#connectome-construction" title="Permalink to this headline">¶</a></h2>
+<p>Streamlines can be used as connectome “edges” for each of the parcellated regions, or “nodes” and presented as a matrix (with nodes being the index for each value in the matrix, and edges being the values in that matrix). This is provided by the diffusion pipeline, currently in four formats all in upper triangular form with 148 columns and rows (square matrix corresponding to the number of regions in the parcellation step). Note that there are no self-self edges (i.e. the diagonal is zero):</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Edges are weighted by the SIFT2 algorithm cross-sectional areas for each streamline, and simply correspond to the number of streamlines that connect to other regions (based on index).</li>
+<li>Edges correspond to mean fiber lengths from node to node, weighted by SIFT2.</li>
+<li>The above matrices are inverted as well to provide an inverse streamline count and inverse length, again weighted by SIFT2.</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Alistair Perry & Nikitas Koussis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/dwi_preprocessing/fibre_and_connectome_construction.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
