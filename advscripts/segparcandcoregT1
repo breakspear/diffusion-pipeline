@@ -99,7 +99,7 @@ srun -c 1 mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -strides -1,2,3 -force 
 #if [ $parctype=="DES" ]; then
 #      labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
 #elif [ $parctype=="DST" ]; then
-     srun -c 8 labelsgmfix parcFSLtempstr.nii.gz brainFSnat_restore.nii.gz /beegfs/scratch/tnc_scratch/aperry/MRtrix/RC3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads 8 -force
+     srun -c 8 labelsgmfix parcFSLtempstr.nii.gz brainFSnat_restore.nii.gz /beegfs/scratch/tnc_scratch/aperry/MRtrix/RC3/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads 8 -force
 #fi
 
 srun -c 1 mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -strides +1,2,3 -force -nthreads 1
