@@ -6,7 +6,7 @@
 #SBATCH -p blade-a
 
 source /daten/bin/setup_fsl-5.0.9-cscor.sh
-source /beegfs/v1/bin2/setup_freesurfer_530.sh
+source /beegfs/bin/setup_freesurfer-6.0.0.sh
 
 MRTRIX=/beegfs/scratch/tnc_scratch/aperry/MRtrix/RC3
 export PATH=${MRTRIX}/bin:$PATH
