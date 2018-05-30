@@ -1,5 +1,3 @@
-.. _advanced_preprocessing
-
 # Advanced preprocessing
 
 The pipeline uses several FSL and MRtrix functions to process the diffusion images prior to anatomical correction and tract generation. Specifically it performs the following:
