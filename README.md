@@ -1,6 +1,6 @@
 # Welcome to SNG Diffusion Pipeline's user documentation!
 
-This pipeline provides a streamlined way of processing diffusion weighted images (and as a side effect, structural images) through the "*MRtrix*", "*FSL*" and "*FreeSurfer*" packages.
+This pipeline provides a streamlined way of processing diffusion weighted images (and as a side effect, structural images) through the *MRtrix*, *FSL* and *FreeSurfer* packages.
 
 ## Setup Information
 
@@ -40,6 +40,8 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 [Fibre and connectome construction](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/fibre_and_connectome_construction.md)
 
-All processed files (images, matrices, text files) can be found in `/working/your_lab_here/your_working_dir/Diff/your_sub/preproc/`.
+All processed files (images, matrices, text files) can be found in:
+
+`/working/your_lab_here/your_working_dir/Diff/your_sub/preproc/`.
 
 
