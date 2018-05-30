@@ -24,18 +24,18 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 ## Getting started
 
-[Conversion to NiFTI for T1](docs/conversion_to_nifti.rst)
+[Conversion to NiFTI for T1](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/conversion_to_nifti.rst)
 
-[Conversion to MIF for DWI](docs/conversion_to_mif.rst)
+[Conversion to MIF for DWI](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/conversion_to_mif.rst)
 
 ## Structural image preprocessing
 
-[FreeSurfer preprocessing](docs/t1_processing_in_freesurfer.rst)
+[FreeSurfer preprocessing](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/t1_processing_in_freesurfer.rst)
 
 ## Diffusion image preprocessing
 
-[Advanced preprocessing](docs/advanced_preprocessing.rst)
+[Advanced preprocessing](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/advanced_preprocessing.rst)
 
-[Segmentation and parcellation](docs/segmentation_and_parcellation.rst)
+[Segmentation and parcellation](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/segmentation_and_parcellation.rst)
 
-[Fibre and connectome construction](docs/fibre_and_connectome_construction.rst)
+[Fibre and connectome construction](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/fibre_and_connectome_construction.rst)
