@@ -30,6 +30,8 @@ fod2dec wm.mif  foddec.mif -mask biasmeanb0bet_mask.nii.gz -force -nthreads $ncp
 
 #Fiber tracking
 
+rm *.tck.gz
+
 tckgen wm.mif ${numfibers}.tck -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask biasmeanb0bet_mask.nii.gz -output_seeds succeeds.txt -force -nthreads $ncpus
 
 tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
@@ -100,4 +102,7 @@ tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengt
 #fi
 
 #
+
+gzip *.tck
+
 connectome2tck ${numfibers}.tck -exemplars rparc_fixsubcort.nii -files single streamlineassignment.txt ${numbers}_connectomeexem.tck -nthreads $ncpus -force
