@@ -36,6 +36,6 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 [Advanced preprocessing](docs/advanced_preprocessing.rst)
 
-[Segmentation_and_parcellation](docs/segmentation_and_parcellation.rst)
+[Segmentation and parcellation](docs/segmentation_and_parcellation.rst)
 
 [Fibre and connectome construction](docs/fibre_and_connectome_construction.rst)
