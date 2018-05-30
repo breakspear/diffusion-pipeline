@@ -1,5 +1,3 @@
-.. _segmentation_and_parcellation
-
 # Segmentation and Parcellation
 
 Currently this step is provided by FreeSurfer. In the future, the Glasser multi-modal pipeline will be implemented (https://doi.org/10.1038/nature18933) to provide better delineation between regions. The atlas currently used is the Destrieux atlas, dividing the cortex into 148 regions with several sub-cortical regions accounted for. For now, this pipeline performs, in order:
