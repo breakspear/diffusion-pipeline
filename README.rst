@@ -37,78 +37,20 @@ You will need to restart your terminal session:
 
 for these changes to take effect. You may also wish to copy the contents of the .bashrc file into an existing .bashrc file in your home directory.
 
+Getting files ready
+------------------
 
+[Conversion to NiFTI for T1](docs/conversion_to_nifti.rst)
+[Conversion to MIF for DWI](docs/conversion_to_mif.rst)
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Structural Preprocessing:
+Structural image preprocessing
+----------------------
 
-   structural_preprocessing/conversion_to_nifti
-   structural_preprocessing/t1_processing_in_freesurfer
+[FreeSurfer preprocessing](docs/t1_processing_in_freesurfer.rst)
 
+Diffusion image preprocessing
+----------------------
 
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: DWI Preprocessing:
-
-   dwi_preprocessing/conversion_to_mif
-   dwi_preprocessing/advanced_preprocessing
-   dwi_preprocessing/segmentation_and_parcellation
-   dwi_preprocessing/fiber_and_connectome_construction
-
-
-
-
-.. toctree::
-  :maxdepth: 1
-  :caption: Fixel-Based Analysis (FBA)
-
-  fixel_based_analysis/fixel_based_analysis
-
-
-
-.. toctree::
-  :maxdepth: 1
-  :caption: Tips and Tricks
-  
-  tips_and_tricks/dicom_handling
-  tips_and_tricks/submitting_batch_jobs
-  tips_and_tricks/interactive_jobs_and_foreach
-  tips_and_tricks/miscellaneous_tips
-
-
-
-
-
-
-.. toctree::
-  :maxdepth: 1
-  :caption: Troubleshooting
-
-  troubleshooting/image_specific_issues
-  troubleshooting/PBS_job_errors
-  troubleshooting/FAQ
-  troubleshooting/advanced_debugging
-
-
-
-
-.. toctree::
-  :maxdepth: 1
-  :caption: Reference
-
-  reference/commands_list
-  reference/config_file_options
-  reference/mrtrix3
-
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+[Advanced preprocessing](docs/advanced_preprocessing.rst)
+[Segmentation_and_parcellation](docs/segmentation_and_parcellation.rst)
+[Fibre and connectome construction](docs/fibre_and_connectome_construction.rst)
