@@ -1,5 +1,3 @@
-.. _fibre_and_connectome_construction
-
 # Fibre and connectome construction
 
 This pipeline provides the connectome and tractography given the patient anatomical image and diffusion images.
