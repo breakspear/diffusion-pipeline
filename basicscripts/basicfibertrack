@@ -32,9 +32,17 @@ fod2dec wm.mif foddec.mif -force -nthreads $ncpus
 #fslmaths fa.nii -mas MNItofa.nii.gz fa_extracted.nii.gz
 #fslmaths fa_extracted -bin fa_binary.nii.gz
 
+#remove previous versions
+
+rm ${numfibers}.tck.gz
+
 #Fiber tracking
 
 tckgen -algorithm iFOD2 wm.mif ${numfibers}.tck -seed_image biasb0brain_mask.nii.gz -minlength 10 -maxlength 250 -select $numfibers -nthreads $ncpus -mask biasb0brain_mask.nii.gz -output_seeds sucesstrackseeds.txt -force
+
+#re-zip
+
+gzip ${numfibers}.tck
 
 #Track density image for vis purposes
 tckmap ${numfibers}.tck ${numfibers}_tdi.nii -vox 0.5 -force
