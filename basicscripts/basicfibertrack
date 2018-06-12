@@ -5,10 +5,14 @@ WORKDIR=$2
 numfibers=$3
 
 currdir=$(pwd)
-scannum=$(basename $currdir)
+#scannum=$(basename $currdir)
 
-if [ "$currdir" != "$WORKDIR/Diff/$subj/preproc/${scannum}" ]; then
-cd $WORKDIR/Diff/$subj/preproc/${scannum}
+#if [ "$currdir" != "$WORKDIR/Diff/$subj/preproc/${scannum}" ]; then
+#cd $WORKDIR/Diff/$subj/preproc/${scannum}
+#fi
+
+if [ "$currdir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+cd $WORKDIR/Diff/$subj/preproc
 fi
 
 #Generate response function by spherical deconvolution
