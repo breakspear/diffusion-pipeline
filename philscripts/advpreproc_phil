@@ -66,7 +66,7 @@ srun -c 1 mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads 1
 numb0rev=$(mrinfo rawdataPAdn.mif -size | awk -F " " '{print $NF}')
 numb0main=$(mrinfo rawdataAPdn.mif -size | awk -F " " '{print $NF}')
 
-if [ $numb0rev ~= $numb0main ];
+if [ "$numb0rev" != "$numb0main" ];
 then
 
 #numb0inc=$(expr $numb0rev - 1)
