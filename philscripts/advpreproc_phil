@@ -25,6 +25,7 @@ srun -c 1 mrinfo rawdataAP.mif -dwgrad > rawencoding.b
 
 #nvols=$(wc -l rawencoding.b | awk -F " " '{print $1}')
 
+
 #embed phase encoding
 
 srun -c 1 mrconvert rawdataAP.mif rawdataAPsetPE.mif -set_property PhaseEncoding j- -nthreads 1 -force
@@ -40,6 +41,7 @@ mv rawdataAPsetPE.mif rawdataAP.mif
 srun -c 1 mrconvert rawdataPA.mif rawdataPAaddenc.mif -grad ${WORKDIR}/revencoding.b -nthreads 1 -force 
 
 mv rawdataPAaddenc.mif rawdataPA.mif
+
 
 #Denoise
 
@@ -60,6 +62,20 @@ rm rawdataPAdnstr.mif
 srun -c 1 mrconvert rawdataAPdn.mif b0AP.mif -coord 3 0 -force -nthreads 1
 srun -c 1 mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads 1
 
+#First check number of b0 volumes match
+numb0rev=$(mrinfo rawdataPAdn.mif -size | awk -F " " '{print $NF}')
+numb0main=$(mrinfo rawdataAPdn.mif -size | awk -F " " '{print $NF}')
+
+if [ $numb0rev ~= $numb0main ];
+then
+
+numb0inc=$(expr $numb0rev - 1)
+
+srun -c 8 mrconvert rawdataAPdn.mif APb0s.mif -coord 3 0:$numb0inc -nthreads 8 -force
+srun -c 8 mrconvert rawdataPAdn.mif PAb0s.mif -coord 3 0:$numb0inc -nthreads 8 -force
+
+else
+
 #Preprocessing steps including eddy correction & bias correction
 
 srun -c 8 dwiextract rawdataAPdn.mif APb0s.mif -nthreads 8 -bzero -force
@@ -73,7 +89,11 @@ srun -c 8 dwiextract rawdataPAdn.mif PAb0s.mif -nthreads 8 -bzero -force
 
 #mv rawdataPAdnrem.mif rawdataPAdn.mif
 
+fi
+
 srun -c 1 mrcat APb0s.mif PAb0s.mif allb0s.mif -axis 3 -force -nthreads 1
+
+
 
 #dwipreproc_cust -rpe_pair AP7b0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads 8 -verbose -force
 
