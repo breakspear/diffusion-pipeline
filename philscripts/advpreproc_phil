@@ -69,10 +69,12 @@ numb0main=$(mrinfo rawdataAPdn.mif -size | awk -F " " '{print $NF}')
 if [ $numb0rev ~= $numb0main ];
 then
 
-numb0inc=$(expr $numb0rev - 1)
+#numb0inc=$(expr $numb0rev - 1)
 
-srun -c 8 mrconvert rawdataAPdn.mif APb0s.mif -coord 3 0:$numb0inc -nthreads 8 -force
-srun -c 8 mrconvert rawdataPAdn.mif PAb0s.mif -coord 3 0:$numb0inc -nthreads 8 -force
+#srun -c 8 mrconvert rawdataAPdn.mif APb0s.mif -coord 3 0:$numb0inc -nthreads 8 -force
+#srun -c 8 mrconvert rawdataPAdn.mif PAb0s.mif -coord 3 0:$numb0inc -nthreads 8 -force
+
+srun -c 1 mrcat b0AP.mif b0PA.mif allb0s.mif -axis 3 -force -nthreads 1
 
 else
 
@@ -89,11 +91,9 @@ srun -c 8 dwiextract rawdataPAdn.mif PAb0s.mif -nthreads 8 -bzero -force
 
 #mv rawdataPAdnrem.mif rawdataPAdn.mif
 
-fi
-
 srun -c 1 mrcat APb0s.mif PAb0s.mif allb0s.mif -axis 3 -force -nthreads 1
 
-
+fi
 
 #dwipreproc_cust -rpe_pair AP7b0s.mif  rawdataPAdn.mif -export_grad_mrtrix adjencoding.b AP rawdataAPdn.mif eddycorr.mif -nthreads 8 -verbose -force
 
