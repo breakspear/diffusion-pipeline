@@ -7,15 +7,24 @@ subj=$1
 WORKDIR=$2
 
 currdir=$(pwd)
-scannum=$(basename $currdir)
+#scannum=$(basename $currdir)
 
-mkdir -p $WORKDIR/Diff/$subj/preproc/${scannum}
+#mkdir -p $WORKDIR/Diff/$subj/preproc/${scannum}
 
-rsync *rawdata* $WORKDIR/Diff/$subj/preproc/${scannum}
+#rsync *rawdata* $WORKDIR/Diff/$subj/preproc/${scannum}
 
-rsync *.json $WORKDIR/Diff/$subj/preproc/${scannum}
+#rsync *.json $WORKDIR/Diff/$subj/preproc/${scannum}
 
-cd $WORKDIR/Diff/$subj/preproc/${scannum}
+#cd $WORKDIR/Diff/$subj/preproc/${scannum}
+
+
+mkdir -p $WORKDIR/Diff/$subj/preproc
+
+rsync *rawdata* $WORKDIR/Diff/$subj/preproc
+
+rsync *.json $WORKDIR/Diff/$subj/preproc
+
+cd $WORKDIR/Diff/$subj/preproc
 
 
 #Extract gradient table for MRtrix specs
