@@ -1,28 +1,22 @@
 #!/bin/bash
-#Template file which sets up PBS requirements for all jobs
 
-# All required resource statements start with "#PBS -l"
-# These will be interpreted by the job submission system (PBS pro)
+#SBATCH -n 1 # 1 per CPU
+#SBATCH -c 8 # number of cpus per task
+#SBATCH --nice=20
+#SBATCH -p blade-a
 
-#PBS -l ncpus=10,mem=2G
-# *select* is the number of parallel processes
-# *ncpus* is the number of cores required by each process
-# *mem* is the amount of memory required by each process
+source /daten/bin/setup_fsl-5.0.9-cscor.sh
+source /beegfs/v1/bin2/setup_freesurfer-5.3.0.sh
 
-#PBS -v MRTRIX=/software/mrtrix3/mrtrix3-AP,ncpus=10
-
-#PBS -l walltime=168:00:00
-# *walltime* is the total time required in hours:minutes:seconds
-# to run the job. 
-# Warning: all processes still running at the end of this period
-# of time will be killed and any temporary data will be erased.
-
-#PBS -m abe -M alistair.perry@qimrberghofer.edu.au
-#NOTE: if you want to receive notifications about job status, enter your QIMR email after the "abe" above
-# *m* situations under which to email a) aborted b) begin e) end
-# *M* email address to send emails to
+MRTRIX=/beegfs/scratch/tnc_scratch/aperry/MRtrix/RC3
+export PATH=${MRTRIX}/bin:$PATH
 
 export OMP_NUM_THREADS=8
+
+#setup configuration file
+
+echo "TmpFileDir: /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/tmp" > /home/aperry/.mrtrix.conf 
+echo "ScriptTmpDir: /beegfs/scratch/tnc_scratch/kfo_pd_connectome/PD_connectome/scripttmp" >> /home/aperry/.mrtrix.conf
 
 ####
 #Find all scripting files
@@ -30,12 +24,5 @@ export OMP_NUM_THREADS=8
 pipedir=&&&&
 PATH=$PATH$( find $pipedir/ -not -path '*/\.*'  -type d -printf ":%p" )
 #export PATH:$PATH
-
-####
-#Load all required software
-module load mrtrix3/AP
-module load freesurfer/6.0.0
-module load ANTs/20160509
-module load fsl/5.0.9_eddy
 
 %%%% #"%%%%" will match to the string  that corresponds to your personalised batch script, or preferred pipeline
