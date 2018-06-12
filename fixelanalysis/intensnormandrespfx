@@ -30,7 +30,7 @@ done
 
 #echo "NumberOfThreads: 10" > /mnt/lustre/home/${USER}/.mrtrix.conf
 
-dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/${OUTDIR}/DWInorm ${WORKDIR}/${OUTDIR}/fa_template.mif ${WORKDIR}/${OUTDIR}/fa_template_wm_mask.mif -tempdir . -nocleanup -force -nthreads 10
+dwiintensitynorm ${WORKDIR}/${OUTDIR}/DWI ${WORKDIR}/${OUTDIR}/Masks ${WORKDIR}/${OUTDIR}/DWInorm ${WORKDIR}/${OUTDIR}/fa_template.mif ${WORKDIR}/${OUTDIR}/fa_template_wm_mask.mif -tempdir . -nocleanup -force -nthreads $ncpus
 
 #rm /mnt/lustre/home/$USER/.mrtrix.conf
 
