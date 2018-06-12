@@ -20,11 +20,11 @@ pipedir=$(pwd)
 
 #Convert base script into subject specific batch jobs
 
-mkdir fixelbatch
+mkdir ${WORKDIR}/fixelbatch
 
-cp fixelblank fixelbatch/fixel_${2}.sh
-sed -i "s;&&&&;$pipedir;" fixelbatch/fixel_${2}.sh
-sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" fixelbatch/fixel_${2}.sh
+cp fixelblank ${WORKDIR}/fixelbatch/fixel_${2}.sh
+sed -i "s;&&&&;$pipedir;" ${WORKDIR}/fixelbatch/fixel_${2}.sh
+sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" ${WORKDIR}/fixelbatch/fixel_${2}.sh
 
 #cd batch #Directory containing batch jobs to be called
 #call jobs
