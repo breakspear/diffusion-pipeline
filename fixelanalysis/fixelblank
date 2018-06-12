@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH -n 1 # 1 per CPU
-#SBATCH -c 8 # number of cpus per task
+#SBATCH -c 10 # number of cpus per task
 #SBATCH --nice=20
 #SBATCH -p blade-a
 
