@@ -2,21 +2,28 @@
 #usage: upsampleandfods subj WORKDIR NORMDIR VOXSIZE OUTDIR
 
 #compulsory arguments that are called automatically:
-subj=$1
-WORKDIR=$2
-NORMDIR=$3
-VOXSIZE=$4
-OUTDIR=$5
+#subj=$1
+WORKDIR=$1
+NORMDIR=$2
+VOXSIZE=$3
 
 cd ${WORKDIR}/${NORMDIR}
+
+OUTDIR=upsample
 
 mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}
 mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI
 mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks
-mkdir ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS
+mkdir -p ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm
+mkdir -p ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/csf
 
-mrresize ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_DWI.mif -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/${subj}_DWI.mif -nthreads 1 -force 
 
-mrresize ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_Mask.nii.gz -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/${subj}_Mask.mif -nthreads 1 -force 
+foreach -10 ${WORKDIR}/${NORMDIR}/DWInorm/*DWI.mif : srun -c 1 mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/UNI_DWI.mif -nthreads 1 -force 
 
-dwi2fod msmt_csd ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/${subj}_DWI.mif ${WORKDIR}/${NORMDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_wm.mif ${WORKDIR}/${NORMDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/${subj}_Mask.mif
+foreach -10 ${WORKDIR}/${NORMDIR}/Masks/*.nii* : srun -c 1 mrresize IN -vox $VOXSIZE ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNI_Mask.mif -interp nearest -nthreads 1 -force 
+
+foreach -10 ${WORKDIR}/${NORMDIR}/${OUTDIR}/DWI/*DWI.mif : srun -c 1 dwi2fod msmt_csd IN ${WORKDIR}/${NORMDIR}/FODS/avg_wm_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/UNI_wm.mif ${WORKDIR}/${NORMDIR}/FODS/avg_csf_resp.txt ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/csf/UNI_csf.mif -nthreads 1 -force -mask ${WORKDIR}/${NORMDIR}/${OUTDIR}/Masks/UNI_Mask.mif
+
+foreach -10 ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/*wm.mif : srun -c 1 mrconvert IN ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/UNI_wm_str.mif -strides +1,2,3,4 -force -nthreads 1 
+
+foreach -10 ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/*wm_str.mif : mv IN ${WORKDIR}/${NORMDIR}/${OUTDIR}/FODS/wm/UNI_wm.mif
