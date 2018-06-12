@@ -18,7 +18,7 @@ SCRIPT=$2 #Script to be called
 nargs=$#
 extargs=${@:3}
 
-find $1/ -name "*scan*" -type d > ${WORKDIR}/scans.txt #Creates list of folders containing the subject data to be analysed
+find $1/Raw/ -type d > ${WORKDIR}/scans.txt #Creates list of folders containing the subject data to be analysed
 
 pipedir=$(pwd)
 #PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
@@ -29,15 +29,15 @@ mkdir ${WORKDIR}/batch
 
 while read line
 do
-        subj=$(echo $line | cut -d / -f 8)
-        scannum=$(basename $line)
+        subj=$(echo $line | cut -d / -f 10)
+        #scannum=$(basename $line)
 	subjDIRECTORY=$line
-	cp dtiblank ${WORKDIR}/batch/${SCRIPT}_${subj}_$scannum.sh
-	sed -i "s;&&&&;$pipedir;" ${WORKDIR}/batch/${SCRIPT}_${subj}_$scannum.sh
+	cp dtiblank ${WORKDIR}/batch/${SCRIPT}_${subj}.sh
+	sed -i "s;&&&&;$pipedir;" ${WORKDIR}/batch/${SCRIPT}_${subj}.sh
         #sed -i "s;&&&&;${WORKDIR};" batch/dti$subj.sh
-	sed -i "s/@@@@/$subj/" ${WORKDIR}/batch/${SCRIPT}_${subj}_$scannum.sh
-	sed -i "s!????!$subjDIRECTORY!" ${WORKDIR}/batch/${SCRIPT}_${subj}_$scannum.sh
-	sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" ${WORKDIR}/batch/${SCRIPT}_${subj}_$scannum.sh
+	sed -i "s/@@@@/$subj/" ${WORKDIR}/batch/${SCRIPT}_${subj}.sh
+	sed -i "s!????!$subjDIRECTORY!" ${WORKDIR}/batch/${SCRIPT}_${subj}.sh
+	sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" ${WORKDIR}/batch/${SCRIPT}_${subj}.sh
 
 done < ${WORKDIR}/scans.txt #List of folders containing each subject data to be analysed
 
