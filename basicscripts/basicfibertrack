@@ -46,7 +46,7 @@ tckgen -algorithm iFOD2 wm.mif ${numfibers}.tck -seed_image biasb0brain_mask.nii
 
 #re-zip
 
-gzip ${numfibers}.tck
+#gzip ${numfibers}.tck
 
 #Track density image for vis purposes
 tckmap ${numfibers}.tck ${numfibers}_tdi.nii -vox 0.5 -force
