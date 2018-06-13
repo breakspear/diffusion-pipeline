@@ -35,16 +35,16 @@ cd ${WORKDIR}/${NORMDIR}/seedtracking/${subj}
 
 #standard flirt - registrationn for now (will change to ANTS)
 
-flirt -ref ${PARCDIR}/${parcimageref}.nii -in ${DATADIR}/${subj}/brainFS.nii -omat FS2MNI.mat -out FS2MNI -dof 12
+flirt -ref ${PARCDIR}/${parcimageref}.nii -in ${DATADIR}/${subj}/preproc/brainFS.nii -omat FS2MNI.mat -out FS2MNI -dof 12
 
-fnirt --in=${DATADIR}/${subj}/brainFS.nii --aff=FS2MNI.mat --cout=FS_nonlinear_transf_2MNI --config=T1_2_MNI152_2mm
+fnirt --in=${DATADIR}/${subj}/preproc/brainFS.nii --aff=FS2MNI.mat --cout=FS_nonlinear_transf_2MNI --config=T1_2_MNI152_2mm
 
 #redundant - but good for QC purposes
-applywarp --ref=${PARCDIR}/${parcimageref}.nii --in=${DATADIR}/${subj}/brainFS.nii --warp=FS_nonlinear_transf_2MNI --out=FS_nonlinear_warped_2MNI
+applywarp --ref=${PARCDIR}/${parcimageref}.nii --in=${DATADIR}/${subj}/preproc/brainFS.nii --warp=FS_nonlinear_transf_2MNI --out=FS_nonlinear_warped_2MNI
 
 #setup inverse for ROI masks
 
-invwarp --ref=${DATADIR}/${subj}/brainFS.nii --warp=FS_nonlinear_transf_2MNI --out=FS_nonlinear_transf_2MNI_INV
+invwarp --ref=${DATADIR}/${subj}/preproc/brainFS.nii --warp=FS_nonlinear_transf_2MNI --out=FS_nonlinear_transf_2MNI_INV
 
 while read line
 
@@ -57,13 +57,13 @@ echo "tracking for $seed to $target" #may do reverse later
 
 #Setup seeds in diffusion space
 
-applywarp --ref=${DATADIR}/${subj}/brainFS.nii --in=${PARCDIR}/${seed}.nii --warp=FS_nonlinear_transf_2MNI_INV --out=${seed}_FS --interp=nn
+applywarp --ref=${DATADIR}/${subj}/preproc/brainFS.nii --in=${PARCDIR}/${seed}.nii --warp=FS_nonlinear_transf_2MNI_INV --out=${seed}_FS --interp=nn
 
 gunzip ${seed}_FS.nii.gz -f
 
 mrconvert ${seed}_FS.nii ${seed}_FS_str.nii -strides -1,3,-2 -force -nthreads 5
 
-flirt -in ${seed}_FS_str.nii -ref ${DATADIR}/${subj}/fa.nii -out ${seed}_diff.nii.gz -applyxfm -init  ${DATADIR}/${subj}/FS2diff.mat -interp nearestneighbour
+flirt -in ${seed}_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out ${seed}_diff.nii.gz -applyxfm -init  ${DATADIR}/${subj}/preproc/FS2diff.mat -interp nearestneighbour
 
 gunzip ${seed}_diff.nii.gz -f
 
@@ -83,13 +83,13 @@ gunzip ${seed}_diff.nii.gz -f
 
 #Setup include masks in diffusion space, plus tracking 
 
-applywarp --ref=${DATADIR}/${subj}/brainFS.nii --in=${PARCDIR}/${target}.nii --warp=FS_nonlinear_transf_2MNI_INV --out=${target}_FS --interp=nn
+applywarp --ref=${DATADIR}/${subj}/preproc/brainFS.nii --in=${PARCDIR}/${target}.nii --warp=FS_nonlinear_transf_2MNI_INV --out=${target}_FS --interp=nn
 
 gunzip ${target}_FS.nii.gz -f
  
 mrconvert ${target}_FS.nii ${target}_FS_str.nii -strides -1,3,-2 -force -nthreads 5
  
-flirt -in ${target}_FS_str.nii -ref ${DATADIR}/${subj}/fa.nii -out ${target}_diff.nii.gz -applyxfm -init ${DATADIR}/${subj}/FS2diff.mat -interp nearestneighbour
+flirt -in ${target}_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out ${target}_diff.nii.gz -applyxfm -init ${DATADIR}/${subj}/preproc/FS2diff.mat -interp nearestneighbour
 
 gunzip ${target}_diff.nii.gz -f
  
