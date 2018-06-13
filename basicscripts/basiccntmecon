@@ -26,9 +26,14 @@ flirt -ref fa.nii -in $FSLDIR/data/standard/FMRIB58_FA_1mm.nii.gz -out MNItofa -
 
 #Parcellation template into subject space
 
-flirt -ref fa.nii -in $parc -out flirted_uniform.nii -applyxfm -init MNItofa.mat -interp nearestneighbour
+flirt -ref fa.nii -in $parc -out ${CNTMEPREFIX}_flirted_uniform.nii -applyxfm -init MNItofa.mat -interp nearestneighbour
 
 gunzip -f flirted_uniform.nii.gz
+
+
+#check if connectomes have been zippeed
+
+gunzip ${tracksbasename}.tck.gz
 
 #Connectome construction
 #Track lengths
@@ -43,4 +48,6 @@ tck2connectome ${tracksbasename}.tck flirted_uniform.nii connectome_${CNTMEPREFI
 
 tck2connectome ${tracksbasename}.tck flirted_uniform.nii connectome_${CNTMEPREFIX}_invnodeandlengths.csv -scale_invnodevol -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
 
-gzip ${numfibers}.tck
+#rezip
+
+gzip ${tracksbasename}.tck
