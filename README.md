@@ -46,6 +46,10 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 [Fixel statistics](docs/fixel_stats.md)
 
+## Quality checking
+
+[Quality checking of images](docs/quality_checking/qc.md)
+
 ## Troubleshooting
 
 [Bugs and errors](docs/bugs.md)
