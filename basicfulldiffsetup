@@ -7,7 +7,7 @@ WORKDIR=$2
 
 #Basic preprocessing
 
-basicpreproc $subj $WORKDIR
+#basicpreproc $subj $WORKDIR
 
 #Fiber construction
 

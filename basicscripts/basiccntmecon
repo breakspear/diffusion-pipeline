@@ -43,4 +43,4 @@ tck2connectome ${tracksbasename}.tck flirted_uniform.nii connectome_${CNTMEPREFI
 
 tck2connectome ${tracksbasename}.tck flirted_uniform.nii connectome_${CNTMEPREFIX}_invnodeandlengths.csv -scale_invnodevol -scale_invlength -zero_diagonal -assignment_radial_search 2 -force -nthreads $ncpus
 
-gzip ${numfibers}.tck
+gzip ${tracksbasename}.tck
