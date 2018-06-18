@@ -22,13 +22,13 @@ echo "Realigning template into subject space"
 #Co-register low-resolution FA into high-resolution template
 
 #flirt -ref fa.nii -in $FSLDIR/data/standard/FMRIB58_FA_1mm.nii.gz -out MNItofa -omat MNItofa.mat -cost mutualinfo -- removed  140117 - registration inaccurate
-flirt -ref fa.nii -in $FSLDIR/data/standard/FMRIB58_FA_1mm.nii.gz -out MNItofa -omat MNItofa.mat -cost normmi
+#flirt -ref fa.nii -in $FSLDIR/data/standard/FMRIB58_FA_1mm.nii.gz -out MNItofa -omat MNItofa.mat -cost normmi
 
 #Parcellation template into subject space
 
-flirt -ref fa.nii -in $parc -out ${CNTMEPREFIX}_flirted_uniform.nii -applyxfm -init MNItofa.mat -interp nearestneighbour
+#flirt -ref fa.nii -in $parc -out ${CNTMEPREFIX}_flirted_uniform.nii -applyxfm -init MNItofa.mat -interp nearestneighbour
 
-gunzip -f flirted_uniform.nii.gz
+#gunzip -f flirted_uniform.nii.gz
 
 
 #check if connectomes have been zippeed
