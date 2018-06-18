@@ -24,8 +24,9 @@
 # *m* situations under which to email a) aborted b) begin e) end
 # *M* email address to send emails to
 
-WORKDIR=$1
-OUTDIR=$2
+subj=$1
+WORKDIR=$2
+OUTDIR=$3
 
 #PBS -e ${WORKDIR}/batch/prepareglassererror.txt
 #PBS -o ${WORKDIR}/batch/prepareglasseroutput.txt
