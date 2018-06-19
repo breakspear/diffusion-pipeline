@@ -44,6 +44,8 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 [Fixel processing pipeline](docs/fixel_based_analysis/processing_fixels.md)
 
+[Fixel statistics](docs/fixel_stats.md)
+
 ## Troubleshooting
 
 [Bugs and errors](docs/bugs.md)

@@ -84,20 +84,5 @@ $ sh fixelcon /working/your_lab_here/your_working_dir/ fixeltracksgen AFD
 These files are found in `AFD/fodtemplate/` known as `tracks_20_million_defang.tck` and `tracks_2_million_defang_sift.tck`.
 
 
-6) `fixeltfcestats` is only to be used (along with the whole fixel pipeline, more generally) if there is a study-specific reason to compute statistics that involve higher order methods of quantification of tract connectivity (e.g. relationship of fibre connectivity in subject to behavioural measures). To use this script, you will need to create a design matrix (i.e. GLM) that describes your subject model design. One thing to note: DM.txt will need to be NxM matrix where N is the number of subjects and M is number of variables. MRtrix will also need the design matrix to be led by a column of zeros e.g.:
-
-```
-0 1
-0 1
-0 0
-0 0
-```
-This design matrix would be used for a four-subject study where two are patients and two are controls. Subjects will need to be organised alphanumerically where their position in order is corresponds to their row in the design matrix.
-
-The command below will need to be submitted from your `~/diffusion-pipeline/fixelanalysis` directory:
-
-```
-$ sh fixelcon /working/your_lab_here/your_working_dir/ fixeltfcestats AFD analysis DM.txt CON.txt
-```
-Where DM.txt is your design matrix file, CON.txt is your contrast matrix e.g. `1 -1` for a simple patient-control contrast. Note that you will need a large number of subjects to get a full comparison. `fixelcfestats` performs permutation testing, and you will need a high number of subjects (>20) to get a full permutation distribution.
+6) `fixeltfcestats` is only to be used (along with the whole pipeline, more generally) if there is a study-specific reason to compute statistics that involve higher order methods of quantification of tract connectivity (e.g. relationship of fibre connectivity in subject to behavioural measures). To use this script, you will need to create a design matrix (i.e. GLM) that describes your subject differences. If this is a simple patient-control contrast, place 
 
