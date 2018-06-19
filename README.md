@@ -44,8 +44,20 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 [Fixel processing pipeline](docs/fixel_based_analysis/processing_fixels.md)
 
+<<<<<<< HEAD
 [Fixel statistics](docs/fixel_stats.md)
 
+=======
+<<<<<<< HEAD
+[Fixel statistics](docs/fixel_stats.md)
+
+## Quality checking
+
+[Quality checking of images](docs/quality_checking/qc.md)
+
+=======
+>>>>>>> aa360d16fb39d09a8ef2741bab78f481f51bb358
+>>>>>>> master
 ## Troubleshooting
 
 [Bugs and errors](docs/bugs.md)
