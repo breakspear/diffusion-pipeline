@@ -24,8 +24,8 @@
 # *m* situations under which to email a) aborted b) begin e) end
 # *M* email address to send emails to
 
-WORKDIR=/working/lab_michaebr/alistaiP/Park/Phil
-OUTDIR=HCPMMP1out
+WORKDIR=$1
+OUTDIR=$2
 
 #PBS -e ${WORKDIR}/batch/prepareglassererror.txt
 #PBS -o ${WORKDIR}/batch/prepareglasseroutput.txt
@@ -36,13 +36,11 @@ module load freesurfer/5.3.0
 module load ANTs/20160509
 module load fsl/5.0.9_eddy
 
-export OMP_NUM_THREADS=8
+export OMP_NUM_THREADS=$ncpus
 
 export SUBJECTS_DIR=${WORKDIR}/FS
 
 cd $SUBJECTS_DIR
-
-subjlist=/working/lab_michaebr/alistaiP/Park/Phil/newFSlist.txt
 
 if [ -z "$subjlist" ]
 then
