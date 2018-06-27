@@ -11,6 +11,6 @@ TEMPLATEDIR=fodtemplate
 
 cd ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}
 
-tckgen -maxlen 250 -minlen 10 -power 1.0 fod_template.mif -seed_image voxel_mask.mif -mask voxel_mask.mif -select 20M tracks_20_million_defang.tck -nthreads 10 --force
+srun -c 10 tckgen -maxlen 250 -minlen 10 -power 1.0 fod_template.mif -cutoff 0.06 -seed_image voxel_mask.mif -mask voxel_mask.mif -select 20M tracks_20_million_defang.tck -nthreads 10 --force
 
-tcksift tracks_20_million_defang.tck fod_template.mif tracks_2_million_defang_sift.tck -term_number 2000000 -nthreads 10 --force
+srun -c 10 tcksift tracks_20_million_defang.tck fod_template.mif tracks_2_million_defang_sift.tck -term_number 2000000 -nthreads 10 --force

@@ -39,8 +39,8 @@ rm subjs.txt
 
 #start analysis now
 
-fixelcfestats fd analysissubjs.txt ${DM} ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fd_${VARINT} -nperms 100 -force -nthreads 10 -neg 
+srun -c 10 fixelcfestats fd analysissubjs.txt ${DM} ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fd_${VARINT} -nperms 100 -force -nthreads 10 -neg 
 
-fixelcfestats log_fc analysissubjs.txt ${DM} ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_logfc_${VARINT} -neg -nperms 100 -force -nthreads 10 
+srun -c 10 fixelcfestats log_fc analysissubjs.txt ${DM} ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_logfc_${VARINT} -neg -nperms 100 -force -nthreads 10 
 
-fixelcfestats fdc analysissubjs.txt ${DM} ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fdc_${VARINT} -nperms 100 -force -nthreads 10 -neg
+srun -c 10 fixelcfestats fdc analysissubjs.txt ${DM} ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fdc_${VARINT} -nperms 100 -force -nthreads 10 -neg
