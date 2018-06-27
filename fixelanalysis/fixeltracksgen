@@ -1,0 +1,16 @@
+#!/bin/bash
+#usage: tracks4cfe WORKDIR NORMDIR
+
+#compulsory arguments that are called automatically:
+#subj=$1
+
+WORKDIR=$1
+NORMDIR=$2
+
+TEMPLATEDIR=fodtemplate
+
+cd ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}
+
+tckgen -maxlen 250 -minlen 10 -power 1.0 fod_template.mif -seed_image voxel_mask.mif -mask voxel_mask.mif -select 20M tracks_20_million_defang.tck -nthreads 10 --force
+
+tcksift tracks_20_million_defang.tck fod_template.mif tracks_2_million_defang_sift.tck -term_number 2000000 -nthreads 10 --force
