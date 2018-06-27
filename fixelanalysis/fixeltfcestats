@@ -1,0 +1,46 @@
+#!/bin/bash
+#usage: tracks4cfe WORKDIR NORMDIR VARINTS CONTRASTMATRIX
+
+#compulsory arguments that are called automatically:
+#subj=$1
+
+WORKDIR=$1
+NORMDIR=$2
+ANALYSISDIR=$3
+DMfile=$4
+CONMATRIXfile=$5
+
+TEMPLATEDIR=fodtemplate
+
+cd ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/fixels 
+
+#find ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/fixels/fdc/*Patient* -name "*Patient*" -maxdepth 0 > fdcfiles.txt
+#awk -F "/" '{print $NF}' fdcfiles.txt > subjs.txt
+
+#setup statistical design 
+
+DM=${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/${ANALYSISDIR}/${DMfile}
+CONMATRIX=${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/${ANALYSISDIR}/${CONMATRIXfile}
+
+VARINT=$(basename "$DM" | cut -d. -f1)
+
+#find subjects with fixel files
+
+find fd/ -type f ! -name index.mif ! -name directions.mif > filelist.txt 
+
+awk -F "/" '{print $NF}' filelist.txt > subjs.txt
+
+sort subjs.txt > subjssort.txt
+
+mv subjssort.txt analysissubjs.txt
+
+rm subjs.txt
+
+
+#start analysis now
+
+fixelcfestats fd analysissubjs.txt ${DM} ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fd_${VARINT} -nperms 100 -force -nthreads 10 -neg 
+
+fixelcfestats log_fc analysissubjs.txt ${DM} ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_logfc_${VARINT} -neg -nperms 100 -force -nthreads 10 
+
+fixelcfestats fdc analysissubjs.txt ${DM} ${CONMATRIX} ${WORKDIR}/${NORMDIR}/${TEMPLATEDIR}/tracks_2_million_defang_sift.tck stats_fdc_${VARINT} -nperms 100 -force -nthreads 10 -neg
