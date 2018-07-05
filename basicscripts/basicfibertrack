@@ -38,11 +38,11 @@ fi
 
 #remove previous versions
 
-#rm ${numfibers}.tck.gz
+rm ${numfibers}.tck.gz
 
 #Fiber tracking
 
-tckgen -algorithm iFOD2 wm.mif ${numfibers}.tck -seed_image biasb0brain_mask.nii.gz -minlength 10 -maxlength 250 -select $numfibers -nthreads $ncpus -mask biasb0brain_mask.nii.gz -output_seeds sucesstrackseeds.txt -force
+tckgen -algorithm iFOD2 wm.mif ${numfibers}.tck -seed_image biasb0brain_mask.nii.gz -cutoff 0.10 -seed_cutoff 0.10 -minlength 10 -maxlength 250 -select $numfibers -nthreads $ncpus -mask biasb0brain_mask.nii.gz -output_seeds sucesstrackseeds.txt -force
 
 #re-zip
 
