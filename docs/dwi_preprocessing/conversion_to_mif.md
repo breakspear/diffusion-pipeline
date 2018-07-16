@@ -130,6 +130,8 @@ Do the same for the PA-encoded image. Copy these files to the Raw folder in your
 
 ## Running the advanced preprocessing
 
+NOTE: RUN `processFSall` BEFORE RUNNING THIS SCRIPT!
+
 We can run the advanced pipeline on our diffusion images, using the structural images to constrain the tract generation (as described in http://mrtrix.readthedocs.io/en/latest/quantitative_structural_connectivity/act.html). We can use the script advfulldiffsetup to process our diffusion images automatically. Make sure the settings in this file are set correctly. These parameters are:
 
 `ismultiband`: If the diffusion acquisition is multi-band, make sure this is set to `1`. If not, set to `0`.
