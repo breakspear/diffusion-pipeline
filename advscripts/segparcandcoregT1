@@ -43,7 +43,7 @@ mrconvert $SUBJECTS_DIR/$subj/mri/T1.mgz FS.nii -nthreads $ncpus -force
 #5ttgen_alt brainFS.nii FS2mni.mat 5TTfsl.nii
 
 
-bet2 T1.nii T1bet -f 0.15
+bet T1.nii T1bet -B
 
 mrconvert $SUBJECTS_DIR/$subj/mri/brain.mgz brainFSsp.nii -nthreads $ncpus -force
 
