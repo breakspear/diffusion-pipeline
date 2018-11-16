@@ -79,13 +79,17 @@ fi
 
 5tt2gmwmi 5TT.nii 5TTgmwmi.nii -nthreads $ncpus -force
 
-#if [ $parctype=="DES" ]; then
-#	echo "${parctype} parcellation being constructed"
-#	labelconvert $SUBJECTS_DIR/$subj/mri/aparc+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc.nii -nthreads $ncpus -force
-#elif [ $parctype=="DST" ]; then
+if [ $parctype=="DES" ]; then
+	echo "${parctype} parcellation being constructed"
+	labelconvert $SUBJECTS_DIR/$subj/mri/aparc+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc.nii -nthreads $ncpus -force
+elif [ $parctype=="DST" ]; then
 	echo "${parctype} parcellation being constructed"
 	labelconvert $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz $FREESURFER_HOME/FreeSurferColorLUT.txt $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc.nii -nthreads $ncpus -force
-#fi
+elif [ $parctype=="HCPMMP1" ]; then
+	echo "${parctype} parcellation being constructed"
+	mrconvert $SUBJECTS_DIR/glasser/$subj/HCPMMP1.nii.gz HCPMMP1str.nii -strides +1,2,3 -nthreads $ncpus -force
+	labelconvert HCPMMP1str.nii.gz $MRTRIX/share/mrtrix3/labelconvert/hcpmmp1_original.txt $MRTRIX/share/mrtrix3/labelconvert/hcpmmp1_ordered.txt parc.nii -nthreads $ncpus -force
+fi
 
 mri_vol2vol --mov parc.nii --targ $SUBJECTS_DIR/$subj/mri/rawavg.mgz --reg register.native.dat --o parcFSL.nii.gz --nearest --keep-precision
 
@@ -95,11 +99,13 @@ rm parc_fixsubcort.nii
 
 mrconvert parcFSL.nii.gz parcFSLtempstr.nii.gz -strides -1,2,3 -force -nthreads $ncpus
 
-#if [ $parctype=="DES" ]; then
-#      labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
-#elif [ $parctype=="DST" ]; then
-       labelsgmfix parcFSLtempstr.nii.gz brainFSnat.nii $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
-#fi
+if [ $parctype=="DES" ]; then
+	labelsgmfix parcFSLtempstr.nii.gz T1betFSmasked_restore.nii.gz $MRTRIX/share/mrtrix3/labelconvert/fs_default.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
+elif [ $parctype=="DST" ]; then
+	labelsgmfix parcFSLtempstr.nii.gz brainFSnat.nii $MRTRIX/share/mrtrix3/labelconvert/fs_a2009s.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
+elif [ $parctype=="HCPMMP1"]; then
+	labelsgmfix parcFSLtempstr.nii.gz brainFSnat.nii $MRTRIX/share/mrtrix3/labelconvert/hcpmmp1_ordered.txt parc_fixsubcort.nii -sgm_amyg_hipp -premasked -nthreads $ncpus -force
+fi
 
 mrconvert parc_fixsubcort.nii parc_fixsubcortstr.nii -strides +1,2,3 -force -nthreads $ncpus
 
