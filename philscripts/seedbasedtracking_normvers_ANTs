@@ -53,7 +53,7 @@ export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
 
 parcimageref=${parcimageref}.nii
 
-mrconvert ${PARCDIR}/${parcimageref}.nii ${parcimageref}_FSstr.nii -strides -1,3,-2 -force
+mrconvert ${PARCDIR}/${parcimageref}.nii ${parcimageref}_FSstr.nii -strides -1,3,-2 -force -nthreads 1
 
 
 if [ ! -f brainFSintemp0GenericAffine.mat ]; then
@@ -68,7 +68,7 @@ fi
 convert_xfm -omat FS2diff.mat -inverse ${DATADIR}/${subj}/preproc/diff2FS.mat
 
 
-#Convert into ANTs format
+#Convert it into ANTs format
 
 c3d_affine_tool -ref ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -src brainFSsp.nii FS2diff.mat -fsl2ras -oitk FS2diff-ANTs.mat
 
@@ -78,10 +78,12 @@ c3d_affine_tool -ref ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -src brainF
 while read line
 
 do 
+
 seed=$(echo $line | cut -d " " -f 1) 
 target=$(echo $line | cut -d " " -f 2)
 
 echo "tracking for $seed to $target" 
+
 
 #Setup STN seeds in diffusion space
 
@@ -95,7 +97,7 @@ antsApplyTransforms -d 3 -r biasmeanb0bet.nii.gz -i {seed}_FSstr.nii -t [brainFS
 antsApplyTransforms -d 3 -r biasmeanb0bet.nii.gz -i ${target}_FSstr.nii -t [brainFSintemp0GenericAffine.mat,1] -t FS2diff-ANTs.mat -o ${target}_diff.nii -n NearestNeighbor
  
 
-#Finally tracking
+#Finally the tracking
 
 tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
 
