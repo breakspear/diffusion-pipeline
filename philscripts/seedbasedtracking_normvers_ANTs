@@ -1,0 +1,281 @@
+#!/bin/bash
+#usage: seedbasedtracking subj WORKDIR NORMDIR
+
+#compulsory arguments that are called automatically:
+subj=$1
+WORKDIR=$2
+NORMDIR=$3
+PARCDIR=$4
+parcimageref=$5
+seedtracklist=$6
+
+#convert to convert appropriate directory structure
+PARCDIR=${WORKDIR}/${PARCDIR}
+seedtracklist=${WORKDIR}/${seedtracklist}
+
+#option to include extra  argument ($4), if diffusion data directory has changed
+#e.g: if files are now located in "Diff-wcust5tt"
+#usage: seedbasedtracking $subj $WORKDIR $NORMDIR Diff-wcust5tt
+
+nargs=$#
+
+if [ "$nargs" == 6 ]; then
+	DATADIR=${WORKDIR}/Diff
+else
+	DATADIR=${WORKDIR}/$7
+fi
+
+echo "Normalized diffusion data are contained in ${WORKDIR}/${NORMDIR}"
+cd ${WORKDIR}/${NORMDIR}
+
+mkdir -p ${WORKDIR}/${NORMDIR}/seedtracking-ANTs/${subj}
+cd ${WORKDIR}/${NORMDIR}/seedtracking-ANTs/${subj}
+
+#Setup transforms between FS, MNI, and Diff space
+
+#standard flirt - registrationn for now (will change to ANTS)
+
+rsync ${DATADIR}/${subj}/preproc/brainFSsp.nii .
+
+bet2 brainFSsp.nii brainFSspbet -f 0.2 -m 
+
+gunzip brainFSbet.nii.gz
+
+#add nthreads for ANTs
+
+ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$ncpus
+export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
+
+#now run
+
+parcimageref=${parcimageref}.nii
+
+if [ ! -f brainFSintemp0GenericAffine.mat ]; then
+
+antsRegistration --verbose 1 --dimensionality 3 --float 0 --collapse-output-transforms 1 --output [brainFSintemp,brainFSintempWarped.nii.gz,brainFSintempInverseWarped.nii.gz] --interpolation Linear --use-histogram-matching 0 --winsorize-image-intensities [0.005,0.995] --initial-moving-transform [${PARCDIR}/${parcimageref},brainFSspbet.nii,1] --transform Rigid[0.1] --metric MI[${PARCDIR}/${parcimageref},brainFSspbet.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform Affine[0.1] --metric MI[${PARCDIR}/${parcimageref},brainFSspbet.nii,1,32,Regular,0.25] --convergence [1000x500x250x100,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox --transform SyN[0.1,3,0] --metric CC[${PARCDIR}/${parcimageref},brainFSspbet.nii,1,4] --convergence [100x70x50x20,1e-6,10] --shrink-factors 8x4x2x1 --smoothing-sigmas 3x2x1x0vox
+
+
+fi
+
+
+convert_xfm -omat FS2diff.mat -inverse ${DATADIR}/${subj}/preproc/diff2FS.mat
+
+
+#Convert into ANTs format
+
+c3d_affine_tool -ref ${DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -src   FS2diff.mat -fsl2ras  -oitk FS2diff-ANTs.mat
+
+
+#Apply transforms
+
+while read line
+
+do 
+seed=$(echo $line | cut -d " " -f 1) 
+target=$(echo $line | cut -d " " -f 2)
+
+echo "tracking for $seed to $target" #may do reverse later
+
+#Setup STN seeds in diffusion space
+
+
+antsApplyTransforms -d 3 -r biasmeanb0bet.nii.gz -i ${PARCDIR}/{seed}.nii -t [brainFSintemp0GenericAffine.mat,1] -t FS2diff-ANTs.mat -o ${seed}_diff.nii -n NearestNeighbor
+
+antsApplyTransforms -d 3 -r biasmeanb0bet.nii.gz -i ${PARCDIR}/${target}.nii -t [brainFSintemp0GenericAffine.mat,1] -t FS2diff-ANTs.mat -o ${target}_diff.nii -n NearestNeighbor
+ 
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_image ${seed}_diff.nii -include ${target}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${seed}_seeds.txt
+
+
+#repeat for left-hemisphere
+
+#flirt -in /mnt/lustre/home/$USER/base/HCP_LSMA.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out HCP_LSMA_FS.nii.gz
+
+#gunzip HCP_LSMA_FS.nii.gz
+ 
+#mrconvert HCP_LSMA_FS.nii HCP_LSMA_FS_str.nii -strides -1,3,-2 -force -nthreads $ncpus
+ 
+#flirt -in HCP_LSMA_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_LSMA_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+
+#gunzip HCP_LSMA_diff.nii.gz
+ 
+#tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -seed_image LSTN_diff.nii -include HCP_LSMA_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds LSTNseeds.txt
+
+
+#NOWIFG
+#Ant
+#flirt -in /mnt/lustre/home/$USER/base/HCP_RIFG_Ant.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out HCP_RIFG_Ant_FS.nii.gz
+
+#gunzip HCP_RIFG_Ant_FS.nii.gz -f
+ 
+#mrconvert HCP_RIFG_Ant_FS.nii HCP_RIFG_Ant_FS_str.nii -strides -1,3,-2 -force -nthreads $ncpus
+ 
+#flirt -in HCP_RIFG_Ant_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_RIFG_Ant_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+
+#gunzip HCP_RIFG_Ant_diff.nii.gz -f
+ 
+#tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}toHCPRIFG_Ant.tck -seed_image ${seed}_diff.nii -include HCP_RIFG_Ant_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds ${seed}seedstoRIFG_Ant.txt
+
+#Post
+#flirt -in /mnt/lustre/home/$USER/base/HCP_RIFG_Post.nii -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init tempinbrainFS.mat -interp nearestneighbour -out HCP_RIFG_Post_FS.nii.gz
+
+#gunzip HCP_RIFG_Post_FS.nii.gz -f
+ 
+#mrconvert HCP_RIFG_Post_FS.nii HCP_RIFG_Post_FS_str.nii -strides -1,3,-2 -force -nthreads $ncpus
+ 
+#flirt -in HCP_RIFG_Post_FS_str.nii -ref ${DATADIR}/${subj}/preproc/fa.nii -out HCP_RIFG_Post_diff.nii.gz -applyxfm -init FS2diff.mat -interp nearestneighbour
+
+#gunzip HCP_RIFG_Post_diff.nii.gz -f
+ 
+#tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}toHCPRIFG_Post.tck -seed_image ${seed}_diff.nii -include HCP_RIFG_Post_diff.nii -act ${DATADIR}/${subj}/preproc/r5TT.nii -number 100 -maxlength 250 -maxnum 0 -stop -unidirectional -force -nthreads $ncpus -output_seeds ${seed}seedstoRIFG_Post.txt
+#calculate normalized tensor images - note will turn off once data has been constructed again (from intensitynormalization)
+
+#dwi2tensor ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_DWI.mif ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
+
+#tensor2metric ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -fa ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
+
+#tensor2metric ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_dt.mif -adc ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii.gz -nthreads $ncpus -force
+
+
+
+#calculate metrics
+#TDI
+
+tckmap ${seed}_to_${target}.tck ${seed}_to_${target}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+
+mrthreshold ${seed}_to_${target}_tdi.nii ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+
+
+#tckmap LSTNtoHCPLSMA.tck LSTNtoHCPLSMA_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+
+#mrthreshold LSTNtoHCPLSMA_tdi.nii LSTNtoHCPLSMA_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+
+
+#tckmap ${seed}toHCPRIFG_Ant.tck ${seed}toHCPRIFG_Ant_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+
+#mrthreshold ${seed}toHCPRIFG_Ant_tdi.nii ${seed}toHCPRIFG_Ant_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+
+
+#tckmap ${seed}toHCPRIFG_Post.tck ${seed}toHCPRIFG_Post_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+
+#mrthreshold ${seed}toHCPRIFG_Post_tdi.nii ${seed}toHCPRIFG_Post_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+
+
+#FA
+
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanFA.txt
+
+#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -nthreads $ncpus -force -output mean > LSTNtoHCPLSMA_meanFA.txt
+
+#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${seed}toHCPRIFG_Ant_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}toHCPRIFG_Ant_meanFA.txt
+
+#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${seed}toHCPRIFG_Post_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}toHCPRIFG_Post_meanFA.txt
+
+#MD
+
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanMD.txt
+
+#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask LSTNtoHCPLSMA_tdi_thr.nii -nthreads $ncpus -force -output mean > LSTNtoHCPLSMA_meanMD.txt
+
+#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}toHCPRIFG_Ant_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}toHCPRIFG_Ant_meanMD.txt
+
+#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}toHCPRIFG_Post_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}toHCPRIFG_Post_meanMD.txt
+
+#AFD
+
+afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}_to_${target}_AFD.nii > ${seed}_to_${target}_AFD.txt
+
+#afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif LSTNtoHCPLSMA.tck -nthreads $ncpus -all_fixels -force -afd_map LSTNtoHCPLSMA_AFD.nii > LSTNtoHCPLSMA_AFD.txt
+
+#afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}toHCPRIFG_Ant.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}toHCPRIFG_Ant_AFD.nii > ${seed}toHCPRIFG_Ant_AFD.txt
+
+#afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}toHCPRIFG_Post.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}toHCPRIFG_Post_AFD.nii > ${seed}toHCPRIFG_Post_AFD.txt
+
+
+#now reverse!
+
+tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -seed_image ${target}_diff.nii -include ${seed}_diff.nii -mask ${WORKDIR}/${NORMDIR}/Masks/${subj}_Mask.nii -select 100 -maxlength 250 -stop -seed_unidirectional -force -nthreads $ncpus -output_seeds ${target}_seeds.txt
+
+tckmap ${target}_to_${seed}.tck ${target}_to_${seed}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+
+mrthreshold ${target}_to_${seed}_tdi.nii ${target}_to_${seed}_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+
+
+#stats
+
+#FA
+
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${target}_to_${seed}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${target}_to_${seed}_meanFA.txt
+
+#MD
+
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${target}_to_${seed}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${target}_to_${seed}_meanMD.txt
+
+#AFD
+
+afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${target}_to_${seed}.tck -nthreads $ncpus -all_fixels -force -afd_map ${target}_to_${seed}_AFD.nii > ${target}_to_${seed}_AFD.txt
+
+###
+
+
+#Calculate combined scores
+
+#AFD
+
+seedtargvalue=$(cat ${seed}_to_${target}_AFD.txt)
+
+targseedvalue=$(cat ${target}_to_${seed}_AFD.txt)
+
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_AFD.txt
+
+
+#FA
+
+seedtargvalue=$(cat ${seed}_to_${target}_meanFA.txt)
+
+targseedvalue=$(cat ${target}_to_${seed}_meanFA.txt)
+
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_meanFA.txt
+
+
+#MD
+
+seedtargvalue=$(cat ${seed}_to_${target}_meanMD.txt)
+
+targseedvalue=$(cat ${target}_to_${seed}_meanMD.txt)
+
+totalval=$(echo "$seedtargvalue + $targseedvalue" | bc -l)
+
+echo "$totalval" / 2 | bc -l > ${seed}_to_${target}_COMB_meanMD.txt
+
+
+done < $seedtracklist
+
+
+#Extract successful seeds as images
+#cut -d ',' -f 3-5 LSTNseeds.txt > LSTNcolseeds.txt
+
+#cut -d ',' -f 3-5 ${seed}seeds.txt > ${seed}colseeds.txt
+
+#sed 1d LSTNcolseeds.txt > LSTNcolseedsnohead.txt
+
+#mv LSTNcolseedsnohead.txt LSTNseeds.txt
+
+#sed 1d ${seed}colseeds.txt > ${seed}colseedsnohead.txt
+
+#mv ${seed}colseedsnohead.txt ${seed}seeds.txt
+
+#rm ${seed}colseeds.txt
+
+#rm LSTNcolseeds.txt
+
+#tckconvert ${seed}seeds.txt ${seed}seeds.tck -nthreads $ncpus -force
+
+#tckmap ${seed}seeds.tck ${seed}seeds.nii -upsample 1 -force -nthreads $ncpus -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii
+
+#tckconvert LSTNseeds.txt LSTNseeds.tck -nthreads $ncpus -force
+
+#tckmap LSTNseeds.tck LSTNseeds.nii -upsample 1 -force -nthreads $ncpus -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii
