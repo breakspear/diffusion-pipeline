@@ -29,9 +29,9 @@ for(i in 1:length(SubjIDs))
  
     SubjDatDir<-paste(DATADIR,SubjIDs[i],"preproc",sep="/")
  
-    eddyfoldmatch<-list.files(path = SubjDatDir, pattern="dwipreproc", include.dirs = TRUE)
+    #eddyfoldmatch<-list.files(path = SubjDatDir, pattern="dwipreproc", include.dirs = TRUE)
     
-    FDfile=paste(SubjDatDir, eddyfoldmatch, "dwi_post_eddy.eddy_movement_rms", sep="/")
+    FDfile=paste(SubjDatDir, "dwipreproc", "eddy_movement_rms", sep="/")
     
     print(FDfile)
     FD=read.table(FDfile,header=FALSE)

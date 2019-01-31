@@ -95,8 +95,9 @@ tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthwei
 
 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodeweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
 
-tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths.csv -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
 
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights.csv  -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads $ncpus
 
 #non-sifted
 tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
