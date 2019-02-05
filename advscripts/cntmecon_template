@@ -1,0 +1,84 @@
+#!/bin/bash
+#usage: concmtme_template subj WORKDIR NORMDIR
+
+#compulsory arguments that are called automatically:
+subj=$1
+WORKDIR=$2
+numfibers=$3
+parcimage=$4
+parcname=$5
+
+#option to include extra  argument ($5), if diffusion data directory has changed
+#e.g: if files are now located in "Diff-wcust5tt"
+#then usage: seedbasedtracking $subj $WORKDIR $NORMDIR Diff-wcust5tt
+
+nargs=$#
+
+if [ "$nargs" == 5 ]; then
+	DATADIR=${WORKDIR}/Diff
+else
+	DATADIR=${WORKDIR}/$6
+fi
+
+
+#save outputs into new directory
+
+mkdir -p ${DATADIR}/${subj}/preproc/${parcname}/
+
+cd ${DATADIR}/${subj}/preproc/${parcname}/
+
+
+#initial filesetup
+
+flirt -ref ${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz -in ${DATADIR}/${subj}/preproc/brainFS.nii -omat FS2MNI.mat -out FS2MNI -dof 12
+
+convert_xfm -omat MNI2FS.mat -inverse FS2MNI.mat
+
+
+flirt -in ${parcimage} -ref ${DATADIR}/${subj}/preproc/brainFS.nii -applyxfm -init MNI2FS.mat -interp nearestneighbour -out ${parcname}_inFS
+
+mrconvert ${parcname}_inFS.nii.gz ${parcname}_inFS_str.nii.gz -strides -1,3,-2 -force -nthreads 1
+
+mv ${parcname}_inFS_str.nii.gz ${parcname}_inFS.nii.gz
+
+
+convert_xfm -omat FS2diff.mat -inverse ${DATADIR}/${subj}/preproc/diff2FS.mat
+
+flirt -in ${parcname}_inFS -ref ${DATADIR}/${subj}/preproc/fa.nii -applyxfm -init FS2diff.mat -interp nearestneighbour -out ${parcname}_inDiff
+
+
+#check for gziped trackfile
+
+gunzip ${DATADIR}/${subj}/preproc/${numfibers}.tck.gz
+
+
+#connectome construction
+
+tck2connectome ${DATADIR}/${subj}/preproc/${numfibers}.tck ${parcname}_inDiff.nii.gz  ${numfibers}_${parcname}_streamweights.csv -tck_weights_in ${DATADIR}/${subj}/preproc/sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
+
+tck2connectome ${DATADIR}/${subj}/preproc/${numfibers}.tck ${parcname}_inDiff.nii.gz  ${numfibers}_${parcname}_invlengthweights.csv -tck_weights_in ${DATADIR}/${subj}/preproc/sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
+
+tck2connectome ${DATADIR}/${subj}/preproc/${numfibers}.tck ${parcname}_inDiff.nii.gz  ${numfibers}_${parcname}_invnodeweights.csv -tck_weights_in ${DATADIR}/${subj}/preproc/sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
+
+tck2connectome ${DATADIR}/${subj}/preproc/${numfibers}.tck ${parcname}_inDiff.nii.gz  ${numfibers}_${parcname}_meanfiberlengths.csv -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
+
+
+#non-sifted
+
+tck2connectome ${DATADIR}/${subj}/preproc/${numfibers}.tck ${parcname}_inDiff.nii.gz ${numfibers}_${parcname}_streamweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
+
+tck2connectome ${DATADIR}/${subj}/preproc/${numfibers}.tck ${parcname}_inDiff.nii.gz ${numfibers}_${parcname}_invlengthweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
+
+tck2connectome ${DATADIR}/${subj}/preproc/${numfibers}.tck ${parcname}_inDiff.nii.gz ${numfibers}_${parcname}_invnodelengthweights_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads $ncpus
+
+
+#create exemplar connectome - actually a good QC approach..
+
+#connectome2tck ${DATADIR}/${subj}/preproc/${numfibers}.tck -exemplars ${parcname}_inDiff.nii.gz -files single streamlineassignment.txt ${numfibers}_${parcname}_connectomeexem.tck -nthreads $ncpus -force
+
+
+#rezip track file
+
+gzip ${DATADIR}/${subj}/preproc/${numfibers}.tck
+
+cd ..
