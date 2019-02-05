@@ -49,7 +49,11 @@ flirt -in ${parcname}_inFS -ref ${DATADIR}/${subj}/preproc/fa.nii -applyxfm -ini
 
 #check for gziped trackfile
 
-gunzip ${DATADIR}/${subj}/preproc/${numfibers}.tck.gz
+if [[ -f ${DATADIR}/${subj}/preproc/${numfibers}.tck* ]]; then
+	gunzip ${DATADIR}/${subj}/preproc/${numfibers}.tck.gz
+else
+	tckgen ${DATADIR}/${subj}/preproc/wm.mif ${DATADIR}/${subj}/preproc/${numfibers}.tck -act ${DATADIR}/${subj}/preproc/r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic ${DATADIR}/${subj}/preproc/wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask ${DATADIR}/${subj}/preproc/iterbrainmask.nii -output_seeds ${DATADIR}/${subj}/preproc/${numfibers}_succeeds.txt -force -nthreads $ncpus
+fi
 
 
 #connectome construction
