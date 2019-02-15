@@ -92,9 +92,9 @@ mrconvert ${PARCDIR}/${target}.nii ${target}_FSstr.nii -strides 1,-3,-2 -force -
 mrconvert ${PARCDIR}/${seed}.nii ${seed}_FSstr.nii -strides 1,-3,-2 -force -nthreads 1
  
 
-antsApplyTransforms -d 3 -r biasmeanb0bet.nii.gz -i {seed}_FSstr.nii -t [brainFSintemp0GenericAffine.mat,1] -t FS2diff-ANTs.mat -o ${seed}_diff.nii -n NearestNeighbor
+antsApplyTransforms -d 3 -r {DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -i {seed}_FSstr.nii -t [brainFSintemp0GenericAffine.mat,1] -t FS2diff-ANTs.mat -o ${seed}_diff.nii -n NearestNeighbor
 
-antsApplyTransforms -d 3 -r biasmeanb0bet.nii.gz -i ${target}_FSstr.nii -t [brainFSintemp0GenericAffine.mat,1] -t FS2diff-ANTs.mat -o ${target}_diff.nii -n NearestNeighbor
+antsApplyTransforms -d 3 -r {DATADIR}/${subj}/preproc/biasmeanb0bet.nii.gz -i ${target}_FSstr.nii -t [brainFSintemp0GenericAffine.mat,1] -t FS2diff-ANTs.mat -o ${target}_diff.nii -n NearestNeighbor
  
 
 #Finally the tracking
