@@ -40,7 +40,9 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 [Fibre and connectome construction](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/dwi_preprocessing/fibre_and_connectome_construction.md)
 
-## Fixel-based analysis
+## Post-processing and Fixel-based analysis
+
+[Custom parcellations](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/post_processing/custom_parcellations.md)
 
 [Fixel processing pipeline](docs/fixel_based_analysis/processing_fixels.md)
 
