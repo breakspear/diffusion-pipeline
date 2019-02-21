@@ -42,11 +42,9 @@ for these changes to take effect. You may also wish to copy the contents of the 
 
 ## Post-processing and Fixel-based analysis
 
-[Custom parcellations](https://github.com/breakspear/diffusion-pipeline/tree/master/docs/post_processing/custom_parcellations.md)
+[Custom parcellations](docs/post_processing/custom_parcellations.md)
 
-[Fixel processing pipeline](docs/fixel_based_analysis/processing_fixels.md)
-
-[Fixel statistics](docs/fixel_stats.md)
+[Fixel processing pipeline](docs/post_processing/processing_fixels.md)
 
 ## Quality checking
 
