@@ -11,7 +11,7 @@ sh dticon /working/... cntmecon_template *numfibers* *parc-(absolute)-location* 
 
 Replace &ast;these&ast; with what you need. Notice there is also an option for specifying the number of fibres in the tractogram
 you need. If the file doesn't exist (for instance, if you want more than 25M streamlines), the script will create that file for you.
-For example, if you wanted to use the Schaefer 400 parcellation, you might run:
+For example, if you wanted to use the Schaefer 400 parcellation and for adequate coverage you want 50 million streamlines, you might run:
 
 ```
 sh dticon /working/lab_here/your_name/working_dir/ cntmecon_template 50M ~/data/schaefer_in_MNI.nii Schaefer
