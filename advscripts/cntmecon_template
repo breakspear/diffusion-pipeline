@@ -22,7 +22,7 @@ fi
 
 #parc image check
 
-b=$( fslstats $parcimage -R | awk '{print int( $2 )}' )
+bins=$( fslstats $parcimage -R | awk '{print int( $2 )}' )
 if [[ $( fslstats $parcimage -h $bins | tail -n+2 | wc -l ) != $bins ]]
 then echo "Parcellation image is not in correct format!"; exit
 fi
