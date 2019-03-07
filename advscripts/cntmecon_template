@@ -63,6 +63,10 @@ else
 	gunzip ${DATADIR}/${subj}/preproc/${numfibers}.tck.gz
 fi
 
+## quality check
+
+tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
+
 
 #connectome construction
 
