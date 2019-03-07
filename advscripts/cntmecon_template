@@ -67,6 +67,8 @@ fi
 
 tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
 
+tckmap ${numfibers}.tck ${numfibers}ends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
+
 
 #connectome construction
 
