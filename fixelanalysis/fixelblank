@@ -17,7 +17,6 @@
 # Warning: all processes still running at the end of this period
 # of time will be killed and any temporary data will be erased.
 
-#PBS -m abe -M alistair.perry@qimrberghofer.edu.au
 #NOTE: if you want to receive notifications about job status, enter your QIMR email after the "abe" above
 # *m* situations under which to email a) aborted b) begin e) end
 # *M* email address to send emails to
