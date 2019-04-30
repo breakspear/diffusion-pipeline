@@ -4,12 +4,12 @@
 # All required resource statements start with "#PBS -l"
 # These will be interpreted by the job submission system (PBS pro)
 
-#PBS -l ncpus=10,mem=2G
+#PBS -l ncpus=10,mem=40G
 # *select* is the number of parallel processes
 # *ncpus* is the number of cores required by each process
 # *mem* is the amount of memory required by each process
 
-#PBS -v ncpus=10,MRTRIX=/software/mrtrix3/mrtrix3-AP
+#PBS -v ncpus=10,MRTRIX=/software/mrtrix3/mrtrix3-3.0_RC3
 
 #PBS -l walltime=47:00:00
 # *walltime* is the total time required in hours:minutes:seconds
@@ -22,7 +22,7 @@
 # *m* situations under which to email a) aborted b) begin e) end
 # *M* email address to send emails to
 
-export OMP_NUM_THREADS=8
+export OMP_NUM_THREADS=10
 
 ####
 #Find all scripting files
@@ -33,7 +33,7 @@ PATH=$PATH$( find $pipedir/ -not -path '*/\.*'  -type d -printf ":%p" )
 
 ####
 #Load all required software
-module load mrtrix3/AP
+module load mrtrix3/3.0_RC3
 module load freesurfer/6.0.0
 module load ANTs/20160509
 module load fsl/5.0.9_eddy
