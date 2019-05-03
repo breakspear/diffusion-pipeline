@@ -53,7 +53,7 @@ $ qsub fixel_upsampleandfods.sh
 This script places the newly upsampled files in `AFD/upsample` in your main working directory.
 
 
-3) `fodtemplateandfixelmask` provides an unbiased study-specific FOD template. Generally, this step is the most time-consuming step in the pipeline. If you wish to create the template from a limited subset of subjects (e.g. 20-30) to avoid lengthy processing times (and high computational requirements), there is a section in [Troubleshooting - Fixel-based analysis](../troubleshooting/fba.md) that describes this process. Again, this script is called as above (make sure that voxel size is set in the script call):
+3) `fodtemplateandfixelmask` provides an unbiased study-specific FOD template. Generally, this step is the most time-consuming step in the pipeline. Again, this script is called as above (make sure that voxel size is set in the script call):
 
 ```
 $ sh fixelcon /working/your_lab_here/your_working_dir/ fodtemplateandfixelmask AFD 1.3 
@@ -63,6 +63,16 @@ All files can be found in the `AFD/fodtemplate` folder. This process produces th
 
 `voxel_mask.mif` is then passed to a command that segments the FOD template to produce a fixel mask `fixel_mask`. Note that all fixel images are stored in directory-format (i.e. a folder).
 
+Population templates are generally optimally run for ~40 subjects. If you have more subjects than this, you will need to run the following command to select for a limited subset of subjects. Assuming your directories are labelled groupwise:
+```
+foreach `ls -d *patient | sort -R | tail -20` : ln -sr DWInorm/UNI_wm.mif fodtemplate/PRE.mif ";" ln -sr upsample/Masks/UNI_Mask.mif fodtemplate/PRE_Mask.mif
+foreach `ls -d *control | sort -R | tail -20` : ln -sr DWInorm/UNI_wm.mif fodtemplate/PRE.mif ";" ln -sr upsample/Masks/UNI_Mask.mif fodtemplate/PRE_Mask.mif
+```
+Following this, to warp remaining subjects into template space:
+```
+dwi2tensor upsample/<subj>_DWI.mif -mask upsample/<subj>_Mask.mif - | tensor2metric - -fa - | mrregister fa_template.mif - -mask2 upsample/<subj>_Mask.mif -nl_scale 0.5,0.75,1.0 -nl_niter 5,5,15 -nl_warp - warps/<subj>2template.mif | mrtransform fixeltemp/mask.mif -template upsample/<subj>_DWI.mif -warp - - | dwinormalise upsample/<subj>_DWI.mif - upsample/<subj>_DWInorm.mif
+```
+You may also perform the above step if you are acquiring data in a staggered way. You will need to process new subjects as they come in to this stage as well (making sure that you have normalised and upsampled your DWI and mask files).
 
 4) `fodmodulationandfdcalc` this script firstly warps all subject WM FODs to template space, then segments FOD images to estimate fixels and apparent fibre density (FD), and then finally sets up the structure for the statistical analysis. Again, call it like before:
 
