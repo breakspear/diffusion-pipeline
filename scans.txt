@@ -1,4 +1,4 @@
-/working/lab_michaebr/alistaiP/poldrack/myconnectome/Raw/sub002
+/working/lab_michaebr/alistaiP/poldrack/myconnectome/Raw/sub
 /working/lab_michaebr/alistaiP/poldrack/myconnectome/Raw/sub011
 /working/lab_michaebr/alistaiP/poldrack/myconnectome/Raw/sub012
 /working/lab_michaebr/alistaiP/poldrack/myconnectome/Raw/sub018
