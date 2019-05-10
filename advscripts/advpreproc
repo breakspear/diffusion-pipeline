@@ -78,19 +78,21 @@ mrconvert rawdataAPdn.mif rawdataAPdn.nii -export_grad_fsl bvecs bvals -force -n
 
 #Generate a b0 base image for each phase-encoding direction
 
-mrconvert rawdataAPdn.mif b0AP.mif -coord 3 0 -force -nthreads $ncpus
-mrconvert rawdataPAdn.mif b0PA.mif -coord 3 0 -force -nthreads $ncpus
+mrconvert rawdataAPdn.mif b0AP.nii -coord 3 0 -force -nthreads $ncpus
+mrconvert rawdataPAdn.mif b0PA.nii -coord 3 0 -force -nthreads $ncpus
 
 #Preprocessing steps including eddy correction & bias correction (WIP)
 
-dwiextract rawdataAPdn.mif APb0s.mif -bzero -force -nthreads $ncpus
+#dwiextract rawdataAPdn.mif APb0s.mif -bzero -force -nthreads $ncpus
 
-mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
-mrconvert allb0s.mif allb0s.nii -nthreads $ncpus -force
+#mrcat APb0s.mif rawdataPAdn.mif allb0s.mif -axis 3 -force -nthreads $ncpus
+#mrconvert allb0s.mif allb0s.nii -nthreads $ncpus -force
+
+fslmerge -t b0APPA b0AP.nii b0PA.nii
 
 if ([ $ismultiband = 1 ]); then
 
-	topup --imain=allb0s.nii --datain=acqparams.txt --config=b02b0.cnf --out=topup_results --iout=topup_b0
+	topup --imain=b0APPA.nii.gz --datain=acqparams.txt --config=b02b0.cnf --out=topup_results --iout=topup_b0
 	fslmaths topup_b0 -Tmean topup_b01
 	bet topup_b01.nii.gz binary -m -f 0.2
 	eddy --imain=rawdataAPdn.nii --mask=binary_mask.nii.gz --acqp=acqparams.txt --index=index.txt --bvecs=bvecs --bvals=bvals --topup=topup_results --data_is_shelled --mb=2 --repol --out=eddycorr
@@ -103,7 +105,7 @@ if ([ $ismultiband = 1 ]); then
 
 else
 
-	topup --imain=allb0s.nii --datain=acqparams.txt --config=b02b0.cnf --out=topup_results --iout=topup_b0
+	topup --imain=b0APPA.nii.gz --datain=acqparams.txt --config=b02b0.cnf --out=topup_results --iout=topup_b0
 	fslmaths topup_b0 -Tmean topup_b01
 	bet topup_b01.nii.gz binary -m -f 0.2
 	eddy --imain=rawdataAPdn.nii --mask=binary_mask.nii.gz --acqp=acqparams.txt --index=index.txt --bvecs=bvecs --bvals=bvals --topup=topup_results --repol --out=eddycorr
