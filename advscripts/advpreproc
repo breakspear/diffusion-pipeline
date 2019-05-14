@@ -95,7 +95,7 @@ if ([ $ismultiband = 1 ]); then
 	topup --imain=b0APPA.nii.gz --datain=acqparams.txt --config=b02b0.cnf --out=topup_results --iout=topup_b0
 	fslmaths topup_b0 -Tmean topup_b01
 	bet topup_b01.nii.gz binary -m -f 0.2
-	eddy --imain=rawdataAPdn.nii --mask=binary_mask.nii.gz --acqp=acqparams.txt --index=index.txt --bvecs=bvecs --bvals=bvals --topup=topup_results --data_is_shelled --mb=2 --repol --out=eddycorr
+	eddy_openmp --imain=rawdataAPdn.nii --mask=binary_mask.nii.gz --acqp=acqparams.txt --index=index.txt --bvecs=bvecs --bvals=bvals --topup=topup_results --data_is_shelled --mb=2 --repol --out=eddycorr
 
 #elif ([ $ismultiband = 1 ] && [ $fullreverseseq = 1 ]); then
         
@@ -108,7 +108,7 @@ else
 	topup --imain=b0APPA.nii.gz --datain=acqparams.txt --config=b02b0.cnf --out=topup_results --iout=topup_b0
 	fslmaths topup_b0 -Tmean topup_b01
 	bet topup_b01.nii.gz binary -m -f 0.2
-	eddy --imain=rawdataAPdn.nii --mask=binary_mask.nii.gz --acqp=acqparams.txt --index=index.txt --bvecs=bvecs --bvals=bvals --topup=topup_results --repol --out=eddycorr
+	eddy_openmp --imain=rawdataAPdn.nii --mask=binary_mask.nii.gz --acqp=acqparams.txt --index=index.txt --bvecs=bvecs --bvals=bvals --topup=topup_results --repol --out=eddycorr
 
 fi
 
