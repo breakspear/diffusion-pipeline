@@ -112,7 +112,7 @@ else
 
 fi
 
-mrconvert eddycorr.nii.gz eddycorr.mif -fslgrad eddycorr.rotated_bvecs bvals -nthreads $ncpus -force
+mrconvert eddycorr.nii.gz eddycorr.mif -fslgrad eddycorr.eddy_rotated_bvecs bvals -nthreads $ncpus -force
 
 dwiextract eddycorr.mif -nthreads $ncpus -bzero - | mrmath -axis 3 - mean eddymeanb0.nii -force -nthreads $ncpus
 
