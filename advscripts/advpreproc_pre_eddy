@@ -1,0 +1,85 @@
+#!/bin/bash
+# file: advpreproc
+# usage: advpreproc subj workdir ismosaic ncpus fullreverseseq ismultiband
+
+# note: for only with acquisitions with reverse sequnce - i.e. base subject directory must contain rawdataAP.mif and its reverse sequence rawdataPA.mif
+
+subj=$1
+WORKDIR=$2
+ismultiband=$3
+
+mkdir -p $WORKDIR/Diff/$subj/preproc 
+
+rsync *rawdata* $WORKDIR/Diff/$subj/preproc
+
+rsync T1.nii $WORKDIR/Diff/$subj/preproc
+
+cd $WORKDIR/Diff/$subj/preproc
+
+#Extract encoding
+
+mrinfo rawdataAP.mif -export_grad_mrtrix rawencoding.b -force
+mrinfo rawdataPA.mif -export_grad_mrtrix rawrevencoding.b -force
+
+#if [ $ismosiac = 1 ];
+#then
+
+#	mrconvert rawdataAP.mif rawdataAP.nii -force -nthreads $ncpus
+
+#	nvols=$(fslnvols rawdataAP.nii)
+#	adjvols=$(expr $nvols - 1)
+
+#	fslroi rawdataAP.nii rawdataAPrem 1 $adjvols
+
+#	sed '1d' rawencoding.b > rawencodingrem.b
+#	mrconvert rawdataAPrem.nii.gz rawdataAPrem.mif -force -grad rawencodingrem.b -strides +1,2,3,4 -nthreads $ncpus
+
+#	mv rawdataAPrem.mif rawdataAP.mif
+
+#fi
+
+#if [ $ismosiac = 1 ] && [ $fullreverseseq = 1 ]; then
+
+
+
+#mrconvert rawdataPA.mif rawdataPA.nii -json_export json_rawdataPA.json -force -nthreads $ncpus
+#nvols=$(fslnvols rawdataPA.nii)
+#fslroi rawdataPA.nii rawdataPArem 1 $nvols
+#sed '1d' rawrevencoding.b > rawrevencodingrem.b
+#mrconvert rawdataPArem.nii.gz rawdataPArem.mif -force -grad rawrevencodingrem.b -strides +1,2,3,4 -nthreads $ncpus
+#mv rawdataPArem.mif rawdataPA.mif
+	
+#else
+	
+dwiextract rawdataPA.mif -bzero rawdataPArem.mif -force -nthreads $ncpus
+#mrconvert rawdataPArem.mif rawdataPA.mif -json_import json_rawdataPA.json -nthreads $ncpus -force
+#rm rawdataPArem.mif	
+
+#fi
+
+#Denoise
+
+dwidenoise rawdataAP.mif rawdataAPdn.mif -force -nthreads $ncpus
+dwidenoise rawdataPArem.mif rawdataPAdn.mif -force -nthreads $ncpus
+
+mrconvert rawdataAPdn.mif rawdataAPdnstr.mif -strides +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataAPdnstr.mif  rawdataAPdn.mif  -force -nthreads $ncpus
+
+mrconvert rawdataPAdn.mif rawdataPAdnstr.mif -strides +1,2,3,4 -force -nthreads $ncpus
+mrconvert rawdataPAdnstr.mif  rawdataPAdn.mif -strides +1,2,3,4 -force -nthreads $ncpus
+
+rm rawdataAPdnstr.mif
+rm rawdataPAdnstr.mif
+
+#get eddy parameters and gradient table in fsl format
+rsync -vazu ${WORKDIR}/acqparams.txt .
+rsync -vazu ${WORKDIR}/index.txt .
+mrconvert rawdataAPdn.mif rawdataAPdn.nii -export_grad_fsl bvecs bvals -force -nthreads $ncpus
+
+#Generate a b0 base image for each phase-encoding direction
+
+mrconvert rawdataAPdn.mif b0AP.nii -coord 3 0 -force -nthreads $ncpus
+mrconvert rawdataPAdn.mif b0PA.nii -coord 3 0 -force -nthreads $ncpus
+
+
+#run eddy-gpu here (slice-to-vol correction)
