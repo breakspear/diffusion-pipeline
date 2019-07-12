@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#usage: eddy_gpu subj workdir ncpus
+
+subj=$1
+WORKDIR=$2
+ismultiband=$3
+
+cd $WORKDIR/Diff/$subj/preproc
+
+#Preprocessing steps including eddy correction & bias correction (WIP)
+
+fslmerge -t b0APPA b0AP.nii b0PA.nii
+
+if ([ $ismultiband = 1 ]); then
+
+	topup --imain=b0APPA.nii.gz --datain=acqparams.txt --config=b02b0.cnf --out=topup_results --iout=topup_b0
+	fslmaths topup_b0 -Tmean topup_b01
+	bet topup_b01.nii.gz binary -m -f 0.2
+	eddy_openmp --imain=rawdataAPdn.nii --mask=binary_mask.nii.gz --acqp=acqparams.txt --index=index.txt --bvecs=bvecs --bvals=bvals --topup=topup_results --data_is_shelled --mb=2 --repol --out=eddycorr
+
+else
+
+	topup --imain=b0APPA.nii.gz --datain=acqparams.txt --config=b02b0.cnf --out=topup_results --iout=topup_b0
+	fslmaths topup_b0 -Tmean topup_b01
+	bet topup_b01.nii.gz binary -m -f 0.2
+	eddy_openmp --imain=rawdataAPdn.nii --mask=binary_mask.nii.gz --acqp=acqparams.txt --index=index.txt --bvecs=bvecs --bvals=bvals --topup=topup_results --repol --out=eddycorr
+
+fi
