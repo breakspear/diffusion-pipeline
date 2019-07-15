@@ -1,0 +1,124 @@
+#!/bin/bash
+#file: fibertrackandcntmecon
+#usage: fibertrackandcntmecon ismultishell numfibers  cntmeprefix
+
+subj=$1
+WORKDIR=$2
+ismultishell=$3
+numfibers=$4
+CNTMEPREFIX=$5
+
+rundir=$(pwd)
+baserundir=$(basename $rundir)
+
+if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+cd $WORKDIR/Diff/$subj/preproc
+fi
+
+#Multi-tissue spherical deconvolution
+
+
+if [ $ismultishell==1 ]
+then
+
+dwi2response msmt_5tt biascorr.mif r5TT.nii wm.txt gm.txt csf.txt -mask iterbrainmask.nii -nthreads $ncpus -force
+
+dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask iterbrainmask.nii -nthreads $ncpus
+
+else
+
+dwi2response dhollander biascorr.mif wm.txt gm.txt csf.txt -mask iterbrainmask.nii -nthreads $ncpus -force
+
+dwi2fod msmt_csd biascorr.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -force -mask iterbrainmask.nii -nthreads $ncpus
+
+fi
+
+
+mrconvert wm.mif wmstr.mif -strides +1,2,3,4 -nthreads $ncpus -force
+
+mv wmstr.mif wm.mif
+
+fod2dec wm.mif  foddec.mif -mask iterbrainmask.nii -force -nthreads $ncpus
+
+
+#Fiber tracking
+
+rm *.tck.gz
+
+tckgen wm.mif ${numfibers}.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select ${numfibers} -mask iterbrainmask.nii -output_seeds succeeds.txt -force -nthreads $ncpus
+
+tckmap ${numfibers}.tck ${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
+
+tckgen wm.mif 1M.tck -act r5TT.nii -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -select 1M -mask iterbrainmask.nii -output_seeds succeeds1M.txt -force -nthreads $ncpus
+
+tckmap 1M.tck 1M.nii -vox 0.5 -force -nthreads $ncpus
+
+
+#Global tractography 
+
+#if [ $ismultishell==1 ]
+#then
+
+#tckglobal biascorr.mif wm.txt -riso csf.txt -riso gm.txt -mask iterbrainmask.nii -niter ${numfibers} -fod wmiso.mif -fiso csfiso.mif GT_${numfibers}.tck
+#tckmap GT_${numfibers}.tck GT_${numfibers}.nii -vox 0.5 -force -nthreads $ncpus
+#tckmap GT_${numfibers}.tck GT_${numfibers}ends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
+#fi
+
+
+#Visualise streamline ends for quality checking purposes
+
+tckmap ${numfibers}.tck ${numfibers}ends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
+
+tckmap 1M.tck 1Mends.nii -vox 0.5 -force -nthreads $ncpus -ends_only
+
+
+#tcksift2
+
+tcksift2 ${numfibers}.tck wm.mif sift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads $ncpus
+
+#tcksift2 1M.tck wm.mif 1Msift_weightfactor.txt -act r5TT.nii -fd_scale_gm -force -nthreads $ncpus
+
+
+#Alter sift tracks for visualisation purposes
+
+#tckedit 1M.tck -tck_weights_in 1Msift_weightfactor.txt  1Msift.tck -force -nthreads $ncpus
+
+#tckmap 1Msift.tck 1Msift.mif -vox 0.5 -force -nthreads $ncpus
+
+
+#Connectome construction
+#sifted
+
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
+
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
+
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodeweights.csv -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
+
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_meanfiberlengths.csv -assignment_radial_search 2 -zero_diagonal -scale_length -stat_edge mean -force -nthreads $ncpus
+
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights.csv  -tck_weights_in sift_weightfactor.txt -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads $ncpus
+
+#non-sifted
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
+
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invlengthweights_nosift.csv -assignment_radial_search 2 -zero_diagonal -scale_invlength -force -nthreads $ncpus
+
+tck2connectome ${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodelengthweights_nosift.csv  -assignment_radial_search 2 -zero_diagonal -scale_invlength -scale_invnodevol -force -nthreads $ncpus
+
+
+#if [ $ismultishell==1 ]
+#then
+#tck2connectome GT_${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_streamweights_GT.csv -assignment_radial_search 2 -zero_diagonal -out_assignments streamlineassignment.txt -force -nthreads $ncpus
+
+#tck2connectome GT_${numfibers}.tck rparc_fixsubcort.nii ${CNTMEPREFIX}_invnodeweights_GT.csv  -assignment_radial_search 2 -zero_diagonal -scale_invnodevol -force -nthreads $ncpus
+
+#fi
+
+#
+
+gzip *.tck
+
+connectome2tck ${numfibers}.tck -exemplars rparc_fixsubcort.nii -files single streamlineassignment.txt ${numfibers}_connectomeexem.tck -nthreads $ncpus -force
+
+

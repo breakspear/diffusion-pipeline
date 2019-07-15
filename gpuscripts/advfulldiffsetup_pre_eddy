@@ -17,16 +17,6 @@ numfibers=25M
 #Advanced preprocessing
 #Parameters: multiband (1 if yes)
 
-advpreproc $subj $WORKDIR $ismultiband
-
-#Segmentation, parcellation and co-registration of T1 images
-
-segparcandcoregT1 $subj $WORKDIR $parc
-
-#Fiber construction and connectome construction
-
-advfibertrackandcntmecon $subj $WORKDIR $ismultishell $numfibers $parc
- 
-
+advpreproc_pre_eddy $subj $WORKDIR $ismultiband
 
 

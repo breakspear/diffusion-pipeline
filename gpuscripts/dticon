@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#ARGUMENTS 
+
+#Standard arguments:
+
+WORKDIR=$1 #DIR containing all data directories (make sure to remove the ending backspace)
+SCRIPT=$2 #Script to be called
+
+#Options:
+ # Full pre-processing to connectome construction #envelopes all the following below:
+ # Pre-processing only
+ # Segmentation, parcellation and co-registration of T1s
+ # Fiber tracking only
+ # Connectome construction only
+
+#Extra Arguments - script specific options
+nargs=$#
+extargs=${@:3}
+
+find $1/Raw/* -maxdepth 0 -type d > ${WORKDIR}/scans.txt #Creates list of folders containing the subject data to be analysed
+
+pipedir=$(pwd)
+#PATH=$PATH$( find $pipedir/ -type d -printf ":%p" )
+
+#Convert base script into subject specific batch jobs
+
+mkdir ${WORKDIR}/batch
+
+while read line
+do
+	subj=$(basename $line)
+	subjDIRECTORY=$line
+	cp dtiblank ${WORKDIR}/batch/${SCRIPT}_$subj.sh
+	sed -i "s;&&&&;$pipedir;" ${WORKDIR}/batch/${SCRIPT}_$subj.sh
+        #sed -i "s;&&&&;${WORKDIR};" batch/dti$subj.sh
+	sed -i "s/@@@@/$subj/" ${WORKDIR}/batch/${SCRIPT}_$subj.sh
+	sed -i "s!????!$subjDIRECTORY!" ${WORKDIR}/batch/${SCRIPT}_$subj.sh
+	sed -i "s:%%%%:$SCRIPT $subj $WORKDIR $extargs:" ${WORKDIR}/batch/${SCRIPT}_$subj.sh
+
+done < ${WORKDIR}/scans.txt #List of folders containing each subject data to be analysed
+
+#cd batch #Directory containing batch jobs to be called
+#call jobs
