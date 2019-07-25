@@ -73,7 +73,7 @@ echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM
 
 else
 
-5ttgen freesurfer ${WORKDIR}/FS/${subj}/mri/aparc.a2009s+aseg.mgz 5TT.nii -sgm_amyg_hipp -nocrop -nthreads $ncpus -force -nocleanup -tempdir .
+5ttgen freesurfer $SUBJECTS_DIR/$subj/mri/aparc.a2009s+aseg.mgz 5TT.nii -sgm_amyg_hipp -nocrop -nthreads $ncpus -force -nocleanup -tempdir .
 
 fi
 
