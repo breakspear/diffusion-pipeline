@@ -125,7 +125,7 @@ afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.t
 
 #get volume corrected data
 
-seed_vol=`fslstats ${seed}_diff.nii`
+seed_vol=`fslstats ${seed}_diff.nii -V`
 
 fa=`cat ${seed}_to_${target}_meanFA.txt`
 awk "BEGIN {print $fa/$seed_vol}" > ${seed}_to_${target}_meanFA_volcorrected.txt
