@@ -123,4 +123,18 @@ mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}_to_${target}_
 
 afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}_to_${target}_AFD.nii > ${seed}_to_${target}_AFD.txt
 
+#get volume corrected data
+
+seed_vol=`fslstats ${seed}_diff.nii`
+
+fa=`cat ${seed}_to_${target}_meanFA.txt`
+awk "BEGIN {print $fa/$seed_vol}" > ${seed}_to_${target}_meanFA_volcorrected.txt
+
+md=`cat ${seed}_to_${target}_meanMD.txt`
+awk "BEGIN {print $md/$seed_vol}" > ${seed}_to_${target}_meanMD_volcorrected.txt
+
+afd=`cat ${seed}_to_${target}_AFD.txt`
+awk "BEGIN {print $afd/$seed_vol}" > ${seed}_to_${target}_AFD_volcorrected.txt
+
+
 done < $seedtracklist
