@@ -4,12 +4,9 @@
 
 subj=$1
 WORKDIR=$2
-rawdir=$3
-ismultiband=$4
+ismultiband=$3
 
 cd $WORKDIR/Diff/$subj/preproc
-
-raw=$rawdir/$subj/*DIFF*AP*
 
 #Preprocessing steps including eddy correction & bias correction (WIP)
 
@@ -17,7 +14,7 @@ fslmerge -t b0APPA b0AP.nii b0PA.nii
 
 nvols=`mrinfo rawdataAPdn.mif -nthreads 0 -quiet | grep Dimensions| awk '{print $8}'`
 
-mrinfo $raw -nthreads 0 -quiet| grep SliceTiming | awk '{print $2}' > slspec.txt
+mrinfo rawdataAP.mif -nthreads 0 -quiet| grep SliceTiming | awk '{print $2}' > slspec.txt
 
 
 if ([ $ismultiband = 1 ]); then
