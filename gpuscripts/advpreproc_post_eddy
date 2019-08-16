@@ -5,7 +5,7 @@
 subj=$1
 WORKDIR=$2
 
-if [ "$nargs" == 3 ]; then
+if [ "$nargs" == 2 ]; then
 	DATADIR=${WORKDIR}/Diff
 else
 	DATADIR=${WORKDIR}/$3
