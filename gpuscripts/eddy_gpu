@@ -6,7 +6,13 @@ subj=$1
 WORKDIR=$2
 ismultiband=$3
 
-cd $WORKDIR/Diff/$subj/preproc
+if [ "$nargs" == 4 ]; then
+	DATADIR=${WORKDIR}/Diff
+else
+	DATADIR=${WORKDIR}/$4
+fi
+
+cd $DATADIR/$subj/preproc
 
 #Preprocessing steps including eddy correction & bias correction (WIP)
 
