@@ -22,7 +22,7 @@ fslmerge -t b0APPA b0AP.nii b0PA.nii
 
 nvols=`mrinfo rawdataAPdn.mif -nthreads 0 -quiet | grep Dimensions| awk '{print $8}'`
 
-rsync -vazu $pipedir/data/MICRORES_slspec.txt ./slspec.txt
+rsync -vazu ~/diffusion-pipeline/data/MICRORES_slspec.txt ./slspec.txt
 
 
 if ([ $ismultiband = 1 ]); then
