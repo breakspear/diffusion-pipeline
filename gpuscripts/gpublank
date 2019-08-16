@@ -38,6 +38,9 @@ module load freesurfer/6.0.0
 module load ANTs/20160509
 module load gpu/fsl/6.0.1
 
+export FSLDIR=/software/fsl/fsl-6.0.1-gpu/
+export PATH=$FSLDIR/bin/:$PATH
+
 
 ####
 #Setup dir for temp MRtrix files to be written - otherwise they get sent to nodes tmp dir
