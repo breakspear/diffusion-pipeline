@@ -8,13 +8,19 @@ subj=$1
 WORKDIR=$2
 ismultiband=$3
 
-mkdir -p $WORKDIR/Diff/$subj/preproc 
+if [ "$nargs" == 4 ]; then
+	DATADIR=${WORKDIR}/Diff
+else
+	DATADIR=${WORKDIR}/$4
+fi
 
-rsync *rawdata* $WORKDIR/Diff/$subj/preproc
+mkdir -p $DATADIR/$subj/preproc 
 
-rsync T1.nii $WORKDIR/Diff/$subj/preproc
+rsync *rawdata* $DATADIR/$subj/preproc
 
-cd $WORKDIR/Diff/$subj/preproc
+rsync T1.nii $DATADIR/$subj/preproc
+
+cd $DATADIR/$subj/preproc
 
 #Extract encoding
 
