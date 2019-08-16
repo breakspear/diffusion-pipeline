@@ -7,25 +7,17 @@
 subj=$1
 WORKDIR=$2
 parctype=$3
-PRESEGDIR=$4
 
-rundir=$(pwd)
-baserundir=$(basename $rundir)
-
-if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
-cd $WORKDIR/Diff/$subj/preproc
-fi
 
 SUBJECTS_DIR=${WORKDIR}/FS
 
-if [ -n "$4" ]; then
-echo "SEGMENTATION HAS ALREADY BEEN PERFORMED"
-
-subjPRESEGDIR=${WORKDIR}/${PRESEGDIR}/${subj}
-
-echo "Subject segmentations located in ${subjPRESEGDIR}"
-
+if [ "$nargs" == 4 ]; then
+	DATADIR=${WORKDIR}/Diff
+else
+	DATADIR=${WORKDIR}/$4
 fi
+
+cd $DATADIR/$subj/preproc
 
 
 #prepare anatomical volume for segmentation, parcellation correction, and then co-registration to diffusion space
@@ -64,18 +56,9 @@ mri_vol2vol --mov $SUBJECTS_DIR/$subj/mri/brain.mgz --targ $SUBJECTS_DIR/$subj/m
 #fast -B --nopve brainFSnat.nii
 
 
-#5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTfsl.nii -nthreads $ncpus -force -tempdir . -nocleanup
-
-if [ -n "$4" ]; then
-echo "SEGMENTATION already perform | expect tissues to have filenames: GM.nii WM.nii CSF.nii"
-
-5ttgen_manual brainFSnat.nii 5TT.nii ${subjPRESEGDIR}
-
-else
+#5ttgen fsl T1betFSmasked.nii.gz -nocrop -premasked -sgm_amyg_hipp 5TTfsl.nii -nthreads $ncpus -force -tempdir . -nocleanu
 
 5ttgen fsl brainFSnat.nii 5TT.nii -sgm_amyg_hipp -premasked -nocrop -nthreads $ncpus -force -nocleanup -tempdir .
-
-fi
 
 5tt2gmwmi 5TT.nii 5TTgmwmi.nii -nthreads $ncpus -force
 
