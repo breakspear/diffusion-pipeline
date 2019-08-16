@@ -8,6 +8,8 @@ ismultishell=$3
 numfibers=$4
 CNTMEPREFIX=$5
 
+nargs=$#
+
 if [ "$nargs" == 5 ]; then
 	DATADIR=${WORKDIR}/Diff
 else
