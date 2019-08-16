@@ -3,6 +3,7 @@
 
 subj=$1
 WORKDIR=$2
+DIFFDIR=$3
 #FS_DIR=$3
 
 #arguments to be set
@@ -17,15 +18,15 @@ numfibers=25M
 #Advanced preprocessing
 #Parameters: multiband (1 if yes)
 
-advpreproc_post_eddy $subj $WORKDIR $ismultiband
+advpreproc_post_eddy $subj $WORKDIR $ismultiband $DIFFDIR
 
 #Segmentation, parcellation and co-registration of T1 images
 
-segparcandcoregT1 $subj $WORKDIR $parc
+segparcandcoregT1 $subj $WORKDIR $parc $DIFFDIR
 
 #Fiber construction and connectome construction
 
-advfibertrackandcntmecon $subj $WORKDIR $ismultishell $numfibers $parc
+advfibertrackandcntmecon $subj $WORKDIR $ismultishell $numfibers $parc $DIFFDIR
  
 
 
