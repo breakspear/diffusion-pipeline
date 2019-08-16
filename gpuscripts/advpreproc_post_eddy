@@ -5,7 +5,13 @@
 subj=$1
 WORKDIR=$2
 
-cd $WORKDIR/Diff/$subj/preproc
+if [ "$nargs" == 3 ]; then
+	DATADIR=${WORKDIR}/Diff
+else
+	DATADIR=${WORKDIR}/$3
+fi
+
+cd $DATADIR/$subj/preproc
 
 
 mrconvert eddycorr.nii.gz eddycorr.mif -fslgrad eddycorr.eddy_rotated_bvecs bvals -nthreads $ncpus -force
