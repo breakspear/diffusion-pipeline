@@ -8,12 +8,13 @@ ismultishell=$3
 numfibers=$4
 CNTMEPREFIX=$5
 
-rundir=$(pwd)
-baserundir=$(basename $rundir)
-
-if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
-cd $WORKDIR/Diff/$subj/preproc
+if [ "$nargs" == 5 ]; then
+	DATADIR=${WORKDIR}/Diff
+else
+	DATADIR=${WORKDIR}/$6
 fi
+
+cd $DATADIR/$subj/preproc
 
 #Multi-tissue spherical deconvolution
 
