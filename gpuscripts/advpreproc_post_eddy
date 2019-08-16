@@ -5,6 +5,8 @@
 subj=$1
 WORKDIR=$2
 
+nargs=$#
+
 if [ "$nargs" == 2 ]; then
 	DATADIR=${WORKDIR}/Diff
 else
