@@ -3,6 +3,7 @@
 
 subj=$1
 WORKDIR=$2
+DIFFDIR=$3
 #FS_DIR=$3
 
 #arguments to be set
@@ -17,8 +18,4 @@ numfibers=25M
 #Advanced preprocessing
 #Parameters: multiband (1 if yes)
 
-eddy_gpu $subj $WORKDIR $ismultiband
- 
-
-
-
+eddy_gpu $subj $WORKDIR $ismultiband $DIFFDIR
