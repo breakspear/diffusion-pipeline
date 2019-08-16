@@ -11,6 +11,8 @@ parctype=$3
 
 SUBJECTS_DIR=${WORKDIR}/FS
 
+nargs=$#
+
 if [ "$nargs" == 3 ]; then
 	DATADIR=${WORKDIR}/Diff
 else
