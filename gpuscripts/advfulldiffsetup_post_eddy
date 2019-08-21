@@ -18,7 +18,7 @@ numfibers=25M
 #Advanced preprocessing
 #Parameters: multiband (1 if yes)
 
-advpreproc_post_eddy $subj $WORKDIR $ismultiband $DIFFDIR
+advpreproc_post_eddy $subj $WORKDIR $DIFFDIR
 
 #Segmentation, parcellation and co-registration of T1 images
 
