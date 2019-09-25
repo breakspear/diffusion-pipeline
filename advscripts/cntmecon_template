@@ -37,7 +37,7 @@ cd ${DATADIR}/${subj}/preproc/${parcname}/
 
 #initial filesetup
 
-flirt -ref ${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz -in ${DATADIR}/${subj}/preproc/brainFS.nii -omat FS2MNI.mat -out FS2MNI -dof 12
+flirt -ref ${FSLDIR}/data/standard/MNI152_T1_2mm_brain.nii.gz -in ${DATADIR}/${subj}/preproc/brainFS.nii -omat FS2MNI.mat -out FS2MNI -dof 12
 
 convert_xfm -omat MNI2FS.mat -inverse FS2MNI.mat
 
