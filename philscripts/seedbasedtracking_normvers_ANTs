@@ -123,4 +123,6 @@ mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}_to_${target}_
 
 afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}_to_${target}_AFD.nii > ${seed}_to_${target}_AFD.txt
 
+tckstats ${seed}_to_${target}.tck -output count -nthreads $ncpus -quiet -force > ${seed}_to_${target}_count.txt
+
 done < $seedtracklist
