@@ -24,13 +24,11 @@ while read line
 do 
     seed=$(echo $line | cut -d " " -f 1)
     target=$(echo $line | cut -d " " -f 2)
-	
-    fslmaths ${seed}_diff.nii -add ${target}_diff.nii ${seed}_${target}_diff.nii.gz
 
-    tckedit ${DATADIR}/${subj}/preproc/25M.tck ${seed}_to_${target}_fibres_25M.tck -include ${seed}_${target}_diff.nii.gz -number 1000 -nthreads 8 -force -tck_weights_in ${DATADIR}/${subj}/preproc/sift_weightfactor.txt
+    tckedit ${DATADIR}/${subj}/preproc/25M.tck ${seed}_to_${target}_fibres_25M.tck -mask ${seed}_to_${target}_tdi_thr.nii -nthreads 8 -force -tck_weights_in ${DATADIR}/${subj}/preproc/sift_weightfactor.txt
 
     tckmap ${seed}_to_${target}_fibres_25M.tck ${seed}_to_${target}_fibres_25M_tdi.nii -template ${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads 8 -force
-
-    mrthreshold ${seed}_to_${target}_tdi.nii ${seed}_to_${target}_tdi_thr.nii -nthreads 8 -force -abs 1
+    
+    afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}_fibres_25M.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}_to_${target}_AFD_fibres_25M.nii > ${seed}_to_${target}_AFD_fibres_25M.txt
 
 done < $seedtracklist
