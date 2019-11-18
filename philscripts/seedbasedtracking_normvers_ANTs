@@ -109,23 +109,26 @@ tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_
 #calculate metrics
 
 #TDI
+# threshold using 5TT wm mask
+tckedit ${seed}_to_${target}.tck ${seed}_to_${target}_masked.tck -mask wm_mask.nii -nthreads 8 -force
 
-tckmap ${seed}_to_${target}.tck ${seed}_to_${target}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
+tckmap ${seed}_to_${target}_masked.tck ${seed}_to_${target}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
-mrthreshold ${seed}_to_${target}_tdi.nii ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -mask wm_mask.nii #parameter can be changed to exclude noisey fibers
+
+#mrthreshold ${seed}_to_${target}_tdi.nii ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -mask wm_mask.nii #parameter can be changed to exclude noisey fibers
 
 
 #FA
 
-#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanFA.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanFA.txt
 
 #MD
 
-#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanMD.txt
+mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanMD.txt
 
 #AFD
 
-#afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}_to_${target}_AFD.nii > ${seed}_to_${target}_AFD.txt
+afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}_masked.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}_to_${target}_AFD.nii > ${seed}_to_${target}_AFD.txt
 
 #tckstats ${seed}_to_${target}.tck -output count -nthreads $ncpus -quiet -force > ${seed}_to_${target}_count.txt
 
