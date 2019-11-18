@@ -37,6 +37,7 @@ cd ${WORKDIR}/${NORMDIR}/seedtracking-ANTs/${subj}
 #standard flirt - registrationn for now (will change to ANTS)
 
 rsync ${DATADIR}/${subj}/preproc/brainFSsp.nii .
+mrconvert ${DATADIR}/${subj}/preproc/r5TT.nii wm.nii -strides +1,2,3 -force -coord 3 2
 
 bet2 brainFSsp.nii brainFSspbet -f 0.2 -m 
 
@@ -108,21 +109,21 @@ tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_
 
 tckmap ${seed}_to_${target}.tck ${seed}_to_${target}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
-mrthreshold ${seed}_to_${target}_tdi.nii ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -abs 1 #parameter can be changed to exclude noisey fibers
+mrthreshold ${seed}_to_${target}_tdi.nii ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -mask wm.nii #parameter can be changed to exclude noisey fibers
 
 
 #FA
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanFA.txt
+#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanFA.txt
 
 #MD
 
-mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanMD.txt
+#mrstats ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_md.nii -mask ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -output mean > ${seed}_to_${target}_meanMD.txt
 
 #AFD
 
-afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}_to_${target}_AFD.nii > ${seed}_to_${target}_AFD.txt
+#afdconnectivity ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -nthreads $ncpus -all_fixels -force -afd_map ${seed}_to_${target}_AFD.nii > ${seed}_to_${target}_AFD.txt
 
-tckstats ${seed}_to_${target}.tck -output count -nthreads $ncpus -quiet -force > ${seed}_to_${target}_count.txt
+#tckstats ${seed}_to_${target}.tck -output count -nthreads $ncpus -quiet -force > ${seed}_to_${target}_count.txt
 
 done < $seedtracklist
