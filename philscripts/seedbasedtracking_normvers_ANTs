@@ -38,6 +38,9 @@ cd ${WORKDIR}/${NORMDIR}/seedtracking-ANTs/${subj}
 
 rsync ${DATADIR}/${subj}/preproc/brainFSsp.nii .
 mrconvert ${DATADIR}/${subj}/preproc/r5TT.nii wm.nii -strides +1,2,3 -force -coord 3 2
+fslmaths wm.nii -bin wm_mask.nii.gz
+
+gunzip wm_mask.nii.gz
 
 bet2 brainFSsp.nii brainFSspbet -f 0.2 -m 
 
@@ -109,7 +112,7 @@ tckgen ${WORKDIR}/${NORMDIR}/FODS/${subj}_wm.mif ${seed}_to_${target}.tck -seed_
 
 tckmap ${seed}_to_${target}.tck ${seed}_to_${target}_tdi.nii -template ${WORKDIR}/${NORMDIR}/DWInorm/${subj}_fa.nii -nthreads $ncpus -force #this is actually useful in looking at the track density
 
-mrthreshold ${seed}_to_${target}_tdi.nii ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -mask wm.nii #parameter can be changed to exclude noisey fibers
+mrthreshold ${seed}_to_${target}_tdi.nii ${seed}_to_${target}_tdi_thr.nii -nthreads $ncpus -force -mask wm_mask.nii #parameter can be changed to exclude noisey fibers
 
 
 #FA
