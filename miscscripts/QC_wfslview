@@ -1,0 +1,59 @@
+#!/bin/bash
+subj=$1
+WORKDIR=$2
+OUTDIR=$3
+
+tckbasename=$4
+parcbasename=$5
+
+rundir=$(pwd)
+baserundir=$(basename $rundir)
+
+if [ "$rundir" != "$WORKDIR/Diff/$subj/preproc" ]; then
+cd $WORKDIR/Diff/$subj/preproc
+fi
+
+
+mkdir -p ${WORKDIR}/${OUTDIR}
+mkdir -p ${WORKDIR}/${OUTDIR}/Masks
+mkdir -p ${WORKDIR}/${OUTDIR}/FA
+mkdir -p ${WORKDIR}/${OUTDIR}/meanDWI
+mkdir -p ${WORKDIR}/${OUTDIR}/tdi
+mkdir -p ${WORKDIR}/${OUTDIR}/parc
+
+#nshells=$(mrinfo meanshell.mif -size)
+#lastdwidim=$(echo $nshells | awk -F " " '{print $NF}')
+#mrconvert eddycorr.mif meandwieddy.nii -coord 3 $(( $lastdwidim-1 )) -nthreads 1
+
+#masks
+overlay 1 1 fa.nii -a biasb0brain_mask.nii.gz 0 1 mask_overlay.nii.gz
+slicer mask_overlay.nii.gz  -a maskoverlay_sliced.ppm
+convert maskoverlay_sliced.ppm ${WORKDIR}/${OUTDIR}/Masks/${subj}_maskoverlay.png
+
+#fa
+
+slicer fa.nii -a fa_sliced.ppm
+convert fa_sliced.ppm ${WORKDIR}/${OUTDIR}/FA/${subj}_fa.png
+
+#b3000
+
+#nshells=$(mrinfo meanshell.mif -size)
+#nshells=$(mrinfo meanshell.mif -size)
+#lastdwidim=$(echo $nshells | awk -F " " '{print $NF}')
+#mrconvert meanshell.mif meandwishell.nii -coord 3 $(( $lastdwidim-1 )) -nthreads 1
+#slicer meandwishell.nii -a meandwi_sliced.ppm
+#convert meandwi_sliced.ppm ${WORKDIR}/${OUTDIR}/meanDWI/${subj}_meandwi.png
+
+#tdi
+
+slicer  ${tckbasename}_tdi.nii -a tdi_sliced.ppm
+convert tdi_sliced.ppm ${WORKDIR}/${OUTDIR}/tdi/${subj}_tdi.png
+
+#parc
+
+overlay 1 1 fa.nii -A 512_flirted_uniform.nii 1 `fslstats 512_flirted_uniform.nii -R | awk -F " " '{print $2}'` parc_overlay.nii.gz
+slicer parc_overlay.nii.gz  -a parcoverlay_sliced.ppm
+convert parcoverlay_sliced.ppm ${WORKDIR}/${OUTDIR}/parc/${subj}_parcoverlay.png 
+rm parc_overlay.nii.gz
+
+rm *.ppm
