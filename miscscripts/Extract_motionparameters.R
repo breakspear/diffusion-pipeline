@@ -2,88 +2,57 @@
 
 args = commandArgs(TRUE)
 
-#ph<-{} 
-datatablefile="/working/lab_michaebr/alistaiP/Park/analysis/Patients_trackconnectivity.dat"
-ph=read.table(datatablefile,header=T,stringsAsFactors=T,sep="\t",colClasses="character")
 
-DATADIR="/mnt/lustre/working/lab_michaebr/alistaiP/Park/Diff"
-#DATADIR=as.character(args[1])
-OUTDIR="/working/lab_michaebr/alistaiP/Park/analysis"
-#OUTDIR=as.character(args[2])
+DATADIR=as.character(args[1])
+OUTDIR=as.character(args[2])
+OUTprefix=as.character(args[3])
 
-nvols<-102
+#nvols<-102
 
-PatientIDs<-list.dirs(path = DATADIR, full.names = FALSE, recursive = FALSE)
-PatientIDs<-t(PatientIDs)
-PatientIDs<-as.character(PatientIDs)
-IDs_nopre<-gsub("^.*?_","",PatientIDs)
+#Find subjects to extract movement parameters
+subjIDs<-list.dirs(path = DATADIR, full.names = FALSE, recursive = FALSE)
+subjIDs<-t(subjIDs)
+subjIDs<-as.character(subjIDs)
+
 
 FDall=NULL
 meanFDall=NULL
 
-for(i in 1:length(PatientIDs))
+#Loop through subjects
+for(i in 1:length(subjIDs))
 {
-  PatDATDir<-paste(DATADIR,PatientIDs[i],"preproc",sep="/")
+  subjDATADir<-paste(DATADIR,subjIDs[i],"preproc",sep="/")
  
-  if (file.exists(paste(PatDATDir,"FD.txt",sep="/"))) {
-      meanFDfile=paste(PatDATDir, "meanFD.txt", sep="/")
-      meanFDval=scan(meanFDfile)
-
-      FDfile=paste(PatDATDir, "FD.txt", sep="/")
-      FDvals=scan(FDfile)
-      if (length(FDvals)<nvols){
-        FDvals[nvols]<-mean(FDvals)
-        }
-      #if (length(FDvals)>nvols){
-        #FDvals<-FDvals[2:length(FDvals)]
-      #}
-
-  } else {
-    eddyfoldmatch<-list.files(path = PatDATDir, pattern="preproc", include.dirs = TRUE)
-    
-    FDfile=paste(PatDATDir, eddyfoldmatch, "dwi_post_eddy.eddy_movement_rms", sep="/")
-    FD=read.table(FDfile,header=FALSE)
-    
-    FDvals<-FD$V2
-    if (length(FDvals)<nvols){
-        FDvals[nvols]<-mean(FDvals)
-        }
-    #if (length(FDvals)>nvols){
-    #    FDvals<-FDvals[2:length(FDvals)]
-    #}
-
-    meanFDval<-mean(FDvals)
-    
-  }
+  eddyfoldmatch<-list.files(path = subjDATADir, pattern="preproc", include.dirs = TRUE)
   
-  FDout=c(IDs_nopre[i],FDvals)
-  FDall=rbind(FDall,FDout)
+  #Use RMS version
+  FDfile=paste(subjDATADir, eddyfoldmatch, "dwi_post_eddy.eddy_movement_rms", sep="/")
   
-  meanFDout=c(IDs_nopre[i],meanFDval)
+  
+  #Check that file does exist!
+  if (file.exists(FDfile)) {
+  
+  FD=read.table(FDfile,header=FALSE)
+    
+  FDvals<-FD$V2
+
+  #Calculate mean
+  meanFDval<-mean(FDvals)
+    
+  
+  #Cobmine all individuals together
+  meanFDout=c(subjIDs[i],meanFDval)
   meanFDall=rbind(meanFDall,meanFDout)
   
+  }
 }
 
 meanFDall=data.frame(meanFDall,stringsAsFactors=F)
-names(meanFDall)=c("ID","meanFD")
+names(meanFDall)=c("BAR","meanRMS")
 
-FDall=data.frame(FDall,stringsAsFactors=F)
-names(FDall)=c("ID",paste("VOL",seq(1,nvols),sep=""))
 
-#check if motion parameters are to be integrated into existing data table
+#Write output
+meanFDfname.out=paste(OUTDIR,paste("subjs_",OUTprefix,"_wRMS.dat",sep=""),sep="/")
+write.table(meanFDall,file=meanFDfname.out,row.names=F,col.names=T,sep="\t",quote=F)
 
-if(length(ph!=0)) {
-tmp=merge(ph,meanFDall,by.x="ID",by.y="ID",sort=F)
-datatablebase<-basename(datatablefile)
-datatablebase<-gsub(pattern = "\\.dat$","", datatablebase)
-meanFDfname.out=paste(OUTDIR,paste(datatablebase,"_wFD.dat",sep=""),sep="/")
-} else {
-  tmp<-meanFDall
-  meanFDfname.out=paste(OUTDIR,"Patients_meanFD.dat",sep="/")
-}
-
-#write output
-write.table(tmp,file=meanFDfname.out,row.names=F,col.names=T,sep="\t",quote=F)
-
-FDallfname.out=paste(OUTDIR,"Patients_FDall.dat",sep="/")
-write.table(FDall,file=FDallfname.out,row.names=F,col.names=T,sep="\t",quote=F)
+#Done
